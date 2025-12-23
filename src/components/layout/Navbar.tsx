@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { ShoppingCart, Menu, Search } from "lucide-react";
 import { Button } from "@/components/ui/Button";
@@ -13,7 +15,34 @@ export function Navbar() {
     return (
         <nav className="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-md">
             <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
-                {/* ... existing code ... */}
+                {/* Logo */}
+                <Link href="/" className="flex items-center gap-2">
+                    <span className="font-display text-2xl font-bold text-primary">
+                        كتابيستا
+                    </span>
+                </Link>
+
+                {/* Desktop Navigation */}
+                <div className="hidden md:flex items-center gap-8">
+                    <Link
+                        href="/"
+                        className="text-sm font-medium text-text-primary hover:text-primary transition-colors"
+                    >
+                        الرئيسية
+                    </Link>
+                    <Link
+                        href="/shop"
+                        className="text-sm font-medium text-text-primary hover:text-primary transition-colors"
+                    >
+                        الكتب
+                    </Link>
+                    <Link
+                        href="/offers"
+                        className="text-sm font-medium text-text-primary hover:text-primary transition-colors"
+                    >
+                        العروض
+                    </Link>
+                </div>
                 {/* Actions */}
                 <div className="flex items-center gap-4">
                     <Button variant="ghost" size="sm" className="hidden md:flex">
