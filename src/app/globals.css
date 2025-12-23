@@ -16,11 +16,25 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  @apply bg-background text-text-primary;
+  @apply bg-background text-text-primary relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
   background-image: linear-gradient(rgba(5, 5, 5, 0.85), rgba(5, 5, 5, 0.85)), url('/images/hero-bg.jpg');
-  background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  pointer-events: none;
 }
