@@ -21,7 +21,7 @@ export function MiniAddToCartButton({ book }: { book: Book }) {
     return (
         <Button
             size="sm"
-            variant={added ? "default" : "secondary"}
+            variant={added ? "primary" : "secondary"}
             className={`h-7 px-2 text-xs transition-all duration-300 ${added ? "bg-green-600 hover:bg-green-700 text-white" : ""}`}
             onClick={handleAdd}
             disabled={book.stock === 0}
