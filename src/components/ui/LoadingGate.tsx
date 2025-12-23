@@ -10,7 +10,7 @@ export function LoadingGate() {
         // Simple reliable timer to remove gate after animation
         const timer = setTimeout(() => {
             setIsVisible(false);
-        }, 2500);
+        }, 1500);
 
         return () => clearTimeout(timer);
     }, []);

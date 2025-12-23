@@ -88,6 +88,8 @@ export default async function Home() {
                                                 alt={book.title}
                                                 fill
                                                 className="object-cover transition-transform duration-500 group-hover:scale-110"
+                                                sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 20vw"
+                                                priority={true}
                                             />
                                         ) : (
                                             <div className="w-full h-full bg-zinc-800 flex items-center justify-center text-zinc-500">
