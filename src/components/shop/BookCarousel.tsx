@@ -106,14 +106,14 @@ export function BookCarousel({ title, books, linkToAll, subtitle }: BookCarousel
                                         </div>
 
                                         {/* Content */}
-                                        <div className="p-3 flex flex-col flex-grow relative text-center">
+                                        <div className="p-3 pb-4 flex flex-col flex-grow relative text-center">
                                             <h3 className="font-bold text-sm text-zinc-100 leading-tight mb-1 line-clamp-2 group-hover/card:text-primary transition-colors min-h-[2.5em]">
                                                 {book.title}
                                             </h3>
-                                            <p className="text-xs text-zinc-400 mb-2 line-clamp-1">{book.author}</p>
+                                            <p className="text-xs text-zinc-400 mb-3 line-clamp-1">{book.author}</p>
 
                                             {/* Footer: Price & Action */}
-                                            <div className="mt-auto flex items-baseline justify-center gap-2 pb-1">
+                                            <div className="mt-auto flex items-baseline justify-center gap-2 pb-1 pl-8">
                                                 {book.discount_price ? (
                                                     <div className="flex items-baseline gap-2">
                                                         <span className="font-bold text-xl md:text-2xl text-primary font-display">
@@ -129,8 +129,12 @@ export function BookCarousel({ title, books, linkToAll, subtitle }: BookCarousel
                                                     </span>
                                                 )}
 
-                                                <div className="absolute bottom-2 left-2 z-20">
-                                                    <MiniAddToCartButton book={book} />
+                                                {/* Integrated Corner Button */}
+                                                <div className="absolute bottom-0 left-0 z-20">
+                                                    <MiniAddToCartButton
+                                                        book={book}
+                                                        className="h-10 w-10 rounded-none rounded-tr-xl flex items-center justify-center !bg-primary hover:!bg-primary/90 text-black shadow-lg"
+                                                    />
                                                 </div>
                                             </div>
                                         </div>

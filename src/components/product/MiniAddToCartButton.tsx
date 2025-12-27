@@ -6,7 +6,7 @@ import { Book } from "@/lib/data";
 import { ShoppingCart, Check } from "lucide-react";
 import { useState, useEffect } from "react";
 
-export function MiniAddToCartButton({ book }: { book: Book }) {
+export function MiniAddToCartButton({ book, className }: { book: Book; className?: string }) {
     const { addItem } = useCart();
     const [added, setAdded] = useState(false);
 
@@ -22,14 +22,17 @@ export function MiniAddToCartButton({ book }: { book: Book }) {
         <Button
             size="sm"
             variant={added ? "primary" : "secondary"}
-            className={`h-8 w-8 p-0 rounded-full transition-all duration-300 ${added ? "bg-green-600 hover:bg-green-700 text-white" : "bg-zinc-800 hover:bg-primary hover:text-black text-white border border-white/10"}`}
+            className={`transition-all duration-300 ${added
+                    ? "bg-green-600 hover:bg-green-700 text-white"
+                    : "bg-primary text-black hover:bg-primary/90"
+                } ${className || "h-8 w-8 p-0 rounded-full"}`}
             onClick={handleAdd}
             disabled={book.stock === 0}
         >
             {added ? (
-                <Check className="w-4 h-4" />
+                <Check className="w-5 h-5" />
             ) : (
-                <ShoppingCart className="w-4 h-4" />
+                <ShoppingCart className="w-5 h-5" />
             )}
         </Button>
     );
