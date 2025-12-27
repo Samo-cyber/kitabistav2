@@ -61,7 +61,7 @@ export function BookCarousel({ title, books, linkToAll, subtitle }: BookCarousel
                     {/* Left Button */}
                     <button
                         onClick={() => scroll("right")}
-                        className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-black/80 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity disabled:opacity-0 hover:bg-primary hover:text-black shadow-xl translate-x-1/2"
+                        className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-black/80 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity disabled:opacity-0 hover:bg-primary hover:text-black shadow-xl"
                         aria-label="Scroll Right"
                     >
                         <ChevronRight className="w-6 h-6" />
@@ -147,7 +147,7 @@ export function BookCarousel({ title, books, linkToAll, subtitle }: BookCarousel
                     {/* Right Button (actually Left in RTL) */}
                     <button
                         onClick={() => scroll("left")}
-                        className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-black/80 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity disabled:opacity-0 hover:bg-primary hover:text-black shadow-xl -translate-x-1/2"
+                        className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-black/80 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity disabled:opacity-0 hover:bg-primary hover:text-black shadow-xl"
                         aria-label="Scroll Left"
                     >
                         <ChevronLeft className="w-6 h-6" />
