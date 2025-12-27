@@ -80,27 +80,21 @@ export function Navbar({ books = [] }: NavbarProps) {
 
     return (
         <>
-            <nav className={cn(
-                "sticky top-0 z-50 w-full border-b border-white/10 bg-background/80 backdrop-blur-md transition-transform duration-300",
-                !isVisible && "-translate-y-full md:translate-y-0"
-            )}>
+            <nav className="sticky top-0 z-50 w-full border-b border-white/10 bg-background/80 backdrop-blur-md">
                 <div className="container mx-auto flex h-16 md:h-20 items-center justify-between px-4 md:px-6 gap-4">
-                    {/* Mobile Menu Button (Right in RTL) */}
-                    <Button
-                        variant="ghost"
-                        size="sm"
-                        className="md:hidden text-zinc-400 hover:text-white p-0 h-auto"
-                        onClick={() => setIsMenuOpen(true)}
-                    >
-                        <Menu className="h-6 w-6" />
-                    </Button>
+                    {/* Logo (Right in RTL) */}
+                    <Link href="/" className="flex items-center gap-2 group shrink-0">
+                        <span className="font-display text-xl md:text-2xl font-bold text-primary group-hover:text-primary-hover transition-colors">
+                            كتابيستا
+                        </span>
+                    </Link>
 
                     {/* Mobile Search Bar (Center) */}
-                    <div className="flex-1 md:hidden relative">
+                    <div className="flex-1 md:hidden relative max-w-[280px] mx-auto">
                         <input
                             type="text"
-                            placeholder="عنوان الكتاب، المؤلف، دار النشر..."
-                            className="w-full h-10 bg-white rounded-lg px-4 pl-12 text-sm text-black placeholder:text-gray-400 focus:outline-none border border-gray-200"
+                            placeholder="بحث..."
+                            className="w-full h-9 bg-zinc-900/50 border border-white/10 rounded-full px-4 pl-10 text-sm text-zinc-200 placeholder:text-zinc-500 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             onKeyDown={(e) => {
@@ -113,23 +107,26 @@ export function Navbar({ books = [] }: NavbarProps) {
                             }}
                         />
                         <button
-                            className="absolute left-0 top-0 h-10 w-12 bg-red-600 rounded-l-lg flex items-center justify-center text-white hover:bg-red-700 transition-colors"
+                            className="absolute left-1 top-1/2 -translate-y-1/2 h-7 w-7 bg-primary/10 text-primary rounded-full flex items-center justify-center hover:bg-primary hover:text-black transition-all"
                             onClick={() => {
                                 if (searchQuery.trim()) {
                                     window.location.href = `/shop?search=${encodeURIComponent(searchQuery)}`;
                                 }
                             }}
                         >
-                            <Search className="h-5 w-5" />
+                            <Search className="h-3.5 w-3.5" />
                         </button>
                     </div>
 
-                    {/* Logo (Left in RTL) */}
-                    <Link href="/" className="flex items-center gap-2 group shrink-0">
-                        <span className="font-display text-xl md:text-2xl font-bold text-primary group-hover:text-primary-hover transition-colors">
-                            كتابيستا
-                        </span>
-                    </Link>
+                    {/* Mobile Menu Button (Left in RTL) */}
+                    <Button
+                        variant="ghost"
+                        size="sm"
+                        className="md:hidden text-zinc-400 hover:text-white p-0 h-auto"
+                        onClick={() => setIsMenuOpen(true)}
+                    >
+                        <Menu className="h-6 w-6" />
+                    </Button>
 
                     {/* Desktop Navigation */}
                     <div className="hidden md:flex items-center gap-8">
