@@ -53,16 +53,19 @@ export function Navbar() {
                         >
                             <Search className="h-5 w-5" />
                         </Button>
-                        <Link href="/cart">
-                            <Button variant="ghost" size="sm" className="relative hover:bg-primary/10 hover:text-primary">
-                                <ShoppingCart className="h-5 w-5" />
-                                {itemCount > 0 && (
-                                    <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] text-white animate-pulse">
-                                        {itemCount}
-                                    </span>
-                                )}
-                            </Button>
-                        </Link>
+                        <Button
+                            variant="ghost"
+                            size="sm"
+                            className="relative hover:bg-primary/10 hover:text-primary"
+                            onClick={useCart().openCart}
+                        >
+                            <ShoppingCart className="h-5 w-5" />
+                            {itemCount > 0 && (
+                                <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] text-white animate-pulse">
+                                    {itemCount}
+                                </span>
+                            )}
+                        </Button>
                         <Button
                             variant="ghost"
                             size="sm"
