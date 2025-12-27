@@ -26,7 +26,7 @@ export function AdminDashboard({ books }: AdminDashboardProps) {
                             <h1 className="font-display text-3xl font-bold mb-2">لوحة التحكم</h1>
                             <p className="text-gray-300 text-sm">مرحباً بك في لوحة إدارة كتابيستا</p>
                         </div>
-                        <div className="flex gap-2 bg-background/10 p-1 rounded-lg backdrop-blur-sm">
+                        <div className="flex gap-2 bg-background/10 p-1 rounded-lg backdrop-blur-sm overflow-x-auto max-w-full no-scrollbar">
                             <TabButton
                                 active={activeTab === "sales"}
                                 onClick={() => setActiveTab("sales")}
@@ -71,9 +71,9 @@ function TabButton({ active, onClick, icon, label }: { active: boolean; onClick:
     return (
         <button
             onClick={onClick}
-            className={`flex items-center gap-2 px-4 py-2 rounded-md transition-all duration-300 ${active
-                    ? "bg-primary text-primary-foreground shadow-lg"
-                    : "text-gray-300 hover:bg-white/5 hover:text-white"
+            className={`flex items-center gap-2 px-4 py-2 rounded-md transition-all duration-300 whitespace-nowrap ${active
+                ? "bg-primary text-primary-foreground shadow-lg"
+                : "text-gray-300 hover:bg-white/5 hover:text-white"
                 }`}
         >
             {icon}
