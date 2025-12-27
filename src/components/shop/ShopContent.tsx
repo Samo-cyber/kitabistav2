@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/Card";
 import { Section } from "@/components/ui/Section";
 import { Book, Category } from "@/lib/data";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { Filter, ChevronDown, Check, Book as BookIcon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -21,7 +22,8 @@ export function ShopContent({ allBooks, categories, selectedCategory }: ShopCont
     const [sortBy, setSortBy] = useState<"default" | "price_asc" | "price_desc">("default");
     const [isSortOpen, setIsSortOpen] = useState(false);
 
-    const [searchQuery, setSearchQuery] = useState("");
+    const searchParams = useSearchParams();
+    const [searchQuery, setSearchQuery] = useState(searchParams.get("search") || "");
 
     // Helper to normalize Arabic text
     const normalizeArabic = (text: string) => {

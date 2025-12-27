@@ -158,6 +158,15 @@ export function Navbar() {
                                         placeholder="اكتب اسم الكتاب أو المؤلف..."
                                         className="w-full bg-white/5 border-2 border-white/10 rounded-2xl py-4 pr-14 pl-6 text-xl text-white placeholder:text-gray-500 focus:outline-none focus:border-primary/50 transition-colors"
                                         autoFocus
+                                        onKeyDown={(e) => {
+                                            if (e.key === "Enter") {
+                                                const query = e.currentTarget.value;
+                                                if (query.trim()) {
+                                                    setIsSearchOpen(false);
+                                                    window.location.href = `/shop?search=${encodeURIComponent(query)}`;
+                                                }
+                                            }
+                                        }}
                                     />
                                 </div>
                                 <div className="mt-8">
