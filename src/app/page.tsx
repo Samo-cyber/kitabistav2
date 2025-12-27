@@ -68,19 +68,16 @@ export default async function Home() {
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                     {featuredBooks.map((book) => (
                         <Link key={book.id} href={`/product/${book.id}`}>
-                            <Card className="h-full overflow-hidden group relative border-0 bg-transparent">
-                                {/* Glass Background */}
-                                <div className="absolute inset-0 bg-zinc-900/40 backdrop-blur-md border border-white/10 rounded-lg transition-all duration-300 group-hover:border-primary/50 group-hover:bg-zinc-900/60" />
-
-                                <div className="relative z-10 flex flex-col h-full">
-                                    {/* Image Container */}
-                                    <div className="relative aspect-[2/3] overflow-hidden rounded-t-lg m-1 mb-0">
+                            <Card className="h-full overflow-hidden group relative border-0 bg-zinc-900/20 hover:bg-zinc-900/40 transition-colors duration-300">
+                                <div className="flex flex-col h-full">
+                                    {/* Image Container - Full Width */}
+                                    <div className="relative aspect-[2/3] overflow-hidden rounded-t-lg">
                                         {book.image_url ? (
                                             <Image
                                                 src={book.image_url}
                                                 alt={book.title}
                                                 fill
-                                                className="object-cover transition-transform duration-500 group-hover:scale-110"
+                                                className="object-cover transition-transform duration-700 group-hover:scale-110"
                                                 sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 20vw"
                                                 priority={true}
                                             />
@@ -90,28 +87,31 @@ export default async function Home() {
                                             </div>
                                         )}
                                         {/* Overlay Gradient */}
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300" />
 
                                         {/* Badge if Discounted */}
                                         {book.discount_price && (
-                                            <div className="absolute top-2 right-2 bg-primary text-black text-[10px] font-bold px-2 py-0.5 rounded-full">
+                                            <div className="absolute top-2 right-2 bg-primary/90 backdrop-blur-sm text-black text-[10px] font-bold px-2 py-1 rounded-md shadow-lg">
                                                 خصم
                                             </div>
                                         )}
                                     </div>
 
-                                    {/* Content */}
-                                    <div className="p-3 flex flex-col flex-grow">
-                                        <h3 className="font-bold text-sm text-zinc-100 line-clamp-1 mb-1 group-hover:text-primary transition-colors">
+                                    {/* Content - Compact & Premium */}
+                                    <div className="p-3 flex flex-col flex-grow relative">
+                                        {/* Decorative Top Border */}
+                                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-10 h-0.5 bg-primary/30 rounded-full group-hover:w-20 transition-all duration-300"></div>
+
+                                        <h3 className="font-display font-bold text-base text-zinc-100 line-clamp-1 mb-1 mt-2 text-center group-hover:text-primary transition-colors">
                                             {book.title}
                                         </h3>
-                                        <p className="text-[10px] text-zinc-400 mb-3 line-clamp-1">{book.author}</p>
+                                        <p className="text-xs text-zinc-400 mb-3 line-clamp-1 text-center font-medium">{book.author}</p>
 
-                                        <div className="mt-auto flex items-center justify-between gap-2">
+                                        <div className="mt-auto flex items-center justify-between gap-2 pt-2 border-t border-white/5">
                                             <div className="flex flex-col leading-none">
                                                 {book.discount_price ? (
                                                     <>
-                                                        <span className="text-[10px] text-zinc-500 line-through decoration-red-500/50">
+                                                        <span className="text-[10px] text-zinc-500 line-through decoration-red-500/50 mb-0.5">
                                                             {book.price}
                                                         </span>
                                                         <span className="font-bold text-sm text-primary">
