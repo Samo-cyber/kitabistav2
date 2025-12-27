@@ -159,215 +159,159 @@ export default function CheckoutPage() {
                                 <AnimatePresence mode="wait">
                                     {currentStep === 1 && (
                                         <motion.div
-                                            key="step1"
-                                            initial={{ opacity: 0, x: 20 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            exit={{ opacity: 0, x: -20 }}
-                                            transition={{ duration: 0.3 }}
-                                        >
-                                            <div className="mb-8 text-start">
-                                                <h2 className="font-display text-3xl font-bold text-white mb-2">بيانات التوصيل</h2>
-                                                <p className="text-gray-400 text-lg">أدخل عنوانك لتوصيل الطلب بأسرع وقت</p>
-                                            </div>
-
-                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                                <div className="space-y-2 md:col-span-2">
-                                                    <label className="text-base font-medium text-gray-300 mr-1">الاسم بالكامل</label>
-                                                    <input name="fullName" value={formData.fullName} onChange={handleInputChange} required placeholder="مثال: أحمد محمد" className={inputClasses} />
-                                                </div>
-                                                <div className="space-y-2 md:col-span-2">
-                                                    <label className="text-base font-medium text-gray-300 mr-1">رقم الهاتف</label>
-                                                    <input name="phone" value={formData.phone} onChange={handleInputChange} required type="tel" placeholder="01xxxxxxxxx" className={inputClasses} />
-                                                </div>
-                                                <div className="space-y-2">
-                                                    <label className="text-base font-medium text-gray-300 mr-1">المحافظة</label>
-                                                    <div className="relative">
-                                                        <select
-                                                            name="city"
-                                                            value={formData.city}
-                                                            onChange={handleInputChange}
-                                                            required
-                                                            className={`${inputClasses} appearance-none`}
-                                                        >
-                                                            <option value="" disabled>اختر المحافظة</option>
-                                                            {governorates.map((gov) => (
-                                                                <option key={gov} value={gov} className="bg-zinc-900 text-white">
-                                                                    {gov}
-                                                                </option>
-                                                            ))}
-                                                        </select>
-                                                        <div className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
-                                                            <ChevronLeft className="w-5 h-5 rotate-[-90deg]" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="space-y-2">
-                                                    <label className="text-base font-medium text-gray-300 mr-1">العنوان بالتفصيل</label>
-                                                    <textarea
-                                                        name="address"
-                                                        value={formData.address}
-                                                        onChange={handleInputChange}
-                                                        required
-                                                        placeholder="اسم الشارع، رقم العمارة، رقم الشقة..."
-                                                        className={textareaClasses}
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div className="mt-10 flex justify-end">
-                                                <Button type="button" size="lg" onClick={nextStep} disabled={!isStep1Valid} className="w-full md:w-auto px-10 h-12 text-lg shadow-lg shadow-primary/10 hover:shadow-primary/30 transition-all">
                                                     التالي
                                                     <ChevronLeft className="w-5 h-5 mr-2" />
                                                 </Button>
-                                            </div>
-                                        </motion.div>
-                                    )}
-
-                                    {currentStep === 2 && (
-                                        <motion.div
-                                            key="step2"
-                                            initial={{ opacity: 0, x: 20 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            exit={{ opacity: 0, x: -20 }}
-                                            transition={{ duration: 0.3 }}
-                                        >
-                                            <div className="mb-8 text-start">
-                                                <h2 className="font-display text-3xl font-bold text-white mb-2">طريقة الدفع</h2>
-                                                <p className="text-gray-400 text-lg">اختر طريقة الدفع المناسبة لك</p>
-                                            </div>
-
-                                            <div className="space-y-4 max-w-2xl mx-auto">
-                                                <div className="relative group">
-                                                    <div className="absolute inset-0 bg-primary/20 blur-xl rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                                                    <label className="relative flex items-center gap-6 p-6 border-2 border-primary bg-gradient-to-r from-primary/10 to-transparent rounded-xl cursor-pointer transition-all hover:bg-primary/5">
-                                                        <div className="w-6 h-6 rounded-full border-[6px] border-primary bg-white shadow-lg"></div>
-                                                        <div className="flex-1">
-                                                            <div className="flex items-center gap-3 mb-1">
-                                                                <div className="p-2 bg-primary/20 rounded-lg text-primary">
-                                                                    <Truck className="w-6 h-6" />
-                                                                </div>
-                                                                <span className="font-bold text-xl text-white">الدفع عند الاستلام</span>
-                                                            </div>
-                                                            <p className="text-sm text-gray-300 pr-[52px]">ادفع نقداً عند استلام طلبك</p>
-                                                        </div>
-                                                    </label>
-                                                </div>
-
-                                                <label className="flex items-center gap-6 p-6 border border-white/5 bg-black/20 rounded-xl cursor-not-allowed opacity-50 grayscale">
-                                                    <div className="w-6 h-6 rounded-full border-2 border-gray-600"></div>
-                                                    <div className="flex-1">
-                                                        <div className="flex items-center gap-3 mb-1">
-                                                            <div className="p-2 bg-white/5 rounded-lg text-gray-400">
-                                                                <CreditCard className="w-6 h-6" />
-                                                            </div>
-                                                            <span className="font-bold text-xl text-gray-400">الدفع بالبطاقة</span>
-                                                        </div>
-                                                        <p className="text-sm text-gray-500 pr-[52px]">غير متاح حالياً - قريباً</p>
-                                                    </div>
-                                                </label>
-                                            </div>
-
-                                            <div className="mt-12 flex justify-between items-center">
-                                                <Button type="button" variant="ghost" size="lg" onClick={prevStep} className="px-6 text-gray-400 hover:text-white hover:bg-white/5">
-                                                    <ChevronRight className="w-5 h-5 ml-2" />
-                                                    السابق
-                                                </Button>
-                                                <Button type="button" size="lg" onClick={nextStep} className="px-10 h-12 text-lg shadow-lg shadow-primary/10 hover:shadow-primary/30 transition-all">
-                                                    التالي
-                                                    <ChevronLeft className="w-5 h-5 mr-2" />
-                                                </Button>
-                                            </div>
-                                        </motion.div>
-                                    )}
-
-                                    {currentStep === 3 && (
-                                        <motion.div
-                                            key="step3"
-                                            initial={{ opacity: 0, x: 20 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            exit={{ opacity: 0, x: -20 }}
-                                            transition={{ duration: 0.3 }}
-                                        >
-                                            <div className="mb-8 text-start">
-                                                <h2 className="font-display text-3xl font-bold text-white mb-2">مراجعة الطلب</h2>
-                                                <p className="text-gray-400 text-lg">تأكد من تفاصيل طلبك قبل التأكيد</p>
-                                            </div>
-
-                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                                {/* Order Items */}
-                                                <div className="space-y-6">
-                                                    <h3 className="font-bold text-white text-lg flex items-center gap-2">
-                                                        <ShoppingBag className="w-5 h-5 text-primary" />
-                                                        المنتجات
-                                                    </h3>
-                                                    <div className="space-y-4 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
-                                                        {items.map((item) => (
-                                                            <div key={item.id} className="flex justify-between items-center bg-black/20 p-4 rounded-xl border border-white/5 hover:border-white/10 transition-colors">
-                                                                <div className="flex items-center gap-4">
-                                                                    <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center font-bold text-sm text-white">
-                                                                        {item.quantity}x
-                                                                    </div>
-                                                                    <div>
-                                                                        <p className="text-white font-bold text-base">{item.title}</p>
-                                                                        <p className="text-xs text-gray-400">{item.author}</p>
-                                                                    </div>
-                                                                </div>
-                                                                <span className="font-bold text-primary text-lg">{(item.discount_price || item.price) * item.quantity} <span className="text-xs text-gray-500">ج.م</span></span>
-                                                            </div>
-                                                        ))}
-                                                    </div>
-                                                </div>
-
-                                                {/* Customer Info & Totals */}
-                                                <div className="space-y-6">
-                                                    <div className="bg-black/20 rounded-xl p-6 border border-white/5">
-                                                        <h3 className="font-bold text-white mb-4 flex items-center gap-2 text-lg">
-                                                            <MapPin className="w-5 h-5 text-primary" />
-                                                            بيانات التوصيل
-                                                        </h3>
-                                                        <div className="space-y-2 text-sm">
-                                                            <p className="text-gray-300 flex justify-between"><span className="text-gray-500">الاسم:</span> <span className="text-white font-medium">{formData.fullName}</span></p>
-                                                            <p className="text-gray-300 flex justify-between"><span className="text-gray-500">الهاتف:</span> <span className="text-white font-medium">{formData.phone}</span></p>
-                                                            <p className="text-gray-300 flex justify-between"><span className="text-gray-500">العنوان:</span> <span className="text-white font-medium text-left" dir="ltr">{formData.address}, {formData.city}</span></p>
-                                                        </div>
-                                                    </div>
-
-                                                    <div className="bg-primary/5 rounded-xl p-6 border border-primary/20">
-                                                        <div className="space-y-3">
-                                                            <div className="flex justify-between text-gray-400 text-base">
-                                                                <span>المجموع الفرعي</span>
-                                                                <span>{total} ج.م</span>
-                                                            </div>
-                                                            <div className="flex justify-between text-gray-400 text-base">
-                                                                <span>الشحن</span>
-                                                                <span className="text-green-400">50 ج.م</span>
-                                                            </div>
-                                                            <div className="flex justify-between text-2xl font-bold text-white pt-4 border-t border-white/10 mt-2">
-                                                                <span>الإجمالي الكلي</span>
-                                                                <span className="text-primary">{total + 50} <span className="text-sm font-normal text-gray-500">ج.م</span></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="mt-12 flex justify-between items-center">
-                                                <Button type="button" variant="ghost" size="lg" onClick={prevStep} className="px-6 text-gray-400 hover:text-white hover:bg-white/5">
-                                                    <ChevronRight className="w-5 h-5 ml-2" />
-                                                    السابق
-                                                </Button>
-                                                <Button type="submit" size="lg" className="px-10 h-14 text-lg bg-green-600 hover:bg-green-500 text-white border-0 shadow-lg shadow-green-600/20 hover:shadow-green-600/40 transition-all">
-                                                    تأكيد الطلب
-                                                    <CheckCircle className="w-5 h-5 mr-2" />
-                                                </Button>
-                                            </div>
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
-                            </form>
                         </div>
-                    </Card>
-                </div>
-            </div>
+                    </motion.div>
+                                    )}
+
+                    {currentStep === 2 && (
+                        <motion.div
+                            key="step2"
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: -20 }}
+                            transition={{ duration: 0.3 }}
+                        >
+                            <div className="mb-8 text-start border-b border-white/10 pb-4">
+                                <h2 className="font-display text-3xl font-bold text-white mb-2">طريقة الدفع</h2>
+                                <p className="text-gray-400 text-lg">اختر طريقة الدفع المناسبة لك</p>
+                            </div>
+
+                            <div className="space-y-4 max-w-2xl mx-auto">
+                                <div className="relative group">
+                                    <div className="absolute inset-0 bg-primary/20 blur-xl rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                    <label className="relative flex items-center gap-6 p-6 border-2 border-primary bg-gradient-to-r from-primary/10 to-transparent rounded-xl cursor-pointer transition-all hover:bg-primary/5">
+                                        <div className="w-6 h-6 rounded-full border-[6px] border-primary bg-white shadow-lg"></div>
+                                        <div className="flex-1">
+                                            <div className="flex items-center gap-3 mb-1">
+                                                <div className="p-2 bg-primary/20 rounded-lg text-primary">
+                                                    <Truck className="w-6 h-6" />
+                                                </div>
+                                                <span className="font-bold text-xl text-white">الدفع عند الاستلام</span>
+                                            </div>
+                                            <p className="text-sm text-gray-300 pr-[52px]">ادفع نقداً عند استلام طلبك</p>
+                                        </div>
+                                    </label>
+                                </div>
+
+                                <label className="flex items-center gap-6 p-6 border border-white/5 bg-black/20 rounded-xl cursor-not-allowed opacity-50 grayscale">
+                                    <div className="w-6 h-6 rounded-full border-2 border-gray-600"></div>
+                                    <div className="flex-1">
+                                        <div className="flex items-center gap-3 mb-1">
+                                            <div className="p-2 bg-white/5 rounded-lg text-gray-400">
+                                                <CreditCard className="w-6 h-6" />
+                                            </div>
+                                            <span className="font-bold text-xl text-gray-400">الدفع بالبطاقة</span>
+                                        </div>
+                                        <p className="text-sm text-gray-500 pr-[52px]">غير متاح حالياً - قريباً</p>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div className="mt-12 flex justify-between items-center">
+                                <Button type="button" variant="ghost" size="lg" onClick={prevStep} className="px-6 text-gray-400 hover:text-white hover:bg-white/5">
+                                    <ChevronRight className="w-5 h-5 ml-2" />
+                                    السابق
+                                </Button>
+                                <Button type="button" size="lg" onClick={nextStep} className="px-10 h-12 text-lg shadow-lg shadow-primary/10 hover:shadow-primary/30 transition-all">
+                                    التالي
+                                    <ChevronLeft className="w-5 h-5 mr-2" />
+                                </Button>
+                            </div>
+                        </motion.div>
+                    )}
+
+                    {currentStep === 3 && (
+                        <motion.div
+                            key="step3"
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: -20 }}
+                            transition={{ duration: 0.3 }}
+                        >
+                            <div className="mb-8 text-start border-b border-white/10 pb-4">
+                                <h2 className="font-display text-3xl font-bold text-white mb-2">مراجعة الطلب</h2>
+                                <p className="text-gray-400 text-lg">تأكد من تفاصيل طلبك قبل التأكيد</p>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                {/* Order Items */}
+                                <div className="space-y-6">
+                                    <h3 className="font-bold text-white text-lg flex items-center gap-2">
+                                        <ShoppingBag className="w-5 h-5 text-primary" />
+                                        المنتجات
+                                    </h3>
+                                    <div className="space-y-4 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
+                                        {items.map((item) => (
+                                            <div key={item.id} className="flex justify-between items-center bg-black/20 p-4 rounded-xl border border-white/5 hover:border-white/10 transition-colors">
+                                                <div className="flex items-center gap-4">
+                                                    <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center font-bold text-sm text-white">
+                                                        {item.quantity}x
+                                                    </div>
+                                                    <div>
+                                                        <p className="text-white font-bold text-base">{item.title}</p>
+                                                        <p className="text-xs text-gray-400">{item.author}</p>
+                                                    </div>
+                                                </div>
+                                                <span className="font-bold text-primary text-lg">{(item.discount_price || item.price) * item.quantity} <span className="text-xs text-gray-500">ج.م</span></span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* Customer Info & Totals */}
+                                <div className="space-y-6">
+                                    <div className="bg-black/20 rounded-xl p-6 border border-white/5">
+                                        <h3 className="font-bold text-white mb-4 flex items-center gap-2 text-lg">
+                                            <MapPin className="w-5 h-5 text-primary" />
+                                            بيانات التوصيل
+                                        </h3>
+                                        <div className="space-y-2 text-sm">
+                                            <p className="text-gray-300 flex justify-between"><span className="text-gray-500">الاسم:</span> <span className="text-white font-medium">{formData.fullName}</span></p>
+                                            <p className="text-gray-300 flex justify-between"><span className="text-gray-500">الهاتف:</span> <span className="text-white font-medium">{formData.phone}</span></p>
+                                            <p className="text-gray-300 flex justify-between"><span className="text-gray-500">العنوان:</span> <span className="text-white font-medium text-left" dir="ltr">{formData.address}, {formData.city}</span></p>
+                                        </div>
+                                    </div>
+
+                                    <div className="bg-primary/5 rounded-xl p-6 border border-primary/20">
+                                        <div className="space-y-3">
+                                            <div className="flex justify-between text-gray-400 text-base">
+                                                <span>المجموع الفرعي</span>
+                                                <span>{total} ج.م</span>
+                                            </div>
+                                            <div className="flex justify-between text-gray-400 text-base">
+                                                <span>الشحن</span>
+                                                <span className="text-green-400">50 ج.م</span>
+                                            </div>
+                                            <div className="flex justify-between text-2xl font-bold text-white pt-4 border-t border-white/10 mt-2">
+                                                <span>الإجمالي الكلي</span>
+                                                <span className="text-primary">{total + 50} <span className="text-sm font-normal text-gray-500">ج.م</span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="mt-12 flex justify-between items-center">
+                                <Button type="button" variant="ghost" size="lg" onClick={prevStep} className="px-6 text-gray-400 hover:text-white hover:bg-white/5">
+                                    <ChevronRight className="w-5 h-5 ml-2" />
+                                    السابق
+                                </Button>
+                                <Button type="submit" size="lg" className="px-10 h-14 text-lg bg-green-600 hover:bg-green-500 text-white border-0 shadow-lg shadow-green-600/20 hover:shadow-green-600/40 transition-all">
+                                    تأكيد الطلب
+                                    <CheckCircle className="w-5 h-5 mr-2" />
+                                </Button>
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </form>
         </div>
+                    </Card >
+                </div >
+            </div >
+        </div >
     );
 }
