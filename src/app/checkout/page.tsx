@@ -92,7 +92,12 @@ export default function CheckoutPage() {
     return (
         <div className="min-h-screen bg-background text-white pb-20">
             {/* Header */}
-            <div className="pt-10 pb-6 text-center">
+            <div className="pt-10 pb-6 text-center relative max-w-2xl mx-auto px-4">
+                <Link href="/cart" className="absolute right-4 top-11 text-gray-400 hover:text-primary transition-colors flex items-center gap-2 group">
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    <span className="font-medium hidden md:inline">العودة للسلة</span>
+                </Link>
+
                 <h1 className="text-3xl md:text-4xl font-bold text-white mb-8">إتمام الشراء</h1>
 
                 {/* Progress Steps */}
