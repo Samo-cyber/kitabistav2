@@ -12,9 +12,10 @@ import { Modal } from "@/components/ui/Modal";
 
 interface AdminDashboardProps {
     books: Book[];
+    categories: { id: string; name: string }[];
 }
 
-export function AdminDashboard({ books: initialBooks }: AdminDashboardProps) {
+export function AdminDashboard({ books: initialBooks, categories }: AdminDashboardProps) {
     const [activeTab, setActiveTab] = useState<"sales" | "products" | "orders">("sales");
     const [books, setBooks] = useState<Book[]>(initialBooks);
 
@@ -73,6 +74,7 @@ export function AdminDashboard({ books: initialBooks }: AdminDashboardProps) {
                         <ProductsTab
                             key="products"
                             books={books}
+                            categories={categories}
                             onAddBook={handleAddBook}
                             onDeleteBook={handleDeleteBook}
                             onUpdateBook={handleUpdateBook}
@@ -182,12 +184,13 @@ function StatsCard({ title, value, change, icon }: { title: string; value: strin
 
 interface ProductsTabProps {
     books: Book[];
+    categories: { id: string; name: string }[];
     onAddBook: (book: Book) => void;
     onDeleteBook: (id: string) => void;
     onUpdateBook: (book: Book) => void;
 }
 
-function ProductsTab({ books, onAddBook, onDeleteBook, onUpdateBook }: ProductsTabProps) {
+function ProductsTab({ books, categories, onAddBook, onDeleteBook, onUpdateBook }: ProductsTabProps) {
     const [selectedBook, setSelectedBook] = useState<Book | null>(null);
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
@@ -426,11 +429,18 @@ function ProductsTab({ books, onAddBook, onDeleteBook, onUpdateBook }: ProductsT
                         </div>
                         <div className="space-y-2">
                             <label className="text-sm text-gray-400">القسم</label>
-                            <Input
+                            <select
                                 value={newBook.category}
                                 onChange={(e) => setNewBook({ ...newBook, category: e.target.value })}
-                                placeholder="روايات"
-                            />
+                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-primary transition-colors"
+                            >
+                                <option value="" disabled>اختر القسم</option>
+                                {categories.map((cat) => (
+                                    <option key={cat.id} value={cat.id} className="bg-zinc-900 text-white">
+                                        {cat.name}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
                         <div className="space-y-2">
                             <label className="text-sm text-gray-400">المخزون</label>
