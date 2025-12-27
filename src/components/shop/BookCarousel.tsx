@@ -106,14 +106,17 @@ export function BookCarousel({ title, books, linkToAll, subtitle }: BookCarousel
                                         </div>
 
                                         {/* Content */}
-                                        <div className="p-3 pb-1 flex flex-col flex-grow relative text-center">
-                                            <h3 className="font-bold text-sm text-zinc-100 leading-tight mb-0.5 line-clamp-2 group-hover/card:text-primary transition-colors min-h-[2.5em]">
+                                        <div className="p-3 pb-0 flex flex-col flex-grow relative text-center">
+                                            {/* Golden Separator */}
+                                            <div className="w-8 h-0.5 bg-primary/60 mx-auto mb-2 rounded-full" />
+
+                                            <h3 className="font-bold text-base text-white leading-tight mb-1 line-clamp-2 group-hover/card:text-primary transition-colors min-h-[1.5em]">
                                                 {book.title}
                                             </h3>
-                                            <p className="text-[10px] text-zinc-400 mb-1 line-clamp-1">{book.author}</p>
+                                            <p className="text-[11px] text-zinc-400 font-medium mb-1 line-clamp-1">{book.author}</p>
 
                                             {/* Footer: Price */}
-                                            <div className="mt-auto relative flex items-center justify-center min-h-[28px] pl-12">
+                                            <div className="mt-auto relative flex items-center justify-center min-h-[24px] pl-14 pt-1">
                                                 {book.discount_price ? (
                                                     <div className="flex items-baseline justify-center gap-1.5 w-full">
                                                         {/* Discount (Old Price) on the Right */}
