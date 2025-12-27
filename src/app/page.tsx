@@ -14,7 +14,7 @@ export default async function Home() {
     return (
         <div className="flex flex-col gap-0">
             {/* Hero Section */}
-            <section className="relative min-h-[85vh] md:min-h-[600px] flex items-center justify-center overflow-hidden py-20 md:py-8">
+            <section className="relative min-h-[65vh] md:min-h-[600px] flex items-center justify-center overflow-hidden py-12 md:py-8">
                 {/* Background removed to show global fixed background */}
 
                 <div className="container relative z-10 px-4 text-center space-y-8 md:space-y-10">

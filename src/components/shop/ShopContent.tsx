@@ -23,13 +23,27 @@ export function ShopContent({ allBooks, categories, selectedCategory }: ShopCont
 
     const [searchQuery, setSearchQuery] = useState("");
 
+    // Helper to normalize Arabic text
+    const normalizeArabic = (text: string) => {
+        return text
+            .replace(/[أإآ]/g, 'ا') // Normalize Alef
+            .replace(/ة/g, 'ه')     // Normalize Taa Marbuta
+            .replace(/ى/g, 'ي');    // Normalize Yaa (Optional but good)
+    };
+
     // Filter
     let displayedBooks = allBooks.filter((book) => {
         const matchesCategory = selectedCategory ? book.category === selectedCategory : true;
-        const matchesSearch = searchQuery
-            ? book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            book.author.toLowerCase().includes(searchQuery.toLowerCase())
-            : true;
+
+        if (!searchQuery) return matchesCategory;
+
+        const normalizedSearch = normalizeArabic(searchQuery.toLowerCase());
+        const normalizedTitle = normalizeArabic(book.title.toLowerCase());
+        const normalizedAuthor = normalizeArabic(book.author.toLowerCase());
+
+        const matchesSearch = normalizedTitle.includes(normalizedSearch) ||
+            normalizedAuthor.includes(normalizedSearch);
+
         return matchesCategory && matchesSearch;
     });
 
@@ -52,7 +66,7 @@ export function ShopContent({ allBooks, categories, selectedCategory }: ShopCont
         <div className="bg-background min-h-screen pb-20">
 
 
-            <Section className="pt-0">
+            <Section className="pt-20 lg:pt-24">
                 <div className="flex flex-col gap-8">
                     {/* Top Filter & Sort Bar */}
                     <div className="sticky top-20 z-30 bg-background/80 backdrop-blur-md border-y border-white/5 py-4">

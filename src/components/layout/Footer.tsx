@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Facebook, Instagram, Twitter } from "lucide-react";
+import { Facebook, Instagram, Twitter, ChevronLeft } from "lucide-react";
 
 export function Footer() {
     return (
@@ -38,7 +38,7 @@ export function Footer() {
                                 <span className="w-1 h-6 bg-primary rounded-full"></span>
                                 اكتشف
                             </h3>
-                            <ul className="space-y-3 w-full flex flex-col items-center lg:items-start">
+                            <ul className="space-y-3 w-fit lg:w-full flex flex-col items-start">
                                 <FooterLink href="/shop">المكتبة</FooterLink>
                                 <FooterLink href="/offers">العروض</FooterLink>
                                 <FooterLink href="/bestsellers">الأكثر مبيعاً</FooterLink>
@@ -52,7 +52,7 @@ export function Footer() {
                                 <span className="w-1 h-6 bg-primary rounded-full"></span>
                                 مساعدة
                             </h3>
-                            <ul className="space-y-3 w-full flex flex-col items-center lg:items-start">
+                            <ul className="space-y-3 w-fit lg:w-full flex flex-col items-start">
                                 <FooterLink href="/about">عن كتابيستا</FooterLink>
                                 <FooterLink href="/contact">اتصل بنا</FooterLink>
                                 <FooterLink href="/shipping-policy">الشحن</FooterLink>
@@ -90,12 +90,12 @@ function SocialIcon({ icon, href }: { icon: React.ReactNode; href: string }) {
 
 function FooterLink({ href, children }: { href: string; children: React.ReactNode }) {
     return (
-        <li className="w-full flex justify-center lg:justify-start">
+        <li className="w-full flex justify-start">
             <Link
                 href={href}
-                className="text-gray-400 hover:text-white hover:translate-x-[-4px] transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group text-sm w-fit"
+                className="text-gray-400 hover:text-white hover:translate-x-[-4px] transition-all duration-300 flex items-center justify-start gap-2 group text-sm w-fit"
             >
-                <span className="w-1.5 h-1.5 rounded-full bg-white/10 group-hover:bg-primary transition-colors"></span>
+                <ChevronLeft className="w-4 h-4 text-primary/50 group-hover:text-primary transition-colors" />
                 {children}
             </Link>
         </li>
