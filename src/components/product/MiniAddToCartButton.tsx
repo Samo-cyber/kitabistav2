@@ -22,14 +22,14 @@ export function MiniAddToCartButton({ book }: { book: Book }) {
         <Button
             size="sm"
             variant={added ? "primary" : "secondary"}
-            className={`h-7 px-2 text-xs transition-all duration-300 ${added ? "bg-green-600 hover:bg-green-700 text-white" : ""}`}
+            className={`h-8 w-8 p-0 rounded-full transition-all duration-300 ${added ? "bg-green-600 hover:bg-green-700 text-white" : "bg-zinc-800 hover:bg-primary hover:text-black text-white border border-white/10"}`}
             onClick={handleAdd}
             disabled={book.stock === 0}
         >
             {added ? (
-                <Check className="w-3 h-3" />
+                <Check className="w-4 h-4" />
             ) : (
-                "إضافة"
+                <ShoppingCart className="w-4 h-4" />
             )}
         </Button>
     );
