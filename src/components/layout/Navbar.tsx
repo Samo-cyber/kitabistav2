@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ShoppingCart, Menu, Search, X, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { useState, useEffect } from "react";
@@ -44,6 +45,14 @@ export function Navbar({ books = [] }: NavbarProps) {
         window.addEventListener("scroll", handleScroll, { passive: true });
         return () => window.removeEventListener("scroll", handleScroll);
     }, [lastScrollY]);
+
+    // Close search and menu on route change
+    const pathname = usePathname();
+    useEffect(() => {
+        setIsMenuOpen(false);
+        setIsSearchOpen(false);
+        setSearchQuery("");
+    }, [pathname]);
 
     // Helper to normalize Arabic text
     const normalizeArabic = (text: string) => {
