@@ -9,7 +9,7 @@ import { MiniAddToCartButton } from "@/components/product/MiniAddToCartButton";
 export default async function Home() {
     const books = await getBooks();
     const categories = await getCategories();
-    const featuredBooks = books.slice(0, 4);
+    const featuredBooks = books.slice(0, 5);
 
     return (
         <div className="flex flex-col gap-0">
@@ -57,7 +57,7 @@ export default async function Home() {
             </section>
 
             {/* Featured Books Section */}
-            <Section className="bg-black/40 backdrop-blur-md border-t border-white/10 py-8 md:py-12">
+            <Section className="bg-black/20 backdrop-blur-sm border-t border-white/5 py-8 md:py-12">
                 <div className="text-center mb-12">
                     <h2 className="font-display text-3xl font-bold text-primary mb-2">
                         أحدث الإصدارات
@@ -65,10 +65,10 @@ export default async function Home() {
                     <p className="text-text-secondary">كتب مميزة اخترناها لك بعناية</p>
                 </div>
 
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-7xl mx-auto">
                     {featuredBooks.map((book) => (
                         <Link key={book.id} href={`/product/${book.id}`}>
-                            <Card className="h-full overflow-hidden group relative border-0 bg-zinc-900/20 hover:bg-zinc-900/40 transition-colors duration-300">
+                            <Card className="h-full overflow-hidden group relative border-0 bg-white/5 hover:bg-white/10 transition-colors duration-300">
                                 <div className="flex flex-col h-full">
                                     {/* Image Container - Full Width */}
                                     <div className="relative aspect-[2/3] overflow-hidden rounded-t-lg">
