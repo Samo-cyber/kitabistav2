@@ -192,13 +192,13 @@ function ProductsTab({ books, onAddBook, onDeleteBook, onUpdateBook }: ProductsT
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
     // Add Book Form State
-    const [newBook, setNewBook] = useState<Partial<Book>>({
+    const [newBook, setNewBook] = useState({
         title: "",
         author: "",
         price: "",
         category: "",
         stock: 0,
-        image: "/books/placeholder.jpg"
+        image_url: "/books/placeholder.jpg"
     });
     const [dragActive, setDragActive] = useState(false);
 
@@ -228,19 +228,21 @@ function ProductsTab({ books, onAddBook, onDeleteBook, onUpdateBook }: ProductsT
         if (!newBook.title || !newBook.price) return;
 
         const bookToAdd: Book = {
-            id: Date.now().toString(), // simple ID generation
-            title: newBook.title!,
+            id: Date.now().toString(),
+            title: newBook.title,
             author: newBook.author || "غير معروف",
-            price: newBook.price!,
+            price: parseFloat(newBook.price) || 0,
             category: newBook.category || "عام",
             stock: newBook.stock || 0,
-            image: newBook.image || "/books/placeholder.jpg",
-            rating: 5
+            image_url: newBook.image_url || "/books/placeholder.jpg",
+            description: "",
+            is_active: true,
+            discount_price: null
         };
 
         onAddBook(bookToAdd);
         setIsAddModalOpen(false);
-        setNewBook({ title: "", author: "", price: "", category: "", stock: 0, image: "/books/placeholder.jpg" });
+        setNewBook({ title: "", author: "", price: "", category: "", stock: 0, image_url: "/books/placeholder.jpg" });
     };
 
     return (
