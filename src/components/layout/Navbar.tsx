@@ -97,6 +97,11 @@ export function Navbar({ books = [] }: NavbarProps) {
                             className="w-full h-9 bg-zinc-900/50 border border-white/10 rounded-full px-4 pl-10 text-sm text-zinc-200 placeholder:text-zinc-500 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
+                            onFocus={() => {
+                                if (searchQuery.trim()) {
+                                    // Logic to ensure results are shown if query exists
+                                }
+                            }}
                             onKeyDown={(e) => {
                                 if (e.key === "Enter") {
                                     const query = e.currentTarget.value;
@@ -116,6 +121,52 @@ export function Navbar({ books = [] }: NavbarProps) {
                         >
                             <Search className="h-3.5 w-3.5" />
                         </button>
+
+                        {/* Live Search Results Dropdown */}
+                        <AnimatePresence>
+                            {searchQuery.trim() && (
+                                <motion.div
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: 10 }}
+                                    className="absolute top-full left-0 right-0 mt-2 bg-zinc-900 border border-white/10 rounded-xl shadow-2xl overflow-hidden z-50 max-h-[60vh] overflow-y-auto"
+                                >
+                                    {searchResults.length > 0 ? (
+                                        <>
+                                            {searchResults.map((book) => (
+                                                <Link
+                                                    key={book.id}
+                                                    href={`/product/${book.id}`}
+                                                    onClick={() => setSearchQuery("")} // Close on click
+                                                    className="flex items-center gap-3 p-3 hover:bg-white/5 border-b border-white/5 last:border-0 transition-colors"
+                                                >
+                                                    <div className="relative w-10 h-14 rounded overflow-hidden flex-shrink-0 bg-zinc-800">
+                                                        <img src={book.image_url} alt={book.title} className="object-cover w-full h-full" />
+                                                    </div>
+                                                    <div className="flex-grow min-w-0">
+                                                        <h4 className="font-bold text-sm text-zinc-200 truncate">{book.title}</h4>
+                                                        <p className="text-xs text-zinc-500 truncate">{book.author}</p>
+                                                    </div>
+                                                    <div className="text-primary font-bold text-xs whitespace-nowrap">
+                                                        {book.discount_price || book.price} ج.م
+                                                    </div>
+                                                </Link>
+                                            ))}
+                                            <Link
+                                                href={`/shop?search=${encodeURIComponent(searchQuery)}`}
+                                                className="block p-3 text-center text-xs font-bold text-primary hover:bg-primary/10 transition-colors"
+                                            >
+                                                عرض كل النتائج ({searchResults.length}+)
+                                            </Link>
+                                        </>
+                                    ) : (
+                                        <div className="p-4 text-center text-zinc-500 text-sm">
+                                            لا توجد نتائج مطابقة
+                                        </div>
+                                    )}
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
                     </div>
 
                     {/* Mobile Menu Button (Left in RTL) */}
