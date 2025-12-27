@@ -243,7 +243,10 @@ function ProductsTab({ books, onAddBook, onDeleteBook, onUpdateBook }: ProductsT
         onAddBook(bookToAdd);
         setIsAddModalOpen(false);
         setNewBook({ title: "", author: "", price: "", category: "", stock: 0, image_url: "/books/placeholder.jpg" });
+        alert("تم إضافة الكتاب بنجاح!");
     };
+
+    const isFormValid = newBook.title && newBook.price;
 
     return (
         <motion.div
@@ -441,7 +444,7 @@ function ProductsTab({ books, onAddBook, onDeleteBook, onUpdateBook }: ProductsT
                     </div>
 
                     <div className="flex gap-3 pt-4 border-t border-white/10 mt-4">
-                        <Button className="flex-1" onClick={handleSubmitBook}>
+                        <Button className="flex-1" onClick={handleSubmitBook} disabled={!isFormValid}>
                             <Plus className="w-4 h-4 ml-2" />
                             إضافة الكتاب
                         </Button>
