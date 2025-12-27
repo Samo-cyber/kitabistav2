@@ -10,6 +10,14 @@ import { CheckCircle, ChevronLeft, ChevronRight, CreditCard, Truck, MapPin, Shop
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
+const governorates = [
+    "القاهرة", "الجيزة", "الإسكندرية", "الدقهلية", "الشرقية", "المنوفية",
+    "القليوبية", "البحيرة", "الغربية", "بور سعيد", "دمياط", "الإسماعيلية",
+    "السويس", "كفر الشيخ", "الفيوم", "بني سويف", "المنيا", "أسيوط",
+    "سوهاج", "قنا", "الأقصر", "أسوان", "البحر الأحمر", "الوادي الجديد",
+    "مطروح", "شمال سيناء", "جنوب سيناء"
+];
+
 export default function CheckoutPage() {
     const { items, total, clearCart } = useCart();
     const [isSubmitted, setIsSubmitted] = useState(false);
@@ -17,19 +25,17 @@ export default function CheckoutPage() {
 
     // Form State
     const [formData, setFormData] = useState({
-        firstName: "",
-        lastName: "",
+        fullName: "",
         phone: "",
         address: "",
         city: "",
-        area: ""
     });
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const isStep1Valid = formData.firstName && formData.lastName && formData.phone && formData.address && formData.city && formData.area;
+    const isStep1Valid = formData.fullName && formData.phone && formData.address && formData.city;
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -163,29 +169,39 @@ export default function CheckoutPage() {
                                         </div>
 
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                            <div className="space-y-2">
-                                                <label className="text-sm font-medium text-gray-300 mr-1">الاسم الأول</label>
-                                                <Input name="firstName" value={formData.firstName} onChange={handleInputChange} required placeholder="مثال: أحمد" className="bg-black/20 border-white/10 focus:border-primary/50 focus:ring-1 focus:ring-primary/50 h-12 transition-all" />
-                                            </div>
-                                            <div className="space-y-2">
-                                                <label className="text-sm font-medium text-gray-300 mr-1">اسم العائلة</label>
-                                                <Input name="lastName" value={formData.lastName} onChange={handleInputChange} required placeholder="مثال: محمد" className="bg-black/20 border-white/10 focus:border-primary/50 focus:ring-1 focus:ring-primary/50 h-12 transition-all" />
+                                            <div className="space-y-2 md:col-span-2">
+                                                <label className="text-sm font-medium text-gray-300 mr-1">الاسم بالكامل</label>
+                                                <Input name="fullName" value={formData.fullName} onChange={handleInputChange} required placeholder="مثال: أحمد محمد" className="bg-black/20 border-white/10 focus:border-primary/50 focus:ring-1 focus:ring-primary/50 h-12 transition-all" />
                                             </div>
                                             <div className="space-y-2 md:col-span-2">
                                                 <label className="text-sm font-medium text-gray-300 mr-1">رقم الهاتف</label>
                                                 <Input name="phone" value={formData.phone} onChange={handleInputChange} required type="tel" placeholder="01xxxxxxxxx" className="bg-black/20 border-white/10 focus:border-primary/50 focus:ring-1 focus:ring-primary/50 h-12 transition-all" />
                                             </div>
-                                            <div className="space-y-2 md:col-span-2">
+                                            <div className="space-y-2">
+                                                <label className="text-sm font-medium text-gray-300 mr-1">المحافظة</label>
+                                                <div className="relative">
+                                                    <select
+                                                        name="city"
+                                                        value={formData.city}
+                                                        onChange={handleInputChange}
+                                                        required
+                                                        className="w-full bg-black/20 border border-white/10 rounded-lg px-4 h-12 text-white focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-all appearance-none"
+                                                    >
+                                                        <option value="" disabled>اختر المحافظة</option>
+                                                        {governorates.map((gov) => (
+                                                            <option key={gov} value={gov} className="bg-zinc-900 text-white">
+                                                                {gov}
+                                                            </option>
+                                                        ))}
+                                                    </select>
+                                                    <div className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
+                                                        <ChevronLeft className="w-4 h-4 rotate-[-90deg]" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="space-y-2">
                                                 <label className="text-sm font-medium text-gray-300 mr-1">العنوان بالتفصيل</label>
                                                 <Input name="address" value={formData.address} onChange={handleInputChange} required placeholder="اسم الشارع، رقم العمارة، الشقة" className="bg-black/20 border-white/10 focus:border-primary/50 focus:ring-1 focus:ring-primary/50 h-12 transition-all" />
-                                            </div>
-                                            <div className="space-y-2">
-                                                <label className="text-sm font-medium text-gray-300 mr-1">المدينة</label>
-                                                <Input name="city" value={formData.city} onChange={handleInputChange} required placeholder="مثال: القاهرة" className="bg-black/20 border-white/10 focus:border-primary/50 focus:ring-1 focus:ring-primary/50 h-12 transition-all" />
-                                            </div>
-                                            <div className="space-y-2">
-                                                <label className="text-sm font-medium text-gray-300 mr-1">المنطقة</label>
-                                                <Input name="area" value={formData.area} onChange={handleInputChange} required placeholder="مثال: المعادي" className="bg-black/20 border-white/10 focus:border-primary/50 focus:ring-1 focus:ring-primary/50 h-12 transition-all" />
                                             </div>
                                         </div>
                                         <div className="mt-10 flex justify-end">
@@ -304,9 +320,9 @@ export default function CheckoutPage() {
                                                         بيانات التوصيل
                                                     </h3>
                                                     <div className="space-y-2 text-sm">
-                                                        <p className="text-gray-300 flex justify-between"><span className="text-gray-500">الاسم:</span> <span className="text-white font-medium">{formData.firstName} {formData.lastName}</span></p>
+                                                        <p className="text-gray-300 flex justify-between"><span className="text-gray-500">الاسم:</span> <span className="text-white font-medium">{formData.fullName}</span></p>
                                                         <p className="text-gray-300 flex justify-between"><span className="text-gray-500">الهاتف:</span> <span className="text-white font-medium">{formData.phone}</span></p>
-                                                        <p className="text-gray-300 flex justify-between"><span className="text-gray-500">العنوان:</span> <span className="text-white font-medium text-left" dir="ltr">{formData.address}, {formData.area}, {formData.city}</span></p>
+                                                        <p className="text-gray-300 flex justify-between"><span className="text-gray-500">العنوان:</span> <span className="text-white font-medium text-left" dir="ltr">{formData.address}, {formData.city}</span></p>
                                                     </div>
                                                 </div>
 
