@@ -3,8 +3,8 @@ import Image from "next/image";
 
 export default function AboutPage() {
     return (
-        <div className="bg-background min-h-screen pb-20 pt-24">
-            <Section>
+        <div className="bg-background min-h-screen pb-20 pt-20">
+            <Section className="pt-0 md:pt-0">
                 <div className="max-w-3xl mx-auto text-center space-y-12">
                     {/* Header */}
                     <div className="space-y-4">
