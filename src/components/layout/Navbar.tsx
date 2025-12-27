@@ -9,6 +9,8 @@ import { useCart } from "@/lib/cart-context";
 import { Input } from "@/components/ui/Input";
 import { Book } from "@/lib/data";
 
+import { cn } from "@/lib/utils";
+
 interface NavbarProps {
     books?: Book[];
 }
@@ -20,6 +22,28 @@ export function Navbar({ books = [] }: NavbarProps) {
     const [searchResults, setSearchResults] = useState<Book[]>([]);
     const { items } = useCart();
     const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
+
+    const [isVisible, setIsVisible] = useState(true);
+    const [lastScrollY, setLastScrollY] = useState(0);
+
+    // Hide Navbar on scroll down (Mobile only logic via CSS)
+    useEffect(() => {
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY;
+
+            // Hide if scrolling down and past 100px
+            if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                setIsVisible(false);
+            } else {
+                setIsVisible(true);
+            }
+
+            setLastScrollY(currentScrollY);
+        };
+
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, [lastScrollY]);
 
     // Helper to normalize Arabic text
     const normalizeArabic = (text: string) => {
@@ -56,7 +80,10 @@ export function Navbar({ books = [] }: NavbarProps) {
 
     return (
         <>
-            <nav className="sticky top-0 z-50 w-full border-b border-white/10 bg-background/80 backdrop-blur-md">
+            <nav className={cn(
+                "sticky top-0 z-50 w-full border-b border-white/10 bg-background/80 backdrop-blur-md transition-transform duration-300",
+                !isVisible && "-translate-y-full md:translate-y-0"
+            )}>
                 <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
                     {/* Logo */}
                     <Link href="/" className="flex items-center gap-2 group">
