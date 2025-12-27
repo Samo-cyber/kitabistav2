@@ -87,7 +87,7 @@ export function Navbar({ books = [] }: NavbarProps) {
                         <Button
                             variant="ghost"
                             size="sm"
-                            className="relative hover:bg-primary/10 hover:text-primary"
+                            className="relative hidden md:flex hover:bg-primary/10 hover:text-primary"
                             onClick={useCart().openCart}
                         >
                             <ShoppingCart className="h-5 w-5" />
