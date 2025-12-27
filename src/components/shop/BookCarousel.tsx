@@ -106,21 +106,24 @@ export function BookCarousel({ title, books, linkToAll, subtitle }: BookCarousel
                                         </div>
 
                                         {/* Content */}
-                                        <div className="p-3 pb-2 flex flex-col flex-grow relative text-center">
-                                            <h3 className="font-bold text-sm text-zinc-100 leading-tight mb-1 line-clamp-2 group-hover/card:text-primary transition-colors min-h-[2.5em]">
+                                        <div className="p-3 pb-1 flex flex-col flex-grow relative text-center">
+                                            <h3 className="font-bold text-sm text-zinc-100 leading-tight mb-0.5 line-clamp-2 group-hover/card:text-primary transition-colors min-h-[2.5em]">
                                                 {book.title}
                                             </h3>
-                                            <p className="text-[10px] text-zinc-400 mb-2 line-clamp-1">{book.author}</p>
+                                            <p className="text-[10px] text-zinc-400 mb-1 line-clamp-1">{book.author}</p>
 
                                             {/* Footer: Price & Action */}
-                                            <div className="mt-auto flex items-center justify-center gap-2 pb-2 pl-10 relative min-h-[40px]">
+                                            <div className="mt-auto relative flex items-center justify-center min-h-[36px] pl-8">
                                                 {book.discount_price ? (
-                                                    <div className="flex flex-col items-center leading-none">
+                                                    <div className="flex items-baseline justify-center gap-1.5 w-full">
+                                                        {/* Discount (Old Price) on the Right */}
+                                                        <span className="text-xs text-red-500/80 line-through decoration-red-500/50 font-medium whitespace-nowrap">
+                                                            {book.price}
+                                                        </span>
+
+                                                        {/* Main Price */}
                                                         <span className="font-bold text-2xl text-primary font-display">
                                                             {book.discount_price} <span className="text-[10px] font-normal text-zinc-400 font-sans">ج.م</span>
-                                                        </span>
-                                                        <span className="text-[10px] text-red-500/80 line-through decoration-red-500/50 font-medium absolute top-0 right-0 translate-x-full translate-y-1">
-                                                            {book.price}
                                                         </span>
                                                     </div>
                                                 ) : (
@@ -130,10 +133,10 @@ export function BookCarousel({ title, books, linkToAll, subtitle }: BookCarousel
                                                 )}
 
                                                 {/* Integrated Corner Button */}
-                                                <div className="absolute bottom-0 left-0 z-20">
+                                                <div className="absolute bottom-0 left-0 z-20 translate-y-1 translate-x-1">
                                                     <MiniAddToCartButton
                                                         book={book}
-                                                        className="h-12 w-12 rounded-none rounded-tr-2xl flex items-center justify-center !bg-primary hover:!bg-primary/90 text-black shadow-lg"
+                                                        className="h-10 w-10 rounded-none rounded-tr-xl flex items-center justify-center !bg-primary hover:!bg-primary/90 text-black shadow-lg"
                                                     />
                                                 </div>
                                             </div>
