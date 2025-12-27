@@ -165,9 +165,8 @@ export default function CheckoutPage() {
                                             exit={{ opacity: 0, x: -20 }}
                                             transition={{ duration: 0.3 }}
                                         >
-                                            <div className="mb-8 text-center">
-                                                <h2 className="font-display text-3xl font-bold text-white mb-2">بيانات التوصيل</h2>
-                                                <p className="text-gray-400 text-base">أدخل عنوانك لتوصيل الطلب بأسرع وقت</p>
+                                            <div className="mb-6 text-center">
+                                                <h2 className="font-display text-3xl font-bold text-white">عنوان التوصيل</h2>
                                             </div>
 
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -245,9 +244,8 @@ export default function CheckoutPage() {
                                             exit={{ opacity: 0, x: -20 }}
                                             transition={{ duration: 0.3 }}
                                         >
-                                            <div className="mb-8 text-center">
-                                                <h2 className="font-display text-3xl font-bold text-white mb-2">طريقة الدفع</h2>
-                                                <p className="text-gray-400 text-base">اختر طريقة الدفع المناسبة لك</p>
+                                            <div className="mb-6 text-center">
+                                                <h2 className="font-display text-3xl font-bold text-white">طريقة الدفع</h2>
                                             </div>
 
                                             <div className="space-y-4 max-w-2xl mx-auto">
@@ -302,9 +300,8 @@ export default function CheckoutPage() {
                                             exit={{ opacity: 0, x: -20 }}
                                             transition={{ duration: 0.3 }}
                                         >
-                                            <div className="mb-8 text-center">
-                                                <h2 className="font-display text-3xl font-bold text-white mb-2">مراجعة الطلب</h2>
-                                                <p className="text-gray-400 text-base">تأكد من تفاصيل طلبك قبل التأكيد</p>
+                                            <div className="mb-6 text-center">
+                                                <h2 className="font-display text-3xl font-bold text-white">مراجعة الطلب</h2>
                                             </div>
 
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
