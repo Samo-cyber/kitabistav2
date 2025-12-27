@@ -106,25 +106,25 @@ export function BookCarousel({ title, books, linkToAll, subtitle }: BookCarousel
                                         </div>
 
                                         {/* Content */}
-                                        <div className="p-3 pb-4 flex flex-col flex-grow relative text-center">
+                                        <div className="p-3 pb-2 flex flex-col flex-grow relative text-center">
                                             <h3 className="font-bold text-sm text-zinc-100 leading-tight mb-1 line-clamp-2 group-hover/card:text-primary transition-colors min-h-[2.5em]">
                                                 {book.title}
                                             </h3>
-                                            <p className="text-xs text-zinc-400 mb-3 line-clamp-1">{book.author}</p>
+                                            <p className="text-[10px] text-zinc-400 mb-2 line-clamp-1">{book.author}</p>
 
                                             {/* Footer: Price & Action */}
-                                            <div className="mt-auto flex items-baseline justify-center gap-2 pb-1 pl-8">
+                                            <div className="mt-auto flex items-center justify-center gap-2 pb-2 pl-10 relative min-h-[40px]">
                                                 {book.discount_price ? (
-                                                    <div className="flex items-baseline gap-2">
-                                                        <span className="font-bold text-xl md:text-2xl text-primary font-display">
+                                                    <div className="flex flex-col items-center leading-none">
+                                                        <span className="font-bold text-2xl text-primary font-display">
                                                             {book.discount_price} <span className="text-[10px] font-normal text-zinc-400 font-sans">ج.م</span>
                                                         </span>
-                                                        <span className="text-xs text-red-500/80 line-through decoration-red-500/50 font-medium">
-                                                            {book.price} ج.م
+                                                        <span className="text-[10px] text-red-500/80 line-through decoration-red-500/50 font-medium absolute top-0 right-0 translate-x-full translate-y-1">
+                                                            {book.price}
                                                         </span>
                                                     </div>
                                                 ) : (
-                                                    <span className="font-bold text-xl md:text-2xl text-primary font-display">
+                                                    <span className="font-bold text-2xl text-primary font-display">
                                                         {book.price} <span className="text-[10px] font-normal text-zinc-400 font-sans">ج.م</span>
                                                     </span>
                                                 )}
@@ -133,7 +133,7 @@ export function BookCarousel({ title, books, linkToAll, subtitle }: BookCarousel
                                                 <div className="absolute bottom-0 left-0 z-20">
                                                     <MiniAddToCartButton
                                                         book={book}
-                                                        className="h-10 w-10 rounded-none rounded-tr-xl flex items-center justify-center !bg-primary hover:!bg-primary/90 text-black shadow-lg"
+                                                        className="h-12 w-12 rounded-none rounded-tr-2xl flex items-center justify-center !bg-primary hover:!bg-primary/90 text-black shadow-lg"
                                                     />
                                                 </div>
                                             </div>
