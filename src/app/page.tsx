@@ -5,17 +5,18 @@ import { getBooks, getCategories } from "@/lib/data";
 import Link from "next/link";
 import Image from "next/image";
 import { MiniAddToCartButton } from "@/components/product/MiniAddToCartButton";
+import { BookCarousel } from "@/components/shop/BookCarousel";
 
 export default async function Home() {
     const books = await getBooks();
     const categories = await getCategories();
-    const featuredBooks = books.slice(0, 3);
-    const newBooks = books.slice(3, 6);
+    const featuredBooks = books.slice(0, 15);
+    const newBooks = books.slice(5, 20);
 
     return (
         <div className="flex flex-col gap-0">
             {/* Hero Section */}
-            <section className="relative min-h-[65vh] md:min-h-[600px] flex items-center justify-center overflow-hidden py-12 md:py-8">
+            <section className="relative min-h-[50vh] md:min-h-[450px] flex items-center justify-center overflow-hidden py-8 md:py-6">
                 {/* Background removed to show global fixed background */}
 
                 <div className="container relative z-10 px-4 text-center space-y-8 md:space-y-10">
