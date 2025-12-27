@@ -7,7 +7,7 @@ import { Section } from "@/components/ui/Section";
 import { Book, Category } from "@/lib/data";
 import Link from "next/link";
 import Image from "next/image";
-import { Filter, ChevronDown, Check } from "lucide-react";
+import { Filter, ChevronDown, Check, Book as BookIcon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MiniAddToCartButton } from "@/components/product/MiniAddToCartButton";
 
@@ -217,7 +217,7 @@ export function ShopContent({ allBooks, categories, selectedCategory }: ShopCont
                         {displayedBooks.length === 0 && (
                             <div className="text-center py-20">
                                 <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-6">
-                                    <Book className="w-10 h-10 text-gray-600" />
+                                    <BookIcon className="w-10 h-10 text-gray-600" />
                                 </div>
                                 <h3 className="text-xl font-bold text-white mb-2">لا توجد كتب في هذا القسم</h3>
                                 <p className="text-gray-400 mb-6">جرب اختيار قسم آخر أو تصفح كل الكتب.</p>
