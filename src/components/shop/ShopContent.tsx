@@ -21,10 +21,17 @@ export function ShopContent({ allBooks, categories, selectedCategory }: ShopCont
     const [sortBy, setSortBy] = useState<"default" | "price_asc" | "price_desc">("default");
     const [isSortOpen, setIsSortOpen] = useState(false);
 
+    const [searchQuery, setSearchQuery] = useState("");
+
     // Filter
-    let displayedBooks = selectedCategory
-        ? allBooks.filter((book) => book.category === selectedCategory)
-        : [...allBooks];
+    let displayedBooks = allBooks.filter((book) => {
+        const matchesCategory = selectedCategory ? book.category === selectedCategory : true;
+        const matchesSearch = searchQuery
+            ? book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            book.author.toLowerCase().includes(searchQuery.toLowerCase())
+            : true;
+        return matchesCategory && matchesSearch;
+    });
 
     // Sort
     if (sortBy === "price_asc") {
@@ -49,10 +56,24 @@ export function ShopContent({ allBooks, categories, selectedCategory }: ShopCont
                 <div className="flex flex-col gap-8">
                     {/* Top Filter & Sort Bar */}
                     <div className="sticky top-20 z-30 bg-background/80 backdrop-blur-md border-y border-white/5 py-4">
-                        <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
+                        <div className="container mx-auto px-4 flex flex-col lg:flex-row items-center justify-between gap-4">
+
+                            {/* Search Bar */}
+                            <div className="w-full lg:w-1/3 relative">
+                                <input
+                                    type="text"
+                                    placeholder="ابحث عن كتاب أو مؤلف..."
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                    className="w-full bg-white/5 border border-white/10 rounded-full py-2.5 pr-10 pl-4 text-white placeholder-gray-400 focus:outline-none focus:border-primary/50 focus:bg-white/10 transition-all"
+                                />
+                                <div className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
+                                </div>
+                            </div>
 
                             {/* Categories (Horizontal Scroll) */}
-                            <div className="w-full md:w-auto overflow-x-auto pb-2 md:pb-0 no-scrollbar">
+                            <div className="w-full lg:w-auto overflow-x-auto pb-2 lg:pb-0 no-scrollbar flex-1 flex justify-center">
                                 <div className="flex items-center gap-2 min-w-max">
                                     <Link href="/shop">
                                         <div
@@ -80,15 +101,15 @@ export function ShopContent({ allBooks, categories, selectedCategory }: ShopCont
                             </div>
 
                             {/* Sort & Count */}
-                            <div className="flex items-center gap-4 w-full md:w-auto justify-between md:justify-end">
-                                <p className="text-gray-400 text-sm hidden md:block">
+                            <div className="flex items-center gap-4 w-full lg:w-auto justify-between lg:justify-end">
+                                <p className="text-gray-400 text-sm hidden xl:block whitespace-nowrap">
                                     <span className="text-primary font-bold">{displayedBooks.length}</span> كتاب
                                 </p>
 
                                 <div className="relative">
                                     <button
                                         onClick={() => setIsSortOpen(!isSortOpen)}
-                                        className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 rounded-full text-sm font-medium transition-colors border border-white/5 text-white"
+                                        className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 rounded-full text-sm font-medium transition-colors border border-white/5 text-white whitespace-nowrap"
                                     >
                                         <Filter className="w-4 h-4 text-primary" />
                                         <span>
@@ -206,11 +227,11 @@ export function ShopContent({ allBooks, categories, selectedCategory }: ShopCont
                                 <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-6">
                                     <BookIcon className="w-10 h-10 text-gray-600" />
                                 </div>
-                                <h3 className="text-xl font-bold text-white mb-2">لا توجد كتب في هذا القسم</h3>
-                                <p className="text-gray-400 mb-6">جرب اختيار قسم آخر أو تصفح كل الكتب.</p>
+                                <h3 className="text-xl font-bold text-white mb-2">لا توجد كتب تطابق بحثك</h3>
+                                <p className="text-gray-400 mb-6">جرب كلمات مختلفة أو تصفح كل الكتب.</p>
                                 <Button
                                     variant="outline"
-                                    onClick={() => window.location.href = '/shop'}
+                                    onClick={() => { setSearchQuery(""); window.location.href = '/shop'; }}
                                     className="border-primary text-primary hover:bg-primary hover:text-black"
                                 >
                                     عرض كل الكتب
