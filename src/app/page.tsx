@@ -41,18 +41,7 @@ export default async function Home() {
                         </div>
                     </div>
 
-                    {/* Integrated Categories */}
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto pt-8 animate-fade-in-up delay-300">
-                        {categories.map((cat) => (
-                            <Link key={cat.id} href={`/shop?category=${cat.id}`}>
-                                <Card className="group h-24 md:h-28 flex flex-col items-center justify-center p-4 bg-black/40 backdrop-blur-md border-white/10 hover:bg-primary hover:border-primary hover:scale-105 cursor-pointer transition-all duration-300 shadow-lg">
-                                    <span className="font-display text-lg md:text-xl font-bold text-white group-hover:text-black transition-colors">
-                                        {cat.name}
-                                    </span>
-                                </Card>
-                            </Link>
-                        ))}
-                    </div>
+
                 </div>
             </section>
 

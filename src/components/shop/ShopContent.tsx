@@ -43,20 +43,7 @@ export function ShopContent({ allBooks, categories, selectedCategory }: ShopCont
 
     return (
         <div className="bg-background min-h-screen pb-20">
-            {/* Hero Section */}
-            <div className="relative h-[300px] flex items-center justify-center overflow-hidden">
-                <div className="absolute inset-0 bg-[url('/images/hero-bg.jpg')] bg-cover bg-center opacity-20"></div>
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/80 to-background"></div>
 
-                <div className="relative z-10 text-center space-y-4 px-4">
-                    <h1 className="font-display text-4xl md:text-6xl font-bold text-white animate-fade-in-up">
-                        المكتبة
-                    </h1>
-                    <p className="text-gray-400 text-lg max-w-xl mx-auto animate-fade-in-up delay-100">
-                        تصفح مجموعتنا المختارة من الكتب المميزة، حيث تلتقي الفخامة بالمعرفة.
-                    </p>
-                </div>
-            </div>
 
             <Section className="pt-0">
                 <div className="flex flex-col gap-8">
