@@ -76,7 +76,7 @@ export function BookCarousel({ title, books, linkToAll, subtitle }: BookCarousel
                         {books.map((book) => (
                             <div key={book.id} className="min-w-[160px] md:min-w-[200px] snap-start">
                                 <Link href={`/product/${book.id}`} className="group/card block h-full">
-                                    <div className="h-full bg-zinc-900/40 border border-white/10 rounded-xl overflow-hidden hover:border-primary/50 hover:bg-zinc-900/80 transition-all duration-300 flex flex-col backdrop-blur-sm">
+                                    <div className="h-full bg-zinc-900/40 border border-white/10 rounded-xl overflow-hidden hover:border-primary/50 hover:bg-zinc-900/80 transition-all duration-300 flex flex-col backdrop-blur-sm group/card relative">
 
                                         {/* Image Container */}
                                         <div className="relative aspect-[2/3] w-full overflow-hidden bg-zinc-800 border-b border-white/5">
@@ -95,43 +95,43 @@ export function BookCarousel({ title, books, linkToAll, subtitle }: BookCarousel
                                             )}
 
                                             {/* Overlay */}
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover/card:opacity-40 transition-opacity duration-300" />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-60 group-hover/card:opacity-40 transition-opacity duration-300" />
 
                                             {/* Discount Badge */}
                                             {book.discount_price && (
-                                                <div className="absolute top-2 right-2 bg-red-600/90 backdrop-blur-md text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-sm border border-white/10">
+                                                <div className="absolute top-2 right-2 bg-red-600/90 backdrop-blur-md text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-sm border border-white/10 z-10">
                                                     -{Math.round(((book.price - book.discount_price) / book.price) * 100)}%
                                                 </div>
                                             )}
                                         </div>
 
                                         {/* Content */}
-                                        <div className="p-3 flex flex-col flex-grow">
+                                        <div className="p-3 flex flex-col flex-grow relative">
                                             <h3 className="font-bold text-sm text-zinc-100 leading-tight mb-1 line-clamp-2 group-hover/card:text-primary transition-colors min-h-[2.5em]">
                                                 {book.title}
                                             </h3>
-                                            <p className="text-xs text-zinc-400 mb-3 line-clamp-1">{book.author}</p>
+                                            <p className="text-xs text-zinc-400 mb-2 line-clamp-1">{book.author}</p>
 
                                             {/* Footer: Price & Action */}
-                                            <div className="mt-auto pt-3 border-t border-white/5 flex items-center justify-between gap-2">
+                                            <div className="mt-auto flex items-end justify-between gap-2">
                                                 <div className="flex flex-col leading-none">
                                                     {book.discount_price ? (
                                                         <>
                                                             <span className="text-[10px] text-zinc-500 line-through decoration-zinc-600 mb-0.5">
                                                                 {book.price} ج.م
                                                             </span>
-                                                            <span className="font-bold text-base text-primary">
-                                                                {book.discount_price} <span className="text-[10px] font-normal text-zinc-400">ج.م</span>
+                                                            <span className="font-bold text-xl md:text-2xl text-primary font-display">
+                                                                {book.discount_price} <span className="text-[10px] font-normal text-zinc-400 font-sans">ج.م</span>
                                                             </span>
                                                         </>
                                                     ) : (
-                                                        <span className="font-bold text-base text-primary">
-                                                            {book.price} <span className="text-[10px] font-normal text-zinc-400">ج.م</span>
+                                                        <span className="font-bold text-xl md:text-2xl text-primary font-display">
+                                                            {book.price} <span className="text-[10px] font-normal text-zinc-400 font-sans">ج.م</span>
                                                         </span>
                                                     )}
                                                 </div>
 
-                                                <div className="relative z-10">
+                                                <div className="absolute bottom-3 left-3 z-20">
                                                     <MiniAddToCartButton book={book} />
                                                 </div>
                                             </div>
