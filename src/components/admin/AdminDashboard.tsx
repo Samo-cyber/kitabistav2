@@ -22,7 +22,7 @@ export function AdminDashboard({ books: initialBooks }: AdminDashboardProps) {
         setBooks([newBook, ...books]);
     };
 
-    const handleDeleteBook = (bookId: number) => {
+    const handleDeleteBook = (bookId: string) => {
         setBooks(books.filter(b => b.id !== bookId));
     };
 
@@ -183,7 +183,7 @@ function StatsCard({ title, value, change, icon }: { title: string; value: strin
 interface ProductsTabProps {
     books: Book[];
     onAddBook: (book: Book) => void;
-    onDeleteBook: (id: number) => void;
+    onDeleteBook: (id: string) => void;
     onUpdateBook: (book: Book) => void;
 }
 
@@ -228,7 +228,7 @@ function ProductsTab({ books, onAddBook, onDeleteBook, onUpdateBook }: ProductsT
         if (!newBook.title || !newBook.price) return;
 
         const bookToAdd: Book = {
-            id: Date.now(), // simple ID generation
+            id: Date.now().toString(), // simple ID generation
             title: newBook.title!,
             author: newBook.author || "غير معروف",
             price: newBook.price!,
