@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Tajawal, Amiri } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/layout/Navbar";
+import { NavbarWrapper } from "@/components/layout/NavbarWrapper";
 import { FooterWrapper } from "@/components/layout/FooterWrapper";
 import { CartProvider } from "@/lib/cart-context";
 
@@ -36,7 +36,7 @@ export default function RootLayout({
                 <LoadingGate />
 
                 <CartProvider>
-                    <Navbar />
+                    <NavbarWrapper />
                     <main className="flex-grow">{children}</main>
                     <FooterWrapper />
                 </CartProvider>
