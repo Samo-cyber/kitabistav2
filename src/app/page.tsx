@@ -68,7 +68,7 @@ export default async function Home() {
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-7xl mx-auto">
                     {featuredBooks.map((book) => (
                         <Link key={book.id} href={`/product/${book.id}`}>
-                            <Card className="h-full overflow-hidden group relative border-0 bg-white/5 hover:bg-white/10 transition-colors duration-300">
+                            <Card className="h-full overflow-hidden group relative border-0 bg-black/40 hover:bg-black/60 transition-colors duration-300">
                                 <div className="flex flex-col h-full">
                                     {/* Image Container - Full Width */}
                                     <div className="relative aspect-[2/3] overflow-hidden rounded-t-lg">
