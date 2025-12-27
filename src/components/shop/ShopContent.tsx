@@ -278,5 +278,6 @@ export function ShopContent({ allBooks, categories, selectedCategory }: ShopCont
                     </div>
                 )}
             </div>
-            );
+        </div>
+    );
 }
