@@ -66,6 +66,7 @@ export function ShopContent({ allBooks, categories, selectedCategory }: ShopCont
     }
 
 
+    return (
     <div className="bg-background min-h-screen pb-8">
         {/* Top Sticky Bar */}
         <div className="sticky top-20 z-30 bg-background/95 backdrop-blur-xl border-b border-white/5 py-4 shadow-2xl transition-all duration-300">
