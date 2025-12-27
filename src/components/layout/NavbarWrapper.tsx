@@ -3,17 +3,18 @@
 import { usePathname } from "next/navigation";
 import { Book } from "@/lib/data";
 import { Navbar } from "./Navbar";
+import { MobileBottomNav } from "./MobileBottomNav";
 
-interface NavbarWrapperProps {
-    books: Book[];
-}
-
-export function NavbarWrapper({ books }: NavbarWrapperProps) {
+export function NavbarWrapper({ books }: { books: Book[] }) {
     const pathname = usePathname();
-    const isCheckout = pathname === "/checkout";
-    const isAdmin = pathname?.startsWith("/admin");
+    const isAuthPage = pathname?.startsWith("/admin");
 
-    if (isCheckout || isAdmin) return null;
+    if (isAuthPage) return null;
 
-    return <Navbar books={books} />;
+    return (
+        <>
+            <Navbar books={books} />
+            <MobileBottomNav />
+        </>
+    );
 }
