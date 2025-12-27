@@ -15,12 +15,12 @@ const governorates = [
     "مطروح", "شمال سيناء", "جنوب سيناء"
 ];
 
-// Styles matching the "Prestige" dark theme reference
-const cardClasses = "bg-[#0f172a]/80 border border-white/5 rounded-2xl p-6 md:p-8 mb-6"; // Dark navy/slate background
+// Styles matching the project's premium dark theme (Green/Primary)
+const cardClasses = "bg-zinc-900/50 border border-white/5 rounded-2xl p-6 md:p-8 mb-6 backdrop-blur-sm";
 const labelClasses = "block text-right text-gray-300 text-sm font-bold mb-2";
 const inputContainerClasses = "relative";
-const inputClasses = "w-full bg-[#1e293b] border border-white/5 rounded-xl px-4 py-3.5 text-right text-white placeholder:text-gray-600 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all";
-const iconClasses = "absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"; // Icons on the left
+const inputClasses = "w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3.5 text-right text-white placeholder:text-gray-600 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all";
+const iconClasses = "absolute left-4 top-1/2 -translate-y-1/2 text-gray-500";
 
 export default function CheckoutPage() {
     const { items, total, clearCart } = useCart();
@@ -58,17 +58,18 @@ export default function CheckoutPage() {
 
     if (isSubmitted) {
         return (
-            <div className="min-h-screen flex flex-col items-center justify-center text-center px-4 bg-[#020617] relative overflow-hidden">
+            <div className="min-h-screen flex flex-col items-center justify-center text-center px-4 bg-background relative overflow-hidden">
+                <div className="absolute inset-0 bg-[url('/images/pattern.png')] opacity-5 pointer-events-none"></div>
                 <motion.div
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
-                    className="w-24 h-24 bg-cyan-500/10 rounded-full flex items-center justify-center text-cyan-500 mb-6"
+                    className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-6"
                 >
                     <CheckCircle className="w-12 h-12" />
                 </motion.div>
                 <h1 className="text-3xl font-bold text-white mb-4">تم استلام طلبك بنجاح!</h1>
                 <Link href="/">
-                    <Button className="bg-cyan-500 hover:bg-cyan-600 text-black font-bold px-8 py-3 rounded-xl">
+                    <Button className="bg-primary hover:bg-primary/90 text-black font-bold px-8 py-3 rounded-xl">
                         العودة للرئيسية
                     </Button>
                 </Link>
@@ -78,33 +79,33 @@ export default function CheckoutPage() {
 
     if (items.length === 0) {
         return (
-            <div className="min-h-screen flex flex-col items-center justify-center bg-[#020617] gap-6">
+            <div className="min-h-screen flex flex-col items-center justify-center bg-background gap-6">
                 <ShoppingBag className="w-16 h-16 text-gray-600" />
                 <p className="text-xl text-gray-400">سلة المشتريات فارغة</p>
                 <Link href="/shop">
-                    <Button className="bg-cyan-500 hover:bg-cyan-600 text-black font-bold px-8">تصفح الكتب</Button>
+                    <Button className="bg-primary hover:bg-primary/90 text-black font-bold px-8">تصفح الكتب</Button>
                 </Link>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-[#020617] text-white pb-20">
+        <div className="min-h-screen bg-background text-white pb-20">
             {/* Header */}
             <div className="pt-10 pb-6 text-center">
                 <h1 className="text-3xl md:text-4xl font-bold text-white mb-8">إتمام الشراء</h1>
 
                 {/* Progress Steps */}
-                <div className="flex items-center justify-center gap-4 md:gap-8 mb-8">
+                <div className="flex items-center justify-center gap-4 md:gap-8 mb-8 flex-row-reverse">
                     {[
                         { num: 3, label: "تأكيد" },
                         { num: 2, label: "الدفع" },
                         { num: 1, label: "البيانات" }
                     ].map((step, index) => (
-                        <div key={step.num} className="flex items-center">
+                        <div key={step.num} className="flex items-center flex-row-reverse">
                             <div className={`flex flex-col items-center gap-2 ${currentStep === step.num ? "opacity-100" : "opacity-40"}`}>
                                 <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all
-                                    ${currentStep === step.num ? "bg-cyan-500 text-black" : "bg-white/10 text-white"}
+                                    ${currentStep === step.num ? "bg-primary text-black" : "bg-white/10 text-white"}
                                 `}>
                                     {step.num}
                                 </div>
@@ -131,7 +132,7 @@ export default function CheckoutPage() {
                                 <div className={cardClasses}>
                                     <h2 className="text-xl font-bold text-white mb-6 flex items-center justify-end gap-2 text-right">
                                         البيانات الشخصية
-                                        <User className="w-5 h-5 text-cyan-500" />
+                                        <User className="w-5 h-5 text-primary" />
                                     </h2>
 
                                     <div className="space-y-5">
@@ -167,7 +168,7 @@ export default function CheckoutPage() {
                                 <div className={cardClasses}>
                                     <h2 className="text-xl font-bold text-white mb-6 flex items-center justify-end gap-2 text-right">
                                         عنوان التوصيل
-                                        <MapPin className="w-5 h-5 text-cyan-500" />
+                                        <MapPin className="w-5 h-5 text-primary" />
                                     </h2>
 
                                     <div className="space-y-5">
@@ -196,7 +197,7 @@ export default function CheckoutPage() {
                                                 >
                                                     <option value="" disabled>اختر المحافظة</option>
                                                     {governorates.map((gov) => (
-                                                        <option key={gov} value={gov} className="bg-[#1e293b] text-white">
+                                                        <option key={gov} value={gov} className="bg-zinc-900 text-white">
                                                             {gov}
                                                         </option>
                                                     ))}
@@ -214,7 +215,7 @@ export default function CheckoutPage() {
                                     type="button"
                                     onClick={nextStep}
                                     disabled={!isStep1Valid}
-                                    className="w-full h-14 bg-cyan-500 hover:bg-cyan-400 text-black text-lg font-bold rounded-xl shadow-lg shadow-cyan-500/20 transition-all flex items-center justify-center gap-2"
+                                    className="w-full h-14 bg-primary hover:bg-primary/90 text-black text-lg font-bold rounded-xl shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2"
                                 >
                                     التالي
                                     <ArrowRight className="w-5 h-5 rotate-180" />
@@ -232,19 +233,19 @@ export default function CheckoutPage() {
                                 <div className={cardClasses}>
                                     <h2 className="text-xl font-bold text-white mb-6 flex items-center justify-end gap-2 text-right">
                                         طريقة الدفع
-                                        <CreditCard className="w-5 h-5 text-cyan-500" />
+                                        <CreditCard className="w-5 h-5 text-primary" />
                                     </h2>
 
                                     <div className="space-y-4">
-                                        <label className="flex items-center justify-between p-4 bg-[#1e293b] border border-cyan-500/50 rounded-xl cursor-pointer">
+                                        <label className="flex items-center justify-between p-4 bg-black/40 border border-primary/50 rounded-xl cursor-pointer">
                                             <div className="flex items-center gap-4">
-                                                <Truck className="w-6 h-6 text-cyan-500" />
+                                                <Truck className="w-6 h-6 text-primary" />
                                                 <span className="text-lg font-bold text-white">الدفع عند الاستلام</span>
                                             </div>
-                                            <div className="w-5 h-5 rounded-full border-[5px] border-cyan-500 bg-white"></div>
+                                            <div className="w-5 h-5 rounded-full border-[5px] border-primary bg-white"></div>
                                         </label>
 
-                                        <div className="p-4 bg-[#1e293b]/50 border border-white/5 rounded-xl text-center text-gray-500">
+                                        <div className="p-4 bg-black/20 border border-white/5 rounded-xl text-center text-gray-500">
                                             الدفع الإلكتروني غير متاح حالياً
                                         </div>
                                     </div>
@@ -262,7 +263,7 @@ export default function CheckoutPage() {
                                     <Button
                                         type="button"
                                         onClick={nextStep}
-                                        className="flex-[2] h-14 bg-cyan-500 hover:bg-cyan-400 text-black text-lg font-bold rounded-xl shadow-lg shadow-cyan-500/20"
+                                        className="flex-[2] h-14 bg-primary hover:bg-primary/90 text-black text-lg font-bold rounded-xl shadow-lg shadow-primary/20"
                                     >
                                         التالي
                                     </Button>
@@ -280,18 +281,18 @@ export default function CheckoutPage() {
                                 <div className={cardClasses}>
                                     <h2 className="text-xl font-bold text-white mb-6 flex items-center justify-end gap-2 text-right">
                                         ملخص الطلب
-                                        <ShoppingBag className="w-5 h-5 text-cyan-500" />
+                                        <ShoppingBag className="w-5 h-5 text-primary" />
                                     </h2>
 
                                     <div className="space-y-4 mb-6">
                                         {items.map((item) => (
-                                            <div key={item.id} className="flex justify-between items-center bg-[#1e293b] p-4 rounded-xl">
+                                            <div key={item.id} className="flex justify-between items-center bg-black/40 p-4 rounded-xl">
                                                 <div className="text-right">
                                                     <p className="font-bold text-white">{item.title}</p>
                                                     <p className="text-sm text-gray-400">{item.author}</p>
                                                 </div>
                                                 <div className="flex items-center gap-3">
-                                                    <span className="text-cyan-500 font-bold">{(item.discount_price || item.price) * item.quantity} ج.م</span>
+                                                    <span className="text-primary font-bold">{(item.discount_price || item.price) * item.quantity} ج.م</span>
                                                     <span className="bg-white/10 px-2 py-1 rounded text-xs text-white">x{item.quantity}</span>
                                                 </div>
                                             </div>
@@ -308,7 +309,7 @@ export default function CheckoutPage() {
                                             <span>الشحن</span>
                                         </div>
                                         <div className="flex justify-between text-xl font-bold text-white pt-2">
-                                            <span className="text-cyan-500">{total + 50} ج.م</span>
+                                            <span className="text-primary">{total + 50} ج.م</span>
                                             <span>الإجمالي</span>
                                         </div>
                                     </div>
@@ -325,7 +326,7 @@ export default function CheckoutPage() {
                                     </Button>
                                     <Button
                                         type="submit"
-                                        className="flex-[2] h-14 bg-green-500 hover:bg-green-400 text-white text-lg font-bold rounded-xl shadow-lg shadow-green-500/20"
+                                        className="flex-[2] h-14 bg-green-600 hover:bg-green-500 text-white text-lg font-bold rounded-xl shadow-lg shadow-green-600/20"
                                     >
                                         تأكيد الطلب
                                     </Button>
