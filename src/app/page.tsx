@@ -14,27 +14,27 @@ export default async function Home() {
     return (
         <div className="flex flex-col gap-0">
             {/* Hero Section */}
-            <section className="relative min-h-[450px] flex items-center justify-center overflow-hidden py-8">
+            <section className="relative min-h-[85vh] md:min-h-[600px] flex items-center justify-center overflow-hidden py-20 md:py-8">
                 {/* Background removed to show global fixed background */}
 
-                <div className="container relative z-10 px-4 text-center space-y-6">
-                    <div className="space-y-4">
-                        <h1 className="font-display text-3xl md:text-5xl font-bold leading-tight animate-fade-in-up">
+                <div className="container relative z-10 px-4 text-center space-y-8 md:space-y-10">
+                    <div className="space-y-6">
+                        <h1 className="font-display text-5xl md:text-7xl font-bold leading-tight animate-fade-in-up drop-shadow-2xl">
                             اكتشف عوالم <span className="text-primary">جديدة</span>
                             <br />
                             بين طيات الكتب
                         </h1>
-                        <p className="text-sm md:text-base text-gray-300 max-w-xl mx-auto animate-fade-in-up delay-100">
+                        <p className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto animate-fade-in-up delay-100 leading-relaxed font-light">
                             مكتبة كتابيستا تقدم لك أفضل الإصدارات العربية والعالمية بتجربة تسوق فريدة مستوحاة من التراث.
                         </p>
-                        <div className="flex flex-wrap justify-center gap-3 animate-fade-in-up delay-200">
-                            <Link href="/shop">
-                                <Button size="lg" className="min-w-[130px] h-10 text-sm">
+                        <div className="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in-up delay-200 pt-4">
+                            <Link href="/shop" className="w-full sm:w-auto">
+                                <Button size="lg" className="w-full sm:min-w-[160px] h-14 sm:h-12 text-lg font-bold shadow-xl shadow-primary/20">
                                     تصفح الكتب
                                 </Button>
                             </Link>
-                            <Link href="/offers">
-                                <Button variant="outline" size="lg" className="min-w-[130px] h-10 text-sm">
+                            <Link href="/offers" className="w-full sm:w-auto">
+                                <Button variant="outline" size="lg" className="w-full sm:min-w-[160px] h-14 sm:h-12 text-lg font-bold border-white/20 hover:bg-white/10 backdrop-blur-md">
                                     العروض الحالية
                                 </Button>
                             </Link>
@@ -42,11 +42,11 @@ export default async function Home() {
                     </div>
 
                     {/* Integrated Categories */}
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl mx-auto pt-4 animate-fade-in-up delay-300">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto pt-8 animate-fade-in-up delay-300">
                         {categories.map((cat) => (
                             <Link key={cat.id} href={`/shop?category=${cat.id}`}>
-                                <Card className="group h-20 flex flex-col items-center justify-center p-3 bg-background/10 backdrop-blur-sm border-white/10 hover:bg-primary/20 hover:border-primary/50 cursor-pointer transition-all duration-300">
-                                    <span className="font-display text-base font-bold text-white group-hover:text-primary transition-colors">
+                                <Card className="group h-24 md:h-28 flex flex-col items-center justify-center p-4 bg-black/40 backdrop-blur-md border-white/10 hover:bg-primary hover:border-primary hover:scale-105 cursor-pointer transition-all duration-300 shadow-lg">
+                                    <span className="font-display text-lg md:text-xl font-bold text-white group-hover:text-black transition-colors">
                                         {cat.name}
                                     </span>
                                 </Card>
