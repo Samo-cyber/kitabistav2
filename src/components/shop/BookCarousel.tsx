@@ -107,8 +107,8 @@ export function BookCarousel({ title, books, linkToAll, subtitle }: BookCarousel
 
                                         {/* Content */}
                                         <div className="p-3 pb-0 flex flex-col flex-grow relative text-center">
-                                            {/* Golden Separator */}
-                                            <div className="w-8 h-0.5 bg-primary/60 mx-auto mb-2 rounded-full" />
+                                            {/* Golden Separator - Explicit Color */}
+                                            <div className="w-8 h-0.5 bg-yellow-500 mx-auto mb-2 rounded-full" />
 
                                             <h3 className="font-bold text-base text-white leading-tight mb-1 line-clamp-2 group-hover/card:text-primary transition-colors min-h-[1.5em]">
                                                 {book.title}

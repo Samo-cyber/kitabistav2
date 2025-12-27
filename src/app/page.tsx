@@ -67,7 +67,7 @@ export default async function Home() {
 
             {/* Best Sellers Section */}
             <BookCarousel
-                title="الأكثر مبيعاً"
+                title="الأكثر مبيعاً 🔥"
                 subtitle="الأكثر طلباً"
                 books={featuredBooks}
                 linkToAll="/shop?sort=best_selling"
