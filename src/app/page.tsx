@@ -65,7 +65,7 @@ export default async function Home() {
                     <p className="text-text-secondary">كتب مميزة اخترناها لك بعناية</p>
                 </div>
 
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
                     {featuredBooks.map((book) => (
                         <Link key={book.id} href={`/product/${book.id}`}>
                             <Card className="h-full overflow-hidden group relative border-0 bg-zinc-900/20 hover:bg-zinc-900/40 transition-colors duration-300">
