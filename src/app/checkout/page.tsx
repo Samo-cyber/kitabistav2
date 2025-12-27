@@ -112,10 +112,15 @@ export default function CheckoutPage() {
     return (
         <div className="bg-background min-h-screen flex flex-col">
             {/* Header with Back Button */}
-            <div className="w-full max-w-3xl mx-auto px-4 py-6 flex justify-between items-center">
+            <div className="w-full max-w-3xl mx-auto px-4 py-6 flex justify-between items-center relative">
                 <Link href="/" className="font-display text-2xl font-bold text-primary">
                     كتابيستا
                 </Link>
+
+                <h1 className="absolute left-1/2 -translate-x-1/2 text-xl md:text-2xl font-bold text-white">
+                    إتمام الطلب
+                </h1>
+
                 <Link href="/cart" className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group">
                     <span className="group-hover:-translate-x-1 transition-transform">العودة للسلة</span>
                     <ArrowRight className="w-5 h-5" />
@@ -165,9 +170,6 @@ export default function CheckoutPage() {
                                             exit={{ opacity: 0, x: -20 }}
                                             transition={{ duration: 0.3 }}
                                         >
-                                            <div className="mb-6 text-center">
-                                                <h2 className="font-display text-3xl font-bold text-white">عنوان التوصيل</h2>
-                                            </div>
 
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                                 <div className="space-y-2 md:col-span-2">
@@ -247,9 +249,6 @@ export default function CheckoutPage() {
                                             exit={{ opacity: 0, x: -20 }}
                                             transition={{ duration: 0.3 }}
                                         >
-                                            <div className="mb-6 text-center">
-                                                <h2 className="font-display text-3xl font-bold text-white">طريقة الدفع</h2>
-                                            </div>
 
                                             <div className="space-y-4 max-w-2xl mx-auto">
                                                 <div className="relative group">
@@ -303,9 +302,6 @@ export default function CheckoutPage() {
                                             exit={{ opacity: 0, x: -20 }}
                                             transition={{ duration: 0.3 }}
                                         >
-                                            <div className="mb-6 text-center">
-                                                <h2 className="font-display text-3xl font-bold text-white">مراجعة الطلب</h2>
-                                            </div>
 
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                                 {/* Order Items */}
