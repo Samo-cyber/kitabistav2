@@ -38,7 +38,7 @@ export default function ReturnPolicyPage() {
                     <div className="space-y-4">
                         <h2 className="font-display text-2xl font-bold text-primary">كيفية تقديم طلب الاسترجاع</h2>
                         <p className="leading-relaxed text-gray-300">
-                            يمكنك تقديم طلب الاسترجاع من خلال التواصل مع خدمة العملاء عبر صفحة "اتصل بنا" أو إرسال بريد إلكتروني إلى <span className="text-primary">support@kitabista.com</span>.
+                            يمكنك تقديم طلب الاسترجاع من خلال التواصل مع خدمة العملاء عبر صفحة &quot;اتصل بنا&quot; أو إرسال بريد إلكتروني إلى <span className="text-primary">support@kitabista.com</span>.
                         </p>
                     </div>
 
