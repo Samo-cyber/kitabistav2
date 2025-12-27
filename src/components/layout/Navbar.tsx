@@ -87,9 +87,14 @@ export function Navbar({ books = [] }: NavbarProps) {
         return () => { document.body.style.overflow = "unset"; };
     }, [isMenuOpen, isSearchOpen]);
 
+    const isCheckout = pathname === '/checkout';
+
     return (
         <>
-            <nav className="sticky top-0 z-50 w-full border-b border-white/10 bg-background/80 backdrop-blur-md">
+            <nav className={cn(
+                "sticky top-0 z-50 w-full border-b border-white/10 bg-background/80 backdrop-blur-md",
+                isCheckout && "hidden md:block" // Hide on mobile for checkout
+            )}>
                 <div className="container mx-auto flex h-16 md:h-20 items-center justify-between px-4 md:px-6 gap-4">
                     {/* Logo (Right in RTL) */}
                     <Link href="/" className="flex items-center gap-2 group shrink-0">
