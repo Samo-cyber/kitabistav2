@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { Book } from "@/lib/data";
+import { Navbar } from "./Navbar";
 
 interface NavbarWrapperProps {
     books: Book[];
