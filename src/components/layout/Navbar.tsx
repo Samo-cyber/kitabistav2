@@ -84,10 +84,49 @@ export function Navbar({ books = [] }: NavbarProps) {
                 "sticky top-0 z-50 w-full border-b border-white/10 bg-background/80 backdrop-blur-md transition-transform duration-300",
                 !isVisible && "-translate-y-full md:translate-y-0"
             )}>
-                <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
-                    {/* Logo */}
-                    <Link href="/" className="flex items-center gap-2 group">
-                        <span className="font-display text-2xl font-bold text-primary group-hover:text-primary-hover transition-colors">
+                <div className="container mx-auto flex h-16 md:h-20 items-center justify-between px-4 md:px-6 gap-4">
+                    {/* Mobile Menu Button (Right in RTL) */}
+                    <Button
+                        variant="ghost"
+                        size="sm"
+                        className="md:hidden text-zinc-400 hover:text-white p-0 h-auto"
+                        onClick={() => setIsMenuOpen(true)}
+                    >
+                        <Menu className="h-6 w-6" />
+                    </Button>
+
+                    {/* Mobile Search Bar (Center) */}
+                    <div className="flex-1 md:hidden relative">
+                        <input
+                            type="text"
+                            placeholder="عنوان الكتاب، المؤلف، دار النشر..."
+                            className="w-full h-10 bg-white rounded-lg px-4 pl-12 text-sm text-black placeholder:text-gray-400 focus:outline-none border border-gray-200"
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            onKeyDown={(e) => {
+                                if (e.key === "Enter") {
+                                    const query = e.currentTarget.value;
+                                    if (query.trim()) {
+                                        window.location.href = `/shop?search=${encodeURIComponent(query)}`;
+                                    }
+                                }
+                            }}
+                        />
+                        <button
+                            className="absolute left-0 top-0 h-10 w-12 bg-red-600 rounded-l-lg flex items-center justify-center text-white hover:bg-red-700 transition-colors"
+                            onClick={() => {
+                                if (searchQuery.trim()) {
+                                    window.location.href = `/shop?search=${encodeURIComponent(searchQuery)}`;
+                                }
+                            }}
+                        >
+                            <Search className="h-5 w-5" />
+                        </button>
+                    </div>
+
+                    {/* Logo (Left in RTL) */}
+                    <Link href="/" className="flex items-center gap-2 group shrink-0">
+                        <span className="font-display text-xl md:text-2xl font-bold text-primary group-hover:text-primary-hover transition-colors">
                             كتابيستا
                         </span>
                     </Link>
@@ -101,12 +140,12 @@ export function Navbar({ books = [] }: NavbarProps) {
                         <NavLink href="/contact">اتصل بنا</NavLink>
                     </div>
 
-                    {/* Actions */}
-                    <div className="flex items-center gap-2">
+                    {/* Desktop Actions */}
+                    <div className="hidden md:flex items-center gap-2">
                         <Button
                             variant="ghost"
                             size="sm"
-                            className="hidden md:flex hover:bg-primary/10 hover:text-primary"
+                            className="hover:bg-primary/10 hover:text-primary"
                             onClick={() => setIsSearchOpen(true)}
                         >
                             <Search className="h-5 w-5" />
@@ -114,7 +153,7 @@ export function Navbar({ books = [] }: NavbarProps) {
                         <Button
                             variant="ghost"
                             size="sm"
-                            className="relative hidden md:flex hover:bg-primary/10 hover:text-primary"
+                            className="relative hover:bg-primary/10 hover:text-primary"
                             onClick={useCart().openCart}
                         >
                             <ShoppingCart className="h-5 w-5" />
@@ -123,14 +162,6 @@ export function Navbar({ books = [] }: NavbarProps) {
                                     {itemCount}
                                 </span>
                             )}
-                        </Button>
-                        <Button
-                            variant="ghost"
-                            size="sm"
-                            className="md:hidden hover:bg-primary/10 hover:text-primary"
-                            onClick={() => setIsMenuOpen(true)}
-                        >
-                            <Menu className="h-6 w-6" />
                         </Button>
                     </div>
                 </div>
