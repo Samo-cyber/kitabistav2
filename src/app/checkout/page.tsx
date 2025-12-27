@@ -87,43 +87,30 @@ export default function CheckoutPage() {
                 </Link>
             </div>
         );
-    }
-
-    return (
-        <div className="min-h-screen bg-background text-white pb-20">
-            {/* Header */}
-            <div className="pt-10 pb-6 text-center relative max-w-2xl mx-auto px-4">
-                <Link href="/cart" className="absolute right-4 top-11 text-gray-400 hover:text-primary transition-colors flex items-center gap-2 group">
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                    <span className="font-medium hidden md:inline">العودة للسلة</span>
-                </Link>
-
-                <h1 className="text-3xl md:text-4xl font-bold text-white mb-8">إتمام الشراء</h1>
-
-                {/* Progress Steps */}
-                <div className="flex items-center justify-center gap-4 md:gap-8 mb-8 flex-row-reverse">
-                    {[
-                        { num: 3, label: "تأكيد" },
-                        { num: 2, label: "الدفع" },
-                        { num: 1, label: "البيانات" }
-                    ].map((step, index) => (
-                        <div key={step.num} className="flex items-center flex-row-reverse">
-                            <div className={`flex flex-col items-center gap-2 ${currentStep === step.num ? "opacity-100" : "opacity-40"}`}>
-                                <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all
+        {
+            [
+                { num: 3, label: "تأكيد" },
+                { num: 2, label: "الدفع" },
+                { num: 1, label: "البيانات" }
+            ].map((step, index) => (
+                <div key={step.num} className="flex items-center flex-row-reverse">
+                    <div className={`flex flex-col items-center gap-2 ${currentStep === step.num ? "opacity-100" : "opacity-40"}`}>
+                        <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all
                                     ${currentStep === step.num ? "bg-primary text-black" : "bg-white/10 text-white"}
                                 `}>
-                                    {step.num}
-                                </div>
-                                <span className="text-xs md:text-sm font-medium">{step.label}</span>
-                            </div>
-                            {index < 2 && <div className="w-8 md:w-16 h-[1px] bg-white/10 mx-2 md:mx-4 -mt-6"></div>}
+                            {step.num}
                         </div>
-                    ))}
+                        <span className="text-xs md:text-sm font-medium">{step.label}</span>
+                    </div>
+                    {index < 2 && <div className="w-8 md:w-16 h-[1px] bg-white/10 mx-2 md:mx-4 -mt-6"></div>}
                 </div>
-            </div>
+            ))
+        }
+                </div >
+            </div >
 
-            {/* Main Content */}
-            <div className="max-w-2xl mx-auto px-4">
+            {/* Main Content */ }
+            < div className = "max-w-2xl mx-auto px-4" >
                 <form onSubmit={handleSubmit}>
                     <AnimatePresence mode="wait">
                         {currentStep === 1 && (
@@ -340,7 +327,7 @@ export default function CheckoutPage() {
                         )}
                     </AnimatePresence>
                 </form>
-            </div>
-        </div>
+            </div >
+        </div >
     );
-}
+    }
