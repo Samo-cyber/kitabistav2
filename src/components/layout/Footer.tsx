@@ -28,20 +28,21 @@ export function Footer() {
                         <div>
                             <h3 className="font-bold mb-3 text-primary text-sm md:text-base">روابط سريعة</h3>
                             <ul className="space-y-1.5 text-xs md:text-sm text-gray-400">
-                                <li><a href="#" className="hover:text-primary transition-colors">عن كتابيستا</a></li>
-                                <li><a href="#" className="hover:text-primary transition-colors">المدونة</a></li>
-                                <li><a href="#" className="hover:text-primary transition-colors">وظائف</a></li>
-                                <li><a href="#" className="hover:text-primary transition-colors">اتصل بنا</a></li>
+                                <li><Link href="/about" className="hover:text-primary transition-colors">عن كتابيستا</Link></li>
+                                <li><Link href="#" className="hover:text-primary transition-colors">المدونة</Link></li>
+                                <li><Link href="#" className="hover:text-primary transition-colors">وظائف</Link></li>
+                                <li><Link href="/contact" className="hover:text-primary transition-colors">اتصل بنا</Link></li>
                             </ul>
                         </div>
 
                         <div>
                             <h3 className="font-bold mb-3 text-primary text-sm md:text-base">المساعدة</h3>
                             <ul className="space-y-1.5 text-xs md:text-sm text-gray-400">
-                                <li><a href="#" className="hover:text-primary transition-colors">الأسئلة الشائعة</a></li>
-                                <li><a href="#" className="hover:text-primary transition-colors">سياسة الشحن</a></li>
-                                <li><a href="#" className="hover:text-primary transition-colors">سياسة الإرجاع</a></li>
-                                <li><a href="#" className="hover:text-primary transition-colors">شروط الاستخدام</a></li>
+                                <li><Link href="#" className="hover:text-primary transition-colors">الأسئلة الشائعة</Link></li>
+                                <li><Link href="#" className="hover:text-primary transition-colors">سياسة الشحن</Link></li>
+                                <li><Link href="#" className="hover:text-primary transition-colors">سياسة الإرجاع</Link></li>
+                                <li><Link href="/terms" className="hover:text-primary transition-colors">شروط الاستخدام</Link></li>
+                                <li><Link href="/privacy" className="hover:text-primary transition-colors">سياسة الخصوصية</Link></li>
                             </ul>
                         </div>
                     </div>
