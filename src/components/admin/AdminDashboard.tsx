@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Section } from "@/components/ui/Section";
 import { Book } from "@/lib/data";
-import { Plus, Edit, Trash, TrendingUp, ShoppingBag, Users, Package, Search, Filter, MoreHorizontal } from "lucide-react";
+import { Plus, Edit, Trash, TrendingUp, ShoppingBag, Users, Package, Search, Filter, Check, X, Truck, Clock, Upload, Image as ImageIcon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Input } from "@/components/ui/Input";
 import { Modal } from "@/components/ui/Modal";
@@ -14,8 +14,21 @@ interface AdminDashboardProps {
     books: Book[];
 }
 
-export function AdminDashboard({ books }: AdminDashboardProps) {
+export function AdminDashboard({ books: initialBooks }: AdminDashboardProps) {
     const [activeTab, setActiveTab] = useState<"sales" | "products" | "orders">("sales");
+    const [books, setBooks] = useState<Book[]>(initialBooks);
+
+    const handleAddBook = (newBook: Book) => {
+        setBooks([newBook, ...books]);
+    };
+
+    const handleDeleteBook = (bookId: number) => {
+        setBooks(books.filter(b => b.id !== bookId));
+    };
+
+    const handleUpdateBook = (updatedBook: Book) => {
+        setBooks(books.map(b => b.id === updatedBook.id ? updatedBook : b));
+    };
 
     return (
         <div className="bg-background min-h-screen pb-12">
@@ -57,7 +70,13 @@ export function AdminDashboard({ books }: AdminDashboardProps) {
                         <SalesTab key="sales" />
                     )}
                     {activeTab === "products" && (
-                        <ProductsTab key="products" books={books} />
+                        <ProductsTab
+                            key="products"
+                            books={books}
+                            onAddBook={handleAddBook}
+                            onDeleteBook={handleDeleteBook}
+                            onUpdateBook={handleUpdateBook}
+                        />
                     )}
                     {activeTab === "orders" && (
                         <OrdersTab key="orders" />
@@ -161,8 +180,68 @@ function StatsCard({ title, value, change, icon }: { title: string; value: strin
     );
 }
 
-function ProductsTab({ books }: { books: Book[] }) {
+interface ProductsTabProps {
+    books: Book[];
+    onAddBook: (book: Book) => void;
+    onDeleteBook: (id: number) => void;
+    onUpdateBook: (book: Book) => void;
+}
+
+function ProductsTab({ books, onAddBook, onDeleteBook, onUpdateBook }: ProductsTabProps) {
     const [selectedBook, setSelectedBook] = useState<Book | null>(null);
+    const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+
+    // Add Book Form State
+    const [newBook, setNewBook] = useState<Partial<Book>>({
+        title: "",
+        author: "",
+        price: "",
+        category: "",
+        stock: 0,
+        image: "/books/placeholder.jpg"
+    });
+    const [dragActive, setDragActive] = useState(false);
+
+    const handleDrag = (e: React.DragEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (e.type === "dragenter" || e.type === "dragover") {
+            setDragActive(true);
+        } else if (e.type === "dragleave") {
+            setDragActive(false);
+        }
+    };
+
+    const handleDrop = (e: React.DragEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setDragActive(false);
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+            // In a real app, we would upload the file here.
+            // For now, we'll just simulate it by setting a placeholder or object URL if we wanted.
+            // keeping the placeholder for simplicity as requested "local data linking"
+            console.log("File dropped:", e.dataTransfer.files[0]);
+        }
+    };
+
+    const handleSubmitBook = () => {
+        if (!newBook.title || !newBook.price) return;
+
+        const bookToAdd: Book = {
+            id: Date.now(), // simple ID generation
+            title: newBook.title!,
+            author: newBook.author || "غير معروف",
+            price: newBook.price!,
+            category: newBook.category || "عام",
+            stock: newBook.stock || 0,
+            image: newBook.image || "/books/placeholder.jpg",
+            rating: 5
+        };
+
+        onAddBook(bookToAdd);
+        setIsAddModalOpen(false);
+        setNewBook({ title: "", author: "", price: "", category: "", stock: 0, image: "/books/placeholder.jpg" });
+    };
 
     return (
         <motion.div
@@ -176,7 +255,7 @@ function ProductsTab({ books }: { books: Book[] }) {
                     <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                     <Input placeholder="بحث عن كتاب..." className="pr-10" />
                 </div>
-                <Button>
+                <Button onClick={() => setIsAddModalOpen(true)}>
                     <Plus className="w-4 h-4 ml-2" />
                     إضافة كتاب جديد
                 </Button>
@@ -192,14 +271,13 @@ function ProductsTab({ books }: { books: Book[] }) {
                                 <th className="p-4 font-bold text-text-primary hidden md:table-cell">القسم</th>
                                 <th className="p-4 font-bold text-text-primary">السعر</th>
                                 <th className="p-4 font-bold text-text-primary">المخزون</th>
-                                <th className="p-4 font-bold text-text-primary hidden md:table-cell">الإجراءات</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-white/5">
                             {books.map((book) => (
                                 <tr
                                     key={book.id}
-                                    className="hover:bg-white/5 transition-colors group cursor-pointer md:cursor-default"
+                                    className="hover:bg-white/5 transition-colors group cursor-pointer"
                                     onClick={() => setSelectedBook(book)}
                                 >
                                     <td className="p-4 font-medium text-white">{book.title}</td>
@@ -227,16 +305,6 @@ function ProductsTab({ books }: { books: Book[] }) {
                                             </span>
                                         </div>
                                     </td>
-                                    <td className="p-4 hidden md:table-cell">
-                                        <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                            <Button variant="ghost" size="sm" className="hover:text-primary" onClick={(e) => e.stopPropagation()}>
-                                                <Edit className="w-4 h-4" />
-                                            </Button>
-                                            <Button variant="ghost" size="sm" className="text-red-400 hover:text-red-500 hover:bg-red-500/10" onClick={(e) => e.stopPropagation()}>
-                                                <Trash className="w-4 h-4" />
-                                            </Button>
-                                        </div>
-                                    </td>
                                 </tr>
                             ))}
                         </tbody>
@@ -244,6 +312,7 @@ function ProductsTab({ books }: { books: Book[] }) {
                 </div>
             </Card>
 
+            {/* Product Details Modal */}
             <Modal
                 isOpen={!!selectedBook}
                 onClose={() => setSelectedBook(null)}
@@ -287,7 +356,10 @@ function ProductsTab({ books }: { books: Book[] }) {
                                 <Edit className="w-4 h-4 ml-2" />
                                 تعديل
                             </Button>
-                            <Button variant="outline" className="flex-1 text-red-400 hover:text-red-500 hover:bg-red-500/10 border-red-500/20" onClick={() => setSelectedBook(null)}>
+                            <Button variant="outline" className="flex-1 text-red-400 hover:text-red-500 hover:bg-red-500/10 border-red-500/20" onClick={() => {
+                                onDeleteBook(selectedBook.id);
+                                setSelectedBook(null);
+                            }}>
                                 <Trash className="w-4 h-4 ml-2" />
                                 حذف
                             </Button>
@@ -295,20 +367,170 @@ function ProductsTab({ books }: { books: Book[] }) {
                     </div>
                 )}
             </Modal>
+
+            {/* Add Book Modal */}
+            <Modal
+                isOpen={isAddModalOpen}
+                onClose={() => setIsAddModalOpen(false)}
+                title="إضافة كتاب جديد"
+            >
+                <div className="space-y-4">
+                    {/* Drag & Drop Image Upload */}
+                    <div
+                        className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors ${dragActive ? "border-primary bg-primary/10" : "border-white/10 hover:border-primary/50 hover:bg-white/5"
+                            }`}
+                        onDragEnter={handleDrag}
+                        onDragLeave={handleDrag}
+                        onDragOver={handleDrag}
+                        onDrop={handleDrop}
+                    >
+                        <div className="flex flex-col items-center gap-2">
+                            <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mb-2">
+                                <Upload className="w-6 h-6 text-gray-400" />
+                            </div>
+                            <p className="font-bold text-white">اسحب صورة الغلاف هنا</p>
+                            <p className="text-xs text-gray-400">أو اضغط للاختيار من جهازك</p>
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                            <label className="text-sm text-gray-400">عنوان الكتاب</label>
+                            <Input
+                                value={newBook.title}
+                                onChange={(e) => setNewBook({ ...newBook, title: e.target.value })}
+                                placeholder="مثال: أولاد حارتنا"
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <label className="text-sm text-gray-400">المؤلف</label>
+                            <Input
+                                value={newBook.author}
+                                onChange={(e) => setNewBook({ ...newBook, author: e.target.value })}
+                                placeholder="مثال: نجيب محفوظ"
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <label className="text-sm text-gray-400">السعر (ج.م)</label>
+                            <Input
+                                value={newBook.price}
+                                onChange={(e) => setNewBook({ ...newBook, price: e.target.value })}
+                                placeholder="150"
+                                type="number"
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <label className="text-sm text-gray-400">القسم</label>
+                            <Input
+                                value={newBook.category}
+                                onChange={(e) => setNewBook({ ...newBook, category: e.target.value })}
+                                placeholder="روايات"
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <label className="text-sm text-gray-400">المخزون</label>
+                            <Input
+                                value={newBook.stock}
+                                onChange={(e) => setNewBook({ ...newBook, stock: parseInt(e.target.value) || 0 })}
+                                placeholder="10"
+                                type="number"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="flex gap-3 pt-4 border-t border-white/10 mt-4">
+                        <Button className="flex-1" onClick={handleSubmitBook}>
+                            <Plus className="w-4 h-4 ml-2" />
+                            إضافة الكتاب
+                        </Button>
+                        <Button variant="outline" className="flex-1" onClick={() => setIsAddModalOpen(false)}>
+                            إلغاء
+                        </Button>
+                    </div>
+                </div>
+            </Modal>
         </motion.div>
     );
 }
 
 function OrdersTab() {
-    const [selectedOrder, setSelectedOrder] = useState<any>(null);
+    const [orders, setOrders] = useState([
+        {
+            id: "#ORD-001",
+            customer: "أحمد محمد",
+            date: "2023-12-25",
+            total: "450",
+            status: "pending",
+            address: "القاهرة، المعادي",
+            items: [
+                { title: "أولاد حارتنا", quantity: 1, price: "150" },
+                { title: "ثلاثية غرناطة", quantity: 1, price: "200" },
+                { title: "يوتوبيا", quantity: 1, price: "100" }
+            ]
+        },
+        {
+            id: "#ORD-002",
+            customer: "سارة علي",
+            date: "2023-12-24",
+            total: "1200",
+            status: "shipped",
+            address: "الجيزة، الدقي",
+            items: [
+                { title: "موسوعة مصر القديمة", quantity: 1, price: "1200" }
+            ]
+        },
+        {
+            id: "#ORD-003",
+            customer: "محمود حسن",
+            date: "2023-12-23",
+            total: "320",
+            status: "delivered",
+            address: "الإسكندرية، سموحة",
+            items: [
+                { title: "عزازيل", quantity: 2, price: "160" }
+            ]
+        },
+        {
+            id: "#ORD-004",
+            customer: "نور الدين",
+            date: "2023-12-23",
+            total: "850",
+            status: "delivered",
+            address: "القاهرة، مدينة نصر",
+            items: [
+                { title: "الفيل الأزرق", quantity: 1, price: "150" },
+                { title: "تراب الماس", quantity: 1, price: "150" },
+                { title: "1919", quantity: 1, price: "150" },
+                { title: "كيرة والجن", quantity: 1, price: "400" }
+            ]
+        },
+        {
+            id: "#ORD-005",
+            customer: "كريم عادل",
+            date: "2023-12-22",
+            total: "210",
+            status: "cancelled",
+            address: "المنصورة",
+            items: [
+                { title: "شآبيب", quantity: 1, price: "210" }
+            ]
+        },
+    ]);
 
-    const orders = [
-        { id: "#ORD-001", customer: "أحمد محمد", date: "2023-12-25", total: "450 ج.م", status: "pending", items: 3, address: "القاهرة، المعادي" },
-        { id: "#ORD-002", customer: "سارة علي", date: "2023-12-24", total: "1,200 ج.م", status: "shipped", items: 5, address: "الجيزة، الدقي" },
-        { id: "#ORD-003", customer: "محمود حسن", date: "2023-12-23", total: "320 ج.م", status: "delivered", items: 2, address: "الإسكندرية، سموحة" },
-        { id: "#ORD-004", customer: "نور الدين", date: "2023-12-23", total: "850 ج.م", status: "delivered", items: 4, address: "القاهرة، مدينة نصر" },
-        { id: "#ORD-005", customer: "كريم عادل", date: "2023-12-22", total: "210 ج.م", status: "cancelled", items: 1, address: "المنصورة" },
-    ];
+    const [selectedOrder, setSelectedOrder] = useState<any>(null);
+    const [isEditingStatus, setIsEditingStatus] = useState(false);
+
+    const handleStatusChange = (newStatus: string) => {
+        if (!selectedOrder) return;
+
+        const updatedOrders = orders.map(order =>
+            order.id === selectedOrder.id ? { ...order, status: newStatus } : order
+        );
+
+        setOrders(updatedOrders);
+        setSelectedOrder({ ...selectedOrder, status: newStatus });
+        setIsEditingStatus(false);
+    };
 
     const getStatusBadge = (status: string) => {
         switch (status) {
@@ -345,26 +567,23 @@ function OrdersTab() {
                                 <th className="p-4 font-bold text-text-primary hidden md:table-cell">التاريخ</th>
                                 <th className="p-4 font-bold text-text-primary">الإجمالي</th>
                                 <th className="p-4 font-bold text-text-primary">الحالة</th>
-                                <th className="p-4 font-bold text-text-primary hidden md:table-cell"></th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-white/5">
                             {orders.map((order) => (
                                 <tr
                                     key={order.id}
-                                    className="hover:bg-white/5 transition-colors cursor-pointer md:cursor-default"
-                                    onClick={() => setSelectedOrder(order)}
+                                    className="hover:bg-white/5 transition-colors cursor-pointer"
+                                    onClick={() => {
+                                        setSelectedOrder(order);
+                                        setIsEditingStatus(false);
+                                    }}
                                 >
                                     <td className="p-4 font-bold text-primary">{order.id}</td>
                                     <td className="p-4 text-white hidden md:table-cell">{order.customer}</td>
                                     <td className="p-4 text-gray-400 hidden md:table-cell">{order.date}</td>
-                                    <td className="p-4 font-bold text-white">{order.total}</td>
+                                    <td className="p-4 font-bold text-white">{order.total} ج.م</td>
                                     <td className="p-4">{getStatusBadge(order.status)}</td>
-                                    <td className="p-4 hidden md:table-cell">
-                                        <Button variant="ghost" size="sm" onClick={(e) => e.stopPropagation()}>
-                                            <MoreHorizontal className="w-4 h-4" />
-                                        </Button>
-                                    </td>
                                 </tr>
                             ))}
                         </tbody>
@@ -396,24 +615,57 @@ function OrdersTab() {
                                 <span className="text-gray-400">العنوان</span>
                                 <span className="font-bold text-sm">{selectedOrder.address}</span>
                             </div>
-                            <div className="flex justify-between items-center p-3 bg-white/5 rounded-lg">
-                                <span className="text-gray-400">عدد العناصر</span>
-                                <span className="font-bold">{selectedOrder.items} كتب</span>
+
+                            {/* Order Items */}
+                            <div className="bg-white/5 rounded-lg p-4">
+                                <h5 className="font-bold text-sm mb-3 text-gray-300">المنتجات المطلوبة</h5>
+                                <div className="space-y-3">
+                                    {selectedOrder.items.map((item: any, index: number) => (
+                                        <div key={index} className="flex justify-between items-center text-sm border-b border-white/5 last:border-0 pb-2 last:pb-0">
+                                            <div className="flex items-center gap-2">
+                                                <span className="w-5 h-5 flex items-center justify-center bg-primary/20 text-primary rounded text-xs font-bold">
+                                                    {item.quantity}x
+                                                </span>
+                                                <span>{item.title}</span>
+                                            </div>
+                                            <span className="font-bold">{item.price} ج.م</span>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
+
                             <div className="flex justify-between items-center p-3 bg-primary/10 border border-primary/20 rounded-lg">
                                 <span className="text-primary font-bold">الإجمالي</span>
-                                <span className="font-bold text-xl text-white">{selectedOrder.total}</span>
+                                <span className="font-bold text-xl text-white">{selectedOrder.total} ج.م</span>
                             </div>
                         </div>
 
-                        <div className="flex gap-3 pt-4">
-                            <Button className="flex-1" onClick={() => setSelectedOrder(null)}>
-                                تعديل الحالة
-                            </Button>
-                            <Button variant="outline" className="flex-1" onClick={() => setSelectedOrder(null)}>
-                                طباعة الفاتورة
-                            </Button>
-                        </div>
+                        {/* Status Change Actions */}
+                        {isEditingStatus ? (
+                            <div className="grid grid-cols-2 gap-2 pt-4 border-t border-white/10">
+                                <Button size="sm" variant="outline" className="border-yellow-500/50 text-yellow-500 hover:bg-yellow-500/10" onClick={() => handleStatusChange("pending")}>
+                                    <Clock className="w-3 h-3 ml-1" /> قيد الانتظار
+                                </Button>
+                                <Button size="sm" variant="outline" className="border-blue-500/50 text-blue-500 hover:bg-blue-500/10" onClick={() => handleStatusChange("shipped")}>
+                                    <Truck className="w-3 h-3 ml-1" /> تم الشحن
+                                </Button>
+                                <Button size="sm" variant="outline" className="border-green-500/50 text-green-500 hover:bg-green-500/10" onClick={() => handleStatusChange("delivered")}>
+                                    <Check className="w-3 h-3 ml-1" /> تم التوصيل
+                                </Button>
+                                <Button size="sm" variant="outline" className="border-red-500/50 text-red-500 hover:bg-red-500/10" onClick={() => handleStatusChange("cancelled")}>
+                                    <X className="w-3 h-3 ml-1" /> ملغي
+                                </Button>
+                            </div>
+                        ) : (
+                            <div className="flex gap-3 pt-4 border-t border-white/10">
+                                <Button className="flex-1" onClick={() => setIsEditingStatus(true)}>
+                                    تعديل الحالة
+                                </Button>
+                                <Button variant="outline" className="flex-1" onClick={() => setSelectedOrder(null)}>
+                                    إغلاق
+                                </Button>
+                            </div>
+                        )}
                     </div>
                 )}
             </Modal>
