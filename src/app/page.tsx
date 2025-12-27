@@ -58,18 +58,11 @@ export default async function Home() {
 
             {/* Featured Books Section */}
             <Section className="bg-black/40 backdrop-blur-md border-t border-white/10 py-8 md:py-12">
-                <div className="flex justify-between items-end mb-12">
-                    <div>
-                        <h2 className="font-display text-3xl font-bold text-primary mb-2">
-                            أحدث الإصدارات
-                        </h2>
-                        <p className="text-text-secondary">كتب مميزة اخترناها لك بعناية</p>
-                    </div>
-                    <Link href="/shop">
-                        <Button variant="ghost" className="hidden md:inline-flex">
-                            عرض الكل
-                        </Button>
-                    </Link>
+                <div className="text-center mb-12">
+                    <h2 className="font-display text-3xl font-bold text-primary mb-2">
+                        أحدث الإصدارات
+                    </h2>
+                    <p className="text-text-secondary">كتب مميزة اخترناها لك بعناية</p>
                 </div>
 
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
@@ -142,9 +135,9 @@ export default async function Home() {
                     ))}
                 </div>
 
-                <div className="mt-8 text-center md:hidden">
+                <div className="mt-10 text-center">
                     <Link href="/shop">
-                        <Button variant="outline" className="w-full">
+                        <Button variant="outline" size="lg" className="min-w-[200px] border-white/10 hover:bg-primary hover:text-black hover:border-primary transition-all">
                             عرض كل الكتب
                         </Button>
                     </Link>
