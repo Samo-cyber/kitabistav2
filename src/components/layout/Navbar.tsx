@@ -7,12 +7,42 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "@/lib/cart-context";
 import { Input } from "@/components/ui/Input";
+import { Book } from "@/lib/data";
 
-export function Navbar() {
+interface NavbarProps {
+    books?: Book[];
+}
+
+export function Navbar({ books = [] }: NavbarProps) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
+    const [searchQuery, setSearchQuery] = useState("");
+    const [searchResults, setSearchResults] = useState<Book[]>([]);
     const { items } = useCart();
     const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
+
+    // Helper to normalize Arabic text
+    const normalizeArabic = (text: string) => {
+        return text
+            .replace(/[أإآ]/g, 'ا')
+            .replace(/ة/g, 'ه')
+            .replace(/ى/g, 'ي');
+    };
+
+    useEffect(() => {
+        if (!searchQuery.trim()) {
+            setSearchResults([]);
+            return;
+        }
+
+        const normalizedSearch = normalizeArabic(searchQuery.toLowerCase());
+        const results = books.filter(book => {
+            const normalizedTitle = normalizeArabic(book.title.toLowerCase());
+            const normalizedAuthor = normalizeArabic(book.author.toLowerCase());
+            return normalizedTitle.includes(normalizedSearch) || normalizedAuthor.includes(normalizedSearch);
+        });
+        setSearchResults(results.slice(0, 5)); // Limit to 5 results
+    }, [searchQuery, books]);
 
     // Lock body scroll when menu or search is open
     useEffect(() => {
@@ -158,6 +188,8 @@ export function Navbar() {
                                         placeholder="اكتب اسم الكتاب أو المؤلف..."
                                         className="w-full bg-white/5 border-2 border-white/10 rounded-2xl py-4 pr-14 pl-6 text-xl text-white placeholder:text-gray-500 focus:outline-none focus:border-primary/50 transition-colors"
                                         autoFocus
+                                        value={searchQuery}
+                                        onChange={(e) => setSearchQuery(e.target.value)}
                                         onKeyDown={(e) => {
                                             if (e.key === "Enter") {
                                                 const query = e.currentTarget.value;
@@ -170,14 +202,54 @@ export function Navbar() {
                                     />
                                 </div>
                                 <div className="mt-8">
-                                    <p className="text-sm text-gray-500 mb-4">الأكثر بحثاً:</p>
-                                    <div className="flex flex-wrap gap-2">
-                                        {["نجيب محفوظ", "روايات رعب", "كتب تاريخية", "أحمد خالد توفيق", "تنمية بشرية"].map((tag) => (
-                                            <button key={tag} className="px-4 py-2 rounded-full bg-white/5 hover:bg-primary/20 hover:text-primary transition-colors text-sm text-gray-300">
-                                                {tag}
-                                            </button>
-                                        ))}
-                                    </div>
+                                    {searchQuery ? (
+                                        <div className="space-y-4 max-h-[60vh] overflow-y-auto custom-scrollbar">
+                                            {searchResults.length > 0 ? (
+                                                searchResults.map((book) => (
+                                                    <Link
+                                                        key={book.id}
+                                                        href={`/product/${book.id}`}
+                                                        onClick={() => setIsSearchOpen(false)}
+                                                        className="flex items-center gap-4 p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-primary/30 transition-all group"
+                                                    >
+                                                        <div className="relative w-12 h-16 rounded-md overflow-hidden flex-shrink-0">
+                                                            <img src={book.image_url} alt={book.title} className="object-cover w-full h-full" />
+                                                        </div>
+                                                        <div className="flex-grow">
+                                                            <h4 className="font-bold text-white group-hover:text-primary transition-colors">{book.title}</h4>
+                                                            <p className="text-sm text-gray-400">{book.author}</p>
+                                                        </div>
+                                                        <div className="text-primary font-bold text-sm">
+                                                            {book.discount_price || book.price} ج.م
+                                                        </div>
+                                                        <ChevronRight className="w-5 h-5 text-gray-500 group-hover:text-primary transition-colors" />
+                                                    </Link>
+                                                ))
+                                            ) : (
+                                                <div className="text-center py-8 text-gray-400">
+                                                    لا توجد نتائج مطابقة
+                                                </div>
+                                            )}
+                                        </div>
+                                    ) : (
+                                        <>
+                                            <p className="text-sm text-gray-500 mb-4">الأكثر بحثاً:</p>
+                                            <div className="flex flex-wrap gap-2">
+                                                {["نجيب محفوظ", "روايات رعب", "كتب تاريخية", "أحمد خالد توفيق", "تنمية بشرية"].map((tag) => (
+                                                    <button
+                                                        key={tag}
+                                                        onClick={() => {
+                                                            setSearchQuery(tag);
+                                                            // Trigger search logic immediately for tags
+                                                        }}
+                                                        className="px-4 py-2 rounded-full bg-white/5 hover:bg-primary/20 hover:text-primary transition-colors text-sm text-gray-300"
+                                                    >
+                                                        {tag}
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        </>
+                                    )}
                                 </div>
                             </motion.div>
                         </div>

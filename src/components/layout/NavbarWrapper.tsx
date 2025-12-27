@@ -1,14 +1,18 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { Navbar } from "./Navbar";
+import { Book } from "@/lib/data";
 
-export function NavbarWrapper() {
+interface NavbarWrapperProps {
+    books: Book[];
+}
+
+export function NavbarWrapper({ books }: NavbarWrapperProps) {
     const pathname = usePathname();
     const isCheckout = pathname === "/checkout";
     const isAdmin = pathname?.startsWith("/admin");
 
     if (isCheckout || isAdmin) return null;
 
-    return <Navbar />;
+    return <Navbar books={books} />;
 }

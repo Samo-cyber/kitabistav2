@@ -24,17 +24,23 @@ export const metadata: Metadata = {
     description: "متجر كتب بروح مصرية أصيلة",
 };
 
-export default function RootLayout({
+import { getBooks } from "@/lib/data";
+
+// ... (imports)
+
+export default async function RootLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const books = await getBooks();
+
     return (
         <html lang="ar" dir="rtl">
             <body className={`${tajawal.variable} ${amiri.variable} font-sans bg-background text-text-primary min-h-screen flex flex-col`}>
                 <LoadingGate />
                 <CartProvider>
-                    <NavbarWrapper />
+                    <NavbarWrapper books={books} />
                     <CartDrawer />
                     <main className="flex-grow">{children}</main>
                     <FooterWrapper />
