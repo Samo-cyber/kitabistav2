@@ -1,8 +1,9 @@
+"use client";
+
 import { Button } from "@/components/ui/Button";
-import { Card } from "@/components/ui/Card";
 import { useCart } from "@/lib/cart-context";
 import { useState } from "react";
-import { CheckCircle, ChevronLeft, ChevronRight, CreditCard, Truck, MapPin, ShoppingBag, ShieldCheck, ArrowRight, User, Phone, Map } from "lucide-react";
+import { CheckCircle, ChevronLeft, ChevronDown, CreditCard, Truck, MapPin, ShoppingBag, ShieldCheck, ArrowRight, User, Phone, Map } from "lucide-react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -14,14 +15,13 @@ const governorates = [
     "مطروح", "شمال سيناء", "جنوب سيناء"
 ];
 
-const formClasses = "w-full bg-black/40 border border-white/10 rounded-xl px-4 pr-10 text-white placeholder:text-gray-600 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all";
-const inputClasses = `${formClasses} h-12`;
-const textareaClasses = `${formClasses} py-3 min-h-[120px] resize-none`;
+const inputClasses = "w-full bg-white/5 border border-white/10 rounded-lg px-4 pr-10 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all hover:bg-white/10";
+const labelClasses = "block text-sm font-medium text-gray-400 mb-1.5";
 
 export default function CheckoutPage() {
     const { items, total, clearCart } = useCart();
     const [isSubmitted, setIsSubmitted] = useState(false);
-    const [currentStep, setCurrentStep] = useState(1);
+    const [isSummaryOpen, setIsSummaryOpen] = useState(false); // For mobile accordion
 
     // Form State
     const [formData, setFormData] = useState({
@@ -35,21 +35,10 @@ export default function CheckoutPage() {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const isStep1Valid = formData.fullName && formData.phone && formData.address && formData.city;
-
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitted(true);
         clearCart();
-    };
-
-    const nextStep = () => {
-        if (currentStep === 1 && isStep1Valid) setCurrentStep(2);
-        else if (currentStep === 2) setCurrentStep(3);
-    };
-
-    const prevStep = () => {
-        if (currentStep > 1) setCurrentStep(currentStep - 1);
     };
 
     if (isSubmitted) {
@@ -68,7 +57,7 @@ export default function CheckoutPage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
-                    className="font-display text-5xl font-bold text-white mb-6"
+                    className="font-display text-4xl md:text-5xl font-bold text-white mb-6"
                 >
                     تم استلام طلبك بنجاح!
                 </motion.h1>
@@ -76,7 +65,7 @@ export default function CheckoutPage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3 }}
-                    className="text-gray-400 max-w-lg mb-10 text-xl leading-relaxed"
+                    className="text-gray-400 max-w-lg mb-10 text-lg md:text-xl leading-relaxed"
                 >
                     شكراً لثقتك بنا. سيتم التواصل معك قريباً لتأكيد الطلب.
                 </motion.p>
@@ -108,216 +97,244 @@ export default function CheckoutPage() {
     }
 
     return (
-        <div className="bg-background min-h-screen flex flex-col">
-            {/* Header with Back Button */}
-            <div className="w-full max-w-3xl mx-auto px-4 py-6 flex justify-between items-center">
-                <Link href="/" className="font-display text-2xl font-bold text-primary">
-                    كتابيستا
-                </Link>
-                <Link href="/cart" className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group">
-                    <span className="group-hover:-translate-x-1 transition-transform">العودة للسلة</span>
-                    <ArrowRight className="w-5 h-5" />
-                </Link>
-            </div>
+        <div className="min-h-screen bg-background text-white selection:bg-primary/30">
+            <div className="lg:grid lg:grid-cols-12 min-h-screen">
 
-            {/* Main Content */}
-            <div className="flex-1 flex items-center justify-center p-4 pb-20">
-                <div className="w-full max-w-3xl">
-                    <Card className="border-0 shadow-2xl bg-zinc-900/50 backdrop-blur-xl border-t border-white/10 overflow-hidden ring-1 ring-white/5">
+                {/* LEFT COLUMN: Order Summary (Sticky on Desktop) */}
+                <div className="lg:col-span-5 lg:order-2 bg-zinc-900/30 border-l border-white/5 relative">
+                    {/* Mobile Summary Toggle */}
+                    <div className="lg:hidden bg-zinc-900/50 border-b border-white/5 p-4">
+                        <button
+                            onClick={() => setIsSummaryOpen(!isSummaryOpen)}
+                            className="w-full flex items-center justify-between text-primary font-medium"
+                        >
+                            <span className="flex items-center gap-2">
+                                <ShoppingBag className="w-5 h-5" />
+                                {isSummaryOpen ? "إخفاء ملخص الطلب" : "عرض ملخص الطلب"}
+                                <ChevronDown className={`w-4 h-4 transition-transform ${isSummaryOpen ? "rotate-180" : ""}`} />
+                            </span>
+                            <span className="text-white font-bold">{total + 50} ج.م</span>
+                        </button>
+                    </div>
 
-                        {/* Internal Progress Bar */}
-                        <div className="bg-black/20 border-b border-white/5 p-8">
-                            <div className="flex items-center justify-between relative max-w-lg mx-auto">
-                                {/* Progress Line */}
-                                <div className="absolute top-1/2 left-0 w-full h-1 bg-white/10 -z-10 rounded-full"></div>
-                                <div
-                                    className="absolute top-1/2 right-0 h-1 bg-gradient-to-l from-primary to-primary/50 -z-10 rounded-full transition-all duration-700 ease-in-out"
-                                    style={{ width: currentStep === 1 ? '0%' : currentStep === 2 ? '50%' : '100%' }}
-                                ></div>
-
-                                {/* Steps */}
-                                {[
-                                    { step: 1, icon: MapPin, label: "العنوان" },
-                                    { step: 2, icon: CreditCard, label: "الدفع" },
-                                    { step: 3, icon: ShieldCheck, label: "المراجعة" }
-                                ].map(({ step, icon: Icon, label }) => (
-                                    <div key={step} className={`flex flex-col items-center gap-3 relative z-10 ${currentStep >= step ? "text-primary" : "text-gray-500"}`}>
-                                        <div className={`w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center border-2 transition-all duration-500 shadow-lg bg-background ${currentStep >= step ? "border-primary text-primary scale-110 shadow-primary/25" : "border-zinc-700 text-gray-500"}`}>
-                                            <Icon className="w-5 h-5 md:w-6 md:h-6" />
+                    {/* Summary Content */}
+                    <div className={`
+                        lg:block lg:h-screen lg:sticky lg:top-0 lg:overflow-y-auto custom-scrollbar
+                        ${isSummaryOpen ? "block" : "hidden"}
+                    `}>
+                        <div className="p-6 lg:p-12 space-y-8">
+                            {/* Items List */}
+                            <div className="space-y-4">
+                                {items.map((item) => (
+                                    <div key={item.id} className="flex gap-4 items-center group">
+                                        <div className="relative w-16 h-20 rounded-lg overflow-hidden border border-white/10 bg-white/5 shrink-0">
+                                            {/* We would use Next/Image here in production */}
+                                            <div className="absolute inset-0 bg-gray-800 animate-pulse" />
+                                            <span className="absolute top-0 right-0 bg-gray-500/80 text-white text-xs font-bold px-1.5 py-0.5 rounded-bl-lg z-10">
+                                                {item.quantity}
+                                            </span>
                                         </div>
-                                        <span className={`text-sm font-bold transition-colors duration-300 ${currentStep >= step ? "text-white" : "text-gray-500"}`}>{label}</span>
+                                        <div className="flex-1 min-w-0">
+                                            <h4 className="font-bold text-gray-200 truncate group-hover:text-primary transition-colors">{item.title}</h4>
+                                            <p className="text-sm text-gray-500 truncate">{item.author}</p>
+                                        </div>
+                                        <div className="text-white font-medium">
+                                            {(item.discount_price || item.price) * item.quantity} ج.م
+                                        </div>
                                     </div>
                                 ))}
                             </div>
+
+                            <div className="h-px bg-white/10" />
+
+                            {/* Cost Breakdown */}
+                            <div className="space-y-3 text-sm">
+                                <div className="flex justify-between text-gray-400">
+                                    <span>المجموع الفرعي</span>
+                                    <span>{total} ج.م</span>
+                                </div>
+                                <div className="flex justify-between text-gray-400">
+                                    <span>الشحن</span>
+                                    <span className="text-green-400">50 ج.م</span>
+                                </div>
+                            </div>
+
+                            <div className="h-px bg-white/10" />
+
+                            {/* Total */}
+                            <div className="flex justify-between items-center">
+                                <span className="text-lg font-bold text-gray-200">الإجمالي الكلي</span>
+                                <div className="text-right">
+                                    <span className="text-3xl font-display font-bold text-primary">{total + 50}</span>
+                                    <span className="text-sm text-gray-500 mr-2">ج.م</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* RIGHT COLUMN: Checkout Form */}
+                <div className="lg:col-span-7 lg:order-1">
+                    <div className="max-w-2xl mx-auto p-6 lg:p-12 lg:pt-16">
+                        {/* Header */}
+                        <div className="flex items-center justify-between mb-8">
+                            <Link href="/" className="font-display text-3xl font-bold text-primary">
+                                كتابيستا
+                            </Link>
+                            <Link href="/cart" className="text-sm text-primary hover:text-primary/80 transition-colors flex items-center gap-1">
+                                <ArrowRight className="w-4 h-4" />
+                                العودة للسلة
+                            </Link>
                         </div>
 
-                        {/* Form Content */}
-                        <div className="p-6 md:p-10">
-                            <form onSubmit={handleSubmit}>
-                                <AnimatePresence mode="wait">
-                                    {currentStep === 1 && (
-                                        <motion.div
-                                            key="step1"
-                                            initial={{ opacity: 0, x: 20 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            exit={{ opacity: 0, x: -20 }}
-                                            transition={{ duration: 0.3 }}
-                                        >
-                                            <div className="mb-6 text-center">
-                                                <h2 className="font-display text-3xl font-bold text-white">عنوان التوصيل</h2>
-                                            </div>
-                                            <Button type="button" size="lg" onClick={nextStep} disabled={!isStep1Valid} className="w-full md:w-auto px-10 h-12 text-lg shadow-lg shadow-primary/10 hover:shadow-primary/30 transition-all">
-                                                التالي
-                                                <ChevronLeft className="w-5 h-5 mr-2" />
-                                            </Button>
-                                        </div>
-                                        </motion.div>
-                                    )}
+                        {/* Breadcrumbs (Visual Only) */}
+                        <div className="flex items-center gap-2 text-sm text-gray-500 mb-10">
+                            <span className="text-primary">السلة</span>
+                            <ChevronLeft className="w-4 h-4" />
+                            <span className="text-white">البيانات والشحن</span>
+                            <ChevronLeft className="w-4 h-4" />
+                            <span>الدفع</span>
+                        </div>
 
-                                {currentStep === 2 && (
-                                    <motion.div
-                                        key="step2"
-                                        initial={{ opacity: 0, x: 20 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        exit={{ opacity: 0, x: -20 }}
-                                        transition={{ duration: 0.3 }}
-                                    >
-                                        <div className="mb-6 text-center">
-                                            <h2 className="font-display text-3xl font-bold text-white">طريقة الدفع</h2>
-                                        </div>
+                        <form onSubmit={handleSubmit} className="space-y-10">
 
-                                        <div className="space-y-4 max-w-2xl mx-auto">
-                                            <div className="relative group">
-                                                <div className="absolute inset-0 bg-primary/20 blur-xl rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                                                <label className="relative flex items-center gap-6 p-6 border-2 border-primary bg-gradient-to-r from-primary/10 to-transparent rounded-xl cursor-pointer transition-all hover:bg-primary/5">
-                                                    <div className="w-6 h-6 rounded-full border-[6px] border-primary bg-white shadow-lg"></div>
-                                                    <div className="flex-1">
-                                                        <div className="flex items-center gap-3 mb-1">
-                                                            <div className="p-2 bg-primary/20 rounded-lg text-primary">
-                                                                <Truck className="w-6 h-6" />
-                                                            </div>
-                                                            <span className="font-bold text-xl text-white">الدفع عند الاستلام</span>
-                                                        </div>
-                                                        <p className="text-sm text-gray-300 pr-[52px]">ادفع نقداً عند استلام طلبك</p>
-                                                    </div>
-                                                </label>
-                                            </div>
-
-                                            <label className="flex items-center gap-6 p-6 border border-white/5 bg-black/20 rounded-xl cursor-not-allowed opacity-50 grayscale">
-                                                <div className="w-6 h-6 rounded-full border-2 border-gray-600"></div>
-                                                <div className="flex-1">
-                                                    <div className="flex items-center gap-3 mb-1">
-                                                        <div className="p-2 bg-white/5 rounded-lg text-gray-400">
-                                                            <CreditCard className="w-6 h-6" />
-                                                        </div>
-                                                        <span className="font-bold text-xl text-gray-400">الدفع بالبطاقة</span>
-                                                    </div>
-                                                    <p className="text-sm text-gray-500 pr-[52px]">غير متاح حالياً - قريباً</p>
-                                                </div>
-                                            </label>
-                                        </div>
-
-                                        <div className="mt-12 flex justify-between items-center">
-                                            <Button type="button" variant="ghost" size="lg" onClick={prevStep} className="px-6 text-gray-400 hover:text-white hover:bg-white/5">
-                                                <ChevronRight className="w-5 h-5 ml-2" />
-                                                السابق
-                                            </Button>
-                                            <Button type="button" size="lg" onClick={nextStep} className="px-10 h-12 text-lg shadow-lg shadow-primary/10 hover:shadow-primary/30 transition-all">
-                                                التالي
-                                                <ChevronLeft className="w-5 h-5 mr-2" />
-                                            </Button>
-                                        </div>
-                                    </motion.div>
-                                )}
-
-                                {currentStep === 3 && (
-                                    <motion.div
-                                        key="step3"
-                                        initial={{ opacity: 0, x: 20 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        exit={{ opacity: 0, x: -20 }}
-                                        transition={{ duration: 0.3 }}
-                                    >
-                                        <div className="mb-6 text-center">
-                                            <h2 className="font-display text-3xl font-bold text-white">مراجعة الطلب</h2>
-                                        </div>
-
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                            {/* Order Items */}
-                                            <div className="space-y-6">
-                                                <h3 className="font-bold text-white text-lg flex items-center gap-2">
-                                                    <ShoppingBag className="w-5 h-5 text-primary" />
-                                                    المنتجات
-                                                </h3>
-                                                <div className="space-y-4 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
-                                                    {items.map((item) => (
-                                                        <div key={item.id} className="flex justify-between items-center bg-black/20 p-4 rounded-xl border border-white/5 hover:border-white/10 transition-colors">
-                                                            <div className="flex items-center gap-4">
-                                                                <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center font-bold text-sm text-white">
-                                                                    {item.quantity}x
-                                                                </div>
-                                                                <div>
-                                                                    <p className="text-white font-bold text-base">{item.title}</p>
-                                                                    <p className="text-xs text-gray-400">{item.author}</p>
-                                                                </div>
-                                                            </div>
-                                                            <span className="font-bold text-primary text-lg">{(item.discount_price || item.price) * item.quantity} <span className="text-xs text-gray-500">ج.م</span></span>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </div>
-
-                                            {/* Customer Info & Totals */}
-                                            <div className="space-y-6">
-                                                <div className="bg-black/20 rounded-xl p-6 border border-white/5">
-                                                    <h3 className="font-bold text-white mb-4 flex items-center gap-2 text-lg">
-                                                        <MapPin className="w-5 h-5 text-primary" />
-                                                        بيانات التوصيل
-                                                    </h3>
-                                                    <div className="space-y-2 text-sm">
-                                                        <p className="text-gray-300 flex justify-between"><span className="text-gray-500">الاسم:</span> <span className="text-white font-medium">{formData.fullName}</span></p>
-                                                        <p className="text-gray-300 flex justify-between"><span className="text-gray-500">الهاتف:</span> <span className="text-white font-medium">{formData.phone}</span></p>
-                                                        <p className="text-gray-300 flex justify-between"><span className="text-gray-500">العنوان:</span> <span className="text-white font-medium text-left" dir="ltr">{formData.address}, {formData.city}</span></p>
-                                                    </div>
-                                                </div>
-
-                                                <div className="bg-primary/5 rounded-xl p-6 border border-primary/20">
-                                                    <div className="space-y-3">
-                                                        <div className="flex justify-between text-gray-400 text-base">
-                                                            <span>المجموع الفرعي</span>
-                                                            <span>{total} ج.م</span>
-                                                        </div>
-                                                        <div className="flex justify-between text-gray-400 text-base">
-                                                            <span>الشحن</span>
-                                                            <span className="text-green-400">50 ج.م</span>
-                                                        </div>
-                                                        <div className="flex justify-between text-2xl font-bold text-white pt-4 border-t border-white/10 mt-2">
-                                                            <span>الإجمالي الكلي</span>
-                                                            <span className="text-primary">{total + 50} <span className="text-sm font-normal text-gray-500">ج.م</span></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                            {/* Section 1: Contact Info */}
+                            <section>
+                                <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                                    <User className="w-5 h-5 text-primary" />
+                                    بيانات الاتصال
+                                </h2>
+                                <div className="space-y-4">
+                                    <div>
+                                        <label className={labelClasses}>رقم الهاتف</label>
+                                        <div className="relative">
+                                            <input
+                                                name="phone"
+                                                value={formData.phone}
+                                                onChange={handleInputChange}
+                                                required
+                                                type="tel"
+                                                placeholder="01xxxxxxxxx"
+                                                className={inputClasses}
+                                            />
+                                            <div className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none">
+                                                <Phone className="w-5 h-5" />
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                            </section>
 
-                                        <div className="mt-12 flex justify-between items-center">
-                                            <Button type="button" variant="ghost" size="lg" onClick={prevStep} className="px-6 text-gray-400 hover:text-white hover:bg-white/5">
-                                                <ChevronRight className="w-5 h-5 ml-2" />
-                                                السابق
-                                            </Button>
-                                            <Button type="submit" size="lg" className="px-10 h-14 text-lg bg-green-600 hover:bg-green-500 text-white border-0 shadow-lg shadow-green-600/20 hover:shadow-green-600/40 transition-all">
-                                                تأكيد الطلب
-                                                <CheckCircle className="w-5 h-5 mr-2" />
-                                            </Button>
+                            {/* Section 2: Shipping Address */}
+                            <section>
+                                <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                                    <MapPin className="w-5 h-5 text-primary" />
+                                    عنوان التوصيل
+                                </h2>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div className="md:col-span-2">
+                                        <label className={labelClasses}>الاسم بالكامل</label>
+                                        <div className="relative">
+                                            <input
+                                                name="fullName"
+                                                value={formData.fullName}
+                                                onChange={handleInputChange}
+                                                required
+                                                placeholder="الاسم الأول والأخير"
+                                                className={inputClasses}
+                                            />
+                                            <div className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none">
+                                                <User className="w-5 h-5" />
+                                            </div>
                                         </div>
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
+                                    </div>
+
+                                    <div className="md:col-span-2">
+                                        <label className={labelClasses}>المحافظة</label>
+                                        <div className="relative">
+                                            <select
+                                                name="city"
+                                                value={formData.city}
+                                                onChange={handleInputChange}
+                                                required
+                                                className={`${inputClasses} appearance-none`}
+                                            >
+                                                <option value="" disabled>اختر المحافظة</option>
+                                                {governorates.map((gov) => (
+                                                    <option key={gov} value={gov} className="bg-zinc-900 text-white">
+                                                        {gov}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                            <div className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none">
+                                                <Map className="w-5 h-5" />
+                                            </div>
+                                            <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none">
+                                                <ChevronDown className="w-4 h-4" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="md:col-span-2">
+                                        <label className={labelClasses}>العنوان بالتفصيل</label>
+                                        <div className="relative">
+                                            <input
+                                                name="address"
+                                                value={formData.address}
+                                                onChange={handleInputChange}
+                                                required
+                                                placeholder="اسم الشارع، رقم العمارة، الشقة"
+                                                className={inputClasses}
+                                            />
+                                            <div className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none">
+                                                <MapPin className="w-5 h-5" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            {/* Section 3: Payment */}
+                            <section>
+                                <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                                    <CreditCard className="w-5 h-5 text-primary" />
+                                    طريقة الدفع
+                                </h2>
+                                <div className="space-y-3">
+                                    <label className="relative flex items-center gap-4 p-4 border border-primary bg-primary/10 rounded-lg cursor-pointer transition-all">
+                                        <div className="w-5 h-5 rounded-full border-[5px] border-primary bg-white shadow-sm"></div>
+                                        <div className="flex-1 flex items-center justify-between">
+                                            <span className="font-bold text-white">الدفع عند الاستلام (Cash on Delivery)</span>
+                                            <Truck className="w-5 h-5 text-primary" />
+                                        </div>
+                                    </label>
+
+                                    <div className="p-4 bg-zinc-900/50 rounded-lg border border-white/5 text-center text-gray-500 text-sm">
+                                        الدفع بالبطاقات البنكية غير متاح حالياً
+                                    </div>
+                                </div>
+                            </section>
+
+                            {/* Submit Button */}
+                            <div className="pt-6">
+                                <Button
+                                    type="submit"
+                                    size="lg"
+                                    className="w-full h-14 text-lg font-bold bg-primary hover:bg-primary/90 text-black shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all rounded-xl"
+                                >
+                                    إتمام الطلب - {total + 50} ج.م
+                                </Button>
+                                <p className="text-center text-gray-500 text-sm mt-4 flex items-center justify-center gap-2">
+                                    <ShieldCheck className="w-4 h-4" />
+                                    بياناتك محمية ومشفرة بالكامل
+                                </p>
+                            </div>
+
                         </form>
+                    </div>
                 </div>
-            </Card>
+
+            </div>
         </div>
-            </div >
-        </div >
     );
 }
