@@ -41,6 +41,7 @@ export function Navbar() {
                         <NavLink href="/shop">المكتبة</NavLink>
                         <NavLink href="/offers">العروض</NavLink>
                         <NavLink href="/about">عن كتابيستا</NavLink>
+                        <NavLink href="/contact">اتصل بنا</NavLink>
                     </div>
 
                     {/* Actions */}
@@ -108,6 +109,7 @@ export function Navbar() {
                                 <MobileNavLink href="/shop" onClick={() => setIsMenuOpen(false)}>المكتبة</MobileNavLink>
                                 <MobileNavLink href="/offers" onClick={() => setIsMenuOpen(false)}>العروض</MobileNavLink>
                                 <MobileNavLink href="/about" onClick={() => setIsMenuOpen(false)}>عن كتابيستا</MobileNavLink>
+                                <MobileNavLink href="/contact" onClick={() => setIsMenuOpen(false)}>اتصل بنا</MobileNavLink>
                                 <MobileNavLink href="/contact" onClick={() => setIsMenuOpen(false)}>اتصل بنا</MobileNavLink>
                             </div>
 
