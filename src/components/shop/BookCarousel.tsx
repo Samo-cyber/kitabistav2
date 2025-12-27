@@ -106,14 +106,14 @@ export function BookCarousel({ title, books, linkToAll, subtitle }: BookCarousel
                                         </div>
 
                                         {/* Content */}
-                                        <div className="p-3 pb-3 flex flex-col flex-grow relative text-center">
+                                        <div className="p-3 pb-1 flex flex-col flex-grow relative text-center">
                                             <h3 className="font-bold text-sm text-zinc-100 leading-tight mb-0.5 line-clamp-2 group-hover/card:text-primary transition-colors min-h-[2.5em]">
                                                 {book.title}
                                             </h3>
-                                            <p className="text-[10px] text-zinc-400 mb-2 line-clamp-1">{book.author}</p>
+                                            <p className="text-[10px] text-zinc-400 mb-1 line-clamp-1">{book.author}</p>
 
                                             {/* Footer: Price */}
-                                            <div className="mt-auto relative flex items-center justify-center min-h-[36px] pl-8">
+                                            <div className="mt-auto relative flex items-center justify-center min-h-[28px] pl-12">
                                                 {book.discount_price ? (
                                                     <div className="flex items-baseline justify-center gap-1.5 w-full">
                                                         {/* Discount (Old Price) on the Right */}
