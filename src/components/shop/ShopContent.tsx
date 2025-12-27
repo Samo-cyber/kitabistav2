@@ -66,10 +66,10 @@ export function ShopContent({ allBooks, categories, selectedCategory }: ShopCont
         <div className="bg-background min-h-screen pb-20">
 
 
-            <Section className="pt-20 lg:pt-24">
+            <Section className="pt-0">
                 <div className="flex flex-col gap-8">
                     {/* Top Filter & Sort Bar */}
-                    <div className="sticky top-20 z-30 bg-background/80 backdrop-blur-md border-y border-white/5 py-4">
+                    <div className="sticky top-16 z-30 bg-background/95 backdrop-blur-xl border-y border-white/5 py-4 shadow-2xl transition-all duration-300">
                         <div className="container mx-auto px-4 flex flex-col lg:flex-row items-center justify-between gap-4">
 
                             {/* Search Bar */}
@@ -86,9 +86,9 @@ export function ShopContent({ allBooks, categories, selectedCategory }: ShopCont
                                 </div>
                             </div>
 
-                            {/* Categories (Horizontal Scroll) */}
-                            <div className="w-full lg:w-auto overflow-x-auto pb-2 lg:pb-0 no-scrollbar flex-1 flex justify-center">
-                                <div className="flex items-center gap-2 min-w-max">
+                            {/* Categories (Wrapped) */}
+                            <div className="w-full lg:w-auto flex-1 flex justify-center">
+                                <div className="flex flex-wrap items-center justify-center gap-2">
                                     <Link href="/shop">
                                         <div
                                             className={`px-4 py-2 rounded-full text-sm font-bold transition-all duration-300 border ${!selectedCategory
