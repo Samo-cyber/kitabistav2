@@ -110,7 +110,6 @@ export function Navbar() {
                                 <MobileNavLink href="/offers" onClick={() => setIsMenuOpen(false)}>العروض</MobileNavLink>
                                 <MobileNavLink href="/about" onClick={() => setIsMenuOpen(false)}>عن كتابيستا</MobileNavLink>
                                 <MobileNavLink href="/contact" onClick={() => setIsMenuOpen(false)}>اتصل بنا</MobileNavLink>
-                                <MobileNavLink href="/contact" onClick={() => setIsMenuOpen(false)}>اتصل بنا</MobileNavLink>
                             </div>
 
                             <div className="mt-8 pt-8 border-t border-white/10">
