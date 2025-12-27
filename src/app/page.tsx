@@ -9,8 +9,8 @@ import { MiniAddToCartButton } from "@/components/product/MiniAddToCartButton";
 export default async function Home() {
     const books = await getBooks();
     const categories = await getCategories();
-    const featuredBooks = books.slice(0, 5);
-    const newBooks = books.slice(5, 10);
+    const featuredBooks = books.slice(0, 3);
+    const newBooks = books.slice(3, 6);
 
     return (
         <div className="flex flex-col gap-0">
