@@ -10,7 +10,7 @@ export function Footer() {
             <div className="absolute inset-0 bg-[url('/images/pattern.png')] opacity-5 pointer-events-none"></div>
             <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
 
-            <div className="container mx-auto px-4 pt-12 pb-8 relative z-10">
+            <div className="max-w-6xl mx-auto px-4 pt-12 pb-8 relative z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-12">
                     {/* Brand Column - Takes full width on mobile, 4 cols on desktop */}
                     <div className="lg:col-span-4 space-y-6 text-center lg:text-right">
