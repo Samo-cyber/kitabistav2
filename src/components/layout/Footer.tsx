@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Facebook, Instagram, Twitter, ChevronLeft } from "lucide-react";
+import Image from "next/image";
 
 export function Footer() {
     return (
@@ -15,10 +16,14 @@ export function Footer() {
                     {/* Brand Column - Takes full width on mobile, 4 cols on desktop */}
                     <div className="lg:col-span-4 space-y-6 text-center lg:text-right">
                         <Link href="/" className="inline-block">
-                            <h2 className="font-display text-3xl font-bold text-white flex items-center justify-center lg:justify-start gap-2">
-                                كتابيستا
-                                <span className="w-2 h-2 rounded-full bg-primary mt-2"></span>
-                            </h2>
+                            <div className="relative h-12 w-40 mx-auto lg:mx-0">
+                                <Image
+                                    src="/images/logo.png"
+                                    alt="كتابيستا"
+                                    fill
+                                    className="object-contain"
+                                />
+                            </div>
                         </Link>
                         <p className="text-gray-400 text-sm leading-relaxed max-w-sm mx-auto lg:mx-0">
                             وجهتك الأولى للكتب المميزة. نجمع بين سحر الورق وأناقة التصميم لنقدم لك تجربة قراءة لا تُنسى.

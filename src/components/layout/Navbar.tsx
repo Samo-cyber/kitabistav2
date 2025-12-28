@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/Input";
 import { Book } from "@/lib/data";
 
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 interface NavbarProps {
     books?: Book[];
@@ -105,10 +106,16 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
             )}>
                 <div className="container mx-auto flex h-16 md:h-20 items-center justify-between px-4 md:px-6 gap-4">
                     {/* Logo (Right in RTL) */}
-                    <Link href="/" className="flex items-center gap-2 group shrink-0">
-                        <span className="font-display text-xl md:text-2xl font-bold text-primary group-hover:text-primary-hover transition-colors">
-                            كتابيستا
-                        </span>
+                    <Link href="/" className="flex items-center group shrink-0">
+                        <div className="relative h-8 md:h-10 w-24 md:w-32">
+                            <Image
+                                src="/images/logo.png"
+                                alt="كتابيستا"
+                                fill
+                                className="object-contain"
+                                priority
+                            />
+                        </div>
                     </Link>
 
                     {/* Mobile Search Bar (Center) */}
@@ -258,7 +265,14 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
                             <div className="flex flex-col h-full">
                                 {/* Header */}
                                 <div className="flex justify-between items-center p-6 border-b border-white/5">
-                                    <h2 className="font-display text-2xl font-bold text-primary">كتابيستا</h2>
+                                    <div className="relative h-8 w-24">
+                                        <Image
+                                            src="/images/logo.png"
+                                            alt="كتابيستا"
+                                            fill
+                                            className="object-contain"
+                                        />
+                                    </div>
                                     <Button variant="ghost" size="sm" onClick={() => setIsMenuOpen(false)} className="hover:bg-white/5 rounded-full p-2">
                                         <X className="w-6 h-6 text-zinc-400" />
                                     </Button>
