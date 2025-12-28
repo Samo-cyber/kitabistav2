@@ -80,7 +80,6 @@ body::before {
 }
 
 @keyframes float {
-
   0%,
   100% {
     transform: translateY(0);
@@ -97,7 +96,6 @@ body::before {
 }
 
 @keyframes pulse-glow {
-
   0%,
   100% {
     box-shadow: 0 0 20px rgba(234, 179, 8, 0.4);
@@ -114,164 +112,40 @@ body::before {
 }
 
 @keyframes scale-pulse {
-
   0%,
   100% {
     transform: scale(1);
   }
 
-  @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
+  50% {
+    transform: scale(1.15);
+  }
+}
 
-  :root {
-    --foreground-rgb: 0, 0, 0;
-    --background-start-rgb: 214, 219, 220;
-    --background-end-rgb: 255, 255, 255;
+.animate-scale-pulse {
+  animation: scale-pulse 2s ease-in-out infinite;
+  will-change: transform;
+}
+
+@media (max-width: 768px) {
+  .backdrop-blur-md,
+  .backdrop-blur-xl,
+  .backdrop-blur-sm {
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    background-color: rgba(24, 24, 27, 0.75) !important;
   }
 
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --foreground-rgb: 255, 255, 255;
-      --background-start-rgb: 0, 0, 0;
-      --background-end-rgb: 0, 0, 0;
-    }
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
-  body {
-    @apply bg-background text-text-primary relative overflow-x-hidden;
-  }
-
-  body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background-image: linear-gradient(rgba(5, 5, 5, 0.85), rgba(5, 5, 5, 0.85)), url('/images/hero-bg.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    pointer-events: none;
-  }
-
-  /* Custom Scrollbar */
-  ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: #09090b;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: #27272a;
-    border-radius: 5px;
-    border: 2px solid #09090b;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: #3f3f46;
-  }
-
-  /* Custom Animations */
-  @keyframes shimmer {
-    0% {
-      background-position: 0% 50%;
-    }
-
-    50% {
-      background-position: 100% 50%;
-    }
-
-    100% {
-      background-position: 0% 50%;
-    }
-  }
-
-  .animate-shimmer-bg {
-    background-size: 200% 200%;
-    animation: shimmer 3s ease infinite;
-  }
-
-  @keyframes float {
-
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-
-    50% {
-      transform: translateY(-5px);
-    }
-  }
-
+  .animate-pulse-glow,
+  .animate-shimmer,
   .animate-float {
-    animation: float 3s ease-in-out infinite;
-    will-change: transform;
+    animation: none !important;
+    transform: none !important;
+    box-shadow: none !important;
   }
 
-  @keyframes pulse-glow {
-
-    0%,
-    100% {
-      box-shadow: 0 0 20px rgba(234, 179, 8, 0.4);
-    }
-
-    50% {
-      box-shadow: 0 0 35px rgba(234, 179, 8, 0.7);
-    }
+  /* Optimize fixed background on mobile */
+  body::before {
+    background-attachment: scroll;
   }
-
-  .animate-pulse-glow {
-    animation: pulse-glow 2s ease-in-out infinite;
-    will-change: box-shadow;
-  }
-
-  @keyframes scale-pulse {
-
-    0%,
-    100% {
-      transform: scale(1);
-    }
-
-    50% {
-      transform: scale(1.15);
-    }
-  }
-
-  .animate-scale-pulse {
-    animation: scale-pulse 2s ease-in-out infinite;
-    will-change: transform;
-  }
-
-  @media (max-width: 768px) {
-
-    .backdrop-blur-md,
-    .backdrop-blur-xl,
-    .backdrop-blur-sm {
-      backdrop-filter: blur(8px) !important;
-      -webkit-backdrop-filter: blur(8px) !important;
-      background-color: rgba(24, 24, 27, 0.75) !important;
-    }
-
-    .animate-pulse-glow,
-    .animate-shimmer,
-    .animate-float {
-      animation: none !important;
-      transform: none !important;
-      box-shadow: none !important;
-    }
-
-    /* Optimize fixed background on mobile */
-    body::before {
-      background-attachment: scroll;
-    }
-  }
+}
