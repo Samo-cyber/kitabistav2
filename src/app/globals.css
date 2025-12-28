@@ -63,7 +63,7 @@ body::before {
   background: #3f3f46;
 }
 
-/* Custom Animations */
+/* Custom Animations - Subdued & Premium */
 @keyframes shimmer {
   0% {
     background-position: 0% 50%;
@@ -80,7 +80,7 @@ body::before {
 
 .animate-shimmer-bg {
   background-size: 200% 200%;
-  animation: shimmer 3s ease infinite;
+  animation: shimmer 4s ease infinite;
 }
 
 @keyframes float {
@@ -91,12 +91,12 @@ body::before {
   }
 
   50% {
-    transform: translateY(-5px);
+    transform: translateY(-3px);
   }
 }
 
 .animate-float {
-  animation: float 3s ease-in-out infinite;
+  animation: float 4s ease-in-out infinite;
   will-change: transform;
 }
 
@@ -104,20 +104,22 @@ body::before {
 
   0%,
   100% {
-    box-shadow: 0 0 15px rgba(234, 179, 8, 0.15);
+    box-shadow: 0 0 15px rgba(234, 179, 8, 0.1);
+    transform: scale(1);
   }
 
   50% {
-    box-shadow: 0 0 25px rgba(234, 179, 8, 0.3);
+    box-shadow: 0 0 25px rgba(234, 179, 8, 0.25);
+    transform: scale(1.02);
   }
 }
 
 .animate-pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
-  will-change: box-shadow;
+  animation: pulse-glow 3s ease-in-out infinite;
+  will-change: box-shadow, transform;
 }
 
-@keyframes scale-pulse {
+@keyframes subtle-scale {
 
   0%,
   100% {
@@ -125,13 +127,28 @@ body::before {
   }
 
   50% {
-    transform: scale(1.15);
+    transform: scale(1.05);
   }
 }
 
-.animate-scale-pulse {
-  animation: scale-pulse 2s ease-in-out infinite;
-  will-change: transform;
+.animate-subtle-scale {
+  animation: subtle-scale 3s ease-in-out infinite;
+}
+
+@keyframes soft-pulse {
+
+  0%,
+  100% {
+    opacity: 0.8;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-soft-pulse {
+  animation: soft-pulse 2s ease-in-out infinite;
 }
 
 @media (max-width: 768px) {
@@ -145,7 +162,7 @@ body::before {
   }
 
   .animate-pulse-glow,
-  .animate-shimmer,
+  .animate-shimmer-bg,
   .animate-float {
     animation: none !important;
     transform: none !important;

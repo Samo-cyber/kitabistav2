@@ -98,7 +98,10 @@ export default function CheckoutPage() {
                     <span className="font-medium hidden md:inline">العودة للرئيسية</span>
                 </Link>
 
-                <h1 className="text-3xl md:text-4xl font-bold text-white mb-8">إتمام الشراء</h1>
+                <h1 className="text-3xl md:text-4xl font-bold text-white mb-8 flex items-center justify-center gap-3">
+                    <CreditCard className="w-8 h-8 text-primary" />
+                    إتمام الشراء
+                </h1>
 
                 {/* Progress Steps */}
                 <div className="flex items-center justify-center gap-4 md:gap-8 mb-8 flex-row-reverse">
@@ -135,9 +138,9 @@ export default function CheckoutPage() {
                             >
                                 {/* Section 1: Personal Data */}
                                 <div className={cardClasses}>
-                                    <h2 className="text-xl font-bold text-white mb-6 flex items-center justify-end gap-2 text-right">
-                                        البيانات الشخصية
+                                    <h2 className="text-xl font-bold text-white mb-6 flex items-center justify-center gap-2">
                                         <User className="w-5 h-5 text-primary" />
+                                        البيانات الشخصية
                                     </h2>
 
                                     <div className="space-y-5">
@@ -171,9 +174,9 @@ export default function CheckoutPage() {
 
                                 {/* Section 2: Delivery Address */}
                                 <div className={cardClasses}>
-                                    <h2 className="text-xl font-bold text-white mb-6 flex items-center justify-end gap-2 text-right">
-                                        عنوان التوصيل
+                                    <h2 className="text-xl font-bold text-white mb-6 flex items-center justify-center gap-2">
                                         <MapPin className="w-5 h-5 text-primary" />
+                                        عنوان التوصيل
                                     </h2>
 
                                     <div className="space-y-5">
@@ -236,9 +239,9 @@ export default function CheckoutPage() {
                                 exit={{ opacity: 0, y: -10 }}
                             >
                                 <div className={cardClasses}>
-                                    <h2 className="text-xl font-bold text-white mb-6 flex items-center justify-end gap-2 text-right">
-                                        طريقة الدفع
+                                    <h2 className="text-xl font-bold text-white mb-6 flex items-center justify-center gap-2">
                                         <CreditCard className="w-5 h-5 text-primary" />
+                                        طريقة الدفع
                                     </h2>
 
                                     <div className="space-y-4">
@@ -284,9 +287,9 @@ export default function CheckoutPage() {
                                 exit={{ opacity: 0, y: -10 }}
                             >
                                 <div className={cardClasses}>
-                                    <h2 className="text-xl font-bold text-white mb-6 flex items-center justify-end gap-2 text-right">
-                                        ملخص الطلب
+                                    <h2 className="text-xl font-bold text-white mb-6 flex items-center justify-center gap-2">
                                         <ShoppingBag className="w-5 h-5 text-primary" />
+                                        ملخص الطلب
                                     </h2>
 
                                     <div className="space-y-4 mb-6">

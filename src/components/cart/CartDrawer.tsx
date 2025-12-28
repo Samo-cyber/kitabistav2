@@ -44,15 +44,15 @@ export function CartDrawer() {
                         className="fixed top-0 right-0 h-full w-full max-w-md bg-zinc-900 border-l border-white/10 z-[70] shadow-2xl flex flex-col"
                     >
                         {/* Header */}
-                        <div className="p-6 border-b border-white/10 flex items-center justify-between bg-zinc-900/50 backdrop-blur-md">
-                            <h2 className="font-display text-2xl font-bold text-white flex items-center gap-2">
+                        <div className="p-6 border-b border-white/10 relative bg-zinc-900/50 backdrop-blur-md">
+                            <h2 className="font-display text-2xl font-bold text-white flex items-center justify-center gap-2">
                                 <ShoppingBag className="w-6 h-6 text-primary" />
                                 سلة التسوق
                                 <span className="text-sm font-normal text-gray-500 mt-1">({items.length})</span>
                             </h2>
                             <button
                                 onClick={closeCart}
-                                className="p-2 hover:bg-white/10 rounded-full transition-colors text-gray-400 hover:text-white"
+                                className="absolute left-4 top-1/2 -translate-y-1/2 p-2 hover:bg-white/10 rounded-full transition-colors text-gray-400 hover:text-white"
                             >
                                 <X className="w-6 h-6" />
                             </button>
@@ -163,8 +163,8 @@ export function CartDrawer() {
                                     }}
                                     className="w-full h-12 bg-primary hover:bg-primary/90 text-black font-bold rounded-xl shadow-lg shadow-primary/20 flex items-center justify-center gap-2 group"
                                 >
+                                    <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform rotate-180" />
                                     إتمام الشراء
-                                    <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
                                 </Button>
 
                                 <button

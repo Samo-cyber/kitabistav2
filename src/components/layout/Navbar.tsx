@@ -33,20 +33,7 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
 
     const pathname = usePathname();
 
-    useEffect(() => {
-        const handleScroll = () => {
-            const currentScrollY = window.scrollY;
-            if (currentScrollY > lastScrollY && currentScrollY > 100) {
-                setIsVisible(false);
-            } else {
-                setIsVisible(true);
-            }
-            setLastScrollY(currentScrollY);
-        };
-
-        window.addEventListener("scroll", handleScroll, { passive: true });
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, [lastScrollY]);
+    // Removed scroll listener to keep navbar always visible
 
     useEffect(() => {
         setIsMenuOpen(false);
@@ -90,9 +77,8 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
     return (
         <>
             <nav className={cn(
-                "sticky top-0 z-50 w-full border-b border-white/10 bg-background/80 backdrop-blur-md transition-transform duration-300",
-                isCheckout && "hidden md:block",
-                !isVisible && "-translate-y-full"
+                "sticky top-0 z-50 w-full border-b border-white/10 bg-background/95 backdrop-blur-md transition-all duration-300",
+                isCheckout && "hidden md:block"
             )}>
                 <div className="container mx-auto flex h-16 md:h-20 items-center justify-between px-4 md:px-6 gap-4">
                     {/* Logo */}
