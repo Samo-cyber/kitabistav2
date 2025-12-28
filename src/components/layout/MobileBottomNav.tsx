@@ -6,7 +6,7 @@ import { Home, BookOpen, ShoppingCart, Star } from "lucide-react";
 import { useCart } from "@/lib/cart-context";
 import { cn } from "@/lib/utils";
 
-export function MobileBottomNav() {
+export function MobileBottomNav({ isHidden }: { isHidden?: boolean }) {
     const pathname = usePathname();
     const { items, openCart } = useCart();
 
@@ -35,7 +35,10 @@ export function MobileBottomNav() {
     ];
 
     return (
-        <div className="fixed bottom-4 left-4 right-4 z-50 md:hidden">
+        <div className={cn(
+            "fixed bottom-4 left-4 right-4 z-50 md:hidden transition-all duration-500 ease-in-out",
+            isHidden ? "translate-y-[200%] opacity-0" : "translate-y-0 opacity-100"
+        )}>
             <nav className="bg-zinc-900/95 backdrop-blur-lg border border-white/10 rounded-2xl shadow-2xl shadow-black/50 p-1.5">
                 <ul className="flex items-center justify-around">
                     {navItems.map((item, index) => {

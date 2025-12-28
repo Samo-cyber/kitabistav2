@@ -147,7 +147,7 @@ export function BookCarousel({ title, books, linkToAll, subtitle }: BookCarousel
                                         <div className="absolute bottom-0 left-0 z-20 group/btn">
                                             <MiniAddToCartButton
                                                 book={book}
-                                                iconSize="w-7 h-7 animate-scale-pulse"
+                                                iconSize="w-7 h-7 animate-scale-pulse drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]"
                                                 className="h-14 w-14 rounded-none rounded-tr-3xl flex items-center justify-center bg-primary/80 backdrop-blur-xl border-t border-r border-white/30 text-black shadow-[inset_0_0_20px_rgba(255,255,255,0.3)] hover:bg-primary hover:shadow-[inset_0_0_30px_rgba(255,255,255,0.5)] group-hover/btn:scale-110 transition-all duration-300 origin-bottom-left"
                                             />
                                         </div>
