@@ -41,6 +41,24 @@
     --glass-border: #DDDDDD;
 }
 
+/* Logo Inversion for Light Mode */
+.light .logo-invert {
+    filter: invert(1) brightness(0);
+    /* Force Black */
+}
+
+.light body::before {
+    background-image: linear-gradient(rgba(250, 250, 247, 0.9), rgba(250, 250, 247, 0.9)), url('/images/hero-bg.jpg');
+    background-color: transparent;
+    opacity: 1;
+    filter: blur(12px) brightness(1.1);
+    transform: scale(1.05);
+}
+
+.light .premium-card:hover {
+    box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.08);
+}
+
 /* Shop Now Button */
 .light .btn-shop-now {
     background-color: #111111 !important;
