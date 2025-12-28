@@ -27,7 +27,7 @@ interface CategoryGridProps {
 export function CategoryGrid({ categories }: CategoryGridProps) {
     return (
         <div className="container mx-auto relative z-20 mb-12 -mt-8">
-            <div className="flex flex-nowrap md:flex-wrap overflow-x-auto md:overflow-visible gap-3 md:gap-6 pb-4 md:pb-0 px-4 scrollbar-hide snap-x snap-mandatory justify-start md:justify-center">
+            <div className="flex flex-wrap justify-center gap-3 md:gap-6 pb-0 px-4">
                 {categories.map((category) => {
                     const Icon = iconMap[category.id] || BookOpen;
                     const style = styleMap[category.id] || styleMap.novels;
@@ -36,7 +36,7 @@ export function CategoryGrid({ categories }: CategoryGridProps) {
                         <Link
                             key={category.id}
                             href={`/shop?category=${category.id}`}
-                            className="group snap-start"
+                            className="group"
                         >
                             <div className="flex flex-col items-center gap-2 min-w-[70px]">
                                 <div className={`w-14 h-14 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br ${style.bg} backdrop-blur-md border border-white/10 flex items-center justify-center shadow-lg ${style.shadow} group-hover:-translate-y-1 group-hover:scale-105 transition-all duration-300 relative overflow-hidden`}>

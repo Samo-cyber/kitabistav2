@@ -3,6 +3,7 @@ import { getBooks, getCategories } from "@/lib/data";
 import Link from "next/link";
 import { BookCarousel } from "@/components/shop/BookCarousel";
 import { CategoryGrid } from "@/components/home/CategoryGrid";
+import { ShoppingBag, Sparkles } from "lucide-react";
 
 export default async function Home() {
     const books = await getBooks();
@@ -32,14 +33,16 @@ export default async function Home() {
                             تسوق الآن واكتشف آلاف العناوين من الروايات والكتب بأسعار لا تقبل المنافسة.
                         </p>
 
-                        <div className="flex flex-col sm:flex-row justify-center gap-3 pt-2 animate-fade-in-up delay-300">
-                            <Link href="/shop" className="w-full sm:w-auto">
-                                <Button size="lg" className="w-full sm:min-w-[140px] h-12 text-base font-bold shadow-xl shadow-primary/20">
+                        <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4 animate-fade-in-up delay-300">
+                            <Link href="/shop" className="w-full sm:w-auto group">
+                                <Button size="lg" className="w-full sm:min-w-[160px] h-14 text-lg font-bold rounded-full bg-gradient-to-r from-primary to-yellow-400 text-black shadow-[0_0_20px_rgba(234,179,8,0.3)] hover:shadow-[0_0_30px_rgba(234,179,8,0.5)] hover:scale-105 transition-all duration-300 border-none">
+                                    <ShoppingBag className="w-5 h-5 ml-2" />
                                     تسوق الآن
                                 </Button>
                             </Link>
-                            <Link href="/offers" className="w-full sm:w-auto">
-                                <Button variant="outline" size="lg" className="w-full sm:min-w-[140px] h-12 text-base font-bold border-white/20 hover:bg-white/10 backdrop-blur-md">
+                            <Link href="/offers" className="w-full sm:w-auto group">
+                                <Button variant="outline" size="lg" className="w-full sm:min-w-[160px] h-14 text-lg font-bold rounded-full border-white/10 bg-white/5 backdrop-blur-md hover:bg-white/10 hover:border-primary/50 hover:text-primary transition-all duration-300">
+                                    <Sparkles className="w-5 h-5 ml-2" />
                                     أحدث العروض
                                 </Button>
                             </Link>
