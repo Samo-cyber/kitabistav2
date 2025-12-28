@@ -14,9 +14,9 @@ export function Footer() {
             <div className="max-w-6xl mx-auto px-4 pt-12 pb-28 md:pb-8 relative z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-12">
                     {/* Brand Column - Takes full width on mobile, 4 cols on desktop */}
-                    <div className="lg:col-span-4 space-y-6 text-center">
+                    <div className="lg:col-span-4 space-y-4 md:space-y-6 text-center">
                         <Link href="/" className="inline-block">
-                            <div className="relative h-16 md:h-14 w-56 md:w-48 mx-auto">
+                            <div className="relative h-20 md:h-16 w-64 md:w-56 mx-auto">
                                 <Image
                                     src="/images/logo.png"
                                     alt="كتابيستا"
@@ -25,10 +25,10 @@ export function Footer() {
                                 />
                             </div>
                         </Link>
-                        <p className="text-zinc-400 text-base md:text-lg font-medium leading-relaxed max-w-md mx-auto font-sans tracking-wide">
+                        <p className="text-zinc-400 text-sm md:text-base font-medium leading-relaxed max-w-md mx-auto font-sans tracking-wide">
                             رفيقك في كل صفحة
                         </p>
-                        <div className="flex justify-center gap-3">
+                        <div className="flex justify-center gap-4">
                             <SocialIcon icon={<Facebook className="w-5 h-5" />} href="#" />
                             <SocialIcon icon={<Instagram className="w-5 h-5" />} href="#" />
                             <SocialIcon icon={<Twitter className="w-5 h-5" />} href="#" />
@@ -39,8 +39,8 @@ export function Footer() {
                     <div className="lg:col-span-8 grid grid-cols-2 gap-8 lg:gap-12">
                         {/* Quick Links */}
                         <div className="flex flex-col items-center text-center lg:items-start lg:text-right">
-                            <h3 className="font-bold text-lg text-white mb-6 flex items-center justify-center lg:justify-start gap-2">
-                                <span className="w-1 h-6 bg-primary rounded-full"></span>
+                            <h3 className="font-bold text-base md:text-lg text-white mb-4 md:mb-6 flex items-center justify-center lg:justify-start gap-2">
+                                <span className="w-1 h-5 md:h-6 bg-primary rounded-full"></span>
                                 اكتشف
                             </h3>
                             <ul className="space-y-3 w-fit lg:w-full flex flex-col items-start">
@@ -53,8 +53,8 @@ export function Footer() {
 
                         {/* Support */}
                         <div className="flex flex-col items-center text-center lg:items-start lg:text-right">
-                            <h3 className="font-bold text-lg text-white mb-6 flex items-center justify-center lg:justify-start gap-2">
-                                <span className="w-1 h-6 bg-primary rounded-full"></span>
+                            <h3 className="font-bold text-base md:text-lg text-white mb-4 md:mb-6 flex items-center justify-center lg:justify-start gap-2">
+                                <span className="w-1 h-5 md:h-6 bg-primary rounded-full"></span>
                                 مساعدة
                             </h3>
                             <ul className="space-y-3 w-fit lg:w-full flex flex-col items-start">
