@@ -12,6 +12,7 @@ import {
     Image as ImageIcon, AlertCircle
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { Input } from "@/components/ui/Input";
 import { Modal } from "@/components/ui/Modal";
 import { getMockDB, saveMockDB, addBook, updateBook, deleteBook } from "@/lib/mock-db";
@@ -337,7 +338,7 @@ function ProductsView({ db }: { db: any }) {
                     <Card key={book.id} className="group bg-zinc-900/20 border-white/5 overflow-hidden hover:border-primary/30 transition-all duration-500 backdrop-blur-sm cursor-pointer" onClick={() => setViewingBook(book)}>
                         <div className="aspect-[3/4] relative overflow-hidden bg-zinc-800">
                             {book.image_url ? (
-                                <img src={book.image_url} alt={book.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                                <Image src={book.image_url} alt={book.title} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
                             ) : (
                                 <div className="w-full h-full flex items-center justify-center"><ImageIcon className="w-10 h-10 text-zinc-700" /></div>
                             )}
@@ -385,7 +386,7 @@ function ProductsView({ db }: { db: any }) {
                         >
                             {formData.image_url ? (
                                 <>
-                                    <img src={formData.image_url} alt="Preview" className="w-full h-full object-cover" />
+                                    <Image src={formData.image_url} alt="Preview" fill className="object-cover" />
                                     <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
                                         <div className="bg-white text-black px-6 py-3 rounded-2xl font-black text-sm shadow-2xl">تغيير الغلاف</div>
                                     </div>
@@ -450,9 +451,9 @@ function ProductsView({ db }: { db: any }) {
                 {viewingBook && (
                     <div className="space-y-8">
                         <div className="flex flex-col sm:flex-row gap-10">
-                            <div className="w-full sm:w-48 aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl shrink-0 border border-white/10 bg-zinc-800 self-center">
+                            <div className="w-full sm:w-48 aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl shrink-0 border border-white/10 bg-zinc-800 self-center relative">
                                 {viewingBook.image_url ? (
-                                    <img src={viewingBook.image_url} alt={viewingBook.title} className="w-full h-full object-cover" />
+                                    <Image src={viewingBook.image_url} alt={viewingBook.title} fill className="object-cover" />
                                 ) : (
                                     <div className="w-full h-full flex items-center justify-center"><ImageIcon className="w-12 h-12 text-zinc-700" /></div>
                                 )}
@@ -476,7 +477,7 @@ function ProductsView({ db }: { db: any }) {
                         <div className="space-y-4">
                             <h4 className="text-xs font-black text-zinc-500 uppercase tracking-widest">عن الكتاب</h4>
                             <p className="text-zinc-300 leading-relaxed text-lg bg-white/5 p-8 rounded-3xl border border-white/5 font-medium italic">
-                                "{viewingBook.description || "لا يوجد وصف متاح لهذا الكتاب حالياً."}"
+                                &quot;{viewingBook.description || "لا يوجد وصف متاح لهذا الكتاب حالياً."}&quot;
                             </p>
                         </div>
                         <div className="flex gap-4 pt-4">
@@ -617,7 +618,7 @@ function OrdersView({ db }: { db: any }) {
                                 </div>
                                 <div className="bg-white/5 p-8 rounded-3xl border border-white/5 shadow-inner">
                                     <p className="text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-4">عنوان التوصيل</p>
-                                    <p className="text-lg font-bold leading-relaxed text-zinc-300 italic">"{selectedOrder.address}"</p>
+                                    <p className="text-lg font-bold leading-relaxed text-zinc-300 italic">&quot;{selectedOrder.address}&quot;</p>
                                 </div>
                             </div>
                             <div className="bg-white/5 rounded-3xl p-8 border border-white/5 shadow-inner flex flex-col">
