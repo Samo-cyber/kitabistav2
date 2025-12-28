@@ -126,30 +126,11 @@ body::before {
 }
 
 .animate-scale-pulse {
-  animation: scale-pulse 2s ease-in-out infinite;
-  will-change: transform;
+  box-shadow: none !important;
 }
 
-@media (max-width: 768px) {
-
-  .backdrop-blur-md,
-  .backdrop-blur-xl,
-  .backdrop-blur-sm {
-    backdrop-filter: none !important;
-    background-color: rgba(24, 24, 27, 0.95) !important;
-    /* zinc-900 with high opacity */
-  }
-
-  .animate-pulse-glow,
-  .animate-shimmer,
-  .animate-float {
-    animation: none !important;
-    transform: none !important;
-    box-shadow: none !important;
-  }
-
-  /* Optimize fixed background on mobile */
-  body::before {
-    background-attachment: scroll;
-  }
+/* Optimize fixed background on mobile */
+body::before {
+  background-attachment: scroll;
+}
 }

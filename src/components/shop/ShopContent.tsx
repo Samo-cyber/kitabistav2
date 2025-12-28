@@ -71,7 +71,7 @@ export function ShopContent({ allBooks, categories, selectedCategory }: ShopCont
             <div className="sticky top-20 z-30 bg-background/95 backdrop-blur-xl border-b border-white/5 py-4 shadow-2xl transition-all duration-300">
                 <div className="container mx-auto px-4 flex items-center gap-4">
                     {/* Search Bar (Expanded) */}
-                    <div className="relative flex-grow">
+                    <div className="relative flex-grow hidden md:block">
                         <input
                             type="text"
                             placeholder="ابحث عن كتاب..."
@@ -87,7 +87,7 @@ export function ShopContent({ allBooks, categories, selectedCategory }: ShopCont
                     {/* Filter Toggle Button */}
                     <button
                         onClick={() => setIsFilterOpen(true)}
-                        className="flex items-center gap-2 px-5 py-3 bg-primary text-black rounded-xl font-bold hover:bg-primary-hover transition-colors shadow-lg shadow-primary/10 whitespace-nowrap"
+                        className="fixed right-0 top-1/2 -translate-y-1/2 z-40 p-3 rounded-l-xl rounded-r-none shadow-[0_0_15px_rgba(234,179,8,0.3)] bg-primary text-black font-bold hover:bg-primary-hover transition-all md:static md:flex md:items-center md:gap-2 md:px-5 md:py-3 md:rounded-xl md:shadow-lg md:shadow-primary/10 md:translate-y-0 whitespace-nowrap"
                     >
                         <Filter className="w-5 h-5" />
                         <span className="hidden md:inline">تصفية وترتيب</span>
