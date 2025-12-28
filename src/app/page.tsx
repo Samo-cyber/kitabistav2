@@ -34,9 +34,11 @@ export default async function Home() {
                         </p>
 
                         <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4 animate-fade-in-up delay-300">
-                            <Link href="/shop" className="w-full sm:w-auto group">
-                                <Button size="lg" className="w-full sm:min-w-[160px] h-14 text-lg font-bold rounded-full bg-gradient-to-r from-primary to-yellow-400 text-black shadow-[0_0_20px_rgba(234,179,8,0.3)] hover:shadow-[0_0_30px_rgba(234,179,8,0.5)] hover:scale-105 transition-all duration-300 border-none">
-                                    <ShoppingBag className="w-5 h-5 ml-2" />
+                            <Link href="/shop" className="w-full sm:w-auto group relative">
+                                <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full animate-pulse-glow" />
+                                <Button size="lg" className="relative w-full sm:min-w-[180px] h-16 text-xl font-bold rounded-full bg-gradient-to-r from-yellow-500 via-amber-400 to-yellow-500 text-black animate-shimmer-bg border-none overflow-hidden group-hover:scale-105 transition-transform duration-300">
+                                    <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 rounded-full" />
+                                    <ShoppingBag className="w-6 h-6 ml-2 animate-bounce" />
                                     تسوق الآن
                                 </Button>
                             </Link>
