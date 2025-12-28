@@ -17,32 +17,32 @@ export default async function Home() {
             {/* Hero Section */}
             <section className="relative flex items-center justify-center overflow-hidden py-8 md:py-12 pb-16">
                 <div className="container relative z-10 px-4 text-center">
-                    <div className="max-w-3xl mx-auto space-y-6">
+                    <div className="max-w-3xl mx-auto space-y-4">
                         {/* Badge */}
-                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900/80 border border-primary/30 backdrop-blur-md shadow-[0_0_15px_rgba(234,179,8,0.15)] animate-float hover:border-primary/60 transition-colors cursor-default">
-                            <span className="relative flex h-2.5 w-2.5">
+                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900/80 border border-primary/30 backdrop-blur-md shadow-[0_0_15px_rgba(234,179,8,0.15)] hover:border-primary/60 transition-colors cursor-default">
+                            <span className="relative flex h-2 w-2">
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
-                                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-600"></span>
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>
                             </span>
-                            <span className="text-primary font-bold text-sm tracking-wide">عروض حصرية لفترة محدودة</span>
-                            <Flame className="w-4 h-4 text-orange-500 animate-pulse" fill="currentColor" />
+                            <span className="text-primary font-bold text-xs tracking-wide">عروض حصرية لفترة محدودة</span>
+                            <Flame className="w-3.5 h-3.5 text-orange-500 animate-pulse" fill="currentColor" />
                         </div>
 
-                        {/* Logo Heading */}
-                        <div className="flex justify-center animate-fade-in-up delay-100">
-                            <div className="relative w-full max-w-[300px] md:max-w-[500px] aspect-[2/1]">
+                        {/* Logo Heading with Live Motion */}
+                        <div className="flex justify-center animate-fade-in-up">
+                            <div className="relative w-full max-w-[220px] md:max-w-[350px] aspect-[2/1] animate-float">
                                 <Image
                                     src="/images/logo.png"
                                     alt="كتابيستا - وجهتك الأولى للكتب"
                                     fill
-                                    className="object-contain drop-shadow-[0_0_20px_rgba(234,179,8,0.3)]"
+                                    className="object-contain drop-shadow-[0_0_15px_rgba(234,179,8,0.2)]"
                                     priority
                                 />
                             </div>
                         </div>
 
                         {/* Paragraph */}
-                        <p className="font-sans text-lg md:text-xl text-zinc-300 max-w-2xl mx-auto leading-relaxed animate-fade-in-up delay-200">
+                        <p className="font-sans text-base md:text-lg text-zinc-400 max-w-xl mx-auto leading-relaxed">
                             نقدم لك مجموعة مختارة من أفضل الكتب العربية والعالمية، لتستمتع برحلة معرفية فريدة وتصلك أينما كنت.
                         </p>
 
