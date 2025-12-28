@@ -45,6 +45,8 @@ export default async function ProductPage({
                         fill
                         className="object-cover blur-[120px] scale-110"
                         priority
+                        unoptimized
+                        referrerPolicy="no-referrer"
                     />
                 )}
                 <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-background" />
@@ -74,6 +76,8 @@ export default async function ProductPage({
                                         className="object-cover"
                                         priority
                                         sizes="150px"
+                                        unoptimized
+                                        referrerPolicy="no-referrer"
                                     />
                                 ) : (
                                     <div className="w-full h-full bg-zinc-900 flex items-center justify-center text-zinc-600 text-xs">
@@ -139,6 +143,8 @@ export default async function ProductPage({
                                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                                     priority
                                     sizes="(max-width: 768px) 100vw, 500px"
+                                    unoptimized
+                                    referrerPolicy="no-referrer"
                                 />
                             ) : (
                                 <div className="w-full h-full bg-zinc-900 flex items-center justify-center text-zinc-600">

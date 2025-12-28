@@ -87,6 +87,8 @@ export function BookCarousel({ title, books, linkToAll, subtitle }: BookCarousel
                                                     fill
                                                     className="object-cover transition-transform duration-700 group-hover/card:scale-110"
                                                     sizes="(max-width: 768px) 160px, 200px"
+                                                    unoptimized
+                                                    referrerPolicy="no-referrer"
                                                 />
                                             ) : (
                                                 <div className="w-full h-full flex items-center justify-center text-zinc-600">
