@@ -32,7 +32,7 @@ export function HeroLogo() {
                 src={theme === 'light' ? "/images/logo-light.png" : "/images/logo.png"}
                 alt="كتابيستا - وجهتك الأولى للكتب"
                 fill
-                className={`object-contain ${theme === 'light' ? '' : 'drop-shadow-[0_0_15px_rgba(234,179,8,0.2)]'}`}
+                className={`hero-logo object-contain ${theme === 'light' ? '' : 'drop-shadow-[0_0_15px_rgba(234,179,8,0.2)]'}`}
                 priority
             />
         </div>
