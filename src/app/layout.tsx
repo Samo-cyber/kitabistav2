@@ -4,7 +4,6 @@ import "./globals.css";
 import { NavbarWrapper } from "@/components/layout/NavbarWrapper";
 import { FooterWrapper } from "@/components/layout/FooterWrapper";
 import { CartProvider } from "@/lib/cart-context";
-import { LoadingGate } from "@/components/ui/LoadingGate";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 
 const cairo = Cairo({
@@ -38,7 +37,6 @@ export default async function RootLayout({
     return (
         <html lang="ar" dir="rtl">
             <body className={`${cairo.variable} ${almarai.variable} font-sans bg-background text-text-primary min-h-screen flex flex-col`}>
-                <LoadingGate />
                 <CartProvider>
                     <NavbarWrapper books={books} />
                     <CartDrawer />
