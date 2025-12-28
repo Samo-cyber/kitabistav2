@@ -76,7 +76,7 @@ export function BookCarousel({ title, books, linkToAll, subtitle }: BookCarousel
                         {books.map((book) => (
                             <div key={book.id} className="min-w-[160px] md:min-w-[200px] snap-start">
                                 <Link href={`/product/${book.id}`} className="group/card block h-full">
-                                    <div className="h-full bg-zinc-900/40 border border-white/10 rounded-xl overflow-hidden hover:border-primary/50 hover:bg-zinc-900/80 transition-all duration-300 flex flex-col backdrop-blur-sm group/card relative">
+                                    <div className="h-full bg-zinc-900/90 md:bg-zinc-900/40 border border-white/10 rounded-xl overflow-hidden hover:border-primary/50 hover:bg-zinc-900/80 transition-all duration-300 flex flex-col md:backdrop-blur-sm group/card relative">
 
                                         {/* Image Container */}
                                         <div className="relative aspect-[2/3] w-full overflow-hidden bg-zinc-800 border-b border-white/5">
