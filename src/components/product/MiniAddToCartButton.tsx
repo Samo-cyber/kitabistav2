@@ -5,6 +5,7 @@ import { useCart } from "@/lib/cart-context";
 import { Book } from "@/lib/data";
 import { ShoppingCart, Check } from "lucide-react";
 import { useState, useEffect } from "react";
+import { cn } from "@/lib/utils";
 
 export function MiniAddToCartButton({ book, className, iconSize = "w-5 h-5" }: { book: Book; className?: string; iconSize?: string }) {
     const { addItem } = useCart();
