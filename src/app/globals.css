@@ -25,45 +25,6 @@
   --glass-border: rgba(255, 255, 255, 0.1);
 }
 
-.light {
-  /* Light Mode - Yellow & Black (Industrial/Bold) */
-  --background: #FEF08A;
-  /* Yellow 200 */
-  --background-paper: #FEF9C3;
-  /* Yellow 100 */
-  --text-primary: #000000;
-  /* Black */
-  --text-secondary: #18181B;
-  /* Zinc 900 */
-  --text-muted: #4B5563;
-  /* Gray 600 */
-  --primary: #000000;
-  /* Black */
-  --primary-hover: #1F2937;
-  /* Gray 800 */
-  --primary-foreground: #FEF08A;
-  /* Yellow 200 */
-  --secondary: #FDE047;
-  /* Yellow 300 */
-  --secondary-foreground: #000000;
-  --accent: #000000;
-  --border: rgba(0, 0, 0, 0.1);
-  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 254, 240, 138;
-  --background-end-rgb: 254, 240, 138;
-  --glass-bg: rgba(254, 249, 195, 0.8);
-  /* Yellow 100 with opacity */
-  --glass-border: rgba(0, 0, 0, 0.1);
-}
-
-/* Logo Inversion for Light Mode */
-.light .logo-invert {
-  filter: invert(1) brightness(0);
-  /* Force Black */
-}
-
 html {
   scroll-behavior: smooth;
 }
@@ -99,12 +60,6 @@ body::before {
   background-size: cover;
   pointer-events: none;
   transition: opacity 0.8s ease, filter 0.8s ease;
-}
-
-.light body::before {
-  background-image: none;
-  background-color: var(--background);
-  opacity: 1;
 }
 
 /* Custom Scrollbar */
@@ -146,10 +101,6 @@ body::before {
 .premium-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.15);
-}
-
-.light .premium-card:hover {
-  box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.1);
 }
 
 /* Custom Animations */
