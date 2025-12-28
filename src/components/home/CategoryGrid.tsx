@@ -1,15 +1,23 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+import { BookOpen, Ghost, Lightbulb, Moon, Scroll } from "lucide-react";
 import { Category } from "@/lib/data";
 
-const imageMap: Record<string, string> = {
-    novels: "/categories/novels.png",
-    horror: "/categories/horror.png",
-    self: "/categories/self.png",
-    religious: "/categories/religious.png",
-    history: "/categories/history.png", // Fallback or missing
+const iconMap: Record<string, React.ElementType> = {
+    novels: BookOpen,
+    horror: Ghost,
+    self: Lightbulb,
+    religious: Moon,
+    history: Scroll,
+};
+
+const styleMap: Record<string, { bg: string, text: string, shadow: string }> = {
+    novels: { bg: "from-emerald-500/20 to-emerald-900/20", text: "text-emerald-400", shadow: "shadow-emerald-500/20" },
+    horror: { bg: "from-red-500/20 to-red-900/20", text: "text-red-500", shadow: "shadow-red-500/20" },
+    self: { bg: "from-yellow-500/20 to-yellow-900/20", text: "text-yellow-400", shadow: "shadow-yellow-500/20" },
+    religious: { bg: "from-blue-500/20 to-blue-900/20", text: "text-blue-400", shadow: "shadow-blue-500/20" },
+    history: { bg: "from-amber-500/20 to-amber-900/20", text: "text-amber-500", shadow: "shadow-amber-500/20" },
 };
 
 interface CategoryGridProps {
@@ -18,10 +26,11 @@ interface CategoryGridProps {
 
 export function CategoryGrid({ categories }: CategoryGridProps) {
     return (
-        <div className="container mx-auto px-4 relative z-20 mb-8 -mt-6">
-            <div className="flex flex-wrap justify-center gap-4 md:gap-8">
+        <div className="container mx-auto px-4 relative z-20 mb-12 -mt-6">
+            <div className="flex flex-wrap justify-center gap-4 md:gap-6">
                 {categories.map((category) => {
-                    const imageSrc = imageMap[category.id] || "/categories/novels.png";
+                    const Icon = iconMap[category.id] || BookOpen;
+                    const style = styleMap[category.id] || styleMap.novels;
 
                     return (
                         <Link
@@ -29,20 +38,12 @@ export function CategoryGrid({ categories }: CategoryGridProps) {
                             href={`/shop?category=${category.id}`}
                             className="group"
                         >
-                            <div className="flex flex-col items-center gap-2">
-                                <div className="w-20 h-20 md:w-24 md:h-24 bg-zinc-900/40 backdrop-blur-sm border border-white/5 rounded-full flex items-center justify-center p-3 shadow-lg group-hover:shadow-primary/20 group-hover:border-primary/30 group-hover:-translate-y-1 transition-all duration-300 relative">
-                                    <div className="absolute inset-0 bg-primary/5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
-                                    <div className="relative w-full h-full">
-                                        <Image
-                                            src={imageSrc}
-                                            alt={category.name}
-                                            fill
-                                            className="object-contain drop-shadow-md group-hover:scale-110 transition-transform duration-300"
-                                            sizes="96px"
-                                        />
-                                    </div>
+                            <div className="flex flex-col items-center gap-3">
+                                <div className={`w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-gradient-to-br ${style.bg} backdrop-blur-md border border-white/10 flex items-center justify-center shadow-lg ${style.shadow} group-hover:-translate-y-1 group-hover:scale-105 transition-all duration-300 relative overflow-hidden`}>
+                                    <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                    <Icon className={`w-8 h-8 md:w-10 md:h-10 ${style.text} drop-shadow-lg`} strokeWidth={1.5} />
                                 </div>
-                                <span className="text-zinc-400 text-xs md:text-sm font-medium group-hover:text-primary transition-colors">
+                                <span className="text-zinc-400 text-xs md:text-sm font-bold group-hover:text-white transition-colors">
                                     {category.name}
                                 </span>
                             </div>
