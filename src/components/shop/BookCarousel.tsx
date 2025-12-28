@@ -118,23 +118,33 @@ export function BookCarousel({ title, books, linkToAll, subtitle }: BookCarousel
 
 
                                             {/* Footer: Price */}
-                                            <div className="mt-auto relative flex items-center justify-center min-h-[24px] pt-1">
+                                            <div className="mt-auto relative flex items-center justify-center min-h-[24px] pt-1 pb-1">
                                                 {book.discount_price ? (
-                                                    <div className="flex items-baseline justify-center gap-1.5 w-full">
+                                                    <div className="flex items-center justify-center gap-2 w-full">
                                                         {/* Discount (Old Price) on the Right */}
                                                         <span className="text-xs text-red-500/80 line-through decoration-red-500/50 font-medium whitespace-nowrap">
                                                             {book.price}
                                                         </span>
 
                                                         {/* Main Price */}
-                                                        <span className="font-bold text-2xl text-primary font-display">
-                                                            {book.discount_price} <span className="text-[10px] font-normal text-zinc-400 font-sans">ج.م</span>
-                                                        </span>
+                                                        <div className="relative">
+                                                            <span className="font-bold text-2xl text-primary font-display leading-none">
+                                                                {book.discount_price}
+                                                            </span>
+                                                            <span className="absolute -bottom-3.5 left-0.5 text-[10px] font-normal text-zinc-400 -rotate-12 whitespace-nowrap">
+                                                                ج.م
+                                                            </span>
+                                                        </div>
                                                     </div>
                                                 ) : (
-                                                    <span className="font-bold text-2xl text-primary font-display">
-                                                        {book.price} <span className="text-[10px] font-normal text-zinc-400 font-sans">ج.م</span>
-                                                    </span>
+                                                    <div className="relative">
+                                                        <span className="font-bold text-2xl text-primary font-display leading-none">
+                                                            {book.price}
+                                                        </span>
+                                                        <span className="absolute -bottom-3.5 left-0.5 text-[10px] font-normal text-zinc-400 -rotate-12 whitespace-nowrap">
+                                                            ج.م
+                                                        </span>
+                                                    </div>
                                                 )}
                                             </div>
                                         </div>
