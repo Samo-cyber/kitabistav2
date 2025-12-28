@@ -161,6 +161,13 @@ export function CartDrawer() {
                                         <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
                                     </Button>
                                 </Link>
+
+                                <button
+                                    onClick={closeCart}
+                                    className="w-full py-2 text-sm text-gray-400 hover:text-white transition-colors flex items-center justify-center gap-2"
+                                >
+                                    العودة للتسوق
+                                </button>
                             </div>
                         )}
                     </motion.div>
