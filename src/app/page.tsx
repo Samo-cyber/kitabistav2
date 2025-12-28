@@ -13,7 +13,7 @@ export default async function Home() {
     return (
         <div className="flex flex-col gap-0 overflow-x-hidden">
             {/* Hero Section */}
-            <section className="relative flex items-center justify-center overflow-hidden py-8 md:py-12 pb-12">
+            <section className="relative flex items-center justify-center overflow-hidden py-8 md:py-12 pb-8">
                 <div className="container relative z-10 px-4 text-center">
                     <div className="max-w-3xl mx-auto space-y-6">
                         <div className="inline-block px-3 py-1 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-md animate-fade-in-up">

@@ -18,7 +18,7 @@ interface CategoryGridProps {
 
 export function CategoryGrid({ categories }: CategoryGridProps) {
     return (
-        <div className="container mx-auto px-4 relative z-20 mb-12 mt-4">
+        <div className="container mx-auto px-4 relative z-20 mb-8 -mt-6">
             <div className="flex flex-wrap justify-center gap-4 md:gap-8">
                 {categories.map((category) => {
                     const imageSrc = imageMap[category.id] || "/categories/novels.png";
