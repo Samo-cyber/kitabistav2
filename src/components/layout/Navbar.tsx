@@ -87,10 +87,10 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
                     <Link href="/" className="flex items-center shrink-0 logo-container !transition-none" style={{ transition: 'none' }}>
                         <div className="relative h-8 md:h-10 w-24 md:w-32 !transition-none" style={{ transition: 'none' }}>
                             <Image
-                                src="/images/logo.png"
+                                src={theme === 'light' ? "/images/logo-light.png" : "/images/logo.png"}
                                 alt="كتابيستا"
                                 fill
-                                className="object-contain !transition-none logo-invert"
+                                className="object-contain !transition-none"
                                 style={{ transition: 'none' }}
                                 priority
                                 loading="eager"
