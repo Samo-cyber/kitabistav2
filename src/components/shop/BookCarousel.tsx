@@ -113,7 +113,7 @@ export function BookCarousel({ title, books, linkToAll, subtitle }: BookCarousel
                                             <h3 className="font-bold text-base text-white leading-tight mb-1 line-clamp-2 group-hover/card:text-primary transition-colors min-h-[1.5em]">
                                                 {book.title}
                                             </h3>
-                                            <p className="text-[11px] text-zinc-400 font-medium mb-1 line-clamp-1">{book.author}</p>
+
 
                                             {/* Footer: Price */}
                                             <div className="mt-auto relative flex items-center justify-center min-h-[24px] pl-14 pt-1">
