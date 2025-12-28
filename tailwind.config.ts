@@ -17,27 +17,27 @@ const config: Config = {
         extend: {
             colors: {
                 primary: {
-                    DEFAULT: "#EAB308", // Logo Gold (Yellow-500)
-                    hover: "#CA8A04",   // Yellow-600
-                    foreground: "#000000",
+                    DEFAULT: "var(--primary)",
+                    hover: "var(--primary-hover)",
+                    foreground: "var(--primary-foreground)",
                 },
                 secondary: {
-                    DEFAULT: "#18181b", // Zinc 900 - True Neutral Dark
-                    foreground: "#FAFAFA",
+                    DEFAULT: "var(--secondary)",
+                    foreground: "var(--secondary-foreground)",
                 },
                 background: {
-                    DEFAULT: "#050505", // Almost Pure Black - No Blue
-                    paper: "#121212",   // Neutral Dark Grey
+                    DEFAULT: "var(--background)",
+                    paper: "var(--background-paper)",
                 },
                 accent: {
-                    DEFAULT: "#A1A1AA", // Zinc 400 - Neutral Silver
+                    DEFAULT: "var(--accent)",
                 },
                 text: {
-                    primary: "#FAFAFA", // Zinc 50
-                    secondary: "#A1A1AA", // Zinc 400
-                    muted: "#52525B",   // Zinc 600
+                    primary: "var(--text-primary)",
+                    secondary: "var(--text-secondary)",
+                    muted: "var(--text-muted)",
                 },
-                border: "#27272A", // Zinc 800
+                border: "var(--border)",
             },
             fontFamily: {
                 sans: ["var(--font-almarai)", "sans-serif"],

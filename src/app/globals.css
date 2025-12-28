@@ -3,9 +3,41 @@
 @tailwind utilities;
 
 :root {
+  --background: #050505;
+  --background-paper: #121212;
+  --text-primary: #FAFAFA;
+  --text-secondary: #A1A1AA;
+  --text-muted: #52525B;
+  --primary: #EAB308;
+  --primary-hover: #CA8A04;
+  --primary-foreground: #000000;
+  --secondary: #18181b;
+  --secondary-foreground: #FAFAFA;
+  --accent: #A1A1AA;
+  --border: #27272A;
+
   --foreground-rgb: 255, 255, 255;
   --background-start-rgb: 0, 0, 0;
   --background-end-rgb: 0, 0, 0;
+}
+
+.light {
+  --background: #F8F9FA;
+  --background-paper: #FFFFFF;
+  --text-primary: #1A1A1A;
+  --text-secondary: #4A4A4A;
+  --text-muted: #71717A;
+  --primary: #D97706;
+  --primary-hover: #B45309;
+  --primary-foreground: #FFFFFF;
+  --secondary: #E4E4E7;
+  --secondary-foreground: #18181B;
+  --accent: #71717A;
+  --border: #E4E4E7;
+
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 255, 255, 255;
+  --background-end-rgb: 255, 255, 255;
 }
 
 html {
@@ -41,6 +73,12 @@ body::before {
   background-repeat: no-repeat;
   background-size: cover;
   pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.light body::before {
+  opacity: 0.1;
+  /* Subdue the background image in light mode */
 }
 
 /* Custom Scrollbar */
@@ -50,17 +88,17 @@ body::before {
 }
 
 ::-webkit-scrollbar-track {
-  background: #09090b;
+  background: var(--background);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #27272a;
+  background: var(--border);
   border-radius: 5px;
-  border: 2px solid #09090b;
+  border: 2px solid var(--background);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #3f3f46;
+  background: var(--text-muted);
 }
 
 /* Custom Animations - Subdued & Premium */
@@ -158,7 +196,8 @@ body::before {
   .backdrop-blur-sm {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
-    background-color: rgba(24, 24, 27, 0.85) !important;
+    background-color: var(--background) !important;
+    opacity: 0.95;
   }
 
   .animate-pulse-glow,
