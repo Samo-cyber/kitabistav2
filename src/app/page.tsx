@@ -30,7 +30,7 @@ export default async function Home() {
 
                         {/* Logo Heading with Live Motion */}
                         <div className="flex justify-center animate-fade-in-up">
-                            <div className="relative w-full max-w-[220px] md:max-w-[350px] aspect-[2/1] animate-float">
+                            <div className="relative w-full max-w-[280px] md:max-w-[350px] aspect-[2/1] animate-float">
                                 <Image
                                     src="/images/logo.png"
                                     alt="كتابيستا - وجهتك الأولى للكتب"
