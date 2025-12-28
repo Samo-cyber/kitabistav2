@@ -3,7 +3,7 @@ import { getBooks, getCategories } from "@/lib/data";
 import Link from "next/link";
 import { BookCarousel } from "@/components/shop/BookCarousel";
 import { CategoryGrid } from "@/components/home/CategoryGrid";
-import { ShoppingBag, Sparkles } from "lucide-react";
+import { ShoppingBag, Sparkles, Flame } from "lucide-react";
 
 export default async function Home() {
     const books = await getBooks();
@@ -17,8 +17,13 @@ export default async function Home() {
             <section className="relative flex items-center justify-center overflow-hidden py-8 md:py-12 pb-16">
                 <div className="container relative z-10 px-4 text-center">
                     <div className="max-w-3xl mx-auto space-y-6">
-                        <div className="inline-block px-3 py-1 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-md animate-fade-in-up">
-                            <span className="text-primary font-bold text-xs md:text-sm">✨ عروض حصرية لفترة محدودة</span>
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900/80 border border-primary/30 backdrop-blur-md shadow-[0_0_15px_rgba(234,179,8,0.15)] animate-float hover:border-primary/60 transition-colors cursor-default">
+                            <span className="relative flex h-2.5 w-2.5">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-600"></span>
+                            </span>
+                            <span className="text-primary font-bold text-sm tracking-wide">عروض حصرية لفترة محدودة</span>
+                            <Flame className="w-4 h-4 text-orange-500 animate-pulse" fill="currentColor" />
                         </div>
 
                         <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold leading-tight drop-shadow-2xl animate-fade-in-up delay-100">
