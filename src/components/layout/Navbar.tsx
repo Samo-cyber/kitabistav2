@@ -90,7 +90,7 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
                                 src="/images/logo.png"
                                 alt="كتابيستا"
                                 fill
-                                className="object-contain !transition-none"
+                                className="object-contain !transition-none logo-invert"
                                 style={{ transition: 'none' }}
                                 priority
                                 loading="eager"
