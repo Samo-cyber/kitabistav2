@@ -219,7 +219,7 @@ export function ShopContent({ allBooks: initialBooks, categories, selectedCatego
 
             {/* Product Grid */}
             <div className="container mx-auto px-4 pt-8">
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 md:gap-6">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-6 gap-4 md:gap-6">
                     {displayedBooks.map((book) => (
                         <div key={book.id} className="group/card relative flex flex-col h-full">
                             <Link href={`/product/${book.id}`} className="flex flex-col h-full">

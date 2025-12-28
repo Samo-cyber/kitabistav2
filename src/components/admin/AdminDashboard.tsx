@@ -81,8 +81,8 @@ export function AdminDashboard() {
                             key={item.id}
                             onClick={() => handleTabChange(item.id as any)}
                             className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group ${activeTab === item.id
-                                    ? "bg-primary text-black font-bold shadow-lg shadow-primary/20"
-                                    : "text-gray-400 hover:bg-white/5 hover:text-white"
+                                ? "bg-primary text-black font-bold shadow-lg shadow-primary/20"
+                                : "text-gray-400 hover:bg-white/5 hover:text-white"
                                 }`}
                         >
                             <span className={activeTab === item.id ? "text-black" : "text-gray-400 group-hover:text-primary transition-colors"}>
@@ -129,11 +129,6 @@ export function AdminDashboard() {
                                 placeholder="بحث..."
                                 className="bg-zinc-900 border border-white/10 rounded-full pr-10 pl-4 py-2 text-sm focus:outline-none focus:border-primary w-32 md:w-64 transition-all"
                             />
-                        </div>
-                        <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-gradient-to-tr from-primary to-yellow-400 p-[2px] shrink-0">
-                            <div className="w-full h-full rounded-full bg-zinc-900 flex items-center justify-center overflow-hidden">
-                                <img src="https://ui-avatars.com/api/?name=Admin&background=random" alt="Admin" />
-                            </div>
                         </div>
                     </div>
                 </header>
@@ -252,6 +247,7 @@ function DashboardView({ db }: { db: any }) {
 
 function ProductsView({ db }: { db: any }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [viewingBook, setViewingBook] = useState<Book | null>(null);
     const [editingBook, setEditingBook] = useState<Book | null>(null);
     const [formData, setFormData] = useState<Partial<Book>>({
         title: "", author: "", price: 0, category: "", stock: 0, image_url: "", description: ""
@@ -310,7 +306,7 @@ function ProductsView({ db }: { db: any }) {
                         </thead>
                         <tbody className="divide-y divide-white/5">
                             {db.books.map((book: Book) => (
-                                <tr key={book.id} className="hover:bg-white/5 transition-colors group">
+                                <tr key={book.id} className="hover:bg-white/5 transition-colors group cursor-pointer" onClick={() => setViewingBook(book)}>
                                     <td className="px-6 py-4">
                                         <div className="flex items-center gap-4">
                                             <img src={book.image_url} alt={book.title} className="w-10 h-14 object-cover rounded shadow-md" />
@@ -337,7 +333,7 @@ function ProductsView({ db }: { db: any }) {
                                         {book.price} ج.م
                                     </td>
                                     <td className="px-6 py-4">
-                                        <div className="flex items-center justify-end gap-2">
+                                        <div className="flex items-center justify-end gap-2" onClick={(e) => e.stopPropagation()}>
                                             <button onClick={() => handleOpenModal(book)} className="p-2 rounded-lg bg-blue-500/10 text-blue-500 hover:bg-blue-500 hover:text-white transition-all">
                                                 <Edit className="w-4 h-4" />
                                             </button>
@@ -356,7 +352,7 @@ function ProductsView({ db }: { db: any }) {
             {/* Mobile Cards */}
             <div className="grid grid-cols-1 gap-4 md:hidden">
                 {db.books.map((book: Book) => (
-                    <Card key={book.id} className="p-4 bg-zinc-900/40 border-white/5 flex gap-4">
+                    <Card key={book.id} className="p-4 bg-zinc-900/40 border-white/5 flex gap-4 cursor-pointer" onClick={() => setViewingBook(book)}>
                         <img src={book.image_url} alt={book.title} className="w-20 h-28 object-cover rounded shadow-lg shrink-0" />
                         <div className="flex-1 min-w-0 flex flex-col">
                             <div className="flex justify-between items-start gap-2">
@@ -372,7 +368,7 @@ function ProductsView({ db }: { db: any }) {
                                     المخزون: {book.stock}
                                 </span>
                             </div>
-                            <div className="flex gap-2 mt-auto">
+                            <div className="flex gap-2 mt-auto" onClick={(e) => e.stopPropagation()}>
                                 <button onClick={() => handleOpenModal(book)} className="flex-1 py-2 rounded-lg bg-blue-500/10 text-blue-500 text-xs font-bold flex items-center justify-center gap-1">
                                     <Edit className="w-3 h-3" /> تعديل
                                 </button>
@@ -434,6 +430,45 @@ function ProductsView({ db }: { db: any }) {
                     </div>
                 </div>
             </Modal>
+
+            <Modal isOpen={!!viewingBook} onClose={() => setViewingBook(null)} title="تفاصيل المنتج">
+                {viewingBook && (
+                    <div className="space-y-6">
+                        <div className="flex gap-6">
+                            <div className="w-32 h-48 rounded-xl overflow-hidden shadow-2xl shrink-0 border border-white/10">
+                                <img src={viewingBook.image_url} alt={viewingBook.title} className="w-full h-full object-cover" />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                                <h3 className="text-2xl font-black text-primary mb-1">{viewingBook.title}</h3>
+                                <p className="text-lg text-gray-400 mb-4">{viewingBook.author}</p>
+                                <div className="flex flex-wrap gap-3">
+                                    <div className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-bold">
+                                        {db.categories.find((c: any) => c.id === viewingBook.category)?.name || viewingBook.category}
+                                    </div>
+                                    <div className="px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold">
+                                        {viewingBook.price} ج.م
+                                    </div>
+                                    <div className={`px-3 py-1 rounded-full border text-xs font-bold ${viewingBook.stock < 10 ? 'bg-red-500/10 border-red-500/20 text-red-500' : 'bg-green-500/10 border-green-500/20 text-green-500'}`}>
+                                        المخزون: {viewingBook.stock}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="space-y-2">
+                            <h4 className="text-sm font-bold text-gray-500 uppercase tracking-wider">وصف الكتاب</h4>
+                            <p className="text-gray-300 leading-relaxed text-sm bg-white/5 p-4 rounded-xl border border-white/5">
+                                {viewingBook.description || "لا يوجد وصف متاح لهذا الكتاب حالياً."}
+                            </p>
+                        </div>
+                        <div className="flex gap-3 pt-4">
+                            <Button onClick={() => { setViewingBook(null); handleOpenModal(viewingBook); }} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold">
+                                <Edit className="w-4 h-4 ml-2" /> تعديل البيانات
+                            </Button>
+                            <Button onClick={() => setViewingBook(null)} variant="outline" className="flex-1 border-white/10">إغلاق</Button>
+                        </div>
+                    </div>
+                )}
+            </Modal>
         </motion.div>
     );
 }
@@ -472,7 +507,7 @@ function OrdersView({ db }: { db: any }) {
                         </thead>
                         <tbody className="divide-y divide-white/5">
                             {db.orders.map((order: any) => (
-                                <tr key={order.id} className="hover:bg-white/5 transition-colors group">
+                                <tr key={order.id} className="hover:bg-white/5 transition-colors group cursor-pointer" onClick={() => setSelectedOrder(order)}>
                                     <td className="px-6 py-4 font-bold text-primary">{order.id}</td>
                                     <td className="px-6 py-4">
                                         <div>
@@ -484,17 +519,17 @@ function OrdersView({ db }: { db: any }) {
                                     <td className="px-6 py-4 font-bold">{order.total} ج.م</td>
                                     <td className="px-6 py-4">
                                         <span className={`text-[10px] px-2.5 py-1 rounded-full font-bold uppercase border ${order.status === 'pending'
-                                                ? 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20'
-                                                : order.status === 'shipped'
-                                                    ? 'bg-blue-500/10 text-blue-500 border-blue-500/20'
-                                                    : 'bg-green-500/10 text-green-500 border-green-500/20'
+                                            ? 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20'
+                                            : order.status === 'shipped'
+                                                ? 'bg-blue-500/10 text-blue-500 border-blue-500/20'
+                                                : 'bg-green-500/10 text-green-500 border-green-500/20'
                                             }`}>
                                             {order.status === 'pending' ? 'قيد الانتظار' : order.status === 'shipped' ? 'تم الشحن' : 'مكتمل'}
                                         </span>
                                     </td>
                                     <td className="px-6 py-4">
                                         <div className="flex items-center justify-end gap-2">
-                                            <button onClick={() => setSelectedOrder(order)} className="p-2 rounded-lg bg-white/5 text-gray-400 hover:bg-primary hover:text-black transition-all">
+                                            <button className="p-2 rounded-lg bg-white/5 text-gray-400 hover:bg-primary hover:text-black transition-all">
                                                 <Eye className="w-4 h-4" />
                                             </button>
                                         </div>
@@ -513,8 +548,8 @@ function OrdersView({ db }: { db: any }) {
                         <div className="flex justify-between items-center">
                             <span className="font-bold text-primary">{order.id}</span>
                             <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold uppercase border ${order.status === 'pending'
-                                    ? 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20'
-                                    : 'bg-green-500/10 text-green-500 border-green-500/20'
+                                ? 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20'
+                                : 'bg-green-500/10 text-green-500 border-green-500/20'
                                 }`}>
                                 {order.status === 'pending' ? 'قيد الانتظار' : 'مكتمل'}
                             </span>
