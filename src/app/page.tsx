@@ -1,22 +1,19 @@
 import { Button } from "@/components/ui/Button";
-import { Card } from "@/components/ui/Card";
-import { Section } from "@/components/ui/Section";
 import { getBooks, getCategories } from "@/lib/data";
 import Link from "next/link";
-import Image from "next/image";
-import { MiniAddToCartButton } from "@/components/product/MiniAddToCartButton";
 import { BookCarousel } from "@/components/shop/BookCarousel";
+import { CategoryGrid } from "@/components/home/CategoryGrid";
 
 export default async function Home() {
     const books = await getBooks();
     const categories = await getCategories();
-    const featuredBooks = books.slice(0, 15);
-    const newBooks = books.slice(5, 20);
+    const featuredBooks = books.filter(b => b.is_active).slice(0, 15);
+    const newBooks = books.filter(b => b.is_active).slice(5, 20);
 
     return (
         <div className="flex flex-col gap-0 overflow-x-hidden">
             {/* Hero Section */}
-            <section className="relative flex items-center justify-center overflow-hidden py-8 md:py-12">
+            <section className="relative flex items-center justify-center overflow-hidden py-8 md:py-12 pb-20">
                 <div className="container relative z-10 px-4 text-center">
                     <div className="max-w-3xl mx-auto space-y-6">
                         <div className="inline-block px-3 py-1 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-md animate-fade-in-up">
@@ -66,6 +63,9 @@ export default async function Home() {
                     </div>
                 </div>
             </section>
+
+            {/* Categories Grid */}
+            <CategoryGrid categories={categories} />
 
             {/* Best Sellers Section */}
             <BookCarousel
