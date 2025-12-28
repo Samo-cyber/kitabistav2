@@ -23,10 +23,12 @@ export default async function Home() {
                             <span className="text-primary font-bold text-xs md:text-sm">✨ عروض حصرية لفترة محدودة</span>
                         </div>
 
-                        <h1 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold leading-tight drop-shadow-2xl animate-fade-in-up delay-100">
-                            مكتبتك <span className="text-primary">الشاملة</span>
+                        <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold leading-tight drop-shadow-2xl animate-fade-in-up delay-100">
+                            عالم من الكتب..
                             <br />
-                            لكل ما تبحث عنه
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-primary to-yellow-200 bg-[length:200%_auto] animate-shimmer">
+                                بين يديك
+                            </span>
                         </h1>
 
                         <p className="text-base md:text-lg text-zinc-300 leading-relaxed animate-fade-in-up delay-200 max-w-2xl mx-auto">

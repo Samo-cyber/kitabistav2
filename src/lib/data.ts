@@ -215,3 +215,7 @@ const DB = {
 
 export async function getBooks() { return DB.books; }
 export async function getBookById(id: string) { return DB.books.find((b) => b.id === id); }
+
+export async function getCategories() {
+    return DB.categories;
+}
