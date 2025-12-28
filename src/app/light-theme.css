@@ -1,57 +1,55 @@
-@layer base {
-    .light {
-        /* Light Mode - Warm White & Black with Brand Yellow */
-        --background: #FAF9F7;
-        /* Warm White */
-        --background-paper: #FFFFFF;
-        /* White */
-        --text-primary: #121212;
-        /* Primary Black */
-        --text-secondary: #5F5F5F;
-        /* Secondary Gray */
-        --text-muted: #5F5F5F;
-        /* Muted Gray */
+.light {
+    /* Light Mode - Warm White & Black with Brand Yellow */
+    --background: #FAF9F7;
+    /* Warm White */
+    --background-paper: #FFFFFF;
+    /* White */
+    --text-primary: #121212;
+    /* Primary Black */
+    --text-secondary: #5F5F5F;
+    /* Secondary Gray */
+    --text-muted: #5F5F5F;
+    /* Muted Gray */
 
-        --primary: #121212;
-        /* Primary Black */
-        --primary-hover: #333333;
-        /* Dark Gray */
-        --primary-foreground: #FFFFFF;
-        /* White */
+    --primary: #121212;
+    /* Primary Black */
+    --primary-hover: #333333;
+    /* Dark Gray */
+    --primary-foreground: #FFFFFF;
+    /* White */
 
-        --secondary: #F5C842;
-        /* Brand Yellow */
-        --secondary-foreground: #121212;
-        /* Black */
+    --secondary: #F5C842;
+    /* Brand Yellow */
+    --secondary-foreground: #121212;
+    /* Black */
 
-        --accent: #F5C842;
-        /* Brand Yellow */
+    --accent: #F5C842;
+    /* Brand Yellow */
 
-        --border: #DDDDDD;
-        /* Light Gray */
-        --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+    --border: #DDDDDD;
+    /* Light Gray */
+    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
 
-        --foreground-rgb: 18, 18, 18;
-        --background-start-rgb: 250, 249, 247;
-        --background-end-rgb: 250, 249, 247;
+    --foreground-rgb: 18, 18, 18;
+    --background-start-rgb: 250, 249, 247;
+    --background-end-rgb: 250, 249, 247;
 
-        --glass-bg: rgba(255, 255, 255, 0.8);
-        --glass-border: #DDDDDD;
-    }
+    --glass-bg: rgba(255, 255, 255, 0.8);
+    --glass-border: #DDDDDD;
+}
 
-    /* Logo Inversion for Light Mode */
-    .light .logo-invert {
-        filter: invert(1) brightness(0);
-        /* Force Black */
-    }
+/* Logo Inversion for Light Mode */
+.light .logo-invert {
+    filter: invert(1) brightness(0);
+    /* Force Black */
+}
 
-    .light body::before {
-        background-image: none;
-        background-color: var(--background);
-        opacity: 1;
-    }
+.light body::before {
+    background-image: none;
+    background-color: var(--background);
+    opacity: 1;
+}
 
-    .light .premium-card:hover {
-        box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.08);
-    }
+.light .premium-card:hover {
+    box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.08);
 }
