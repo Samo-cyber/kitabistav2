@@ -259,26 +259,30 @@ export default async function ProductPage({
                 </div>
             </div>
 
-            {/* Sticky Bottom Bar for Mobile */}
-            <div className="fixed bottom-0 left-0 right-0 z-50 bg-zinc-900/90 backdrop-blur-lg border-t border-white/10 p-4 md:hidden pb-safe">
-                <div className="flex items-center gap-4">
+            {/* Sticky Bottom Bar for Mobile (Floating Pill Design) */}
+            <div className="fixed bottom-6 left-4 right-4 z-50 md:hidden">
+                <div className="bg-zinc-900/80 backdrop-blur-xl border border-white/10 rounded-2xl p-3 shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex items-center gap-4">
                     <div className="flex-1">
                         <AddToCartButton book={book} />
                     </div>
-                    <div className="flex flex-col items-end">
+                    <div className="flex flex-col items-center px-2 border-r border-white/10">
                         {book.discount_price ? (
                             <>
-                                <span className="text-xl font-bold text-primary font-display">
-                                    {book.discount_price} <span className="text-xs text-zinc-500 font-sans font-normal">ج.م</span>
+                                <span className="text-lg font-bold text-primary font-display leading-none">
+                                    {book.discount_price}
                                 </span>
-                                <span className="text-xs text-zinc-600 line-through decoration-red-500/30">
+                                <span className="text-[10px] text-zinc-500 font-sans">ج.م</span>
+                                <span className="text-[10px] text-zinc-600 line-through decoration-red-500/30">
                                     {book.price}
                                 </span>
                             </>
                         ) : (
-                            <span className="text-xl font-bold text-primary font-display">
-                                {book.price} <span className="text-xs text-zinc-500 font-sans font-normal">ج.م</span>
-                            </span>
+                            <>
+                                <span className="text-lg font-bold text-primary font-display leading-none">
+                                    {book.price}
+                                </span>
+                                <span className="text-[10px] text-zinc-500 font-sans">ج.م</span>
+                            </>
                         )}
                     </div>
                 </div>
