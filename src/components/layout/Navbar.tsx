@@ -79,7 +79,7 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
     return (
         <>
             <nav className={cn(
-                "sticky top-0 z-50 w-full border-b border-white/10 bg-background/95 backdrop-blur-md transition-all duration-300",
+                "sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-xl transition-all duration-500",
                 isCheckout && "hidden md:block"
             )}>
                 <div className="container mx-auto flex h-16 md:h-20 items-center justify-between px-4 md:px-6 gap-4">
@@ -103,7 +103,7 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
                         <input
                             type="text"
                             placeholder="بحث..."
-                            className="w-full h-9 bg-zinc-900/50 border border-white/10 rounded-full px-4 pl-10 text-sm text-zinc-200 placeholder:text-zinc-500 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all"
+                            className="w-full h-9 bg-secondary/50 border border-border rounded-full px-4 pl-10 text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             onKeyDown={(e) => {
@@ -132,7 +132,7 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: 10 }}
-                                    className="absolute top-full left-0 right-0 mt-2 bg-zinc-900 border border-white/10 rounded-xl shadow-2xl overflow-hidden z-50 max-h-[60vh] overflow-y-auto"
+                                    className="absolute top-full left-0 right-0 mt-2 bg-background-paper border border-border rounded-2xl shadow-2xl overflow-hidden z-50 max-h-[60vh] overflow-y-auto backdrop-blur-xl"
                                 >
                                     {searchResults.length > 0 ? (
                                         <>
@@ -141,14 +141,14 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
                                                     key={book.id}
                                                     href={`/product/${book.id}`}
                                                     onClick={() => setSearchQuery("")}
-                                                    className="flex items-center gap-3 p-3 hover:bg-white/5 border-b border-white/5 last:border-0 transition-colors"
+                                                    className="flex items-center gap-3 p-3 hover:bg-primary/5 border-b border-border last:border-0 transition-colors"
                                                 >
-                                                    <div className="relative w-10 h-14 rounded overflow-hidden flex-shrink-0 bg-zinc-800">
+                                                    <div className="relative w-10 h-14 rounded-lg overflow-hidden flex-shrink-0 bg-secondary">
                                                         <Image src={book.image_url} alt={book.title} fill className="object-cover" />
                                                     </div>
                                                     <div className="flex-grow min-w-0">
-                                                        <h4 className="font-bold text-sm text-zinc-200 truncate">{book.title}</h4>
-                                                        <p className="text-xs text-zinc-500 truncate">{book.author}</p>
+                                                        <h4 className="font-bold text-sm text-text-primary truncate">{book.title}</h4>
+                                                        <p className="text-xs text-text-secondary truncate">{book.author}</p>
                                                     </div>
                                                     <div className="text-primary font-bold text-xs whitespace-nowrap">
                                                         {book.discount_price || book.price} ج.م
@@ -243,10 +243,10 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
                             animate={{ x: 0 }}
                             exit={{ x: "100%" }}
                             transition={{ type: "spring", damping: 30, stiffness: 300 }}
-                            className="fixed top-0 right-0 h-full w-[85%] max-w-sm bg-zinc-950 border-l border-white/10 z-50 shadow-2xl overflow-y-auto"
+                            className="fixed top-0 right-0 h-full w-[85%] max-w-sm bg-background-paper border-l border-border z-50 shadow-2xl overflow-y-auto"
                         >
                             <div className="flex flex-col h-full">
-                                <div className="flex justify-between items-center p-6 border-b border-white/5">
+                                <div className="flex justify-between items-center p-6 border-b border-border">
                                     <div className="flex items-center gap-4">
                                         <div className="relative h-8 w-24">
                                             <Image src="/images/logo.png" alt="كتابيستا" fill className="object-contain" />
@@ -254,14 +254,14 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
                                         <Button
                                             variant="ghost"
                                             size="sm"
-                                            className="hover:bg-white/5 rounded-full p-2"
+                                            className="hover:bg-secondary rounded-full p-2"
                                             onClick={toggleTheme}
                                         >
-                                            {theme === 'dark' ? <Sun className="w-5 h-5 text-zinc-400" /> : <Moon className="w-5 h-5 text-zinc-400" />}
+                                            {theme === 'dark' ? <Sun className="w-5 h-5 text-text-secondary" /> : <Moon className="w-5 h-5 text-text-secondary" />}
                                         </Button>
                                     </div>
-                                    <Button variant="ghost" size="sm" onClick={() => setIsMenuOpen(false)} className="hover:bg-white/5 rounded-full p-2">
-                                        <X className="w-6 h-6 text-zinc-400" />
+                                    <Button variant="ghost" size="sm" onClick={() => setIsMenuOpen(false)} className="hover:bg-secondary rounded-full p-2">
+                                        <X className="w-6 h-6 text-text-secondary" />
                                     </Button>
                                 </div>
 
@@ -270,15 +270,15 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
                                         <input
                                             type="text"
                                             placeholder="ابحث عن كتاب..."
-                                            className="w-full bg-zinc-900 border border-white/10 rounded-xl py-3 px-4 pl-10 text-sm text-white focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all"
+                                            className="w-full bg-secondary border border-border rounded-xl py-3 px-4 pl-10 text-sm text-text-primary focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all"
                                             onClick={() => { setIsMenuOpen(false); setIsSearchOpen(true); }}
                                             readOnly
                                         />
-                                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
+                                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-muted" />
                                     </div>
 
                                     <div>
-                                        <h3 className="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-4 px-2">اكتشف</h3>
+                                        <h3 className="text-xs font-bold text-text-muted uppercase tracking-wider mb-4 px-2">اكتشف</h3>
                                         <div className="space-y-1">
                                             <MobileNavLink href="/" onClick={() => setIsMenuOpen(false)} icon={<Menu className="w-5 h-5" />}>الرئيسية</MobileNavLink>
                                             <MobileNavLink href="/shop" onClick={() => setIsMenuOpen(false)} icon={<Search className="w-5 h-5" />}>المكتبة</MobileNavLink>
@@ -287,7 +287,7 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
                                     </div>
 
                                     <div>
-                                        <h3 className="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-4 px-2">مساعدة</h3>
+                                        <h3 className="text-xs font-bold text-text-muted uppercase tracking-wider mb-4 px-2">مساعدة</h3>
                                         <div className="space-y-1">
                                             <MobileNavLink href="/about" onClick={() => setIsMenuOpen(false)}>عن كتابيستا</MobileNavLink>
                                             <MobileNavLink href="/contact" onClick={() => setIsMenuOpen(false)}>اتصل بنا</MobileNavLink>
@@ -295,8 +295,8 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
                                     </div>
                                 </div>
 
-                                <div className="p-6 border-t border-white/5 bg-zinc-900/50">
-                                    <p className="text-xs text-center text-zinc-500">
+                                <div className="p-6 border-t border-border bg-secondary/30">
+                                    <p className="text-xs text-center text-text-muted">
                                         © {new Date().getFullYear()} كتابيستا. جميع الحقوق محفوظة.
                                     </p>
                                 </div>
@@ -412,7 +412,7 @@ function NavLink({ href, children }: { href: string; children: React.ReactNode }
     return (
         <Link
             href={href}
-            className="text-sm font-medium text-gray-300 hover:text-primary transition-colors relative group"
+            className="text-sm font-medium text-text-secondary hover:text-primary transition-colors relative group"
         >
             {children}
             <span className="absolute -bottom-1 right-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
@@ -425,13 +425,13 @@ function MobileNavLink({ href, onClick, children, icon }: { href: string; onClic
         <Link
             href={href}
             onClick={onClick}
-            className="flex items-center justify-between p-3 rounded-xl hover:bg-white/5 text-zinc-300 hover:text-white transition-all group border border-transparent hover:border-white/5"
+            className="flex items-center justify-between p-3 rounded-xl hover:bg-primary/5 text-text-secondary hover:text-text-primary transition-all group border border-transparent hover:border-border"
         >
             <div className="flex items-center gap-3">
-                {icon && <span className="text-zinc-500 group-hover:text-primary transition-colors">{icon}</span>}
+                {icon && <span className="text-text-muted group-hover:text-primary transition-colors">{icon}</span>}
                 <span className="font-medium text-base">{children}</span>
             </div>
-            <ChevronRight className="w-4 h-4 text-zinc-600 group-hover:text-primary group-hover:translate-x-[-4px] transition-all" />
+            <ChevronRight className="w-4 h-4 text-text-muted group-hover:text-primary group-hover:translate-x-[-4px] transition-all" />
         </Link>
     );
 }
