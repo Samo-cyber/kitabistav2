@@ -23,6 +23,7 @@ export const DB = {
         { id: "self", name: "تنمية وعلم نفس" },
         { id: "religious", name: "ديني وروحاني" },
         { id: "history", name: "تاريخ وفلسفة" },
+        { id: "gifts", name: "هدايا" },
     ],
     books: [
         {

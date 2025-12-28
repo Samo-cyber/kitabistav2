@@ -16,10 +16,10 @@ const governorates = [
 ];
 
 // Styles matching the project's premium dark theme
-const cardClasses = "bg-zinc-900/50 border border-white/5 rounded-xl p-3 md:p-4 mb-2 backdrop-blur-sm";
-const labelClasses = "block text-right text-gray-400 text-[10px] font-bold mb-1";
+const cardClasses = "bg-zinc-900/50 border border-white/5 rounded-xl p-4 md:p-6 mb-4 backdrop-blur-sm";
+const labelClasses = "block text-right text-gray-400 text-[10px] md:text-xs font-bold mb-1.5";
 const inputContainerClasses = "relative";
-const inputClasses = "w-full bg-black/40 border border-white/10 rounded-lg px-3 py-2 text-right text-white placeholder:text-gray-600 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-xs";
+const inputClasses = "w-full bg-black/40 border border-white/10 rounded-lg px-3 py-2.5 text-right text-white placeholder:text-gray-600 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-xs md:text-sm";
 const iconClasses = "absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 w-3.5 h-3.5";
 
 export default function CheckoutPage() {
@@ -92,7 +92,7 @@ export default function CheckoutPage() {
     return (
         <div className="h-screen md:overflow-hidden bg-background text-white flex flex-col">
             {/* Header */}
-            <div className="pt-4 pb-2 text-center relative max-w-2xl mx-auto px-4 w-full shrink-0">
+            <div className="pt-6 pb-4 text-center relative max-w-4xl mx-auto px-4 w-full shrink-0">
                 <Link href="/" className="absolute right-4 top-5 text-gray-400 hover:text-primary transition-colors flex items-center gap-2 group">
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     <span className="font-medium text-[10px] hidden md:inline">العودة</span>
@@ -126,9 +126,9 @@ export default function CheckoutPage() {
             </div>
 
             {/* Main Content - Scrollable on mobile, fixed on desktop */}
-            <div className="flex-1 overflow-y-auto md:overflow-visible px-4 pb-4 custom-scrollbar">
-                <div className="max-w-2xl mx-auto w-full h-full">
-                    <form onSubmit={handleSubmit} className="h-full flex flex-col">
+            <div className="flex-1 overflow-y-auto md:overflow-visible px-4 pb-8 custom-scrollbar">
+                <div className="max-w-4xl mx-auto w-full">
+                    <form onSubmit={handleSubmit} className="flex flex-col">
                         <AnimatePresence mode="wait">
                             {currentStep === 1 && (
                                 <motion.div
@@ -136,7 +136,7 @@ export default function CheckoutPage() {
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: -10 }}
-                                    className="flex flex-col h-full"
+                                    className="flex flex-col"
                                 >
                                     {/* Section 1: Personal Data */}
                                     <div className={cardClasses}>
@@ -221,12 +221,12 @@ export default function CheckoutPage() {
                                     </div>
 
                                     {/* Next Button */}
-                                    <div className="mt-auto pt-2">
+                                    <div className="pt-4">
                                         <Button
                                             type="button"
                                             onClick={nextStep}
                                             disabled={!isStep1Valid}
-                                            className="w-full h-11 bg-primary hover:bg-primary/90 text-black text-sm font-bold rounded-xl shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2"
+                                            className="w-full h-12 bg-primary hover:bg-primary/90 text-black text-sm md:text-base font-bold rounded-xl shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2"
                                         >
                                             التالي
                                             <ArrowRight className="w-4 h-4 rotate-180" />
@@ -241,7 +241,7 @@ export default function CheckoutPage() {
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: -10 }}
-                                    className="flex flex-col h-full"
+                                    className="flex flex-col"
                                 >
                                     <div className={cardClasses}>
                                         <h2 className="text-base font-bold text-white mb-4 flex items-center justify-center gap-2">
@@ -264,19 +264,19 @@ export default function CheckoutPage() {
                                         </div>
                                     </div>
 
-                                    <div className="mt-auto pt-2 flex gap-3">
+                                    <div className="pt-4 flex gap-3">
                                         <Button
                                             type="button"
                                             variant="ghost"
                                             onClick={prevStep}
-                                            className="flex-1 h-11 text-gray-400 hover:text-white hover:bg-white/5 rounded-xl text-xs"
+                                            className="flex-1 h-12 text-gray-400 hover:text-white hover:bg-white/5 rounded-xl text-xs md:text-sm"
                                         >
                                             السابق
                                         </Button>
                                         <Button
                                             type="button"
                                             onClick={nextStep}
-                                            className="flex-[2] h-11 bg-primary hover:bg-primary/90 text-black text-sm font-bold rounded-xl shadow-lg shadow-primary/20"
+                                            className="flex-[2] h-12 bg-primary hover:bg-primary/90 text-black text-sm md:text-base font-bold rounded-xl shadow-lg shadow-primary/20"
                                         >
                                             التالي
                                         </Button>
@@ -290,7 +290,7 @@ export default function CheckoutPage() {
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: -10 }}
-                                    className="flex flex-col h-full"
+                                    className="flex flex-col"
                                 >
                                     <div className={cardClasses}>
                                         <h2 className="text-base font-bold text-white mb-3 flex items-center justify-center gap-2">
@@ -329,18 +329,18 @@ export default function CheckoutPage() {
                                         </div>
                                     </div>
 
-                                    <div className="mt-auto pt-2 flex gap-3">
+                                    <div className="pt-4 flex gap-3">
                                         <Button
                                             type="button"
                                             variant="ghost"
                                             onClick={prevStep}
-                                            className="flex-1 h-11 text-gray-400 hover:text-white hover:bg-white/5 rounded-xl text-xs"
+                                            className="flex-1 h-12 text-gray-400 hover:text-white hover:bg-white/5 rounded-xl text-xs md:text-sm"
                                         >
                                             السابق
                                         </Button>
                                         <Button
                                             type="submit"
-                                            className="flex-[2] h-11 bg-green-600 hover:bg-green-500 text-white text-sm font-bold rounded-xl shadow-lg shadow-green-600/20"
+                                            className="flex-[2] h-12 bg-green-600 hover:bg-green-500 text-white text-sm md:text-base font-bold rounded-xl shadow-lg shadow-green-600/20"
                                         >
                                             تأكيد الطلب
                                         </Button>
