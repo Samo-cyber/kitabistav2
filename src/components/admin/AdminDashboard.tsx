@@ -12,14 +12,18 @@ import {
     Image as ImageIcon, AlertCircle
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { Input } from "@/components/ui/Input";
 import { Modal } from "@/components/ui/Modal";
 import { getMockDB, saveMockDB, addBook, updateBook, deleteBook } from "@/lib/mock-db";
+import { useTheme } from "@/lib/theme-context";
+import { Sun, Moon } from "lucide-react";
 
 export function AdminDashboard() {
     const [activeTab, setActiveTab] = useState<"dashboard" | "products" | "orders">("dashboard");
     const [db, setDb] = useState(getMockDB());
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const { theme, toggleTheme } = useTheme();
 
     // Sync with localStorage
     useEffect(() => {
@@ -40,13 +44,13 @@ export function AdminDashboard() {
     ];
 
     return (
-        <div className="flex h-screen bg-[#050505] text-white overflow-hidden font-sans select-none" dir="rtl">
+        <div className="flex h-screen bg-background text-text-primary overflow-hidden font-sans select-none" dir="rtl">
             <style jsx global>{`
                 .no-scrollbar::-webkit-scrollbar { display: none; }
                 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
                 .custom-scrollbar::-webkit-scrollbar { width: 4px; }
                 .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-                .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+                .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
                 .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: var(--primary); }
             `}</style>
 
@@ -70,7 +74,7 @@ export function AdminDashboard() {
                     width: isSidebarOpen ? 280 : (typeof window !== 'undefined' && window.innerWidth < 1024 ? 0 : 80),
                     x: typeof window !== 'undefined' && window.innerWidth < 1024 && !isSidebarOpen ? 280 : 0
                 }}
-                className={`bg-zinc-900/40 border-l border-white/5 flex flex-col fixed lg:relative h-full z-[70] backdrop-blur-2xl transition-all duration-500 ease-in-out ${!isSidebarOpen && "lg:w-20"}`}
+                className={`bg-background-paper border-l border-border flex flex-col fixed lg:relative h-full z-[70] backdrop-blur-2xl transition-all duration-500 ease-in-out ${!isSidebarOpen && "lg:w-20"}`}
             >
                 <div className="p-8 flex items-center gap-4 shrink-0">
                     <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shrink-0 shadow-lg shadow-primary/20">
@@ -106,8 +110,8 @@ export function AdminDashboard() {
                     ))}
                 </nav>
 
-                <div className="p-6 mt-auto border-t border-white/5 shrink-0">
-                    <button className="w-full flex items-center gap-4 px-4 py-4 text-zinc-500 hover:text-red-400 hover:bg-red-500/10 rounded-2xl transition-all duration-300">
+                <div className="p-6 mt-auto border-t border-border shrink-0">
+                    <button className="w-full flex items-center gap-4 px-4 py-4 text-text-muted hover:text-red-500 hover:bg-red-500/10 rounded-2xl transition-all duration-300">
                         <LogOut className="w-5 h-5" />
                         {(isSidebarOpen || (typeof window !== 'undefined' && window.innerWidth >= 1024)) && (
                             <span className={`font-bold transition-all duration-300 ${!isSidebarOpen && "lg:opacity-0 lg:w-0"}`}>تسجيل الخروج</span>
@@ -119,34 +123,40 @@ export function AdminDashboard() {
             {/* Main Content */}
             <main className="flex-1 flex flex-col min-w-0 h-full relative">
                 {/* Header */}
-                <header className="h-20 border-b border-white/5 px-6 lg:px-10 flex items-center justify-between shrink-0 bg-[#050505]/50 backdrop-blur-xl z-50">
+                <header className="h-20 border-b border-border px-6 lg:px-10 flex items-center justify-between shrink-0 bg-background/50 backdrop-blur-xl z-50">
                     <div className="flex items-center gap-6">
                         <button
                             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-                            className="p-3 bg-white/5 hover:bg-white/10 rounded-xl lg:hidden transition-colors"
+                            className="p-3 bg-secondary hover:bg-border rounded-xl lg:hidden transition-colors"
                         >
-                            <Menu className="w-6 h-6 text-zinc-400" />
+                            <Menu className="w-6 h-6 text-text-secondary" />
                         </button>
                         <div className="flex flex-col">
                             <h2 className="text-xl lg:text-2xl font-black tracking-tight">
                                 {sidebarItems.find(i => i.id === activeTab)?.label}
                             </h2>
-                            <p className="text-xs text-zinc-500 font-medium hidden sm:block">مرحباً بك في لوحة التحكم الخاصة بك</p>
+                            <p className="text-xs text-text-secondary font-medium hidden sm:block">مرحباً بك في لوحة التحكم الخاصة بك</p>
                         </div>
                     </div>
 
                     <div className="flex items-center gap-4">
                         <div className="relative hidden md:block group">
-                            <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500 group-focus-within:text-primary transition-colors" />
+                            <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-text-secondary group-focus-within:text-primary transition-colors" />
                             <input
                                 type="text"
                                 placeholder="بحث سريع..."
-                                className="bg-zinc-900/50 border border-white/10 rounded-2xl pr-12 pl-6 py-2.5 text-sm focus:outline-none focus:border-primary/50 w-64 lg:w-80 transition-all backdrop-blur-md"
+                                className="bg-background-paper border border-border rounded-2xl pr-12 pl-6 py-2.5 text-sm focus:outline-none focus:border-primary/50 w-64 lg:w-80 transition-all backdrop-blur-md"
                             />
                         </div>
-                        <button className="p-3 bg-white/5 hover:bg-white/10 rounded-xl transition-colors relative">
-                            <div className="absolute top-3 left-3 w-2 h-2 bg-red-500 rounded-full border-2 border-[#050505]" />
-                            <Settings className="w-5 h-5 text-zinc-400" />
+                        <button
+                            onClick={toggleTheme}
+                            className="p-3 bg-secondary hover:bg-border rounded-xl transition-colors text-text-secondary"
+                        >
+                            {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+                        </button>
+                        <button className="p-3 bg-secondary hover:bg-border rounded-xl transition-colors relative">
+                            <div className="absolute top-3 left-3 w-2 h-2 bg-red-500 rounded-full border-2 border-background" />
+                            <Settings className="w-5 h-5 text-text-secondary" />
                         </button>
                     </div>
                 </header>
@@ -176,7 +186,7 @@ function DashboardView({ db }: { db: any }) {
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="space-y-10">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {stats.map((stat, i) => (
-                    <Card key={i} className="p-6 bg-zinc-900/20 border-white/5 hover:border-primary/20 transition-all duration-500 group relative overflow-hidden backdrop-blur-sm">
+                    <Card key={i} className="p-6 bg-background-paper border-border hover:border-primary/20 transition-all duration-500 group relative overflow-hidden backdrop-blur-sm shadow-sm">
                         <div className="flex justify-between items-start mb-6">
                             <div className={`p-4 rounded-2xl ${stat.bg} ${stat.color} shadow-inner`}>
                                 {stat.icon}
@@ -185,28 +195,28 @@ function DashboardView({ db }: { db: any }) {
                                 {stat.trend} {stat.trend.startsWith('+') ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
                             </div>
                         </div>
-                        <p className="text-zinc-500 text-sm font-bold mb-1">{stat.label}</p>
-                        <h3 className="text-3xl font-black tracking-tighter">{stat.value}</h3>
+                        <p className="text-text-muted text-sm font-bold mb-1">{stat.label}</p>
+                        <h3 className="text-3xl font-black tracking-tighter text-text-primary">{stat.value}</h3>
                     </Card>
                 ))}
             </div>
 
             <div className="grid grid-cols-1 xl:grid-cols-3 gap-10">
-                <Card className="xl:col-span-2 p-8 bg-zinc-900/20 border-white/5 backdrop-blur-sm">
+                <Card className="xl:col-span-2 p-8 bg-background-paper border-border backdrop-blur-sm shadow-sm">
                     <div className="flex items-center justify-between mb-8">
-                        <h3 className="font-black text-xl">أحدث الطلبات</h3>
+                        <h3 className="font-black text-xl text-text-primary">أحدث الطلبات</h3>
                         <Button variant="ghost" className="text-primary font-bold hover:bg-primary/10">مشاهدة الكل</Button>
                     </div>
                     <div className="space-y-4">
                         {db.orders.slice(0, 5).map((order: any) => (
-                            <div key={order.id} className="flex items-center justify-between p-5 rounded-2xl bg-white/5 hover:bg-white/10 transition-all duration-300 group cursor-pointer border border-transparent hover:border-white/10">
+                            <div key={order.id} className="flex items-center justify-between p-5 rounded-2xl bg-secondary/30 hover:bg-secondary/50 transition-all duration-300 group cursor-pointer border border-transparent hover:border-border">
                                 <div className="flex items-center gap-5">
-                                    <div className="w-12 h-12 rounded-xl bg-zinc-800 flex items-center justify-center text-zinc-400 font-black text-sm group-hover:bg-primary group-hover:text-black transition-all">
+                                    <div className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center text-text-muted font-black text-sm group-hover:bg-primary group-hover:text-primary-foreground transition-all">
                                         #{order.id.split('-')[1]}
                                     </div>
                                     <div>
-                                        <p className="font-black text-base">{order.customer}</p>
-                                        <p className="text-xs text-zinc-500 font-medium">{order.date}</p>
+                                        <p className="font-black text-base text-text-primary">{order.customer}</p>
+                                        <p className="text-xs text-text-muted font-medium">{order.date}</p>
                                     </div>
                                 </div>
                                 <div className="text-left">
@@ -220,8 +230,8 @@ function DashboardView({ db }: { db: any }) {
                     </div>
                 </Card>
 
-                <Card className="p-8 bg-zinc-900/20 border-white/5 backdrop-blur-sm overflow-hidden">
-                    <h3 className="font-black text-xl mb-8">تحليل المبيعات</h3>
+                <Card className="p-8 bg-background-paper border-border backdrop-blur-sm shadow-sm overflow-hidden">
+                    <h3 className="font-black text-xl mb-8 text-text-primary">تحليل المبيعات</h3>
                     <div className="h-64 relative mt-10">
                         <svg className="w-full h-full" viewBox="0 0 1000 100" preserveAspectRatio="none">
                             <defs>
@@ -234,7 +244,7 @@ function DashboardView({ db }: { db: any }) {
                             <path d="M0,80 Q100,60 200,70 T400,40 T600,50 T800,20 T1000,30" fill="none" stroke="var(--primary)" strokeWidth="4" strokeLinecap="round" />
                         </svg>
                     </div>
-                    <div className="flex justify-between mt-6 text-[10px] font-black text-zinc-500 uppercase tracking-widest">
+                    <div className="flex justify-between mt-6 text-[10px] font-black text-text-muted uppercase tracking-widest">
                         <span>يناير</span>
                         <span>يونيو</span>
                         <span>ديسمبر</span>
@@ -299,25 +309,25 @@ function ProductsView({ db }: { db: any }) {
             <div className="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-6">
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 flex-1">
                     <div className="relative flex-1 max-w-md group">
-                        <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500 group-focus-within:text-primary transition-colors" />
+                        <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-text-muted group-focus-within:text-primary transition-colors" />
                         <input
                             type="text"
                             placeholder="ابحث عن كتاب أو مؤلف..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full bg-zinc-900/40 border border-white/10 rounded-2xl pr-12 pl-6 py-3 text-sm focus:outline-none focus:border-primary/50 transition-all backdrop-blur-sm"
+                            className="w-full bg-secondary/50 border border-border rounded-2xl pr-12 pl-6 py-3 text-sm focus:outline-none focus:border-primary/50 transition-all backdrop-blur-sm text-text-primary"
                         />
                     </div>
                     <select
                         value={selectedCategory}
                         onChange={(e) => setSelectedCategory(e.target.value)}
-                        className="bg-zinc-900/40 border border-white/10 rounded-2xl px-6 py-3 text-sm focus:outline-none focus:border-primary/50 backdrop-blur-sm appearance-none cursor-pointer font-bold"
+                        className="bg-secondary/50 border border-border rounded-2xl px-6 py-3 text-sm focus:outline-none focus:border-primary/50 backdrop-blur-sm appearance-none cursor-pointer font-bold text-text-primary"
                     >
                         <option value="all">جميع الأقسام</option>
                         {db.categories.map((c: any) => <option key={c.id} value={c.id}>{c.name}</option>)}
                     </select>
                 </div>
-                <Button onClick={() => handleOpenModal()} className="bg-primary hover:bg-primary/90 text-black font-black h-14 px-8 rounded-2xl shadow-2xl shadow-primary/20 transition-all hover:scale-105 active:scale-95">
+                <Button onClick={() => handleOpenModal()} className="bg-primary hover:bg-primary/90 text-primary-foreground font-black h-14 px-8 rounded-2xl shadow-2xl shadow-primary/20 transition-all hover:scale-105 active:scale-95">
                     <Plus className="w-5 h-5 ml-2" />
                     إضافة منتج جديد
                 </Button>
@@ -325,14 +335,14 @@ function ProductsView({ db }: { db: any }) {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
                 {filteredBooks.map((book: Book) => (
-                    <Card key={book.id} className="group bg-zinc-900/20 border-white/5 overflow-hidden hover:border-primary/30 transition-all duration-500 backdrop-blur-sm cursor-pointer" onClick={() => setViewingBook(book)}>
-                        <div className="aspect-[3/4] relative overflow-hidden bg-zinc-800">
+                    <Card key={book.id} className="group bg-background-paper border-border overflow-hidden hover:border-primary/30 transition-all duration-500 backdrop-blur-sm cursor-pointer shadow-sm premium-card" onClick={() => setViewingBook(book)}>
+                        <div className="aspect-[3/4] relative overflow-hidden bg-secondary">
                             {book.image_url ? (
-                                <img src={book.image_url} alt={book.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                                <Image src={book.image_url} alt={book.title} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
                             ) : (
-                                <div className="w-full h-full flex items-center justify-center"><ImageIcon className="w-10 h-10 text-zinc-700" /></div>
+                                <div className="w-full h-full flex items-center justify-center"><ImageIcon className="w-10 h-10 text-text-muted" /></div>
                             )}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end p-6">
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end p-6">
                                 <div className="flex gap-2 w-full" onClick={(e) => e.stopPropagation()}>
                                     <button onClick={() => handleOpenModal(book)} className="flex-1 py-3 bg-white text-black rounded-xl font-black text-xs flex items-center justify-center gap-2 hover:bg-primary transition-colors">
                                         <Edit className="w-4 h-4" /> تعديل
@@ -345,12 +355,12 @@ function ProductsView({ db }: { db: any }) {
                         </div>
                         <div className="p-5">
                             <div className="flex justify-between items-start gap-4 mb-2">
-                                <h4 className="font-black text-lg truncate group-hover:text-primary transition-colors">{book.title}</h4>
+                                <h4 className="font-black text-lg truncate group-hover:text-primary transition-colors text-text-primary">{book.title}</h4>
                                 <span className="text-primary font-black text-lg shrink-0">{book.price} ج.م</span>
                             </div>
-                            <p className="text-sm text-zinc-500 font-bold mb-4">{book.author}</p>
+                            <p className="text-sm text-text-muted font-bold mb-4">{book.author}</p>
                             <div className="flex items-center justify-between">
-                                <span className="text-[10px] px-3 py-1 rounded-full bg-white/5 border border-white/10 text-zinc-400 font-black uppercase tracking-widest">
+                                <span className="text-[10px] px-3 py-1 rounded-full bg-secondary border border-border text-text-secondary font-black uppercase tracking-widest">
                                     {db.categories.find((c: any) => c.id === book.category)?.name || book.category}
                                 </span>
                                 <span className={`text-xs font-black ${book.stock < 10 ? 'text-red-500' : 'text-green-500'}`}>
@@ -376,7 +386,7 @@ function ProductsView({ db }: { db: any }) {
                         >
                             {formData.image_url ? (
                                 <>
-                                    <img src={formData.image_url} alt="Preview" className="w-full h-full object-cover" />
+                                    <Image src={formData.image_url} alt="Preview" fill className="object-cover" />
                                     <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
                                         <div className="bg-white text-black px-6 py-3 rounded-2xl font-black text-sm shadow-2xl">تغيير الغلاف</div>
                                     </div>
@@ -395,26 +405,26 @@ function ProductsView({ db }: { db: any }) {
 
                         <div className="space-y-6">
                             <div className="space-y-2">
-                                <label className="text-xs font-black text-zinc-500 uppercase tracking-widest">عنوان الكتاب</label>
-                                <Input value={formData.title} onChange={e => setFormData({ ...formData, title: e.target.value })} placeholder="أدخل العنوان الكامل" className="bg-zinc-900/50 border-white/10 h-14 rounded-2xl px-6 font-bold focus:ring-primary/20" />
+                                <label className="text-xs font-black text-text-muted uppercase tracking-widest">عنوان الكتاب</label>
+                                <Input value={formData.title} onChange={e => setFormData({ ...formData, title: e.target.value })} placeholder="أدخل العنوان الكامل" className="bg-secondary/50 border-border h-14 rounded-2xl px-6 font-bold focus:ring-primary/20 text-text-primary" />
                             </div>
                             <div className="space-y-2">
-                                <label className="text-xs font-black text-zinc-500 uppercase tracking-widest">اسم المؤلف</label>
-                                <Input value={formData.author} onChange={e => setFormData({ ...formData, author: e.target.value })} placeholder="الكاتب أو المترجم" className="bg-zinc-900/50 border-white/10 h-14 rounded-2xl px-6 font-bold focus:ring-primary/20" />
+                                <label className="text-xs font-black text-text-muted uppercase tracking-widest">اسم المؤلف</label>
+                                <Input value={formData.author} onChange={e => setFormData({ ...formData, author: e.target.value })} placeholder="الكاتب أو المترجم" className="bg-secondary/50 border-border h-14 rounded-2xl px-6 font-bold focus:ring-primary/20 text-text-primary" />
                             </div>
                             <div className="grid grid-cols-2 gap-6">
                                 <div className="space-y-2">
-                                    <label className="text-xs font-black text-zinc-500 uppercase tracking-widest">السعر</label>
-                                    <Input type="number" value={formData.price} onChange={e => setFormData({ ...formData, price: parseFloat(e.target.value) })} placeholder="0.00" className="bg-zinc-900/50 border-white/10 h-14 rounded-2xl px-6 font-bold focus:ring-primary/20" />
+                                    <label className="text-xs font-black text-text-muted uppercase tracking-widest">السعر</label>
+                                    <Input type="number" value={formData.price} onChange={e => setFormData({ ...formData, price: parseFloat(e.target.value) })} placeholder="0.00" className="bg-secondary/50 border-border h-14 rounded-2xl px-6 font-bold focus:ring-primary/20 text-text-primary" />
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-xs font-black text-zinc-500 uppercase tracking-widest">المخزون</label>
-                                    <Input type="number" value={formData.stock} onChange={e => setFormData({ ...formData, stock: parseInt(e.target.value) })} placeholder="0" className="bg-zinc-900/50 border-white/10 h-14 rounded-2xl px-6 font-bold focus:ring-primary/20" />
+                                    <label className="text-xs font-black text-text-muted uppercase tracking-widest">المخزون</label>
+                                    <Input type="number" value={formData.stock} onChange={e => setFormData({ ...formData, stock: parseInt(e.target.value) })} placeholder="0" className="bg-secondary/50 border-border h-14 rounded-2xl px-6 font-bold focus:ring-primary/20 text-text-primary" />
                                 </div>
                             </div>
                             <div className="space-y-2">
-                                <label className="text-xs font-black text-zinc-500 uppercase tracking-widest">تصنيف الكتاب</label>
-                                <select value={formData.category} onChange={e => setFormData({ ...formData, category: e.target.value })} className="w-full bg-zinc-900/50 border border-white/10 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-primary/50 appearance-none font-bold cursor-pointer">
+                                <label className="text-xs font-black text-text-muted uppercase tracking-widest">تصنيف الكتاب</label>
+                                <select value={formData.category} onChange={e => setFormData({ ...formData, category: e.target.value })} className="w-full bg-secondary/50 border border-border rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-primary/50 appearance-none font-bold cursor-pointer text-text-primary">
                                     {db.categories.map((c: any) => <option key={c.id} value={c.id}>{c.name}</option>)}
                                 </select>
                             </div>
@@ -422,15 +432,15 @@ function ProductsView({ db }: { db: any }) {
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-xs font-black text-zinc-500 uppercase tracking-widest">وصف مختصر</label>
-                        <textarea value={formData.description} onChange={e => setFormData({ ...formData, description: e.target.value })} className="w-full bg-zinc-900/50 border border-white/10 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-primary/50 min-h-[120px] resize-none font-medium leading-relaxed" placeholder="اكتب نبذة تشجع القراء على اقتناء الكتاب..." />
+                        <label className="text-xs font-black text-text-muted uppercase tracking-widest">وصف مختصر</label>
+                        <textarea value={formData.description} onChange={e => setFormData({ ...formData, description: e.target.value })} className="w-full bg-secondary/50 border border-border rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-primary/50 min-h-[120px] resize-none font-medium leading-relaxed text-text-primary" placeholder="اكتب نبذة تشجع القراء على اقتناء الكتاب..." />
                     </div>
 
                     <div className="flex gap-4 pt-4">
-                        <Button onClick={handleSave} className="flex-[2] bg-primary hover:bg-primary/90 text-black font-black h-16 rounded-2xl shadow-2xl shadow-primary/20 text-lg transition-all hover:scale-[1.02]">
+                        <Button onClick={handleSave} className="flex-[2] bg-primary hover:bg-primary/90 text-primary-foreground font-black h-16 rounded-2xl shadow-2xl shadow-primary/20 text-lg transition-all hover:scale-[1.02]">
                             {editingBook ? "تحديث البيانات" : "إضافة للمكتبة الآن"}
                         </Button>
-                        <Button onClick={() => setIsModalOpen(false)} variant="outline" className="flex-1 border-white/10 h-16 rounded-2xl font-bold hover:bg-white/5">
+                        <Button onClick={() => setIsModalOpen(false)} variant="outline" className="flex-1 border-border h-16 rounded-2xl font-bold hover:bg-secondary">
                             إلغاء
                         </Button>
                     </div>
@@ -441,18 +451,18 @@ function ProductsView({ db }: { db: any }) {
                 {viewingBook && (
                     <div className="space-y-8">
                         <div className="flex flex-col sm:flex-row gap-10">
-                            <div className="w-full sm:w-48 aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl shrink-0 border border-white/10 bg-zinc-800 self-center">
+                            <div className="w-full sm:w-48 aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl shrink-0 border border-border bg-secondary self-center relative">
                                 {viewingBook.image_url ? (
-                                    <img src={viewingBook.image_url} alt={viewingBook.title} className="w-full h-full object-cover" />
+                                    <Image src={viewingBook.image_url} alt={viewingBook.title} fill className="object-cover" />
                                 ) : (
-                                    <div className="w-full h-full flex items-center justify-center"><ImageIcon className="w-12 h-12 text-zinc-700" /></div>
+                                    <div className="w-full h-full flex items-center justify-center"><ImageIcon className="w-12 h-12 text-text-muted" /></div>
                                 )}
                             </div>
                             <div className="flex-1 min-w-0 flex flex-col justify-center">
-                                <h3 className="text-4xl font-black text-white mb-2 tracking-tighter">{viewingBook.title}</h3>
-                                <p className="text-xl text-zinc-400 font-bold mb-8">{viewingBook.author}</p>
+                                <h3 className="text-4xl font-black text-text-primary mb-2 tracking-tighter">{viewingBook.title}</h3>
+                                <p className="text-xl text-text-secondary font-bold mb-8">{viewingBook.author}</p>
                                 <div className="flex flex-wrap gap-4">
-                                    <div className="px-5 py-2 rounded-2xl bg-white/5 border border-white/10 text-xs font-black uppercase tracking-widest text-zinc-300">
+                                    <div className="px-5 py-2 rounded-2xl bg-secondary border border-border text-xs font-black uppercase tracking-widest text-text-secondary">
                                         {db.categories.find((c: any) => c.id === viewingBook.category)?.name || viewingBook.category}
                                     </div>
                                     <div className="px-5 py-2 rounded-2xl bg-primary/10 border border-primary/20 text-primary text-sm font-black">
@@ -465,16 +475,16 @@ function ProductsView({ db }: { db: any }) {
                             </div>
                         </div>
                         <div className="space-y-4">
-                            <h4 className="text-xs font-black text-zinc-500 uppercase tracking-widest">عن الكتاب</h4>
-                            <p className="text-zinc-300 leading-relaxed text-lg bg-white/5 p-8 rounded-3xl border border-white/5 font-medium italic">
-                                "{viewingBook.description || "لا يوجد وصف متاح لهذا الكتاب حالياً."}"
+                            <h4 className="text-xs font-black text-text-muted uppercase tracking-widest">عن الكتاب</h4>
+                            <p className="text-text-secondary leading-relaxed text-lg bg-secondary/30 p-8 rounded-3xl border border-border font-medium italic">
+                                &quot;{viewingBook.description || "لا يوجد وصف متاح لهذا الكتاب حالياً."}&quot;
                             </p>
                         </div>
                         <div className="flex gap-4 pt-4">
-                            <Button onClick={() => { setViewingBook(null); handleOpenModal(viewingBook); }} className="flex-1 bg-white text-black hover:bg-primary transition-colors font-black h-16 rounded-2xl text-lg shadow-xl">
+                            <Button onClick={() => { setViewingBook(null); handleOpenModal(viewingBook); }} className="flex-1 bg-text-primary text-background hover:bg-primary hover:text-primary-foreground transition-all font-black h-16 rounded-2xl text-lg shadow-xl">
                                 <Edit className="w-5 h-5 ml-2" /> تعديل البيانات
                             </Button>
-                            <Button onClick={() => setViewingBook(null)} variant="outline" className="flex-1 border-white/10 h-16 rounded-2xl font-bold text-lg">إغلاق</Button>
+                            <Button onClick={() => setViewingBook(null)} variant="outline" className="flex-1 border-border h-16 rounded-2xl font-bold text-lg hover:bg-secondary">إغلاق</Button>
                         </div>
                     </div>
                 )}
@@ -505,19 +515,19 @@ function OrdersView({ db }: { db: any }) {
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="space-y-8">
             <div className="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-6">
                 <div className="relative flex-1 max-w-md group">
-                    <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500 group-focus-within:text-primary transition-colors" />
+                    <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-text-muted group-focus-within:text-primary transition-colors" />
                     <input
                         type="text"
                         placeholder="ابحث برقم الطلب أو اسم العميل..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="w-full bg-zinc-900/40 border border-white/10 rounded-2xl pr-12 pl-6 py-3 text-sm focus:outline-none focus:border-primary/50 transition-all backdrop-blur-sm"
+                        className="w-full bg-secondary/50 border border-border rounded-2xl pr-12 pl-6 py-3 text-sm focus:outline-none focus:border-primary/50 transition-all backdrop-blur-sm text-text-primary"
                     />
                 </div>
                 <select
                     value={statusFilter}
                     onChange={(e) => setStatusFilter(e.target.value)}
-                    className="bg-zinc-900/40 border border-white/10 rounded-2xl px-8 py-3 text-sm focus:outline-none focus:border-primary/50 backdrop-blur-sm appearance-none cursor-pointer font-bold"
+                    className="bg-secondary/50 border border-border rounded-2xl px-8 py-3 text-sm focus:outline-none focus:border-primary/50 backdrop-blur-sm appearance-none cursor-pointer font-bold text-text-primary"
                 >
                     <option value="all">جميع الحالات</option>
                     <option value="pending">قيد الانتظار</option>
@@ -527,31 +537,31 @@ function OrdersView({ db }: { db: any }) {
                 </select>
             </div>
 
-            <Card className="bg-zinc-900/20 border-white/5 backdrop-blur-sm overflow-hidden">
+            <Card className="bg-background-paper border-border backdrop-blur-sm overflow-hidden shadow-sm">
                 <div className="overflow-x-auto no-scrollbar">
                     <table className="w-full text-right min-w-[800px]">
                         <thead>
-                            <tr className="border-b border-white/5 bg-white/5">
-                                <th className="px-8 py-6 font-black text-xs uppercase tracking-widest text-zinc-500">رقم الطلب</th>
-                                <th className="px-8 py-6 font-black text-xs uppercase tracking-widest text-zinc-500">العميل</th>
-                                <th className="px-8 py-6 font-black text-xs uppercase tracking-widest text-zinc-500">التاريخ</th>
-                                <th className="px-8 py-6 font-black text-xs uppercase tracking-widest text-zinc-500">الإجمالي</th>
-                                <th className="px-8 py-6 font-black text-xs uppercase tracking-widest text-zinc-500">الحالة</th>
-                                <th className="px-8 py-6 font-black text-xs uppercase tracking-widest text-zinc-500 text-left">التفاصيل</th>
+                            <tr className="border-b border-border bg-secondary/30">
+                                <th className="px-8 py-6 font-black text-xs uppercase tracking-widest text-text-muted">رقم الطلب</th>
+                                <th className="px-8 py-6 font-black text-xs uppercase tracking-widest text-text-muted">العميل</th>
+                                <th className="px-8 py-6 font-black text-xs uppercase tracking-widest text-text-muted">التاريخ</th>
+                                <th className="px-8 py-6 font-black text-xs uppercase tracking-widest text-text-muted">الإجمالي</th>
+                                <th className="px-8 py-6 font-black text-xs uppercase tracking-widest text-text-muted">الحالة</th>
+                                <th className="px-8 py-6 font-black text-xs uppercase tracking-widest text-text-muted text-left">التفاصيل</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-white/5">
+                        <tbody className="divide-y divide-border">
                             {filteredOrders.map((order: any) => (
-                                <tr key={order.id} className="hover:bg-white/5 transition-all duration-300 group cursor-pointer" onClick={() => setSelectedOrder(order)}>
+                                <tr key={order.id} className="hover:bg-secondary/20 transition-all duration-300 group cursor-pointer" onClick={() => setSelectedOrder(order)}>
                                     <td className="px-8 py-6 font-black text-primary text-lg">{order.id}</td>
                                     <td className="px-8 py-6">
                                         <div>
-                                            <p className="font-black text-base">{order.customer}</p>
-                                            <p className="text-xs text-zinc-500 font-medium">{order.phone}</p>
+                                            <p className="font-black text-base text-text-primary">{order.customer}</p>
+                                            <p className="text-xs text-text-muted font-medium">{order.phone}</p>
                                         </div>
                                     </td>
-                                    <td className="px-8 py-6 text-sm text-zinc-400 font-bold">{order.date}</td>
-                                    <td className="px-8 py-6 font-black text-lg">{order.total} ج.م</td>
+                                    <td className="px-8 py-6 text-sm text-text-secondary font-bold">{order.date}</td>
+                                    <td className="px-8 py-6 font-black text-lg text-text-primary">{order.total} ج.م</td>
                                     <td className="px-8 py-6">
                                         <span className={`text-[10px] px-4 py-1.5 rounded-full font-black uppercase tracking-widest border ${order.status === 'pending'
                                             ? 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20'
@@ -564,7 +574,7 @@ function OrdersView({ db }: { db: any }) {
                                     </td>
                                     <td className="px-8 py-6">
                                         <div className="flex items-center justify-end">
-                                            <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-zinc-500 group-hover:bg-primary group-hover:text-black transition-all">
+                                            <div className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center text-text-muted group-hover:bg-primary group-hover:text-primary-foreground transition-all">
                                                 <Eye className="w-5 h-5" />
                                             </div>
                                         </div>
@@ -579,17 +589,17 @@ function OrdersView({ db }: { db: any }) {
             <Modal isOpen={!!selectedOrder} onClose={() => setSelectedOrder(null)} title="تفاصيل الطلب الكاملة">
                 {selectedOrder && (
                     <div className="space-y-10">
-                        <div className="flex flex-col sm:flex-row justify-between items-start gap-8 pb-8 border-b border-white/10">
+                        <div className="flex flex-col sm:flex-row justify-between items-start gap-8 pb-8 border-b border-border">
                             <div>
                                 <h4 className="text-4xl font-black text-primary mb-2 tracking-tighter">{selectedOrder.id}</h4>
-                                <p className="text-lg text-zinc-500 font-bold">{selectedOrder.date}</p>
+                                <p className="text-lg text-text-muted font-bold">{selectedOrder.date}</p>
                             </div>
                             <div className="w-full sm:w-64">
-                                <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-2 block">تحديث حالة الطلب</label>
+                                <label className="text-[10px] font-black text-text-muted uppercase tracking-widest mb-2 block">تحديث حالة الطلب</label>
                                 <select
                                     value={selectedOrder.status}
                                     onChange={(e) => updateStatus(selectedOrder.id, e.target.value)}
-                                    className="w-full bg-zinc-900 border border-white/10 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-primary appearance-none font-black cursor-pointer"
+                                    className="w-full bg-secondary border border-border rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-primary appearance-none font-black cursor-pointer text-text-primary"
                                 >
                                     <option value="pending">قيد الانتظار</option>
                                     <option value="shipped">تم الشحن</option>
@@ -601,39 +611,39 @@ function OrdersView({ db }: { db: any }) {
 
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
                             <div className="space-y-6">
-                                <div className="bg-white/5 p-8 rounded-3xl border border-white/5 shadow-inner">
-                                    <p className="text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-4">بيانات العميل</p>
-                                    <p className="font-black text-2xl mb-2">{selectedOrder.customer}</p>
-                                    <p className="text-lg text-zinc-400 font-bold flex items-center gap-3"><Truck className="w-5 h-5 text-primary" /> {selectedOrder.phone}</p>
+                                <div className="bg-secondary/30 p-8 rounded-3xl border border-border shadow-inner">
+                                    <p className="text-[10px] font-black text-text-muted uppercase tracking-widest mb-4">بيانات العميل</p>
+                                    <p className="font-black text-2xl mb-2 text-text-primary">{selectedOrder.customer}</p>
+                                    <p className="text-lg text-text-secondary font-bold flex items-center gap-3"><Truck className="w-5 h-5 text-primary" /> {selectedOrder.phone}</p>
                                 </div>
-                                <div className="bg-white/5 p-8 rounded-3xl border border-white/5 shadow-inner">
-                                    <p className="text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-4">عنوان التوصيل</p>
-                                    <p className="text-lg font-bold leading-relaxed text-zinc-300 italic">"{selectedOrder.address}"</p>
+                                <div className="bg-secondary/30 p-8 rounded-3xl border border-border shadow-inner">
+                                    <p className="text-[10px] font-black text-text-muted uppercase tracking-widest mb-4">عنوان التوصيل</p>
+                                    <p className="text-lg font-bold leading-relaxed text-text-secondary italic">&quot;{selectedOrder.address}&quot;</p>
                                 </div>
                             </div>
-                            <div className="bg-white/5 rounded-3xl p-8 border border-white/5 shadow-inner flex flex-col">
-                                <p className="text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-6">قائمة المشتريات</p>
+                            <div className="bg-secondary/30 rounded-3xl p-8 border border-border shadow-inner flex flex-col">
+                                <p className="text-[10px] font-black text-text-muted uppercase tracking-widest mb-6">قائمة المشتريات</p>
                                 <div className="space-y-4 flex-1">
                                     {selectedOrder.items.map((item: any, i: number) => (
-                                        <div key={i} className="flex justify-between items-center p-4 rounded-2xl bg-black/20 border border-white/5">
+                                        <div key={i} className="flex justify-between items-center p-4 rounded-2xl bg-background-paper border border-border">
                                             <div className="flex flex-col">
-                                                <span className="text-white font-black text-base">{item.title}</span>
-                                                <span className="text-xs text-zinc-500 font-bold">الكمية: {item.quantity}</span>
+                                                <span className="text-text-primary font-black text-base">{item.title}</span>
+                                                <span className="text-xs text-text-muted font-bold">الكمية: {item.quantity}</span>
                                             </div>
                                             <span className="font-black text-primary text-lg">{item.price * item.quantity} ج.م</span>
                                         </div>
                                     ))}
                                 </div>
-                                <div className="border-t border-white/10 pt-6 mt-6 flex justify-between items-center">
-                                    <span className="font-black text-zinc-500 uppercase tracking-widest">الإجمالي النهائي</span>
-                                    <span className="text-4xl font-black text-white tracking-tighter">{selectedOrder.total} ج.م</span>
+                                <div className="border-t border-border pt-6 mt-6 flex justify-between items-center">
+                                    <span className="font-black text-text-muted uppercase tracking-widest">الإجمالي النهائي</span>
+                                    <span className="text-4xl font-black text-text-primary tracking-tighter">{selectedOrder.total} ج.م</span>
                                 </div>
                             </div>
                         </div>
 
                         <div className="flex gap-4 pt-4">
-                            <Button onClick={() => setSelectedOrder(null)} className="flex-1 bg-white/5 hover:bg-white/10 text-white h-16 rounded-2xl font-bold text-lg">إغلاق النافذة</Button>
-                            <Button className="flex-1 bg-primary text-black font-black h-16 rounded-2xl shadow-2xl shadow-primary/20 text-lg hover:scale-[1.02] transition-all">طباعة الفاتورة</Button>
+                            <Button onClick={() => setSelectedOrder(null)} className="flex-1 bg-secondary hover:bg-border text-text-primary h-16 rounded-2xl font-bold text-lg">إغلاق النافذة</Button>
+                            <Button className="flex-1 bg-primary text-primary-foreground font-black h-16 rounded-2xl shadow-2xl shadow-primary/20 text-lg hover:scale-[1.02] transition-all">طباعة الفاتورة</Button>
                         </div>
                     </div>
                 )}
