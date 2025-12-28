@@ -85,9 +85,8 @@ export function BookCarousel({ title, books, linkToAll, subtitle }: BookCarousel
                                                     src={book.image_url}
                                                     alt={book.title}
                                                     fill
-                                                    className="object-cover transition-transform duration-700 group-hover/card:scale-110"
+                                                    className="object-cover transition-transform duration-700 group-hover/card:scale-110 will-change-transform"
                                                     sizes="(max-width: 768px) 160px, 200px"
-                                                    unoptimized
                                                     referrerPolicy="no-referrer"
                                                 />
                                             ) : (
