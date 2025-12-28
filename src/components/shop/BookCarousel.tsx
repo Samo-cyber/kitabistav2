@@ -118,16 +118,16 @@ export function BookCarousel({ title, books, linkToAll, subtitle }: BookCarousel
 
 
                                             {/* Footer: Price */}
-                                            <div className="mt-auto relative flex items-center justify-center pb-2 min-h-[40px] w-full">
-                                                {/* Old Price - Absolute Right */}
+                                            <div className="mt-auto flex items-center justify-center gap-3 pb-2 w-full">
+                                                {/* Old Price - Right of Main Price (in RTL) */}
                                                 {book.discount_price && (
-                                                    <span className="absolute right-0 top-2 text-xs text-red-500/60 line-through decoration-red-500/40 font-medium">
+                                                    <span className="text-xs text-red-500/60 line-through decoration-red-500/40 font-medium">
                                                         {book.price}
                                                     </span>
                                                 )}
 
-                                                {/* Main Price Stack - Centered */}
-                                                <div className="flex flex-col items-center justify-center leading-none z-10">
+                                                {/* Main Price Stack */}
+                                                <div className="flex flex-col items-center justify-center leading-none">
                                                     <span className="font-bold text-2xl text-primary font-display">
                                                         {book.discount_price || book.price}
                                                     </span>
