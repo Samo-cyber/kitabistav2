@@ -50,9 +50,9 @@ export default async function ProductPage({
                 <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-background" />
             </div>
 
-            <div className="container relative z-10 px-4 pt-6 md:pt-10">
+            <div className="container relative z-10 px-4 pt-6 md:pt-10 pb-24 md:pb-0">
                 {/* Breadcrumb */}
-                <div className="flex items-center gap-2 text-sm text-zinc-400 mb-8 md:mb-10 overflow-x-auto whitespace-nowrap pb-2 md:pb-0 font-medium">
+                <div className="flex items-center gap-2 text-sm text-zinc-400 mb-6 md:mb-10 overflow-x-auto whitespace-nowrap pb-2 md:pb-0 font-medium">
                     <Link href="/" className="hover:text-primary transition-colors">الرئيسية</Link>
                     <ChevronRight className="w-3 h-3 text-zinc-600" />
                     <Link href="/shop" className="hover:text-primary transition-colors">المتجر</Link>
@@ -60,9 +60,76 @@ export default async function ProductPage({
                     <span className="text-zinc-200">{book.title}</span>
                 </div>
 
+                {/* Mobile Header (Visible only on mobile) */}
+                <div className="md:hidden mb-8">
+                    <div className="flex gap-5">
+                        {/* Image */}
+                        <div className="w-[35%] flex-shrink-0">
+                            <div className="relative aspect-[2/3] w-full rounded-lg shadow-lg overflow-hidden border border-white/10">
+                                {book.image_url ? (
+                                    <Image
+                                        src={book.image_url}
+                                        alt={book.title}
+                                        fill
+                                        className="object-cover"
+                                        priority
+                                        sizes="150px"
+                                    />
+                                ) : (
+                                    <div className="w-full h-full bg-zinc-900 flex items-center justify-center text-zinc-600 text-xs">
+                                        <span>لا توجد صورة</span>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+
+                        {/* Info */}
+                        <div className="flex-1 flex flex-col justify-center">
+                            <div className="flex flex-wrap items-center gap-2 mb-2">
+                                <Badge variant="outline" className="bg-primary/5 text-primary border-primary/20 px-2 py-0.5 text-[10px] font-bold rounded-md">
+                                    {categoryName}
+                                </Badge>
+                                {book.stock > 0 ? (
+                                    <Badge variant="outline" className="bg-green-500/5 text-green-400 border-green-500/20 px-2 py-0.5 text-[10px] font-bold rounded-md">
+                                        متوفر
+                                    </Badge>
+                                ) : (
+                                    <Badge variant="destructive" className="px-2 py-0.5 text-[10px] font-bold rounded-md">نفذت الكمية</Badge>
+                                )}
+                            </div>
+
+                            <h1 className="font-display text-2xl font-bold text-white leading-tight mb-2 line-clamp-2">
+                                {book.title}
+                            </h1>
+
+                            <div className="flex items-center gap-1 text-sm text-zinc-300 mb-3">
+                                <span className="text-zinc-500 font-light">تأليف:</span>
+                                <span className="text-primary font-bold">{book.author}</span>
+                            </div>
+
+                            <div className="flex items-baseline gap-2">
+                                {book.discount_price ? (
+                                    <>
+                                        <span className="text-2xl font-bold text-primary font-display">
+                                            {book.discount_price} <span className="text-sm text-zinc-500 font-sans font-normal">ج.م</span>
+                                        </span>
+                                        <span className="text-sm text-zinc-600 line-through decoration-red-500/30">
+                                            {book.price}
+                                        </span>
+                                    </>
+                                ) : (
+                                    <span className="text-2xl font-bold text-primary font-display">
+                                        {book.price} <span className="text-sm text-zinc-500 font-sans font-normal">ج.م</span>
+                                    </span>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 lg:gap-16 items-start">
-                    {/* Right Column: Image (Sticky on Desktop) */}
-                    <div className="md:col-span-5 lg:col-span-4 md:sticky md:top-24">
+                    {/* Right Column: Image (Hidden on Mobile, Sticky on Desktop) */}
+                    <div className="hidden md:block md:col-span-5 lg:col-span-4 md:sticky md:top-24">
                         <div className="relative aspect-[2/3] w-full max-w-[300px] md:max-w-full mx-auto rounded-xl shadow-2xl shadow-black/50 overflow-hidden border border-white/10 group">
                             {book.image_url ? (
                                 <Image
@@ -90,8 +157,8 @@ export default async function ProductPage({
 
                     {/* Left Column: Details */}
                     <div className="md:col-span-7 lg:col-span-8 space-y-8">
-                        {/* Header Info */}
-                        <div className="space-y-4 border-b border-white/5 pb-8">
+                        {/* Header Info (Hidden on Mobile) */}
+                        <div className="hidden md:block space-y-4 border-b border-white/5 pb-8">
                             <div className="flex flex-wrap items-center gap-3">
                                 <Badge variant="outline" className="bg-primary/5 text-primary border-primary/20 hover:bg-primary/10 px-3 py-1 text-xs font-bold rounded-md transition-colors">
                                     {categoryName}
@@ -115,8 +182,8 @@ export default async function ProductPage({
                             </div>
                         </div>
 
-                        {/* Price & Actions */}
-                        <div className="bg-zinc-900/20 backdrop-blur-sm border border-white/5 rounded-2xl p-6 md:p-8 space-y-6">
+                        {/* Price & Actions (Hidden on Mobile) */}
+                        <div className="hidden md:block bg-zinc-900/20 backdrop-blur-sm border border-white/5 rounded-2xl p-6 md:p-8 space-y-6">
                             <div className="flex flex-wrap items-end gap-4">
                                 {book.discount_price ? (
                                     <>
@@ -182,6 +249,31 @@ export default async function ProductPage({
                                 </p>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Sticky Bottom Bar for Mobile */}
+            <div className="fixed bottom-0 left-0 right-0 z-50 bg-zinc-900/90 backdrop-blur-lg border-t border-white/10 p-4 md:hidden pb-safe">
+                <div className="flex items-center gap-4">
+                    <div className="flex-1">
+                        <AddToCartButton book={book} />
+                    </div>
+                    <div className="flex flex-col items-end">
+                        {book.discount_price ? (
+                            <>
+                                <span className="text-xl font-bold text-primary font-display">
+                                    {book.discount_price} <span className="text-xs text-zinc-500 font-sans font-normal">ج.م</span>
+                                </span>
+                                <span className="text-xs text-zinc-600 line-through decoration-red-500/30">
+                                    {book.price}
+                                </span>
+                            </>
+                        ) : (
+                            <span className="text-xl font-bold text-primary font-display">
+                                {book.price} <span className="text-xs text-zinc-500 font-sans font-normal">ج.م</span>
+                            </span>
+                        )}
                     </div>
                 </div>
             </div>
