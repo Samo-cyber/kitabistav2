@@ -118,34 +118,23 @@ export function BookCarousel({ title, books, linkToAll, subtitle }: BookCarousel
 
 
                                             {/* Footer: Price */}
-                                            <div className="mt-auto relative flex items-center justify-center min-h-[24px] pt-1 pb-1">
-                                                {book.discount_price ? (
-                                                    <div className="flex items-center justify-center gap-2 w-full">
-                                                        {/* Discount (Old Price) on the Right */}
-                                                        <span className="text-xs text-red-500/80 line-through decoration-red-500/50 font-medium whitespace-nowrap">
-                                                            {book.price}
-                                                        </span>
-
-                                                        {/* Main Price */}
-                                                        <div className="relative">
-                                                            <span className="font-bold text-2xl text-primary font-display leading-none">
-                                                                {book.discount_price}
-                                                            </span>
-                                                            <span className="absolute -bottom-3.5 left-0.5 text-[10px] font-normal text-zinc-400 -rotate-12 whitespace-nowrap">
-                                                                ج.م
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                ) : (
-                                                    <div className="relative">
-                                                        <span className="font-bold text-2xl text-primary font-display leading-none">
-                                                            {book.price}
-                                                        </span>
-                                                        <span className="absolute -bottom-3.5 left-0.5 text-[10px] font-normal text-zinc-400 -rotate-12 whitespace-nowrap">
-                                                            ج.م
-                                                        </span>
-                                                    </div>
+                                            <div className="mt-auto flex items-center justify-center gap-2 pb-2">
+                                                {/* Old Price */}
+                                                {book.discount_price && (
+                                                    <span className="text-xs text-red-500/60 line-through decoration-red-500/40 font-medium">
+                                                        {book.price}
+                                                    </span>
                                                 )}
+
+                                                {/* Main Price Stack */}
+                                                <div className="flex flex-col items-center justify-center leading-none">
+                                                    <span className="font-bold text-2xl text-primary font-display">
+                                                        {book.discount_price || book.price}
+                                                    </span>
+                                                    <span className="text-[10px] text-zinc-400 font-normal mt-0.5">
+                                                        ج.م
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div>
 
