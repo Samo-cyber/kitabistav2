@@ -4,6 +4,7 @@ import Link from "next/link";
 import { BookCarousel } from "@/components/shop/BookCarousel";
 import { CategoryGrid } from "@/components/home/CategoryGrid";
 import { ShoppingBag, Sparkles, Flame } from "lucide-react";
+import Image from "next/image";
 
 export default async function Home() {
     const books = await getBooks();
@@ -27,14 +28,18 @@ export default async function Home() {
                             <Flame className="w-4 h-4 text-orange-500 animate-pulse" fill="currentColor" />
                         </div>
 
-                        {/* Heading */}
-                        <h1 className="font-sans text-4xl md:text-6xl lg:text-7xl font-bold leading-tight drop-shadow-2xl animate-fade-in-up delay-100">
-                            كتابيستا
-                            <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-primary to-yellow-200 bg-[length:200%_auto] animate-shimmer">
-                                وجهتك الأولى للكتب
-                            </span>
-                        </h1>
+                        {/* Logo Heading */}
+                        <div className="flex justify-center animate-fade-in-up delay-100">
+                            <div className="relative w-full max-w-[300px] md:max-w-[500px] aspect-[2/1]">
+                                <Image
+                                    src="/images/logo.png"
+                                    alt="كتابيستا - وجهتك الأولى للكتب"
+                                    fill
+                                    className="object-contain drop-shadow-[0_0_20px_rgba(234,179,8,0.3)]"
+                                    priority
+                                />
+                            </div>
+                        </div>
 
                         {/* Paragraph */}
                         <p className="font-sans text-lg md:text-xl text-zinc-300 max-w-2xl mx-auto leading-relaxed animate-fade-in-up delay-200">
