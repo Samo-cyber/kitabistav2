@@ -43,14 +43,14 @@ export default async function Home() {
                         <div className="flex flex-col sm:flex-row justify-center gap-3 pt-2 animate-fade-in-up delay-300">
                             <Link href="/shop" className="w-full sm:w-auto group relative">
                                 <div className="absolute inset-0 bg-primary/10 blur-xl rounded-full animate-pulse-glow" />
-                                <Button size="lg" className="relative w-full sm:min-w-[200px] h-14 md:h-16 text-base md:text-lg font-bold rounded-full bg-gradient-to-r from-primary/90 via-primary to-primary/90 text-black border-none overflow-hidden group-hover:scale-105 transition-all duration-300 shadow-xl animate-shimmer-bg">
+                                <Button size="lg" className="relative w-full sm:min-w-[200px] h-14 md:h-16 text-base md:text-lg font-bold rounded-full bg-primary text-primary-foreground border-none overflow-hidden group-hover:scale-105 transition-all duration-300 shadow-xl animate-shimmer-bg">
                                     <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300 rounded-full" />
                                     <ShoppingBag className="w-5 h-5 md:w-6 md:h-6 ml-2" />
                                     <span>تسوق الآن</span>
                                 </Button>
                             </Link>
                             <Link href="/offers" className="w-full sm:w-auto group">
-                                <Button variant="outline" size="lg" className="w-full sm:min-w-[160px] h-12 md:h-14 text-base md:text-lg font-bold rounded-full border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 backdrop-blur-md hover:bg-black/10 dark:hover:bg-white/10 hover:border-primary/50 text-black dark:text-primary transition-all duration-300">
+                                <Button variant="outline" size="lg" className="w-full sm:min-w-[160px] h-12 md:h-14 text-base md:text-lg font-bold rounded-full border-2 border-black dark:border-white/10 bg-transparent hover:bg-black hover:text-yellow-400 dark:hover:bg-white/10 dark:hover:text-primary text-black dark:text-primary transition-all duration-300">
                                     <Sparkles className="w-4 h-4 md:w-5 md:h-5 ml-2" />
                                     أحدث العروض
                                 </Button>
