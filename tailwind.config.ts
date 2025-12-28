@@ -40,8 +40,8 @@ const config: Config = {
                 border: "#27272A", // Zinc 800
             },
             fontFamily: {
-                sans: ["var(--font-tajawal)", "sans-serif"],
-                display: ["var(--font-amiri)", "serif"],
+                sans: ["var(--font-almarai)", "sans-serif"],
+                display: ["var(--font-cairo)", "sans-serif"],
             },
             backgroundImage: {
                 "papyrus-texture": "url('/images/papyrus-noise.png')",

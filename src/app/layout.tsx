@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Tajawal, Amiri } from "next/font/google";
+import { Cairo, Almarai } from "next/font/google";
 import "./globals.css";
 import { NavbarWrapper } from "@/components/layout/NavbarWrapper";
 import { FooterWrapper } from "@/components/layout/FooterWrapper";
@@ -7,16 +7,16 @@ import { CartProvider } from "@/lib/cart-context";
 import { LoadingGate } from "@/components/ui/LoadingGate";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 
-const tajawal = Tajawal({
+const cairo = Cairo({
     subsets: ["arabic"],
-    weight: ["300", "400", "500", "700"],
-    variable: "--font-tajawal",
+    weight: ["300", "400", "500", "600", "700", "800", "900"],
+    variable: "--font-cairo",
 });
 
-const amiri = Amiri({
+const almarai = Almarai({
     subsets: ["arabic"],
-    weight: ["400", "700"],
-    variable: "--font-amiri",
+    weight: ["300", "400", "700", "800"],
+    variable: "--font-almarai",
 });
 
 export const metadata: Metadata = {
@@ -37,7 +37,7 @@ export default async function RootLayout({
 
     return (
         <html lang="ar" dir="rtl">
-            <body className={`${tajawal.variable} ${amiri.variable} font-sans bg-background text-text-primary min-h-screen flex flex-col`}>
+            <body className={`${cairo.variable} ${almarai.variable} font-sans bg-background text-text-primary min-h-screen flex flex-col`}>
                 <LoadingGate />
                 <CartProvider>
                     <NavbarWrapper books={books} />

@@ -248,9 +248,9 @@ export default async function ProductPage({
                                 <BookOpen className="w-5 h-5 text-primary" />
                                 نبذة عن الكتاب
                             </h2>
-                            <div className="text-zinc-300 leading-relaxed bg-zinc-900/10 p-4 rounded-xl border border-white/5">
-                                <p>{book.description}</p>
-                                <p className="text-zinc-400 text-sm">
+                            <div className="text-zinc-300 leading-[1.8] bg-zinc-900/10 p-5 rounded-xl border border-white/5 font-normal text-base md:text-lg">
+                                <p className="mb-4">{book.description}</p>
+                                <p className="text-zinc-400 text-sm md:text-base italic">
                                     هذا الكتاب هو رحلة ممتعة في عالم المعرفة والخيال. يتميز بأسلوب سردي مشوق ولغة رصينة تأخذك إلى عوالم أخرى. مناسب لجميع الأعمار ومثالي للإهداء.
                                 </p>
                             </div>
