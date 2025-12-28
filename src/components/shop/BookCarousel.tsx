@@ -39,7 +39,7 @@ export function BookCarousel({ title, books, linkToAll, subtitle }: BookCarousel
                 {/* Header */}
                 <div className="flex items-center justify-between mb-6 md:mb-8">
                     <div className="flex items-center gap-4">
-                        <h2 className="font-display text-2xl md:text-3xl font-bold text-white">
+                        <h2 className="font-sans text-xl md:text-3xl font-bold text-white tracking-wide">
                             {title}
                         </h2>
                         {subtitle && (
@@ -49,9 +49,9 @@ export function BookCarousel({ title, books, linkToAll, subtitle }: BookCarousel
                         )}
                     </div>
                     <Link href={linkToAll}>
-                        <Button variant="ghost" className="text-zinc-400 hover:text-white hover:bg-white/5 gap-2">
+                        <Button variant="outline" size="sm" className="border-primary/50 text-primary hover:bg-primary hover:text-black transition-all duration-300 text-xs md:text-sm font-bold px-4 rounded-full">
                             <span>شاهد الكل</span>
-                            <ChevronLeft className="w-4 h-4" />
+                            <ChevronLeft className="w-3 h-3 md:w-4 md:h-4 mr-1" />
                         </Button>
                     </Link>
                 </div>
@@ -74,7 +74,7 @@ export function BookCarousel({ title, books, linkToAll, subtitle }: BookCarousel
                         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                     >
                         {books.map((book) => (
-                            <div key={book.id} className="min-w-[160px] md:min-w-[200px] snap-start">
+                            <div key={book.id} className="min-w-[140px] md:min-w-[200px] snap-start">
                                 <Link href={`/product/${book.id}`} className="group/card block h-full">
                                     <div className="h-full bg-zinc-900/90 md:bg-zinc-900/40 border border-white/10 rounded-xl overflow-hidden hover:border-primary/50 hover:bg-zinc-900/80 transition-all duration-300 flex flex-col md:backdrop-blur-sm group/card relative">
 
