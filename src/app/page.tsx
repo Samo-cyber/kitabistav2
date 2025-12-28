@@ -30,7 +30,7 @@ export default async function Home() {
                         </h1>
 
                         <p className="text-base md:text-lg text-zinc-300 leading-relaxed animate-fade-in-up delay-200 max-w-2xl mx-auto">
-                            تسوق الآن واكتشف آلاف العناوين من الروايات، الكتب السياسية، والتاريخية بأسعار لا تقبل المنافسة.
+                            تسوق الآن واكتشف آلاف العناوين من الروايات والكتب بأسعار لا تقبل المنافسة.
                         </p>
 
                         <div className="flex flex-col sm:flex-row justify-center gap-3 pt-2 animate-fade-in-up delay-300">
