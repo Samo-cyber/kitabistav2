@@ -110,7 +110,7 @@ export function BookCarousel({ title, books, linkToAll, subtitle }: BookCarousel
                                         {/* Content */}
                                         <div className="p-3 pb-2 flex flex-col flex-grow relative text-center">
                                             {/* Golden Separator - Explicit Color */}
-                                            <div className="w-8 h-0.5 bg-primary/60 mx-auto mb-2 rounded-full transition-all duration-300 group-hover/card:w-20 group-hover/card:shadow-[0_0_10px_rgba(197,160,89,0.3)]" />
+                                            <div className="w-8 h-0.5 bg-primary/60 mx-auto mb-2 rounded-full transition-all duration-300 group-hover/card:w-20 group-hover/card:shadow-[0_0_10px_rgba(234,179,8,0.3)]" />
 
                                             <h3 className={cn(
                                                 "font-bold text-white leading-snug group-hover/card:text-primary transition-colors flex items-center justify-center text-center line-clamp-2 min-h-[2.4em]",

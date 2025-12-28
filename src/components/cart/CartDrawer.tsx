@@ -156,12 +156,16 @@ export function CartDrawer() {
                                     </div>
                                 </div>
 
-                                <Link href="/checkout" onClick={closeCart} className="block">
-                                    <Button className="w-full h-12 bg-primary hover:bg-primary/90 text-black font-bold rounded-xl shadow-lg shadow-primary/20 flex items-center justify-center gap-2 group">
-                                        إتمام الشراء
-                                        <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-                                    </Button>
-                                </Link>
+                                <Button
+                                    onClick={() => {
+                                        closeCart();
+                                        window.location.href = "/checkout";
+                                    }}
+                                    className="w-full h-12 bg-primary hover:bg-primary/90 text-black font-bold rounded-xl shadow-lg shadow-primary/20 flex items-center justify-center gap-2 group"
+                                >
+                                    إتمام الشراء
+                                    <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+                                </Button>
 
                                 <button
                                     onClick={closeCart}

@@ -15,7 +15,7 @@ const iconMap: Record<string, React.ElementType> = {
 const styleMap: Record<string, { bg: string, text: string, shadow: string }> = {
     novels: { bg: "from-emerald-900/40 to-emerald-950/40", text: "text-emerald-500/80", shadow: "shadow-emerald-900/20" },
     horror: { bg: "from-rose-900/40 to-rose-950/40", text: "text-rose-500/80", shadow: "shadow-rose-900/20" },
-    self: { bg: "from-amber-900/40 to-amber-950/40", text: "text-amber-500/80", shadow: "shadow-amber-900/20" },
+    self: { bg: "from-yellow-900/40 to-yellow-950/40", text: "text-primary/80", shadow: "shadow-yellow-900/20" },
     religious: { bg: "from-sky-900/40 to-sky-950/40", text: "text-sky-500/80", shadow: "shadow-sky-900/20" },
     history: { bg: "from-stone-800/40 to-stone-900/40", text: "text-stone-400/80", shadow: "shadow-stone-900/20" },
 };

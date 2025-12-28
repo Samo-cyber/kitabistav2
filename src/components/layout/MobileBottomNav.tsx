@@ -25,7 +25,7 @@ export function MobileBottomNav({ isHidden }: { isHidden?: boolean }) {
             name: "السلة",
             action: openCart, // Custom action for cart
             icon: ShoppingCart,
-            badge: items.length
+            badge: items.reduce((sum, item) => sum + item.quantity, 0)
         },
         {
             name: "العروض",
