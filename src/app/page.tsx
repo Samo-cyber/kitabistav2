@@ -17,6 +17,7 @@ export default async function Home() {
             <section className="relative flex items-center justify-center overflow-hidden py-8 md:py-12 pb-16">
                 <div className="container relative z-10 px-4 text-center">
                     <div className="max-w-3xl mx-auto space-y-6">
+                        {/* Badge */}
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900/80 border border-primary/30 backdrop-blur-md shadow-[0_0_15px_rgba(234,179,8,0.15)] animate-float hover:border-primary/60 transition-colors cursor-default">
                             <span className="relative flex h-2.5 w-2.5">
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
@@ -26,18 +27,21 @@ export default async function Home() {
                             <Flame className="w-4 h-4 text-orange-500 animate-pulse" fill="currentColor" />
                         </div>
 
-                        <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold leading-tight drop-shadow-2xl animate-fade-in-up delay-100">
-                            عالم من الكتب..
+                        {/* Heading */}
+                        <h1 className="font-sans text-4xl md:text-6xl lg:text-7xl font-bold leading-tight drop-shadow-2xl animate-fade-in-up delay-100">
+                            كتابيستا
                             <br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-primary to-yellow-200 bg-[length:200%_auto] animate-shimmer">
-                                بين يديك
+                                وجهتك الأولى للكتب
                             </span>
                         </h1>
 
-                        <p className="text-base md:text-lg text-zinc-300 leading-relaxed animate-fade-in-up delay-200 max-w-2xl mx-auto">
-                            تسوق الآن واكتشف آلاف العناوين من الروايات والكتب بأسعار لا تقبل المنافسة.
+                        {/* Paragraph */}
+                        <p className="font-sans text-lg md:text-xl text-zinc-300 max-w-2xl mx-auto leading-relaxed animate-fade-in-up delay-200">
+                            نقدم لك مجموعة مختارة من أفضل الكتب العربية والعالمية، لتستمتع برحلة معرفية فريدة وتصلك أينما كنت.
                         </p>
 
+                        {/* Buttons */}
                         <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4 animate-fade-in-up delay-300">
                             <Link href="/shop" className="w-full sm:w-auto group relative">
                                 <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full animate-pulse-glow" />
@@ -75,10 +79,10 @@ export default async function Home() {
             </section>
 
             {/* Categories Grid */}
-            <CategoryGrid categories={categories} />
+            < CategoryGrid categories={categories} />
 
             {/* Best Sellers Section */}
-            <BookCarousel
+            < BookCarousel
                 title="الأكثر مبيعاً 🔥"
                 subtitle="الأكثر طلباً"
                 books={featuredBooks}
@@ -86,12 +90,12 @@ export default async function Home() {
             />
 
             {/* New Additions Section */}
-            <BookCarousel
+            < BookCarousel
                 title="أحدث الإضافات"
                 subtitle="جديد"
                 books={newBooks}
                 linkToAll="/shop?sort=newest"
             />
-        </div>
+        </div >
     );
 }
