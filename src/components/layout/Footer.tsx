@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export function Footer() {
     return (
-        <footer className="relative bg-background-paper text-text-primary overflow-hidden border-t border-border">
+        <footer className="relative bg-zinc-950 text-white overflow-hidden border-t border-white/5">
             {/* Background Pattern */}
             <div className="absolute inset-0 bg-[url('/images/pattern.png')] opacity-5 pointer-events-none"></div>
             <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
@@ -25,7 +25,7 @@ export function Footer() {
                                 />
                             </div>
                         </Link>
-                        <p className="text-text-muted text-xs md:text-base font-medium leading-relaxed max-w-md mx-auto font-sans tracking-wide">
+                        <p className="text-zinc-400 text-xs md:text-base font-medium leading-relaxed max-w-md mx-auto font-sans tracking-wide">
                             رفيقك في كل صفحة
                         </p>
                         <div className="flex justify-center gap-3">
@@ -39,7 +39,7 @@ export function Footer() {
                     <div className="lg:col-span-8 grid grid-cols-2 gap-8 lg:gap-12">
                         {/* Quick Links */}
                         <div className="flex flex-col items-center text-center lg:items-start lg:text-right">
-                            <h3 className="font-bold text-sm md:text-lg text-text-primary mb-3 md:mb-6 flex items-center justify-center lg:justify-start gap-2">
+                            <h3 className="font-bold text-sm md:text-lg text-white mb-3 md:mb-6 flex items-center justify-center lg:justify-start gap-2">
                                 <span className="w-1 h-4 md:h-6 bg-primary rounded-full"></span>
                                 اكتشف
                             </h3>
@@ -53,7 +53,7 @@ export function Footer() {
 
                         {/* Support */}
                         <div className="flex flex-col items-center text-center lg:items-start lg:text-right">
-                            <h3 className="font-bold text-sm md:text-lg text-text-primary mb-3 md:mb-6 flex items-center justify-center lg:justify-start gap-2">
+                            <h3 className="font-bold text-sm md:text-lg text-white mb-3 md:mb-6 flex items-center justify-center lg:justify-start gap-2">
                                 <span className="w-1 h-4 md:h-6 bg-primary rounded-full"></span>
                                 مساعدة
                             </h3>
@@ -68,11 +68,11 @@ export function Footer() {
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="pt-4 border-t border-border flex flex-col md:flex-row items-center justify-between gap-3 text-[10px] md:text-xs text-text-muted">
+                <div className="pt-4 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-3 text-[10px] md:text-xs text-gray-500">
                     <p>© {new Date().getFullYear()} كتابيستا. جميع الحقوق محفوظة.</p>
                     <div className="flex items-center gap-4 md:gap-6">
-                        <Link href="/privacy" className="hover:text-text-primary transition-colors">الخصوصية</Link>
-                        <Link href="/terms" className="hover:text-text-primary transition-colors">الشروط</Link>
+                        <Link href="/privacy" className="hover:text-white transition-colors">الخصوصية</Link>
+                        <Link href="/terms" className="hover:text-white transition-colors">الشروط</Link>
                     </div>
                 </div>
             </div>
@@ -84,7 +84,7 @@ function SocialIcon({ icon, href }: { icon: React.ReactNode; href: string }) {
     return (
         <a
             href={href}
-            className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-secondary border border-border flex items-center justify-center text-text-muted hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300 group"
+            className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-gray-400 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300 group"
         >
             <div className="transform group-hover:scale-110 transition-transform">
                 {icon}
@@ -98,7 +98,7 @@ function FooterLink({ href, children }: { href: string; children: React.ReactNod
         <li className="w-full flex justify-start">
             <Link
                 href={href}
-                className="text-text-secondary hover:text-text-primary hover:translate-x-[-4px] transition-all duration-300 flex items-center justify-start gap-2 group text-[13px] md:text-sm w-fit"
+                className="text-gray-400 hover:text-white hover:translate-x-[-4px] transition-all duration-300 flex items-center justify-start gap-2 group text-[13px] md:text-sm w-fit"
             >
                 <ChevronLeft className="w-4 h-4 text-primary/50 group-hover:text-primary transition-colors" />
                 {children}

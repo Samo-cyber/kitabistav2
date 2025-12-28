@@ -86,24 +86,25 @@ export function ShopContent({ allBooks: initialBooks, categories, selectedCatego
     }
 
     return (
-        <div className="relative min-h-screen pb-20 bg-background">
+        <div className="relative min-h-screen pb-20 bg-[#050505]">
             {/* Chic Background Spectrum */}
             <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
                 <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/5 blur-[120px] animate-pulse" />
                 <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-primary/5 blur-[120px] animate-pulse" style={{ animationDelay: '2s' }} />
+                <div className="absolute top-[20%] right-[10%] w-[30%] h-[30%] rounded-full bg-blue-500/5 blur-[100px]" />
             </div>
 
             <div className="relative z-10">
                 {/* Mobile Filter Button (Fixed) */}
                 <button
                     onClick={() => setIsFilterOpen(true)}
-                    className="fixed left-0 top-1/2 -translate-y-1/2 z-40 p-3 rounded-r-xl rounded-l-none shadow-lg shadow-primary/20 bg-primary text-primary-foreground font-bold hover:bg-primary-hover transition-all md:hidden border-none outline-none ring-0"
+                    className="fixed left-0 top-1/2 -translate-y-1/2 z-40 p-3 rounded-r-xl rounded-l-none shadow-lg shadow-primary/20 bg-primary text-black font-bold hover:bg-primary-hover transition-all md:hidden border-none outline-none ring-0"
                 >
                     <Filter className="w-5 h-5" />
                 </button>
 
                 {/* Top Sticky Bar (Desktop Only) */}
-                <div className="hidden md:sticky top-20 z-30 bg-background/80 backdrop-blur-xl border-b border-border py-4 shadow-sm transition-all duration-500">
+                <div className="hidden md:sticky top-20 z-30 bg-background/95 backdrop-blur-xl border-b border-white/5 py-4 shadow-2xl transition-all duration-300">
                     <div className="container mx-auto px-4 flex items-center gap-4">
                         {/* Search Bar (Expanded) */}
                         <div className="relative flex-grow hidden md:block">
@@ -112,9 +113,9 @@ export function ShopContent({ allBooks: initialBooks, categories, selectedCatego
                                 placeholder="ابحث عن كتاب..."
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
-                                className="w-full bg-secondary/50 border border-border rounded-xl py-3 pr-12 pl-4 text-text-primary placeholder:text-text-muted focus:outline-none focus:border-primary/50 focus:bg-background-paper transition-all"
+                                className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pr-12 pl-4 text-white placeholder-gray-400 focus:outline-none focus:border-primary/50 focus:bg-white/10 transition-all"
                             />
-                            <div className="absolute right-4 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none">
+                            <div className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
                             </div>
                         </div>
@@ -122,7 +123,7 @@ export function ShopContent({ allBooks: initialBooks, categories, selectedCatego
                         {/* Filter Toggle Button (Desktop) */}
                         <button
                             onClick={() => setIsFilterOpen(true)}
-                            className="hidden md:flex items-center gap-2 px-5 py-3 bg-primary text-primary-foreground rounded-xl font-bold hover:bg-primary-hover transition-all shadow-lg shadow-primary/20 whitespace-nowrap"
+                            className="hidden md:flex items-center gap-2 px-5 py-3 bg-primary text-black rounded-xl font-bold hover:bg-primary-hover transition-colors shadow-lg shadow-primary/10 whitespace-nowrap"
                         >
                             <Filter className="w-5 h-5" />
                             <span>تصفية وترتيب</span>
@@ -148,13 +149,13 @@ export function ShopContent({ allBooks: initialBooks, categories, selectedCatego
                                 animate={{ x: 0 }}
                                 exit={{ x: "100%" }}
                                 transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                                className="fixed top-0 right-0 h-full w-[85%] max-w-md bg-background-paper border-l border-border z-50 shadow-2xl overflow-y-auto"
+                                className="fixed top-0 right-0 h-full w-[85%] max-w-md bg-zinc-900 border-l border-white/10 z-50 shadow-2xl overflow-y-auto"
                             >
                                 <div className="p-6 space-y-8">
                                     {/* Header */}
                                     <div className="flex items-center justify-between">
-                                        <h2 className="text-2xl font-display font-bold text-text-primary">تصفية الكتب</h2>
-                                        <button onClick={() => setIsFilterOpen(false)} className="p-2 hover:bg-secondary rounded-full text-text-muted hover:text-text-primary transition-colors">
+                                        <h2 className="text-2xl font-display font-bold text-white">تصفية الكتب</h2>
+                                        <button onClick={() => setIsFilterOpen(false)} className="p-2 hover:bg-white/5 rounded-full text-gray-400 hover:text-white transition-colors">
                                             <ChevronDown className="w-6 h-6 rotate-90" />
                                         </button>
                                     </div>
@@ -173,7 +174,7 @@ export function ShopContent({ allBooks: initialBooks, categories, selectedCatego
                                                     onClick={() => setSortBy(option.value as any)}
                                                     className={`w-full text-right px-4 py-3 rounded-lg text-sm transition-all flex items-center justify-between ${sortBy === option.value
                                                         ? "bg-primary/10 text-primary border border-primary/20"
-                                                        : "bg-secondary text-text-secondary border border-transparent hover:bg-secondary/80"
+                                                        : "bg-white/5 text-gray-300 border border-transparent hover:bg-white/10"
                                                         }`}
                                                 >
                                                     {option.label}
@@ -201,8 +202,8 @@ export function ShopContent({ allBooks: initialBooks, categories, selectedCatego
                                                 <Link key={cat.id} href={`/shop?category=${cat.id}`} className="w-full">
                                                     <div
                                                         className={`w-full px-4 py-3 rounded-lg text-sm font-bold transition-all text-center border ${selectedCategory === cat.id
-                                                            ? "bg-primary text-primary-foreground border-primary"
-                                                            : "bg-secondary text-text-secondary border-transparent hover:bg-secondary/80 hover:text-text-primary"
+                                                            ? "bg-primary text-black border-primary"
+                                                            : "bg-white/5 text-gray-400 border-transparent hover:bg-white/10 hover:text-white"
                                                             }`}
                                                     >
                                                         {cat.name}
@@ -230,9 +231,9 @@ export function ShopContent({ allBooks: initialBooks, categories, selectedCatego
                         {displayedBooks.map((book) => (
                             <div key={book.id} className="group/card relative flex flex-col h-full">
                                 <Link href={`/product/${book.id}`} className="flex flex-col h-full">
-                                    <div className="h-full bg-background-paper border border-border rounded-2xl overflow-hidden hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 flex flex-col relative premium-card">
+                                    <div className="h-full bg-zinc-900/90 md:bg-zinc-900/40 border border-white/10 rounded-xl overflow-hidden hover:border-primary/50 hover:bg-zinc-900/80 transition-all duration-300 flex flex-col md:backdrop-blur-sm relative">
                                         {/* Image Container */}
-                                        <div className="relative aspect-[2/3] w-full overflow-hidden bg-secondary border-b border-border">
+                                        <div className="relative aspect-[2/3] w-full overflow-hidden bg-zinc-800 border-b border-white/5">
                                             {book.image_url ? (
                                                 <Image
                                                     src={book.image_url}
@@ -265,14 +266,14 @@ export function ShopContent({ allBooks: initialBooks, categories, selectedCatego
                                             <div className="w-8 h-0.5 bg-primary/60 mx-auto mb-1.5 rounded-full transition-all duration-300 group-hover/card:w-20 group-hover/card:shadow-[0_0_10px_rgba(234,179,8,0.3)]" />
 
                                             <h3 className={cn(
-                                                "font-bold text-text-primary leading-snug group-hover/card:text-primary transition-colors flex items-center justify-center text-center line-clamp-2 min-h-[2.4em]",
+                                                "font-bold text-white leading-snug group-hover/card:text-primary transition-colors flex items-center justify-center text-center line-clamp-2 min-h-[2.4em]",
                                                 book.title.length > 30 ? "text-[11px] md:text-base" : "text-[13px] md:text-base",
                                                 "mb-0"
                                             )}>
                                                 {book.title}
                                             </h3>
 
-                                            <p className="text-[10px] md:text-xs text-text-muted mb-0.5 line-clamp-1 font-medium -mt-1.5">
+                                            <p className="text-[10px] md:text-xs text-zinc-400 mb-0.5 line-clamp-1 font-medium -mt-1.5">
                                                 {book.author}
                                             </p>
 
@@ -292,7 +293,7 @@ export function ShopContent({ allBooks: initialBooks, categories, selectedCatego
                                                     <span className="font-bold text-lg md:text-2xl text-primary font-display">
                                                         {book.discount_price || book.price}
                                                     </span>
-                                                    <span className="text-[9px] md:text-[10px] text-text-muted font-normal mt-0.5">
+                                                    <span className="text-[9px] md:text-[10px] text-zinc-400 font-normal mt-0.5">
                                                         ج.م
                                                     </span>
                                                 </div>
@@ -309,7 +310,7 @@ export function ShopContent({ allBooks: initialBooks, categories, selectedCatego
                                     <MiniAddToCartButton
                                         book={book}
                                         iconSize="w-4 h-4 md:w-5 md:h-5"
-                                        className="h-8 w-8 md:h-10 md:w-10 rounded-lg md:rounded-xl bg-secondary border border-border text-primary hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300 shadow-sm"
+                                        className="h-8 w-8 md:h-10 md:w-10 rounded-lg md:rounded-xl bg-white/5 border border-white/10 text-primary hover:bg-primary hover:text-black hover:border-primary transition-all duration-300"
                                     />
                                 </div>
                             </div>
@@ -318,11 +319,11 @@ export function ShopContent({ allBooks: initialBooks, categories, selectedCatego
 
                     {displayedBooks.length === 0 && (
                         <div className="text-center py-20">
-                            <div className="w-20 h-20 bg-secondary rounded-full flex items-center justify-center mx-auto mb-6">
-                                <BookIcon className="w-10 h-10 text-text-muted" />
+                            <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-6">
+                                <BookIcon className="w-10 h-10 text-gray-600" />
                             </div>
-                            <h3 className="text-xl font-bold text-text-primary mb-2">لا توجد كتب تطابق بحثك</h3>
-                            <p className="text-text-secondary mb-6">جرب كلمات مختلفة أو تصفح كل الكتب.</p>
+                            <h3 className="text-xl font-bold text-white mb-2">لا توجد كتب تطابق بحثك</h3>
+                            <p className="text-gray-400 mb-6">جرب كلمات مختلفة أو تصفح كل الكتب.</p>
                             <Button
                                 variant="outline"
                                 onClick={() => { setSearchQuery(""); window.location.href = '/shop'; }}
