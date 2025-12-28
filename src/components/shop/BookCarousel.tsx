@@ -107,11 +107,11 @@ export function BookCarousel({ title, books, linkToAll, subtitle }: BookCarousel
                                         </div>
 
                                         {/* Content */}
-                                        <div className="p-2 md:p-3 pb-1 md:pb-3 flex flex-col flex-grow relative text-center">
+                                        <div className="p-2 md:p-3 pb-6 md:pb-3 flex flex-col flex-grow relative text-center">
                                             {/* Golden Separator - Explicit Color */}
-                                            <div className="w-6 md:w-8 h-0.5 bg-yellow-400/80 mx-auto mb-1 md:mb-2 rounded-full transition-all duration-300 group-hover/card:w-16 md:group-hover/card:w-24 group-hover/card:shadow-[0_0_10px_rgba(250,204,21,0.5)]" />
+                                            <div className="w-6 md:w-8 h-0.5 bg-yellow-400/80 mx-auto mb-2 md:mb-2 rounded-full transition-all duration-300 group-hover/card:w-16 md:group-hover/card:w-24 group-hover/card:shadow-[0_0_10px_rgba(250,204,21,0.5)]" />
 
-                                            <h3 className="font-bold text-sm md:text-base text-white leading-tight mb-0.5 md:mb-1 line-clamp-2 group-hover/card:text-primary transition-colors min-h-[1.2em] md:min-h-[1.5em]">
+                                            <h3 className="font-bold text-sm md:text-base text-white leading-tight mb-2 md:mb-1 line-clamp-2 group-hover/card:text-primary transition-colors min-h-[2.4em] md:min-h-[1.5em]">
                                                 {book.title}
                                             </h3>
 
@@ -132,7 +132,7 @@ export function BookCarousel({ title, books, linkToAll, subtitle }: BookCarousel
                                                     <span className="font-bold text-xl md:text-2xl text-primary font-display">
                                                         {book.discount_price || book.price}
                                                     </span>
-                                                    <span className="text-[9px] md:text-[10px] text-zinc-400 font-normal mt-0 md:mt-0.5">
+                                                    <span className="text-[9px] md:text-[10px] text-zinc-400 font-normal mt-0.5 md:mt-0.5">
                                                         ج.م
                                                     </span>
                                                 </div>

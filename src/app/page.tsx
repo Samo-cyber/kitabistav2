@@ -42,23 +42,23 @@ export default async function Home() {
                         </div>
 
                         {/* Paragraph */}
-                        <p className="font-sans text-base md:text-lg text-zinc-400 max-w-xl mx-auto leading-relaxed">
+                        <p className="font-sans text-sm md:text-lg text-zinc-400 max-w-xl mx-auto leading-relaxed">
                             نقدم لك مجموعة مختارة من أفضل الكتب العربية والعالمية، لتستمتع برحلة معرفية فريدة وتصلك أينما كنت.
                         </p>
 
                         {/* Buttons */}
-                        <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4 animate-fade-in-up delay-300">
+                        <div className="flex flex-col sm:flex-row justify-center gap-3 pt-2 animate-fade-in-up delay-300">
                             <Link href="/shop" className="w-full sm:w-auto group relative">
                                 <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full animate-pulse-glow" />
-                                <Button size="lg" className="relative w-full sm:min-w-[180px] h-16 text-xl font-bold rounded-full bg-gradient-to-r from-yellow-500 via-amber-400 to-yellow-500 text-black animate-shimmer-bg border-none overflow-hidden group-hover:scale-105 transition-transform duration-300">
+                                <Button size="lg" className="relative w-full sm:min-w-[180px] h-13 md:h-16 text-lg md:text-xl font-bold rounded-full bg-gradient-to-r from-yellow-500 via-amber-400 to-yellow-500 text-black animate-shimmer-bg border-none overflow-hidden group-hover:scale-105 transition-transform duration-300">
                                     <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 rounded-full" />
-                                    <ShoppingBag className="w-6 h-6 ml-2 animate-bounce" />
+                                    <ShoppingBag className="w-5 h-5 md:w-6 md:h-6 ml-2 animate-bounce" />
                                     تسوق الآن
                                 </Button>
                             </Link>
                             <Link href="/offers" className="w-full sm:w-auto group">
-                                <Button variant="outline" size="lg" className="w-full sm:min-w-[160px] h-14 text-lg font-bold rounded-full border-white/10 bg-white/5 backdrop-blur-md hover:bg-white/10 hover:border-primary/50 hover:text-primary transition-all duration-300">
-                                    <Sparkles className="w-5 h-5 ml-2" />
+                                <Button variant="outline" size="lg" className="w-full sm:min-w-[160px] h-12 md:h-14 text-base md:text-lg font-bold rounded-full border-white/10 bg-white/5 backdrop-blur-md hover:bg-white/10 hover:border-primary/50 hover:text-primary transition-all duration-300">
+                                    <Sparkles className="w-4 h-4 md:w-5 md:h-5 ml-2" />
                                     أحدث العروض
                                 </Button>
                             </Link>
