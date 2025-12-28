@@ -11,12 +11,12 @@ export function Footer() {
             <div className="absolute inset-0 bg-[url('/images/pattern.png')] opacity-5 pointer-events-none"></div>
             <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
 
-            <div className="max-w-6xl mx-auto px-4 pt-12 pb-28 md:pb-8 relative z-10">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-12">
+            <div className="max-w-6xl mx-auto px-4 pt-8 pb-24 md:pt-12 md:pb-8 relative z-10">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 mb-8 md:mb-12">
                     {/* Brand Column - Takes full width on mobile, 4 cols on desktop */}
-                    <div className="lg:col-span-4 space-y-4 md:space-y-6 text-center">
+                    <div className="lg:col-span-4 space-y-3 md:space-y-6 text-center">
                         <Link href="/" className="inline-block">
-                            <div className="relative h-20 md:h-16 w-64 md:w-56 mx-auto">
+                            <div className="relative h-14 md:h-16 w-48 md:w-56 mx-auto">
                                 <Image
                                     src="/images/logo.png"
                                     alt="كتابيستا"
@@ -25,13 +25,13 @@ export function Footer() {
                                 />
                             </div>
                         </Link>
-                        <p className="text-zinc-400 text-sm md:text-base font-medium leading-relaxed max-w-md mx-auto font-sans tracking-wide">
+                        <p className="text-zinc-400 text-xs md:text-base font-medium leading-relaxed max-w-md mx-auto font-sans tracking-wide">
                             رفيقك في كل صفحة
                         </p>
-                        <div className="flex justify-center gap-4">
-                            <SocialIcon icon={<Facebook className="w-5 h-5" />} href="#" />
-                            <SocialIcon icon={<Instagram className="w-5 h-5" />} href="#" />
-                            <SocialIcon icon={<Twitter className="w-5 h-5" />} href="#" />
+                        <div className="flex justify-center gap-3">
+                            <SocialIcon icon={<Facebook className="w-4 h-4 md:w-5 md:h-5" />} href="#" />
+                            <SocialIcon icon={<Instagram className="w-4 h-4 md:w-5 md:h-5" />} href="#" />
+                            <SocialIcon icon={<Twitter className="w-4 h-4 md:w-5 md:h-5" />} href="#" />
                         </div>
                     </div>
 
@@ -39,11 +39,11 @@ export function Footer() {
                     <div className="lg:col-span-8 grid grid-cols-2 gap-8 lg:gap-12">
                         {/* Quick Links */}
                         <div className="flex flex-col items-center text-center lg:items-start lg:text-right">
-                            <h3 className="font-bold text-base md:text-lg text-white mb-4 md:mb-6 flex items-center justify-center lg:justify-start gap-2">
-                                <span className="w-1 h-5 md:h-6 bg-primary rounded-full"></span>
+                            <h3 className="font-bold text-sm md:text-lg text-white mb-3 md:mb-6 flex items-center justify-center lg:justify-start gap-2">
+                                <span className="w-1 h-4 md:h-6 bg-primary rounded-full"></span>
                                 اكتشف
                             </h3>
-                            <ul className="space-y-3 w-fit lg:w-full flex flex-col items-start">
+                            <ul className="space-y-2 w-fit lg:w-full flex flex-col items-start">
                                 <FooterLink href="/shop">المكتبة</FooterLink>
                                 <FooterLink href="/offers">العروض</FooterLink>
                                 <FooterLink href="/bestsellers">الأكثر مبيعاً</FooterLink>
@@ -53,11 +53,11 @@ export function Footer() {
 
                         {/* Support */}
                         <div className="flex flex-col items-center text-center lg:items-start lg:text-right">
-                            <h3 className="font-bold text-base md:text-lg text-white mb-4 md:mb-6 flex items-center justify-center lg:justify-start gap-2">
-                                <span className="w-1 h-5 md:h-6 bg-primary rounded-full"></span>
+                            <h3 className="font-bold text-sm md:text-lg text-white mb-3 md:mb-6 flex items-center justify-center lg:justify-start gap-2">
+                                <span className="w-1 h-4 md:h-6 bg-primary rounded-full"></span>
                                 مساعدة
                             </h3>
-                            <ul className="space-y-3 w-fit lg:w-full flex flex-col items-start">
+                            <ul className="space-y-2 w-fit lg:w-full flex flex-col items-start">
                                 <FooterLink href="/about">عن كتابيستا</FooterLink>
                                 <FooterLink href="/contact">اتصل بنا</FooterLink>
                                 <FooterLink href="/shipping-policy">الشحن</FooterLink>
@@ -68,9 +68,9 @@ export function Footer() {
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="pt-6 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-500">
+                <div className="pt-4 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-3 text-[10px] md:text-xs text-gray-500">
                     <p>© {new Date().getFullYear()} كتابيستا. جميع الحقوق محفوظة.</p>
-                    <div className="flex items-center gap-6">
+                    <div className="flex items-center gap-4 md:gap-6">
                         <Link href="/privacy" className="hover:text-white transition-colors">الخصوصية</Link>
                         <Link href="/terms" className="hover:text-white transition-colors">الشروط</Link>
                     </div>
@@ -84,7 +84,7 @@ function SocialIcon({ icon, href }: { icon: React.ReactNode; href: string }) {
     return (
         <a
             href={href}
-            className="w-10 h-10 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-gray-400 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300 group"
+            className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-gray-400 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300 group"
         >
             <div className="transform group-hover:scale-110 transition-transform">
                 {icon}
@@ -98,7 +98,7 @@ function FooterLink({ href, children }: { href: string; children: React.ReactNod
         <li className="w-full flex justify-start">
             <Link
                 href={href}
-                className="text-gray-400 hover:text-white hover:translate-x-[-4px] transition-all duration-300 flex items-center justify-start gap-2 group text-sm w-fit"
+                className="text-gray-400 hover:text-white hover:translate-x-[-4px] transition-all duration-300 flex items-center justify-start gap-2 group text-[13px] md:text-sm w-fit"
             >
                 <ChevronLeft className="w-4 h-4 text-primary/50 group-hover:text-primary transition-colors" />
                 {children}
