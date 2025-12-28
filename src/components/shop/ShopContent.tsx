@@ -87,7 +87,7 @@ export function ShopContent({ allBooks, categories, selectedCategory }: ShopCont
                     {/* Filter Toggle Button */}
                     <button
                         onClick={() => setIsFilterOpen(true)}
-                        className="fixed right-0 top-1/2 -translate-y-1/2 z-40 p-3 rounded-l-xl rounded-r-none shadow-[0_0_15px_rgba(234,179,8,0.3)] bg-primary text-black font-bold hover:bg-primary-hover transition-all md:static md:flex md:items-center md:gap-2 md:px-5 md:py-3 md:rounded-xl md:shadow-lg md:shadow-primary/10 md:translate-y-0 whitespace-nowrap"
+                        className="fixed left-0 top-1/2 -translate-y-1/2 z-40 p-3 rounded-r-xl rounded-l-none shadow-lg shadow-primary/20 bg-primary text-black font-bold hover:bg-primary-hover transition-all md:static md:flex md:items-center md:gap-2 md:px-5 md:py-3 md:rounded-xl md:shadow-lg md:shadow-primary/10 md:translate-y-0 whitespace-nowrap border-none outline-none ring-0"
                     >
                         <Filter className="w-5 h-5" />
                         <span className="hidden md:inline">تصفية وترتيب</span>
