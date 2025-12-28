@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cairo, Almarai } from "next/font/google";
 import "./globals.css";
+import "./light-theme.css";
 import { NavbarWrapper } from "@/components/layout/NavbarWrapper";
 import { FooterWrapper } from "@/components/layout/FooterWrapper";
 import { CartProvider } from "@/lib/cart-context";

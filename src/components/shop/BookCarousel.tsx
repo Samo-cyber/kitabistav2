@@ -101,10 +101,10 @@ export function BookCarousel({ title, books: initialBooks, linkToAll, subtitle }
                             <div key={book.id} className="min-w-[140px] md:min-w-[200px] snap-start">
                                 <div className="group/card relative block h-full">
                                     <Link href={`/product/${book.id}`} className="block h-full">
-                                        <div className="h-full bg-zinc-900/90 md:bg-zinc-900/40 border border-white/10 rounded-xl overflow-hidden hover:border-primary/50 hover:bg-zinc-900/80 transition-all duration-300 flex flex-col md:backdrop-blur-sm relative">
+                                        <div className="h-full bg-background-paper dark:bg-zinc-900/40 border border-border dark:border-white/10 rounded-2xl overflow-hidden hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 flex flex-col relative premium-card">
 
                                             {/* Image Container */}
-                                            <div className="relative aspect-[2/3] w-full overflow-hidden bg-zinc-800 border-b border-white/5">
+                                            <div className="relative aspect-[2/3] w-full overflow-hidden bg-secondary border-b border-border">
                                                 {book.image_url ? (
                                                     <Image
                                                         src={book.image_url}
@@ -137,14 +137,14 @@ export function BookCarousel({ title, books: initialBooks, linkToAll, subtitle }
                                                 <div className="w-8 h-0.5 bg-primary/60 mx-auto mb-1.5 rounded-full transition-all duration-300 group-hover/card:w-20 group-hover/card:shadow-[0_0_10px_rgba(234,179,8,0.3)]" />
 
                                                 <h3 className={cn(
-                                                    "font-bold text-white leading-snug group-hover/card:text-primary transition-colors flex items-center justify-center text-center line-clamp-2 min-h-[2.4em]",
+                                                    "font-bold text-text-primary dark:text-white leading-snug group-hover/card:text-primary transition-colors flex items-center justify-center text-center line-clamp-2 min-h-[2.4em]",
                                                     book.title.length > 30 ? "text-[11px] md:text-base" : "text-[13px] md:text-base",
                                                     "mb-0"
                                                 )}>
                                                     {book.title}
                                                 </h3>
 
-                                                <p className="text-[10px] md:text-xs text-zinc-400 mb-0.5 line-clamp-1 font-medium -mt-1.5">
+                                                <p className="text-[10px] md:text-xs text-text-muted dark:text-zinc-400 mb-0.5 line-clamp-1 font-medium -mt-1.5">
                                                     {book.author}
                                                 </p>
 
@@ -165,7 +165,7 @@ export function BookCarousel({ title, books: initialBooks, linkToAll, subtitle }
                                                         <span className="font-bold text-lg md:text-2xl text-primary font-display">
                                                             {book.discount_price || book.price}
                                                         </span>
-                                                        <span className="text-[9px] md:text-[10px] text-zinc-400 font-normal mt-0.5">
+                                                        <span className="text-[9px] md:text-[10px] text-text-muted dark:text-zinc-400 font-normal mt-0.5">
                                                             ج.م
                                                         </span>
                                                     </div>
@@ -182,7 +182,7 @@ export function BookCarousel({ title, books: initialBooks, linkToAll, subtitle }
                                         <MiniAddToCartButton
                                             book={book}
                                             iconSize="w-4 h-4 md:w-5 md:h-5"
-                                            className="h-8 w-8 md:h-10 md:w-10 rounded-lg md:rounded-xl bg-white/5 border border-white/10 text-primary hover:bg-primary hover:text-black hover:border-primary transition-all duration-300"
+                                            className="h-8 w-8 md:h-10 md:w-10 rounded-lg md:rounded-xl bg-secondary dark:bg-white/5 border border-border dark:border-white/10 text-primary hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300 shadow-sm"
                                         />
                                     </div>
                                 </div>
@@ -198,8 +198,8 @@ export function BookCarousel({ title, books: initialBooks, linkToAll, subtitle }
                     >
                         <ChevronLeft className="w-6 h-6" />
                     </button>
-                </div>
-            </div>
-        </div>
+                </div >
+            </div >
+        </div >
     );
 }
