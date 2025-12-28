@@ -313,12 +313,12 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-start justify-center pt-32 px-4"
+                        className="fixed inset-0 bg-background/95 backdrop-blur-md z-50 flex items-start justify-center pt-32 px-4"
                     >
                         <div className="w-full max-w-2xl relative">
                             <Button
                                 variant="ghost"
-                                className="absolute -top-16 right-0 text-gray-400 hover:text-white"
+                                className="absolute -top-16 right-0 text-text-muted hover:text-text-primary"
                                 onClick={() => setIsSearchOpen(false)}
                             >
                                 <X className="w-8 h-8" />
@@ -329,13 +329,13 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
                                 animate={{ y: 0, opacity: 1 }}
                                 transition={{ delay: 0.1 }}
                             >
-                                <h2 className="text-3xl font-display font-bold text-center mb-8 text-white">عن ماذا تبحث؟</h2>
+                                <h2 className="text-3xl font-display font-bold text-center mb-8 text-text-primary">عن ماذا تبحث؟</h2>
                                 <div className="relative">
                                     <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 text-primary" />
                                     <input
                                         type="text"
                                         placeholder="اكتب اسم الكتاب أو المؤلف..."
-                                        className="w-full bg-white/5 border-2 border-white/10 rounded-2xl py-4 pr-14 pl-6 text-xl text-white placeholder:text-gray-500 focus:outline-none focus:border-primary/50 transition-colors"
+                                        className="w-full bg-secondary/50 border-2 border-border rounded-2xl py-4 pr-14 pl-6 text-xl text-text-primary placeholder:text-text-muted focus:outline-none focus:border-primary/50 transition-colors"
                                         autoFocus
                                         value={searchQuery}
                                         onChange={(e) => setSearchQuery(e.target.value)}
@@ -359,30 +359,30 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
                                                         key={book.id}
                                                         href={`/product/${book.id}`}
                                                         onClick={() => setIsSearchOpen(false)}
-                                                        className="flex items-center gap-4 p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-primary/30 transition-all group"
+                                                        className="flex items-center gap-4 p-3 rounded-xl bg-secondary/30 hover:bg-secondary/50 border border-border hover:border-primary/30 transition-all group"
                                                     >
                                                         <div className="relative w-12 h-16 rounded-md overflow-hidden flex-shrink-0">
                                                             <Image src={book.image_url} alt={book.title} fill className="object-cover" />
                                                         </div>
                                                         <div className="flex-grow">
-                                                            <h4 className="font-bold text-white group-hover:text-primary transition-colors">{book.title}</h4>
-                                                            <p className="text-sm text-gray-400">{book.author}</p>
+                                                            <h4 className="font-bold text-text-primary group-hover:text-primary transition-colors">{book.title}</h4>
+                                                            <p className="text-sm text-text-muted">{book.author}</p>
                                                         </div>
                                                         <div className="text-primary font-bold text-sm">
                                                             {book.discount_price || book.price} ج.م
                                                         </div>
-                                                        <ChevronRight className="w-5 h-5 text-gray-500 group-hover:text-primary transition-colors" />
+                                                        <ChevronRight className="w-5 h-5 text-text-muted group-hover:text-primary transition-colors" />
                                                     </Link>
                                                 ))
                                             ) : (
-                                                <div className="text-center py-8 text-gray-400">
+                                                <div className="text-center py-8 text-text-muted">
                                                     لا توجد نتائج مطابقة
                                                 </div>
                                             )}
                                         </div>
                                     ) : (
                                         <>
-                                            <p className="text-sm text-gray-500 mb-4">الأكثر بحثاً:</p>
+                                            <p className="text-sm text-text-muted mb-4">الأكثر بحثاً:</p>
                                             <div className="flex flex-wrap gap-2">
                                                 {["نجيب محفوظ", "روايات رعب", "كتب تاريخية", "أحمد خالد توفيق", "تنمية بشرية"].map((tag) => (
                                                     <button
@@ -390,7 +390,7 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
                                                         onClick={() => {
                                                             setSearchQuery(tag);
                                                         }}
-                                                        className="px-4 py-2 rounded-full bg-white/5 hover:bg-primary/20 hover:text-primary transition-colors text-sm text-gray-300"
+                                                        className="px-4 py-2 rounded-full bg-secondary hover:bg-primary/20 hover:text-primary transition-colors text-sm text-text-secondary"
                                                     >
                                                         {tag}
                                                     </button>
