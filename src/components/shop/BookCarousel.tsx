@@ -118,15 +118,17 @@ export function BookCarousel({ title, books, linkToAll, subtitle }: BookCarousel
 
 
                                             {/* Footer: Price */}
-                                            <div className="mt-auto flex items-center justify-center gap-3 pb-2 w-full">
-                                                {/* Old Price - Right of Main Price (in RTL) */}
-                                                {book.discount_price && (
-                                                    <span className="text-xs text-red-500/60 line-through decoration-red-500/40 font-medium">
-                                                        {book.price}
-                                                    </span>
-                                                )}
+                                            <div className="mt-auto grid grid-cols-[1fr_auto_1fr] items-center w-full pb-2 gap-1.5">
+                                                {/* Old Price - Right (Col 1 in RTL) */}
+                                                <div className="flex justify-end">
+                                                    {book.discount_price && (
+                                                        <span className="text-xs text-red-500/60 line-through decoration-red-500/40 font-medium whitespace-nowrap">
+                                                            {book.price}
+                                                        </span>
+                                                    )}
+                                                </div>
 
-                                                {/* Main Price Stack */}
+                                                {/* Main Price Stack - Center (Col 2) */}
                                                 <div className="flex flex-col items-center justify-center leading-none">
                                                     <span className="font-bold text-2xl text-primary font-display">
                                                         {book.discount_price || book.price}
@@ -135,6 +137,9 @@ export function BookCarousel({ title, books, linkToAll, subtitle }: BookCarousel
                                                         ج.م
                                                     </span>
                                                 </div>
+
+                                                {/* Empty Spacer - Left (Col 3 in RTL) */}
+                                                <div />
                                             </div>
                                         </div>
 
