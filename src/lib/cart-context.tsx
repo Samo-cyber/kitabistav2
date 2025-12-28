@@ -80,6 +80,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }, [items]);
 
     const addItem = (book: Book) => {
+        const isFirstItem = items.length === 0;
         setItems((prev) => {
             const existing = prev.find((item) => item.id === book.id);
             if (existing) {
@@ -89,7 +90,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
             }
             return [...prev, { ...book, quantity: 1 }];
         });
-        openCart();
+
+        if (isFirstItem) {
+            openCart();
+        }
     };
 
     const removeItem = (bookId: string) => {

@@ -21,11 +21,12 @@ export function MiniAddToCartButton({ book, className, iconSize = "w-5 h-5" }: {
     return (
         <Button
             size="sm"
-            variant={added ? "primary" : "secondary"}
-            className={`transition-all duration-300 ${added
-                ? "bg-green-600 hover:bg-green-700 text-white"
-                : "bg-primary text-black hover:bg-primary/90"
-                } ${className || "h-8 w-8 p-0 rounded-full"}`}
+            variant="ghost"
+            className={cn(
+                "transition-all duration-300 p-0 flex items-center justify-center",
+                added ? "bg-green-600 text-white hover:bg-green-700" : "",
+                className
+            )}
             onClick={handleAdd}
             disabled={book.stock === 0}
         >

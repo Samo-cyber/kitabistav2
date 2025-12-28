@@ -30,6 +30,7 @@ export function CartDrawer() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
+                        transition={{ duration: 0.2 }}
                         onClick={closeCart}
                         className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60]"
                     />
@@ -39,7 +40,7 @@ export function CartDrawer() {
                         initial={{ x: "100%" }}
                         animate={{ x: 0 }}
                         exit={{ x: "100%" }}
-                        transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                        transition={{ type: "tween", duration: 0.25, ease: [0.32, 0.72, 0, 1] }}
                         className="fixed top-0 right-0 h-full w-full max-w-md bg-zinc-900 border-l border-white/10 z-[70] shadow-2xl flex flex-col"
                     >
                         {/* Header */}

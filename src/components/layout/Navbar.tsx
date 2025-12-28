@@ -7,9 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "@/lib/cart-context";
-import { Input } from "@/components/ui/Input";
 import { Book } from "@/lib/data";
-
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 
@@ -20,7 +18,6 @@ interface NavbarProps {
 }
 
 export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: propSetIsMenuOpen }: NavbarProps) {
-    // Use props if available, otherwise fallback to local state (for backward compatibility/safety)
     const [localIsMenuOpen, setLocalIsMenuOpen] = useState(false);
     const isMenuOpen = propIsMenuOpen !== undefined ? propIsMenuOpen : localIsMenuOpen;
     const setIsMenuOpen = propSetIsMenuOpen || setLocalIsMenuOpen;
@@ -28,26 +25,22 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
     const [searchResults, setSearchResults] = useState<Book[]>([]);
-    const { items } = useCart();
+    const { items, openCart } = useCart();
     const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
 
     const [isVisible, setIsVisible] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
 
-    // ... (keep existing scroll and search logic) ...
+    const pathname = usePathname();
 
-    // Hide Navbar on scroll down (Mobile only logic via CSS)
     useEffect(() => {
         const handleScroll = () => {
             const currentScrollY = window.scrollY;
-
-            // Hide if scrolling down and past 100px
             if (currentScrollY > lastScrollY && currentScrollY > 100) {
                 setIsVisible(false);
             } else {
                 setIsVisible(true);
             }
-
             setLastScrollY(currentScrollY);
         };
 
@@ -55,15 +48,12 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
         return () => window.removeEventListener("scroll", handleScroll);
     }, [lastScrollY]);
 
-    // Close search and menu on route change
-    const pathname = usePathname();
     useEffect(() => {
         setIsMenuOpen(false);
         setIsSearchOpen(false);
         setSearchQuery("");
     }, [pathname, setIsMenuOpen]);
 
-    // Helper to normalize Arabic text
     const normalizeArabic = (text: string) => {
         return text
             .replace(/[أإآ]/g, 'ا')
@@ -83,10 +73,9 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
             const normalizedAuthor = normalizeArabic(book.author.toLowerCase());
             return normalizedTitle.includes(normalizedSearch) || normalizedAuthor.includes(normalizedSearch);
         });
-        setSearchResults(results.slice(0, 5)); // Limit to 5 results
+        setSearchResults(results.slice(0, 5));
     }, [searchQuery, books]);
 
-    // Lock body scroll when menu or search is open
     useEffect(() => {
         if (isMenuOpen || isSearchOpen) {
             document.body.style.overflow = "hidden";
@@ -101,11 +90,12 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
     return (
         <>
             <nav className={cn(
-                "sticky top-0 z-50 w-full border-b border-white/10 bg-background/80 backdrop-blur-md",
-                isCheckout && "hidden md:block" // Hide on mobile for checkout
+                "sticky top-0 z-50 w-full border-b border-white/10 bg-background/80 backdrop-blur-md transition-transform duration-300",
+                isCheckout && "hidden md:block",
+                !isVisible && "-translate-y-full"
             )}>
                 <div className="container mx-auto flex h-16 md:h-20 items-center justify-between px-4 md:px-6 gap-4">
-                    {/* Logo (Right in RTL) */}
+                    {/* Logo */}
                     <Link href="/" className="flex items-center shrink-0 logo-container !transition-none" style={{ transition: 'none' }}>
                         <div className="relative h-8 md:h-10 w-24 md:w-32 !transition-none" style={{ transition: 'none' }}>
                             <Image
@@ -120,7 +110,7 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
                         </div>
                     </Link>
 
-                    {/* Mobile Search Bar (Center) */}
+                    {/* Mobile Search Bar */}
                     <div className="flex-1 md:hidden relative max-w-[280px] mx-auto">
                         <input
                             type="text"
@@ -128,11 +118,6 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
                             className="w-full h-9 bg-zinc-900/50 border border-white/10 rounded-full px-4 pl-10 text-sm text-zinc-200 placeholder:text-zinc-500 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            onFocus={() => {
-                                if (searchQuery.trim()) {
-                                    // Logic to ensure results are shown if query exists
-                                }
-                            }}
                             onKeyDown={(e) => {
                                 if (e.key === "Enter") {
                                     const query = e.currentTarget.value;
@@ -153,7 +138,6 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
                             <Search className="h-3.5 w-3.5" />
                         </button>
 
-                        {/* Live Search Results Dropdown */}
                         <AnimatePresence>
                             {searchQuery.trim() && (
                                 <motion.div
@@ -168,7 +152,7 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
                                                 <Link
                                                     key={book.id}
                                                     href={`/product/${book.id}`}
-                                                    onClick={() => setSearchQuery("")} // Close on click
+                                                    onClick={() => setSearchQuery("")}
                                                     className="flex items-center gap-3 p-3 hover:bg-white/5 border-b border-white/5 last:border-0 transition-colors"
                                                 >
                                                     <div className="relative w-10 h-14 rounded overflow-hidden flex-shrink-0 bg-zinc-800">
@@ -200,7 +184,7 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
                         </AnimatePresence>
                     </div>
 
-                    {/* Mobile Menu Button (Left in RTL) */}
+                    {/* Mobile Menu Button */}
                     <Button
                         variant="ghost"
                         size="sm"
@@ -233,11 +217,11 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
                             variant="ghost"
                             size="sm"
                             className="relative hover:bg-primary/10 hover:text-primary"
-                            onClick={useCart().openCart}
+                            onClick={openCart}
                         >
                             <ShoppingCart className="h-5 w-5" />
                             {itemCount > 0 && (
-                                <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] text-white animate-pulse">
+                                <span className="absolute -top-1.5 -right-1.5 flex h-4.5 w-4.5 min-w-[18px] h-[18px] items-center justify-center rounded-full bg-primary text-[10px] font-bold text-black shadow-[0_0_15px_rgba(234,179,8,0.6)] animate-pulse">
                                     {itemCount}
                                 </span>
                             )}
@@ -246,7 +230,7 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
                 </div>
             </nav>
 
-            {/* Mobile Menu Slide-out (Redesigned) */}
+            {/* Mobile Menu Slide-out */}
             <AnimatePresence>
                 {isMenuOpen && (
                     <>
@@ -265,24 +249,16 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
                             className="fixed top-0 right-0 h-full w-[85%] max-w-sm bg-zinc-950 border-l border-white/10 z-50 shadow-2xl overflow-y-auto"
                         >
                             <div className="flex flex-col h-full">
-                                {/* Header */}
                                 <div className="flex justify-between items-center p-6 border-b border-white/5">
                                     <div className="relative h-8 w-24">
-                                        <Image
-                                            src="/images/logo.png"
-                                            alt="كتابيستا"
-                                            fill
-                                            className="object-contain"
-                                        />
+                                        <Image src="/images/logo.png" alt="كتابيستا" fill className="object-contain" />
                                     </div>
                                     <Button variant="ghost" size="sm" onClick={() => setIsMenuOpen(false)} className="hover:bg-white/5 rounded-full p-2">
                                         <X className="w-6 h-6 text-zinc-400" />
                                     </Button>
                                 </div>
 
-                                {/* Content */}
                                 <div className="flex-1 p-6 space-y-8">
-                                    {/* Search in Menu */}
                                     <div className="relative">
                                         <input
                                             type="text"
@@ -294,7 +270,6 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
                                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
                                     </div>
 
-                                    {/* Section 1: Discover */}
                                     <div>
                                         <h3 className="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-4 px-2">اكتشف</h3>
                                         <div className="space-y-1">
@@ -304,7 +279,6 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
                                         </div>
                                     </div>
 
-                                    {/* Section 2: Support */}
                                     <div>
                                         <h3 className="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-4 px-2">مساعدة</h3>
                                         <div className="space-y-1">
@@ -314,7 +288,6 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
                                     </div>
                                 </div>
 
-                                {/* Footer */}
                                 <div className="p-6 border-t border-white/5 bg-zinc-900/50">
                                     <p className="text-xs text-center text-zinc-500">
                                         © {new Date().getFullYear()} كتابيستا. جميع الحقوق محفوظة.
@@ -409,7 +382,6 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
                                                         key={tag}
                                                         onClick={() => {
                                                             setSearchQuery(tag);
-                                                            // Trigger search logic immediately for tags
                                                         }}
                                                         className="px-4 py-2 rounded-full bg-white/5 hover:bg-primary/20 hover:text-primary transition-colors text-sm text-gray-300"
                                                     >
