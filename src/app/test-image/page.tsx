@@ -16,7 +16,9 @@ export default function TestImagePage() {
                     <div className="flex gap-10">
                         <div>
                             <h3 className="font-bold mb-2">Standard &lt;img&gt;</h3>
-                            <img src={url} alt="Standard" width={200} />
+                            <div className="relative w-[200px] h-[300px]">
+                                <Image src={url} alt="Standard" fill className="object-contain" />
+                            </div>
                         </div>
                         <div>
                             <h3 className="font-bold mb-2">Next.js &lt;Image&gt;</h3>

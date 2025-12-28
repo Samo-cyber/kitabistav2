@@ -61,7 +61,7 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
         setIsMenuOpen(false);
         setIsSearchOpen(false);
         setSearchQuery("");
-    }, [pathname]);
+    }, [pathname, setIsMenuOpen]);
 
     // Helper to normalize Arabic text
     const normalizeArabic = (text: string) => {
@@ -172,7 +172,7 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
                                                     className="flex items-center gap-3 p-3 hover:bg-white/5 border-b border-white/5 last:border-0 transition-colors"
                                                 >
                                                     <div className="relative w-10 h-14 rounded overflow-hidden flex-shrink-0 bg-zinc-800">
-                                                        <img src={book.image_url} alt={book.title} className="object-cover w-full h-full" />
+                                                        <Image src={book.image_url} alt={book.title} fill className="object-cover" />
                                                     </div>
                                                     <div className="flex-grow min-w-0">
                                                         <h4 className="font-bold text-sm text-zinc-200 truncate">{book.title}</h4>
@@ -382,7 +382,7 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
                                                         className="flex items-center gap-4 p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-primary/30 transition-all group"
                                                     >
                                                         <div className="relative w-12 h-16 rounded-md overflow-hidden flex-shrink-0">
-                                                            <img src={book.image_url} alt={book.title} className="object-cover w-full h-full" />
+                                                            <Image src={book.image_url} alt={book.title} fill className="object-cover" />
                                                         </div>
                                                         <div className="flex-grow">
                                                             <h4 className="font-bold text-white group-hover:text-primary transition-colors">{book.title}</h4>

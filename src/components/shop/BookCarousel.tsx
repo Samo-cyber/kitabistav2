@@ -8,6 +8,7 @@ import Link from "next/link";
 import { MiniAddToCartButton } from "@/components/product/MiniAddToCartButton";
 import { ChevronLeft, ChevronRight, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { cn } from "@/lib/utils";
 
 interface BookCarouselProps {
     title: string;
