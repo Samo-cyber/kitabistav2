@@ -52,7 +52,7 @@ export default async function ProductPage({
 
             <div className="container relative z-10 px-4 pt-6 md:pt-10">
                 {/* Breadcrumb */}
-                <div className="flex items-center gap-2 text-sm text-zinc-400 mb-8 md:mb-12 overflow-x-auto whitespace-nowrap pb-2 md:pb-0 font-medium">
+                <div className="flex items-center gap-2 text-sm text-zinc-400 mb-8 md:mb-10 overflow-x-auto whitespace-nowrap pb-2 md:pb-0 font-medium">
                     <Link href="/" className="hover:text-primary transition-colors">الرئيسية</Link>
                     <ChevronRight className="w-3 h-3 text-zinc-600" />
                     <Link href="/shop" className="hover:text-primary transition-colors">المتجر</Link>
@@ -60,10 +60,10 @@ export default async function ProductPage({
                     <span className="text-zinc-200">{book.title}</span>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 lg:gap-24 items-start">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 lg:gap-16 items-start">
                     {/* Right Column: Image (Sticky on Desktop) */}
-                    <div className="md:col-span-5 lg:col-span-4 md:sticky md:top-32">
-                        <div className="relative aspect-[2/3] w-full max-w-[340px] md:max-w-full mx-auto rounded-2xl shadow-2xl shadow-black/50 overflow-hidden border border-white/10 group">
+                    <div className="md:col-span-5 lg:col-span-4 md:sticky md:top-24">
+                        <div className="relative aspect-[2/3] w-full max-w-[300px] md:max-w-full mx-auto rounded-xl shadow-2xl shadow-black/50 overflow-hidden border border-white/10 group">
                             {book.image_url ? (
                                 <Image
                                     src={book.image_url}
@@ -81,7 +81,7 @@ export default async function ProductPage({
 
                             {/* Floating Discount Badge */}
                             {book.discount_price && (
-                                <div className="absolute top-4 right-4 bg-red-600 text-white font-bold px-4 py-1.5 rounded-full shadow-xl border border-white/10 backdrop-blur-md z-20">
+                                <div className="absolute top-3 right-3 bg-red-600 text-white font-bold px-3 py-1 rounded-lg shadow-xl border border-white/10 backdrop-blur-md z-20 text-sm">
                                     خصم {discountPercentage}%
                                 </div>
                             )}
@@ -89,54 +89,54 @@ export default async function ProductPage({
                     </div>
 
                     {/* Left Column: Details */}
-                    <div className="md:col-span-7 lg:col-span-8 space-y-10">
+                    <div className="md:col-span-7 lg:col-span-8 space-y-8">
                         {/* Header Info */}
-                        <div className="space-y-6 border-b border-white/5 pb-10">
+                        <div className="space-y-4 border-b border-white/5 pb-8">
                             <div className="flex flex-wrap items-center gap-3">
-                                <Badge variant="outline" className="bg-primary/10 text-primary border-primary/20 hover:bg-primary/20 px-4 py-1.5 text-sm font-bold rounded-full transition-colors">
+                                <Badge variant="outline" className="bg-primary/5 text-primary border-primary/20 hover:bg-primary/10 px-3 py-1 text-xs font-bold rounded-md transition-colors">
                                     {categoryName}
                                 </Badge>
                                 {book.stock > 0 ? (
-                                    <Badge variant="outline" className="bg-green-500/10 text-green-400 border-green-500/20 px-4 py-1.5 text-sm font-bold rounded-full">
+                                    <Badge variant="outline" className="bg-green-500/5 text-green-400 border-green-500/20 px-3 py-1 text-xs font-bold rounded-md">
                                         متوفر
                                     </Badge>
                                 ) : (
-                                    <Badge variant="destructive" className="px-4 py-1.5 text-sm font-bold rounded-full">نفذت الكمية</Badge>
+                                    <Badge variant="destructive" className="px-3 py-1 text-xs font-bold rounded-md">نفذت الكمية</Badge>
                                 )}
                             </div>
 
-                            <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight tracking-tight">
+                            <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight tracking-tight">
                                 {book.title}
                             </h1>
 
-                            <div className="flex items-center gap-3 text-xl text-zinc-300">
-                                <span className="text-zinc-500 font-light">تأليف:</span>
+                            <div className="flex items-center gap-2 text-lg text-zinc-300">
+                                <span className="text-zinc-500 font-light text-base">تأليف:</span>
                                 <span className="text-primary font-bold hover:text-primary/80 transition-colors cursor-pointer">{book.author}</span>
                             </div>
                         </div>
 
                         {/* Price & Actions */}
-                        <div className="bg-zinc-900/40 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-10 space-y-8 shadow-2xl">
-                            <div className="flex flex-wrap items-end gap-6">
+                        <div className="bg-zinc-900/20 backdrop-blur-sm border border-white/5 rounded-2xl p-6 md:p-8 space-y-6">
+                            <div className="flex flex-wrap items-end gap-4">
                                 {book.discount_price ? (
                                     <>
                                         <div className="flex flex-col">
-                                            <span className="text-sm text-zinc-400 mb-2 font-medium">السعر الحالي</span>
-                                            <span className="text-5xl md:text-6xl font-bold text-primary font-display tracking-tighter">
-                                                {book.discount_price} <span className="text-2xl text-zinc-500 font-sans font-normal">ج.م</span>
+                                            <span className="text-xs text-zinc-500 mb-1 font-medium">السعر الحالي</span>
+                                            <span className="text-4xl md:text-5xl font-bold text-primary font-display tracking-tighter">
+                                                {book.discount_price} <span className="text-xl text-zinc-500 font-sans font-normal">ج.م</span>
                                             </span>
                                         </div>
-                                        <div className="flex flex-col mb-3">
-                                            <span className="text-xl text-zinc-600 line-through decoration-red-500/30 decoration-2">
+                                        <div className="flex flex-col mb-2">
+                                            <span className="text-lg text-zinc-600 line-through decoration-red-500/30 decoration-2">
                                                 {book.price} ج.م
                                             </span>
                                         </div>
                                     </>
                                 ) : (
                                     <div className="flex flex-col">
-                                        <span className="text-sm text-zinc-400 mb-2 font-medium">السعر</span>
-                                        <span className="text-5xl md:text-6xl font-bold text-primary font-display tracking-tighter">
-                                            {book.price} <span className="text-2xl text-zinc-500 font-sans font-normal">ج.م</span>
+                                        <span className="text-xs text-zinc-500 mb-1 font-medium">السعر</span>
+                                        <span className="text-4xl md:text-5xl font-bold text-primary font-display tracking-tighter">
+                                            {book.price} <span className="text-xl text-zinc-500 font-sans font-normal">ج.م</span>
                                         </span>
                                     </div>
                                 )}
@@ -147,37 +147,37 @@ export default async function ProductPage({
                             </div>
 
                             {/* Trust Badges */}
-                            <div className="grid grid-cols-3 gap-6 pt-6 border-t border-white/5">
+                            <div className="grid grid-cols-3 gap-4 pt-6 border-t border-white/5">
                                 <div className="flex flex-col items-center text-center gap-2 group">
-                                    <div className="w-10 h-10 rounded-full bg-zinc-800/50 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                                        <Truck className="w-5 h-5 text-zinc-400 group-hover:text-primary transition-colors" />
+                                    <div className="w-8 h-8 rounded-full bg-zinc-800/50 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                                        <Truck className="w-4 h-4 text-zinc-400 group-hover:text-primary transition-colors" />
                                     </div>
-                                    <span className="text-xs text-zinc-400 font-medium">شحن سريع</span>
+                                    <span className="text-[10px] text-zinc-400 font-medium">شحن سريع</span>
                                 </div>
                                 <div className="flex flex-col items-center text-center gap-2 group">
-                                    <div className="w-10 h-10 rounded-full bg-zinc-800/50 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                                        <ShieldCheck className="w-5 h-5 text-zinc-400 group-hover:text-primary transition-colors" />
+                                    <div className="w-8 h-8 rounded-full bg-zinc-800/50 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                                        <ShieldCheck className="w-4 h-4 text-zinc-400 group-hover:text-primary transition-colors" />
                                     </div>
-                                    <span className="text-xs text-zinc-400 font-medium">دفع آمن</span>
+                                    <span className="text-[10px] text-zinc-400 font-medium">دفع آمن</span>
                                 </div>
                                 <div className="flex flex-col items-center text-center gap-2 group">
-                                    <div className="w-10 h-10 rounded-full bg-zinc-800/50 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                                        <Star className="w-5 h-5 text-zinc-400 group-hover:text-primary transition-colors" />
+                                    <div className="w-8 h-8 rounded-full bg-zinc-800/50 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                                        <Star className="w-4 h-4 text-zinc-400 group-hover:text-primary transition-colors" />
                                     </div>
-                                    <span className="text-xs text-zinc-400 font-medium">طبعة فاخرة</span>
+                                    <span className="text-[10px] text-zinc-400 font-medium">طبعة فاخرة</span>
                                 </div>
                             </div>
                         </div>
 
                         {/* Description */}
-                        <div className="space-y-6">
-                            <h2 className="text-3xl font-bold text-white font-display flex items-center gap-3">
-                                <BookOpen className="w-6 h-6 text-primary" />
+                        <div className="space-y-4">
+                            <h2 className="text-xl font-bold text-white font-display flex items-center gap-2">
+                                <BookOpen className="w-5 h-5 text-primary" />
                                 نبذة عن الكتاب
                             </h2>
-                            <div className="prose prose-invert prose-lg max-w-none text-zinc-300 leading-loose bg-zinc-900/20 p-8 rounded-3xl border border-white/5 shadow-inner">
+                            <div className="prose prose-invert max-w-none text-zinc-300 leading-relaxed bg-zinc-900/10 p-6 rounded-2xl border border-white/5">
                                 <p>{book.description}</p>
-                                <p className="text-zinc-400">
+                                <p className="text-zinc-400 text-sm">
                                     هذا الكتاب هو رحلة ممتعة في عالم المعرفة والخيال. يتميز بأسلوب سردي مشوق ولغة رصينة تأخذك إلى عوالم أخرى. مناسب لجميع الأعمار ومثالي للإهداء.
                                 </p>
                             </div>
