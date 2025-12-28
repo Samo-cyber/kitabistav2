@@ -25,7 +25,6 @@ export const DB = {
         { id: "history", name: "تاريخ وفلسفة" },
     ],
     books: [
-        // --- الأدب الكلاسيكي والحديث ---
         {
             id: "bk001",
             title: "بين القصرين",
@@ -34,7 +33,7 @@ export const DB = {
             price: 150,
             discount_price: 120,
             stock: 30,
-            image_url: "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1423403217l/12713709.jpg",
+            image_url: "https://wsrv.nl/?url=https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1423403217l/12713709.jpg",
             description: "الجزء الأول من ثلاثية نجيب محفوظ الشهيرة، وهي تؤرخ لحياة أسرة مصرية متوسطة في حارة شعبية، وتجسد الصراع بين التقاليد الصارمة والتحولات السياسية إبان ثورة 1919.",
             is_active: true,
         },
@@ -46,7 +45,7 @@ export const DB = {
             price: 100,
             discount_price: 85,
             stock: 150,
-            image_url: "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1351253457l/16104433.jpg",
+            image_url: "https://wsrv.nl/?url=https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1351253457l/16104433.jpg",
             description: "بعد خمس سنوات من العزلة الاختيارية، يعود د. يحيى للعمل في مستشفى العباسية، ليجد نفسه مسؤولاً عن القسم الذي يضم مرتكبي الجرائم، حيث يقابل صديقاً قديماً يجرجر وراءه ماضياً مظلماً.",
             is_active: true,
         },
@@ -58,7 +57,7 @@ export const DB = {
             price: 75,
             discount_price: 65,
             stock: 200,
-            image_url: "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1373511675l/18167352.jpg",
+            image_url: "https://wsrv.nl/?url=https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1373511675l/18167352.jpg",
             description: "رواية خيالية بطلها خالد الذي يدخل سرداباً في قريته لينتهي به المطاف في أرض زيكولا، حيث يتعامل أهلها بالذكاء بدلاً من المال، ومن ينفد ذكاؤه يُذبح.",
             is_active: true,
         },
@@ -70,7 +69,7 @@ export const DB = {
             price: 180,
             discount_price: 150,
             stock: 45,
-            image_url: "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1344440626l/15802264.jpg",
+            image_url: "https://wsrv.nl/?url=https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1344440626l/15802264.jpg",
             description: "ملحمة تاريخية تتناول حياة عائلة أندلسية على مدى أجيال متعاقبة، منذ سقوط غرناطة عام 1492 وحتى قرار الطرد النهائي للموريسكيين.",
             is_active: true,
         },
@@ -82,12 +81,10 @@ export const DB = {
             price: 110,
             discount_price: null,
             stock: 60,
-            image_url: "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1335198030l/13606969.jpg",
+            image_url: "https://wsrv.nl/?url=https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1335198030l/13606969.jpg",
             description: "رواية حائزة على جائزة البوكر، تطرح تساؤلات حادة حول الهوية والدين والوطن من خلال قصة عيسى، ابن الخادمة الفلبينية من أب كويتي.",
             is_active: true,
         },
-
-        // --- الرعب والإثارة ---
         {
             id: "bk006",
             title: "انتخريستوس",
@@ -96,7 +93,7 @@ export const DB = {
             price: 90,
             discount_price: 80,
             stock: 250,
-            image_url: "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1429119561l/25360980.jpg",
+            image_url: "https://wsrv.nl/?url=https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1429119561l/25360980.jpg",
             description: "رواية مثيرة للجدل تمزج بين الوقائع التاريخية ونظريات المؤامرة، تأخذك في رحلة عبر الزمن لتعرف أسرار نشأة الماسونية وشياطين بابل.",
             is_active: true,
         },
@@ -108,7 +105,7 @@ export const DB = {
             price: 85,
             discount_price: 75,
             stock: 140,
-            image_url: "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1428526558l/25324536.jpg",
+            image_url: "https://wsrv.nl/?url=https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1428526558l/25324536.jpg",
             description: "يسرد الكتاب قصة شاب يدفعه الفضول لاقتحام عالم الجن والسحر، ليكتشف أن الحقيقة أكثر رعباً مما يتخيل، وأن العودة للوراء مستحيلة.",
             is_active: true,
         },
@@ -120,12 +117,10 @@ export const DB = {
             price: 95,
             discount_price: null,
             stock: 120,
-            image_url: "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1444155104l/27014605.jpg",
+            image_url: "https://wsrv.nl/?url=https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1444155104l/27014605.jpg",
             description: "ملحمة فانتازيا عربية تدور في عصور قديمة، تتناول الصراع الدموي بين ساحرات العرب والانتقام الذي لا ينتهي.",
             is_active: true,
         },
-
-        // --- تطوير الذات وعلم النفس ---
         {
             id: "bk009",
             title: "العادات الذرية",
@@ -134,7 +129,7 @@ export const DB = {
             price: 130,
             discount_price: 110,
             stock: 500,
-            image_url: "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1647466824l/60619049.jpg",
+            image_url: "https://wsrv.nl/?url=https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1647466824l/60619049.jpg",
             description: "الطريقة السهلة والمثبتة لبناء عادات جيدة والتخلص من العادات السيئة، معتمداً على نتائج علمية في السلوك البشري.",
             is_active: true,
         },
@@ -146,7 +141,7 @@ export const DB = {
             price: 95,
             discount_price: 80,
             stock: 300,
-            image_url: "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1523788734l/39832731.jpg",
+            image_url: "https://wsrv.nl/?url=https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1523788734l/39832731.jpg",
             description: "كتاب يساعدك على تحديد ما يهم حقاً في حياتك، والتوقف عن القلق بشأن الأشياء التافهة التي لا تستحق عناء التفكير.",
             is_active: true,
         },
@@ -158,12 +153,10 @@ export const DB = {
             price: 80,
             discount_price: null,
             stock: 200,
-            image_url: "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1489063618l/34419263.jpg",
+            image_url: "https://wsrv.nl/?url=https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1489063618l/34419263.jpg",
             description: "كتاب سيغير طريقة تفكيرك، يحتوي على مقالات تهدف لفتح آفاق النجاح، وتطوير السلوك، وتحسين نظرتك للعالم من حولك.",
             is_active: true,
         },
-
-        // --- كتب دينية وروحانية ---
         {
             id: "bk012",
             title: "فاتتني صلاة",
@@ -172,7 +165,7 @@ export const DB = {
             price: 70,
             discount_price: 60,
             stock: 400,
-            image_url: "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1586550785l/52771801.jpg",
+            image_url: "https://wsrv.nl/?url=https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1586550785l/52771801.jpg",
             description: "لماذا يحافظ البعض على الصلاة بينما يتركها الكثير؟ كتاب يخاطب عقلك بأسلوب نفسي شيق ليجعلك تعشق الوقوف بين يدي الله.",
             is_active: true,
         },
@@ -184,12 +177,10 @@ export const DB = {
             price: 65,
             discount_price: null,
             stock: 350,
-            image_url: "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1471374526l/31448889.jpg",
+            image_url: "https://wsrv.nl/?url=https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1471374526l/31448889.jpg",
             description: "رحلة روحانية لاستكشاف معاني أسماء الله الحسنى، وكيف تتجلى رحمته وقدرته في أدق تفاصيل حياتنا اليومية.",
             is_active: true,
         },
-
-        // --- التاريخ والفلسفة ---
         {
             id: "bk014",
             title: "مقدمة ابن خلدون",
@@ -198,7 +189,7 @@ export const DB = {
             price: 300,
             discount_price: 250,
             stock: 20,
-            image_url: "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1381310618l/13596001.jpg",
+            image_url: "https://wsrv.nl/?url=https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1381310618l/13596001.jpg",
             description: "الكتاب الذي وضع حجر الأساس لعلم الاجتماع، يحلل فيه ابن خلدون طبائع العمران، وتطور الدول، وأسباب سقوط الحضارات.",
             is_active: true,
         },
@@ -210,7 +201,7 @@ export const DB = {
             price: 150,
             discount_price: 130,
             stock: 55,
-            image_url: "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1454580214l/12711776.jpg",
+            image_url: "https://wsrv.nl/?url=https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1454580214l/12711776.jpg",
             description: "رواية تأخذك في رحلة تاريخية عبر الفلسفة، من سقراط وأفلاطون حتى الوجودية، في قالب قصصي غامض وممتع.",
             is_active: true,
         },
@@ -222,7 +213,7 @@ export const DB = {
             price: 120,
             discount_price: null,
             stock: 40,
-            image_url: "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1344265449l/13593006.jpg",
+            image_url: "https://wsrv.nl/?url=https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1344265449l/13593006.jpg",
             description: "أحد أهم الكتب الفلسفية في العصر الحديث، يطرح فيه نيتشه أفكاره حول 'الإنسان الأعلى' وموت القيم القديمة.",
             is_active: true,
         },
@@ -234,7 +225,7 @@ export const DB = {
             price: 80,
             discount_price: 65,
             stock: 100,
-            image_url: "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1363623912l/17666275.jpg",
+            image_url: "https://wsrv.nl/?url=https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1363623912l/17666275.jpg",
             description: "السيرة الذاتية لعميد الأدب العربي طه حسين، يروي فيها معاناته مع العمى، ورحلته من القرية إلى الأزهر ثم السوربون.",
             is_active: true,
         },
@@ -246,7 +237,7 @@ export const DB = {
             price: 90,
             discount_price: null,
             stock: 70,
-            image_url: "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1512406830l/36971161.jpg",
+            image_url: "https://wsrv.nl/?url=https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1512406830l/36971161.jpg",
             description: "رواية تستعرض التحولات الاجتماعية العميقة في منطقة الخليج من خلال بناء درامي مذهل.",
             is_active: true,
         },
@@ -258,7 +249,7 @@ export const DB = {
             price: 55,
             discount_price: 45,
             stock: 150,
-            image_url: "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1233075218l/5973685.jpg",
+            image_url: "https://wsrv.nl/?url=https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1233075218l/5973685.jpg",
             description: "يرد د. مصطفى محمود بأسلوبه العلمي والفلسفي على تساؤلات الملحدين حول الوجود والذات الإلهية.",
             is_active: true,
         },
@@ -270,7 +261,7 @@ export const DB = {
             price: 95,
             discount_price: null,
             stock: 50,
-            image_url: "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1281223961l/8526563.jpg",
+            image_url: "https://wsrv.nl/?url=https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1281223961l/8526563.jpg",
             description: "سيرة ذاتية جريئة وصادمة ترصد حياة الفقر والتشرد في شوارع طنجة خلال الحقبة الاستعمارية.",
             is_active: true,
         }
@@ -279,7 +270,4 @@ export const DB = {
 
 export async function getBooks() { return DB.books; }
 export async function getBookById(id: string) { return DB.books.find((b) => b.id === id); }
-
-export async function getCategories() {
-    return DB.categories;
-}
+export async function getCategories() { return DB.categories; }
