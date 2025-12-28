@@ -4,15 +4,20 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
 export function LoadingGate() {
-    const [isVisible, setIsVisible] = useState(true);
+    const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
-        // Simple reliable timer to remove gate after animation
-        const timer = setTimeout(() => {
-            setIsVisible(false);
-        }, 1500);
+        // Check if gate has already been shown in this session
+        const hasBeenShown = sessionStorage.getItem("gateShown");
 
-        return () => clearTimeout(timer);
+        if (!hasBeenShown) {
+            setIsVisible(true);
+            const timer = setTimeout(() => {
+                setIsVisible(false);
+                sessionStorage.setItem("gateShown", "true");
+            }, 1500);
+            return () => clearTimeout(timer);
+        }
     }, []);
 
     if (!isVisible) return null;
