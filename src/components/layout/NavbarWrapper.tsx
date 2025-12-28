@@ -9,6 +9,7 @@ import { useState } from "react";
 export function NavbarWrapper({ books }: { books: Book[] }) {
     const pathname = usePathname();
     const isAuthPage = pathname?.startsWith("/admin");
+    const isProductPage = pathname?.startsWith("/product/");
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     if (isAuthPage) return null;
@@ -16,7 +17,7 @@ export function NavbarWrapper({ books }: { books: Book[] }) {
     return (
         <>
             <Navbar books={books} isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
-            <MobileBottomNav isHidden={isMenuOpen} />
+            <MobileBottomNav isHidden={isMenuOpen || isProductPage} />
         </>
     );
 }

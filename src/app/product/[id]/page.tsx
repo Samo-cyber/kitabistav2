@@ -35,7 +35,7 @@ export default async function ProductPage({
         : 0;
 
     return (
-        <div className="min-h-screen bg-background pb-20 overflow-x-hidden">
+        <div className="min-h-screen bg-background pb-10 overflow-x-hidden">
             {/* Blurred Background Hero */}
             <div className="fixed inset-0 z-0 opacity-30 pointer-events-none">
                 {book.image_url && (
@@ -52,7 +52,7 @@ export default async function ProductPage({
                 <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-background" />
             </div>
 
-            <div className="container relative z-10 px-4 pt-6 md:pt-10 pb-24 md:pb-0">
+            <div className="container relative z-10 px-4 pt-6 md:pt-10 pb-12 md:pb-0">
                 {/* Breadcrumb */}
                 <div className="flex items-center gap-2 text-sm text-zinc-400 mb-6 md:mb-10 overflow-x-auto whitespace-nowrap pb-2 md:pb-0 font-medium">
                     <Link href="/" className="hover:text-primary transition-colors">الرئيسية</Link>
@@ -63,7 +63,7 @@ export default async function ProductPage({
                 </div>
 
                 {/* Mobile Header (Visible only on mobile) */}
-                <div className="md:hidden mb-8">
+                <div className="md:hidden mb-4">
                     <div className="flex gap-5">
                         {/* Image */}
                         <div className="w-[35%] flex-shrink-0">
@@ -90,19 +90,19 @@ export default async function ProductPage({
                         {/* Info */}
                         <div className="flex-1 flex flex-col justify-center">
                             <div className="flex flex-wrap items-center gap-2 mb-2">
-                                <Badge variant="outline" className="bg-primary/5 text-primary border-primary/20 px-2 py-0.5 text-[10px] font-bold rounded-md">
+                                <Badge variant="outline" className="bg-primary/5 text-primary border-primary/20 px-2 py-0.5 text-xs font-bold rounded-md">
                                     {categoryName}
                                 </Badge>
                                 {book.stock > 0 ? (
-                                    <Badge variant="outline" className="bg-green-500/5 text-green-400 border-green-500/20 px-2 py-0.5 text-[10px] font-bold rounded-md">
+                                    <Badge variant="outline" className="bg-green-500/5 text-green-400 border-green-500/20 px-2 py-0.5 text-xs font-bold rounded-md">
                                         متوفر
                                     </Badge>
                                 ) : (
-                                    <Badge variant="destructive" className="px-2 py-0.5 text-[10px] font-bold rounded-md">نفذت الكمية</Badge>
+                                    <Badge variant="destructive" className="px-2 py-0.5 text-xs font-bold rounded-md">نفذت الكمية</Badge>
                                 )}
                             </div>
 
-                            <h1 className="font-display text-2xl font-bold text-white leading-tight mb-2 line-clamp-2">
+                            <h1 className="font-display text-xl font-bold text-white leading-tight mb-1 line-clamp-2">
                                 {book.title}
                             </h1>
 
@@ -114,7 +114,7 @@ export default async function ProductPage({
                             <div className="flex items-baseline gap-2">
                                 {book.discount_price ? (
                                     <>
-                                        <span className="text-2xl font-bold text-primary font-display">
+                                        <span className="text-xl font-bold text-primary font-display">
                                             {book.discount_price} <span className="text-sm text-zinc-500 font-sans font-normal">ج.م</span>
                                         </span>
                                         <span className="text-sm text-zinc-600 line-through decoration-red-500/30">
@@ -131,7 +131,7 @@ export default async function ProductPage({
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 lg:gap-16 items-start">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 lg:gap-10 items-start">
                     {/* Right Column: Image (Hidden on Mobile, Sticky on Desktop) */}
                     <div className="hidden md:block md:col-span-5 lg:col-span-4 md:sticky md:top-24">
                         <div className="relative aspect-[2/3] w-full max-w-[300px] md:max-w-full mx-auto rounded-xl shadow-2xl shadow-black/50 overflow-hidden border border-white/10 group">
@@ -162,9 +162,9 @@ export default async function ProductPage({
                     </div>
 
                     {/* Left Column: Details */}
-                    <div className="md:col-span-7 lg:col-span-8 space-y-8">
+                    <div className="md:col-span-7 lg:col-span-8 space-y-4">
                         {/* Header Info (Hidden on Mobile) */}
-                        <div className="hidden md:block space-y-4 border-b border-white/5 pb-8">
+                        <div className="hidden md:block space-y-3 border-b border-white/5 pb-4">
                             <div className="flex flex-wrap items-center gap-3">
                                 <Badge variant="outline" className="bg-primary/5 text-primary border-primary/20 hover:bg-primary/10 px-3 py-1 text-xs font-bold rounded-md transition-colors">
                                     {categoryName}
@@ -178,25 +178,25 @@ export default async function ProductPage({
                                 )}
                             </div>
 
-                            <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight tracking-tight">
+                            <h1 className="font-display text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-tight tracking-tight">
                                 {book.title}
                             </h1>
 
-                            <div className="flex items-center gap-2 text-lg text-zinc-300">
+                            <div className="flex items-center gap-2 text-base text-zinc-300">
                                 <span className="text-zinc-500 font-light text-base">تأليف:</span>
                                 <span className="text-primary font-bold hover:text-primary/80 transition-colors cursor-pointer">{book.author}</span>
                             </div>
                         </div>
 
                         {/* Price & Actions (Hidden on Mobile) */}
-                        <div className="hidden md:block bg-zinc-900/20 backdrop-blur-sm border border-white/5 rounded-2xl p-6 md:p-8 space-y-6">
+                        <div className="hidden md:block bg-zinc-900/20 backdrop-blur-sm border border-white/5 rounded-2xl p-5 md:p-6 space-y-4">
                             <div className="flex flex-wrap items-end gap-4">
                                 {book.discount_price ? (
                                     <>
                                         <div className="flex flex-col">
                                             <span className="text-xs text-zinc-500 mb-1 font-medium">السعر الحالي</span>
                                             <span className="text-4xl md:text-5xl font-bold text-primary font-display tracking-tighter">
-                                                {book.discount_price} <span className="text-xl text-zinc-500 font-sans font-normal">ج.م</span>
+                                                {book.discount_price} <span className="text-lg text-zinc-500 font-sans font-normal">ج.م</span>
                                             </span>
                                         </div>
                                         <div className="flex flex-col mb-2">
@@ -209,7 +209,7 @@ export default async function ProductPage({
                                     <div className="flex flex-col">
                                         <span className="text-xs text-zinc-500 mb-1 font-medium">السعر</span>
                                         <span className="text-4xl md:text-5xl font-bold text-primary font-display tracking-tighter">
-                                            {book.price} <span className="text-xl text-zinc-500 font-sans font-normal">ج.م</span>
+                                            {book.price} <span className="text-lg text-zinc-500 font-sans font-normal">ج.م</span>
                                         </span>
                                     </div>
                                 )}
@@ -248,7 +248,7 @@ export default async function ProductPage({
                                 <BookOpen className="w-5 h-5 text-primary" />
                                 نبذة عن الكتاب
                             </h2>
-                            <div className="prose prose-invert max-w-none text-zinc-300 leading-relaxed bg-zinc-900/10 p-6 rounded-2xl border border-white/5">
+                            <div className="text-zinc-300 leading-relaxed bg-zinc-900/10 p-4 rounded-xl border border-white/5">
                                 <p>{book.description}</p>
                                 <p className="text-zinc-400 text-sm">
                                     هذا الكتاب هو رحلة ممتعة في عالم المعرفة والخيال. يتميز بأسلوب سردي مشوق ولغة رصينة تأخذك إلى عوالم أخرى. مناسب لجميع الأعمار ومثالي للإهداء.
@@ -286,7 +286,7 @@ export default async function ProductPage({
 
             {/* Related Books */}
             {relatedBooks.length > 0 && (
-                <div className="mt-24 md:mt-32 border-t border-white/5 pt-16">
+                <div className="mt-8 md:mt-12 border-t border-white/5 pt-8">
                     <BookCarousel
                         title="قد يعجبك أيضاً"
                         subtitle="كتب مشابهة"
