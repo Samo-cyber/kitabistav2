@@ -15,12 +15,12 @@ const governorates = [
     "مطروح", "شمال سيناء", "جنوب سيناء"
 ];
 
-// Styles matching the project's premium dark theme (Green/Primary)
-const cardClasses = "bg-zinc-900/50 border border-white/5 rounded-xl p-4 md:p-5 mb-3 backdrop-blur-sm";
-const labelClasses = "block text-right text-gray-400 text-xs font-bold mb-1.5";
+// Styles matching the project's premium dark theme
+const cardClasses = "bg-zinc-900/50 border border-white/5 rounded-xl p-3 md:p-4 mb-2 backdrop-blur-sm";
+const labelClasses = "block text-right text-gray-400 text-[10px] font-bold mb-1";
 const inputContainerClasses = "relative";
-const inputClasses = "w-full bg-black/40 border border-white/10 rounded-lg px-3 py-2.5 text-right text-white placeholder:text-gray-600 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-sm";
-const iconClasses = "absolute left-3 top-1/2 -translate-y-1/2 text-gray-500";
+const inputClasses = "w-full bg-black/40 border border-white/10 rounded-lg px-3 py-2 text-right text-white placeholder:text-gray-600 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-xs";
+const iconClasses = "absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 w-3.5 h-3.5";
 
 export default function CheckoutPage() {
     const { items, total, clearCart } = useCart();
@@ -58,16 +58,16 @@ export default function CheckoutPage() {
 
     if (isSubmitted) {
         return (
-            <div className="min-h-screen flex flex-col items-center justify-center text-center px-4 bg-background relative overflow-hidden">
+            <div className="h-screen flex flex-col items-center justify-center text-center px-4 bg-background relative overflow-hidden">
                 <div className="absolute inset-0 bg-[url('/images/pattern.png')] opacity-5 pointer-events-none"></div>
                 <motion.div
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
-                    className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-6"
+                    className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-6"
                 >
-                    <CheckCircle className="w-12 h-12" />
+                    <CheckCircle className="w-10 h-10" />
                 </motion.div>
-                <h1 className="text-3xl font-bold text-white mb-4">تم استلام طلبك بنجاح!</h1>
+                <h1 className="text-2xl font-bold text-white mb-4">تم استلام طلبك بنجاح!</h1>
                 <Link href="/">
                     <Button className="bg-primary hover:bg-primary/90 text-black font-bold px-8 py-3 rounded-xl">
                         العودة للرئيسية
@@ -79,7 +79,7 @@ export default function CheckoutPage() {
 
     if (items.length === 0) {
         return (
-            <div className="min-h-screen flex flex-col items-center justify-center bg-background gap-6">
+            <div className="h-screen flex flex-col items-center justify-center bg-background gap-6">
                 <ShoppingBag className="w-16 h-16 text-gray-600" />
                 <p className="text-xl text-gray-400">سلة المشتريات فارغة</p>
                 <Link href="/shop">
@@ -90,21 +90,21 @@ export default function CheckoutPage() {
     }
 
     return (
-        <div className="min-h-screen bg-background text-white pb-20">
+        <div className="h-screen md:overflow-hidden bg-background text-white flex flex-col">
             {/* Header */}
-            <div className="pt-4 pb-2 text-center relative max-w-2xl mx-auto px-4">
+            <div className="pt-4 pb-2 text-center relative max-w-2xl mx-auto px-4 w-full shrink-0">
                 <Link href="/" className="absolute right-4 top-5 text-gray-400 hover:text-primary transition-colors flex items-center gap-2 group">
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    <span className="font-medium text-xs hidden md:inline">العودة</span>
+                    <span className="font-medium text-[10px] hidden md:inline">العودة</span>
                 </Link>
 
-                <h1 className="text-xl md:text-2xl font-bold text-white mb-4 flex items-center justify-center gap-2">
-                    <CreditCard className="w-6 h-6 text-primary" />
+                <h1 className="text-lg md:text-xl font-bold text-white mb-3 flex items-center justify-center gap-2">
+                    <CreditCard className="w-5 h-5 text-primary" />
                     إتمام الشراء
                 </h1>
 
                 {/* Progress Steps */}
-                <div className="flex items-center justify-center gap-4 md:gap-6 mb-4 flex-row-reverse">
+                <div className="flex items-center justify-center gap-3 md:gap-6 mb-2 flex-row-reverse">
                     {[
                         { num: 3, label: "تأكيد" },
                         { num: 2, label: "الدفع" },
@@ -112,238 +112,245 @@ export default function CheckoutPage() {
                     ].map((step, index) => (
                         <div key={step.num} className="flex items-center flex-row-reverse">
                             <div className={`flex flex-col items-center gap-1 ${currentStep === step.num ? "opacity-100" : "opacity-40"}`}>
-                                <div className={`w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all
+                                <div className={`w-6 h-6 md:w-7 md:h-7 rounded-full flex items-center justify-center text-[10px] font-bold transition-all
                                     ${currentStep === step.num ? "bg-primary text-black" : "bg-white/10 text-white"}
                                 `}>
                                     {step.num}
                                 </div>
-                                <span className="text-[10px] md:text-xs font-medium">{step.label}</span>
+                                <span className="text-[9px] md:text-[10px] font-medium">{step.label}</span>
                             </div>
-                            {index < 2 && <div className="w-6 md:w-12 h-[1px] bg-white/10 mx-1 md:mx-2 -mt-4"></div>}
+                            {index < 2 && <div className="w-6 md:w-12 h-[1px] bg-white/10 mx-1 md:mx-2 -mt-3"></div>}
                         </div>
                     ))}
                 </div>
             </div>
 
-            {/* Main Content */}
-            <div className="max-w-2xl mx-auto px-4">
-                <form onSubmit={handleSubmit}>
-                    <AnimatePresence mode="wait">
-                        {currentStep === 1 && (
-                            <motion.div
-                                key="step1"
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -10 }}
-                            >
-                                {/* Section 1: Personal Data */}
-                                <div className={cardClasses}>
-                                    <h2 className="text-lg font-bold text-white mb-4 flex items-center justify-center gap-2">
-                                        <User className="w-4 h-4 text-primary" />
-                                        البيانات الشخصية
-                                    </h2>
-
-                                    <div className="space-y-5">
-                                        <div>
-                                            <label className={labelClasses}>الاسم بالكامل</label>
-                                            <div className={inputContainerClasses}>
-                                                <input
-                                                    name="fullName"
-                                                    value={formData.fullName}
-                                                    onChange={handleInputChange}
-                                                    required
-                                                    className={inputClasses}
-                                                />
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <label className={labelClasses}>رقم الهاتف</label>
-                                            <div className={inputContainerClasses}>
-                                                <input
-                                                    name="phone"
-                                                    value={formData.phone}
-                                                    onChange={handleInputChange}
-                                                    required
-                                                    type="tel"
-                                                    className={inputClasses}
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Section 2: Delivery Address */}
-                                <div className={cardClasses}>
-                                    <h2 className="text-lg font-bold text-white mb-4 flex items-center justify-center gap-2">
-                                        <MapPin className="w-4 h-4 text-primary" />
-                                        عنوان التوصيل
-                                    </h2>
-
-                                    <div className="space-y-5">
-                                        <div>
-                                            <label className={labelClasses}>العنوان بالتفصيل</label>
-                                            <div className={inputContainerClasses}>
-                                                <input
-                                                    name="address"
-                                                    value={formData.address}
-                                                    onChange={handleInputChange}
-                                                    required
-                                                    placeholder="اسم الشارع، رقم العمارة، الشقة"
-                                                    className={inputClasses}
-                                                />
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <label className={labelClasses}>المحافظة</label>
-                                            <div className={inputContainerClasses}>
-                                                <select
-                                                    name="city"
-                                                    value={formData.city}
-                                                    onChange={handleInputChange}
-                                                    required
-                                                    className={`${inputClasses} appearance-none`}
-                                                >
-                                                    <option value="" disabled>اختر المحافظة</option>
-                                                    {governorates.map((gov) => (
-                                                        <option key={gov} value={gov} className="bg-zinc-900 text-white">
-                                                            {gov}
-                                                        </option>
-                                                    ))}
-                                                </select>
-                                                <div className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
-                                                    <ChevronLeft className="w-5 h-5 rotate-[-90deg]" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Next Button */}
-                                <Button
-                                    type="button"
-                                    onClick={nextStep}
-                                    disabled={!isStep1Valid}
-                                    className="w-full h-12 bg-primary hover:bg-primary/90 text-black text-base font-bold rounded-xl shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2"
+            {/* Main Content - Scrollable on mobile, fixed on desktop */}
+            <div className="flex-1 overflow-y-auto md:overflow-visible px-4 pb-4 custom-scrollbar">
+                <div className="max-w-2xl mx-auto w-full h-full">
+                    <form onSubmit={handleSubmit} className="h-full flex flex-col">
+                        <AnimatePresence mode="wait">
+                            {currentStep === 1 && (
+                                <motion.div
+                                    key="step1"
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -10 }}
+                                    className="flex flex-col h-full"
                                 >
-                                    التالي
-                                    <ArrowRight className="w-4 h-4 rotate-180" />
-                                </Button>
-                            </motion.div>
-                        )}
+                                    {/* Section 1: Personal Data */}
+                                    <div className={cardClasses}>
+                                        <h2 className="text-base font-bold text-white mb-3 flex items-center justify-center gap-2">
+                                            <User className="w-4 h-4 text-primary" />
+                                            البيانات الشخصية
+                                        </h2>
 
-                        {currentStep === 2 && (
-                            <motion.div
-                                key="step2"
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -10 }}
-                            >
-                                <div className={cardClasses}>
-                                    <h2 className="text-lg font-bold text-white mb-4 flex items-center justify-center gap-2">
-                                        <CreditCard className="w-4 h-4 text-primary" />
-                                        طريقة الدفع
-                                    </h2>
-
-                                    <div className="space-y-4">
-                                        <label className="flex items-center justify-between p-4 bg-black/40 border border-primary/50 rounded-xl cursor-pointer">
-                                            <div className="flex items-center gap-4">
-                                                <Truck className="w-6 h-6 text-primary" />
-                                                <span className="text-lg font-bold text-white">الدفع عند الاستلام</span>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                            <div>
+                                                <label className={labelClasses}>الاسم بالكامل</label>
+                                                <div className={inputContainerClasses}>
+                                                    <input
+                                                        name="fullName"
+                                                        value={formData.fullName}
+                                                        onChange={handleInputChange}
+                                                        required
+                                                        className={inputClasses}
+                                                    />
+                                                </div>
                                             </div>
-                                            <div className="w-5 h-5 rounded-full border-[5px] border-primary bg-white"></div>
-                                        </label>
-
-                                        <div className="p-4 bg-black/20 border border-white/5 rounded-xl text-center text-gray-500">
-                                            الدفع الإلكتروني غير متاح حالياً
+                                            <div>
+                                                <label className={labelClasses}>رقم الهاتف</label>
+                                                <div className={inputContainerClasses}>
+                                                    <input
+                                                        name="phone"
+                                                        value={formData.phone}
+                                                        onChange={handleInputChange}
+                                                        required
+                                                        type="tel"
+                                                        className={inputClasses}
+                                                    />
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div className="flex gap-3">
-                                    <Button
-                                        type="button"
-                                        variant="ghost"
-                                        onClick={prevStep}
-                                        className="flex-1 h-12 text-gray-400 hover:text-white hover:bg-white/5 rounded-xl text-sm"
-                                    >
-                                        السابق
-                                    </Button>
-                                    <Button
-                                        type="button"
-                                        onClick={nextStep}
-                                        className="flex-[2] h-12 bg-primary hover:bg-primary/90 text-black text-base font-bold rounded-xl shadow-lg shadow-primary/20"
-                                    >
-                                        التالي
-                                    </Button>
-                                </div>
-                            </motion.div>
-                        )}
+                                    {/* Section 2: Delivery Address */}
+                                    <div className={cardClasses}>
+                                        <h2 className="text-base font-bold text-white mb-3 flex items-center justify-center gap-2">
+                                            <MapPin className="w-4 h-4 text-primary" />
+                                            عنوان التوصيل
+                                        </h2>
 
-                        {currentStep === 3 && (
-                            <motion.div
-                                key="step3"
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -10 }}
-                            >
-                                <div className={cardClasses}>
-                                    <h2 className="text-lg font-bold text-white mb-4 flex items-center justify-center gap-2">
-                                        <ShoppingBag className="w-4 h-4 text-primary" />
-                                        ملخص الطلب
-                                    </h2>
-
-                                    <div className="space-y-4 mb-6">
-                                        {items.map((item) => (
-                                            <div key={item.id} className="flex justify-between items-center bg-black/40 p-4 rounded-xl">
-                                                <div className="text-right">
-                                                    <p className="font-bold text-white">{item.title}</p>
-                                                    <p className="text-sm text-gray-400">{item.author}</p>
+                                        <div className="space-y-3">
+                                            <div>
+                                                <label className={labelClasses}>العنوان بالتفصيل</label>
+                                                <div className={inputContainerClasses}>
+                                                    <input
+                                                        name="address"
+                                                        value={formData.address}
+                                                        onChange={handleInputChange}
+                                                        required
+                                                        placeholder="اسم الشارع، رقم العمارة، الشقة"
+                                                        className={inputClasses}
+                                                    />
                                                 </div>
+                                            </div>
+                                            <div>
+                                                <label className={labelClasses}>المحافظة</label>
+                                                <div className={inputContainerClasses}>
+                                                    <select
+                                                        name="city"
+                                                        value={formData.city}
+                                                        onChange={handleInputChange}
+                                                        required
+                                                        className={`${inputClasses} appearance-none`}
+                                                    >
+                                                        <option value="" disabled>اختر المحافظة</option>
+                                                        {governorates.map((gov) => (
+                                                            <option key={gov} value={gov} className="bg-zinc-900 text-white">
+                                                                {gov}
+                                                            </option>
+                                                        ))}
+                                                    </select>
+                                                    <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
+                                                        <ChevronLeft className="w-4 h-4 rotate-[-90deg]" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Next Button */}
+                                    <div className="mt-auto pt-2">
+                                        <Button
+                                            type="button"
+                                            onClick={nextStep}
+                                            disabled={!isStep1Valid}
+                                            className="w-full h-11 bg-primary hover:bg-primary/90 text-black text-sm font-bold rounded-xl shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2"
+                                        >
+                                            التالي
+                                            <ArrowRight className="w-4 h-4 rotate-180" />
+                                        </Button>
+                                    </div>
+                                </motion.div>
+                            )}
+
+                            {currentStep === 2 && (
+                                <motion.div
+                                    key="step2"
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -10 }}
+                                    className="flex flex-col h-full"
+                                >
+                                    <div className={cardClasses}>
+                                        <h2 className="text-base font-bold text-white mb-4 flex items-center justify-center gap-2">
+                                            <CreditCard className="w-4 h-4 text-primary" />
+                                            طريقة الدفع
+                                        </h2>
+
+                                        <div className="space-y-3">
+                                            <label className="flex items-center justify-between p-3 bg-black/40 border border-primary/50 rounded-xl cursor-pointer">
                                                 <div className="flex items-center gap-3">
-                                                    <span className="text-primary font-bold">{(item.discount_price || item.price) * item.quantity} ج.م</span>
-                                                    <span className="bg-white/10 px-2 py-1 rounded text-xs text-white">x{item.quantity}</span>
+                                                    <Truck className="w-5 h-5 text-primary" />
+                                                    <span className="text-base font-bold text-white">الدفع عند الاستلام</span>
                                                 </div>
+                                                <div className="w-4 h-4 rounded-full border-[4px] border-primary bg-white"></div>
+                                            </label>
+
+                                            <div className="p-3 bg-black/20 border border-white/5 rounded-xl text-center text-gray-500 text-xs">
+                                                الدفع الإلكتروني غير متاح حالياً
                                             </div>
-                                        ))}
-                                    </div>
-
-                                    <div className="border-t border-white/10 pt-4 space-y-2">
-                                        <div className="flex justify-between text-gray-400">
-                                            <span>{total} ج.م</span>
-                                            <span>المجموع</span>
-                                        </div>
-                                        <div className="flex justify-between text-gray-400">
-                                            <span>50 ج.م</span>
-                                            <span>الشحن</span>
-                                        </div>
-                                        <div className="flex justify-between text-xl font-bold text-white pt-2">
-                                            <span className="text-primary">{total + 50} ج.م</span>
-                                            <span>الإجمالي</span>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div className="flex gap-3">
-                                    <Button
-                                        type="button"
-                                        variant="ghost"
-                                        onClick={prevStep}
-                                        className="flex-1 h-12 text-gray-400 hover:text-white hover:bg-white/5 rounded-xl text-sm"
-                                    >
-                                        السابق
-                                    </Button>
-                                    <Button
-                                        type="submit"
-                                        className="flex-[2] h-12 bg-green-600 hover:bg-green-500 text-white text-base font-bold rounded-xl shadow-lg shadow-green-600/20"
-                                    >
-                                        تأكيد الطلب
-                                    </Button>
-                                </div>
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
-                </form>
-            </div >
-        </div >
+                                    <div className="mt-auto pt-2 flex gap-3">
+                                        <Button
+                                            type="button"
+                                            variant="ghost"
+                                            onClick={prevStep}
+                                            className="flex-1 h-11 text-gray-400 hover:text-white hover:bg-white/5 rounded-xl text-xs"
+                                        >
+                                            السابق
+                                        </Button>
+                                        <Button
+                                            type="button"
+                                            onClick={nextStep}
+                                            className="flex-[2] h-11 bg-primary hover:bg-primary/90 text-black text-sm font-bold rounded-xl shadow-lg shadow-primary/20"
+                                        >
+                                            التالي
+                                        </Button>
+                                    </div>
+                                </motion.div>
+                            )}
+
+                            {currentStep === 3 && (
+                                <motion.div
+                                    key="step3"
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -10 }}
+                                    className="flex flex-col h-full"
+                                >
+                                    <div className={cardClasses}>
+                                        <h2 className="text-base font-bold text-white mb-3 flex items-center justify-center gap-2">
+                                            <ShoppingBag className="w-4 h-4 text-primary" />
+                                            ملخص الطلب
+                                        </h2>
+
+                                        <div className="space-y-2 mb-4 max-h-[40vh] overflow-y-auto custom-scrollbar pr-1">
+                                            {items.map((item) => (
+                                                <div key={item.id} className="flex justify-between items-center bg-black/40 p-2.5 rounded-lg">
+                                                    <div className="text-right">
+                                                        <p className="font-bold text-white text-xs">{item.title}</p>
+                                                        <p className="text-[10px] text-gray-400">{item.author}</p>
+                                                    </div>
+                                                    <div className="flex items-center gap-2">
+                                                        <span className="text-primary font-bold text-xs">{(item.discount_price || item.price) * item.quantity} ج.م</span>
+                                                        <span className="bg-white/10 px-1.5 py-0.5 rounded text-[10px] text-white">x{item.quantity}</span>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+
+                                        <div className="border-t border-white/10 pt-3 space-y-1.5">
+                                            <div className="flex justify-between text-gray-400 text-[11px]">
+                                                <span>{total} ج.م</span>
+                                                <span>المجموع</span>
+                                            </div>
+                                            <div className="flex justify-between text-gray-400 text-[11px]">
+                                                <span>50 ج.م</span>
+                                                <span>الشحن</span>
+                                            </div>
+                                            <div className="flex justify-between text-base font-bold text-white pt-1.5">
+                                                <span className="text-primary">{total + 50} ج.م</span>
+                                                <span>الإجمالي</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="mt-auto pt-2 flex gap-3">
+                                        <Button
+                                            type="button"
+                                            variant="ghost"
+                                            onClick={prevStep}
+                                            className="flex-1 h-11 text-gray-400 hover:text-white hover:bg-white/5 rounded-xl text-xs"
+                                        >
+                                            السابق
+                                        </Button>
+                                        <Button
+                                            type="submit"
+                                            className="flex-[2] h-11 bg-green-600 hover:bg-green-500 text-white text-sm font-bold rounded-xl shadow-lg shadow-green-600/20"
+                                        >
+                                            تأكيد الطلب
+                                        </Button>
+                                    </div>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </form>
+                </div>
+            </div>
+        </div>
     );
 }

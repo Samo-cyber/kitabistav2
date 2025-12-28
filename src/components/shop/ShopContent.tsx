@@ -246,7 +246,7 @@ export function ShopContent({ allBooks, categories, selectedCategory }: ShopCont
                                             {book.title}
                                         </h3>
 
-                                        <p className="text-[10px] md:text-xs text-zinc-400 mb-0.5 line-clamp-1 font-medium -mt-0.5">
+                                        <p className="text-[10px] md:text-xs text-zinc-400 mb-0.5 line-clamp-1 font-medium -mt-1.5">
                                             {book.author}
                                         </p>
 

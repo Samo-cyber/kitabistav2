@@ -14,7 +14,7 @@ export function Footer() {
             <div className="max-w-6xl mx-auto px-4 pt-8 pb-24 md:pt-12 md:pb-8 relative z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 mb-8 md:mb-12">
                     {/* Brand Column - Takes full width on mobile, 4 cols on desktop */}
-                    <div className="lg:col-span-4 space-y-3 md:space-y-6 text-center">
+                    <div className="lg:col-span-4 space-y-1 md:space-y-4 text-center">
                         <Link href="/" className="inline-block">
                             <div className="relative h-14 md:h-16 w-48 md:w-56 mx-auto">
                                 <Image

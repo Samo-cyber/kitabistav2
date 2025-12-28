@@ -17,7 +17,7 @@ export function NavbarWrapper({ books }: { books: Book[] }) {
 
     return (
         <>
-            <Navbar books={books} isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+            {!isCheckoutPage && <Navbar books={books} isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />}
             <MobileBottomNav isHidden={isMenuOpen || isProductPage || isCheckoutPage} />
         </>
     );
