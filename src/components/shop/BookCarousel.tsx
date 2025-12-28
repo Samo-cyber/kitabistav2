@@ -147,12 +147,12 @@ export function BookCarousel({ title, books, linkToAll, subtitle }: BookCarousel
                                             </div>
                                         </div>
 
-                                        {/* Emerging Corner Button (Outside Padding) */}
-                                        <div className="absolute bottom-0 left-0 z-20 group/btn">
+                                        {/* Premium Floating Button */}
+                                        <div className="absolute bottom-3 left-3 z-20 group/btn">
                                             <MiniAddToCartButton
                                                 book={book}
-                                                iconSize="w-6 h-6 md:w-7 md:h-7 animate-scale-pulse drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]"
-                                                className="h-12 w-12 md:h-14 md:w-14 rounded-none rounded-tr-3xl flex items-center justify-center bg-gradient-to-tr from-yellow-400 to-yellow-500 border-t border-r border-white/50 text-black shadow-[0_0_15px_rgba(234,179,8,0.4)] hover:shadow-[0_0_25px_rgba(234,179,8,0.6)] group-hover/btn:scale-110 transition-all duration-300 origin-bottom-left"
+                                                iconSize="w-5 h-5 md:w-6 md:h-6"
+                                                className="h-10 w-10 md:h-12 md:w-12 rounded-full flex items-center justify-center bg-zinc-900/90 backdrop-blur-xl border border-primary/20 text-primary shadow-[0_8px_20px_rgba(0,0,0,0.4)] hover:bg-primary hover:text-black hover:border-primary hover:shadow-[0_0_20px_rgba(234,179,8,0.4)] transition-all duration-500 group-hover/btn:scale-110"
                                             />
                                         </div>
                                     </div>

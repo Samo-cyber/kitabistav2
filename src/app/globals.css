@@ -21,6 +21,13 @@ button {
   @apply transition-all duration-300;
 }
 
+/* Force disable transitions for logo to prevent flicker on refresh */
+.logo-container,
+.logo-container * {
+  transition: none !important;
+  animation: none !important;
+}
+
 body::before {
   content: "";
   position: fixed;

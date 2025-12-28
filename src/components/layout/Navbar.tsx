@@ -106,7 +106,7 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
             )}>
                 <div className="container mx-auto flex h-16 md:h-20 items-center justify-between px-4 md:px-6 gap-4">
                     {/* Logo (Right in RTL) */}
-                    <Link href="/" className="flex items-center shrink-0 !transition-none" style={{ transition: 'none' }}>
+                    <Link href="/" className="flex items-center shrink-0 logo-container !transition-none" style={{ transition: 'none' }}>
                         <div className="relative h-8 md:h-10 w-24 md:w-32 !transition-none" style={{ transition: 'none' }}>
                             <Image
                                 src="/images/logo.png"
