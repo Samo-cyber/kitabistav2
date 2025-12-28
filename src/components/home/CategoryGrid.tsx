@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { BookOpen, Ghost, Lightbulb, Moon, Scroll } from "lucide-react";
+import { BookOpen, Ghost, Lightbulb, Moon, Scroll, Gift } from "lucide-react";
 import { Category } from "@/lib/data";
 
 const iconMap: Record<string, React.ElementType> = {
@@ -10,6 +10,7 @@ const iconMap: Record<string, React.ElementType> = {
     self: Lightbulb,
     religious: Moon,
     history: Scroll,
+    gifts: Gift,
 };
 
 const styleMap: Record<string, { bg: string, text: string, shadow: string }> = {
@@ -18,6 +19,7 @@ const styleMap: Record<string, { bg: string, text: string, shadow: string }> = {
     self: { bg: "from-yellow-900/40 to-yellow-950/40", text: "text-primary/80", shadow: "shadow-yellow-900/20" },
     religious: { bg: "from-sky-900/40 to-sky-950/40", text: "text-sky-500/80", shadow: "shadow-sky-900/20" },
     history: { bg: "from-stone-800/40 to-stone-900/40", text: "text-stone-400/80", shadow: "shadow-stone-900/20" },
+    gifts: { bg: "from-purple-900/40 to-purple-950/40", text: "text-purple-400/80", shadow: "shadow-purple-900/20" },
 };
 
 interface CategoryGridProps {
