@@ -1,23 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { BookOpen, Ghost, Lightbulb, Moon, Scroll } from "lucide-react";
+import Image from "next/image";
 import { Category } from "@/lib/data";
 
-const iconMap: Record<string, React.ElementType> = {
-    novels: BookOpen,
-    horror: Ghost,
-    self: Lightbulb,
-    religious: Moon,
-    history: Scroll,
-};
-
-const colorMap: Record<string, string> = {
-    novels: "text-emerald-400",
-    horror: "text-red-500",
-    self: "text-yellow-400",
-    religious: "text-blue-400",
-    history: "text-amber-600",
+const imageMap: Record<string, string> = {
+    novels: "/categories/novels.png",
+    horror: "/categories/horror.png",
+    self: "/categories/self.png",
+    religious: "/categories/religious.png",
+    history: "/categories/history.png", // Fallback or missing
 };
 
 interface CategoryGridProps {
@@ -26,11 +18,10 @@ interface CategoryGridProps {
 
 export function CategoryGrid({ categories }: CategoryGridProps) {
     return (
-        <div className="container mx-auto px-4 -mt-10 relative z-20 mb-16">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="container mx-auto px-4 relative z-20 mb-16 mt-8">
+            <div className="flex flex-wrap justify-center gap-4 md:gap-6">
                 {categories.map((category) => {
-                    const Icon = iconMap[category.id] || BookOpen;
-                    const colorClass = colorMap[category.id] || "text-primary";
+                    const imageSrc = imageMap[category.id] || "/categories/novels.png";
 
                     return (
                         <Link
@@ -38,11 +29,20 @@ export function CategoryGrid({ categories }: CategoryGridProps) {
                             href={`/shop?category=${category.id}`}
                             className="group"
                         >
-                            <div className="bg-zinc-900/80 backdrop-blur-md border border-white/10 p-6 rounded-2xl flex flex-col items-center justify-center gap-4 hover:bg-zinc-800/90 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-primary/5 h-full">
-                                <div className={`w-16 h-16 rounded-full bg-white/5 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 ${colorClass} group-hover:bg-white/10`}>
-                                    <Icon className="w-8 h-8" strokeWidth={1.5} />
+                            <div className="flex flex-col items-center gap-3">
+                                <div className="w-24 h-24 md:w-28 md:h-28 bg-zinc-900/80 backdrop-blur-md border border-white/10 rounded-2xl flex items-center justify-center p-4 shadow-lg group-hover:shadow-primary/20 group-hover:border-primary/50 group-hover:-translate-y-1 transition-all duration-300 relative overflow-hidden">
+                                    <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                                    <div className="relative w-full h-full">
+                                        <Image
+                                            src={imageSrc}
+                                            alt={category.name}
+                                            fill
+                                            className="object-contain drop-shadow-xl group-hover:scale-110 transition-transform duration-500"
+                                            sizes="(max-width: 768px) 96px, 112px"
+                                        />
+                                    </div>
                                 </div>
-                                <span className="text-white font-bold text-lg group-hover:text-primary transition-colors">
+                                <span className="text-zinc-300 text-sm font-bold group-hover:text-primary transition-colors">
                                     {category.name}
                                 </span>
                             </div>
