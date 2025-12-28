@@ -17,8 +17,8 @@ const config: Config = {
         extend: {
             colors: {
                 primary: {
-                    DEFAULT: "#D4AF37", // Metallic Gold
-                    hover: "#B4941F",
+                    DEFAULT: "#C5A059", // Muted Premium Gold
+                    hover: "#A6864A",
                     foreground: "#000000",
                 },
                 secondary: {

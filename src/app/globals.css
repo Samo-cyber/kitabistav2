@@ -104,11 +104,11 @@ body::before {
 
   0%,
   100% {
-    box-shadow: 0 0 20px rgba(234, 179, 8, 0.4);
+    box-shadow: 0 0 15px rgba(197, 160, 89, 0.15);
   }
 
   50% {
-    box-shadow: 0 0 35px rgba(234, 179, 8, 0.7);
+    box-shadow: 0 0 25px rgba(197, 160, 89, 0.3);
   }
 }
 

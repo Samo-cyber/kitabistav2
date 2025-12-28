@@ -19,13 +19,13 @@ export default async function Home() {
                 <div className="container relative z-10 px-4 text-center">
                     <div className="max-w-3xl mx-auto space-y-4">
                         {/* Badge */}
-                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900/80 border border-primary/30 backdrop-blur-md shadow-[0_0_15px_rgba(234,179,8,0.15)] hover:border-primary/60 transition-colors cursor-default">
+                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900/80 border border-primary/20 backdrop-blur-md shadow-lg hover:border-primary/40 transition-colors cursor-default">
                             <span className="relative flex h-2 w-2">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
-                                <span className="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-900/50 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-red-800"></span>
                             </span>
                             <span className="text-primary font-bold text-xs tracking-wide">عروض حصرية لفترة محدودة</span>
-                            <Flame className="w-3.5 h-3.5 text-orange-500 animate-pulse" fill="currentColor" />
+                            <Flame className="w-3.5 h-3.5 text-orange-800/80 animate-pulse" fill="currentColor" />
                         </div>
 
                         {/* Logo Heading with Live Motion */}
@@ -49,9 +49,9 @@ export default async function Home() {
                         {/* Buttons */}
                         <div className="flex flex-col sm:flex-row justify-center gap-3 pt-2 animate-fade-in-up delay-300">
                             <Link href="/shop" className="w-full sm:w-auto group relative">
-                                <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full animate-pulse-glow" />
-                                <Button size="lg" className="relative w-full sm:min-w-[200px] h-14 md:h-16 text-base md:text-lg font-bold rounded-full bg-gradient-to-r from-yellow-500 via-amber-400 to-yellow-500 text-black animate-shimmer-bg border-none overflow-hidden group-hover:scale-105 transition-all duration-300 shadow-[0_10px_20px_rgba(234,179,8,0.3)]">
-                                    <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 rounded-full" />
+                                <div className="absolute inset-0 bg-primary/10 blur-xl rounded-full" />
+                                <Button size="lg" className="relative w-full sm:min-w-[200px] h-14 md:h-16 text-base md:text-lg font-bold rounded-full bg-gradient-to-r from-primary/80 via-primary to-primary/80 text-black border-none overflow-hidden group-hover:scale-105 transition-all duration-300 shadow-xl">
+                                    <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300 rounded-full" />
                                     <ShoppingBag className="w-5 h-5 md:w-6 md:h-6 ml-2" />
                                     <span>تسوق الآن</span>
                                 </Button>
@@ -67,15 +67,15 @@ export default async function Home() {
                         {/* Trust Badges */}
                         <div className="flex flex-wrap justify-center items-center gap-4 md:gap-8 pt-6 border-t border-white/10 mt-6 animate-fade-in-up delay-500">
                             <div className="flex items-center gap-1.5">
-                                <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                                <div className="w-1.5 h-1.5 rounded-full bg-emerald-900/60" />
                                 <span className="text-xs md:text-sm text-zinc-400">شحن سريع</span>
                             </div>
                             <div className="flex items-center gap-1.5">
-                                <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                                <div className="w-1.5 h-1.5 rounded-full bg-emerald-900/60" />
                                 <span className="text-xs md:text-sm text-zinc-400">دفع عند الاستلام</span>
                             </div>
                             <div className="flex items-center gap-1.5">
-                                <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                                <div className="w-1.5 h-1.5 rounded-full bg-emerald-900/60" />
                                 <span className="text-xs md:text-sm text-zinc-400">أفضل الأسعار</span>
                             </div>
                         </div>

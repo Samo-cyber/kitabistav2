@@ -221,7 +221,7 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
                         >
                             <ShoppingCart className="h-5 w-5" />
                             {itemCount > 0 && (
-                                <span className="absolute -top-1.5 -right-1.5 flex h-4.5 w-4.5 min-w-[18px] h-[18px] items-center justify-center rounded-full bg-primary text-[10px] font-bold text-black shadow-[0_0_15px_rgba(234,179,8,0.6)] animate-pulse">
+                                <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[9px] font-bold text-black shadow-lg shadow-primary/10">
                                     {itemCount}
                                 </span>
                             )}

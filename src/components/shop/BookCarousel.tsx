@@ -110,7 +110,7 @@ export function BookCarousel({ title, books, linkToAll, subtitle }: BookCarousel
                                         {/* Content */}
                                         <div className="p-3 pb-2 flex flex-col flex-grow relative text-center">
                                             {/* Golden Separator - Explicit Color */}
-                                            <div className="w-8 h-0.5 bg-yellow-400/80 mx-auto mb-2 rounded-full transition-all duration-300 group-hover/card:w-20 group-hover/card:shadow-[0_0_10px_rgba(250,204,21,0.5)]" />
+                                            <div className="w-8 h-0.5 bg-primary/60 mx-auto mb-2 rounded-full transition-all duration-300 group-hover/card:w-20 group-hover/card:shadow-[0_0_10px_rgba(197,160,89,0.3)]" />
 
                                             <h3 className={cn(
                                                 "font-bold text-white leading-snug group-hover/card:text-primary transition-colors flex items-center justify-center text-center line-clamp-2 min-h-[2.4em]",
@@ -147,7 +147,7 @@ export function BookCarousel({ title, books, linkToAll, subtitle }: BookCarousel
                                                     <MiniAddToCartButton
                                                         book={book}
                                                         iconSize="w-4 h-4 md:w-5 md:h-5"
-                                                        className="h-8 w-8 md:h-10 md:w-10 rounded-lg md:rounded-xl bg-primary text-black hover:bg-primary/90 transition-all duration-300 shadow-[0_4px_12px_rgba(234,179,8,0.2)] hover:shadow-[0_4px_15px_rgba(234,179,8,0.4)]"
+                                                        className="h-8 w-8 md:h-10 md:w-10 rounded-lg md:rounded-xl bg-white/5 border border-white/10 text-primary hover:bg-primary hover:text-black hover:border-primary transition-all duration-300"
                                                     />
                                                 </div>
                                             </div>
