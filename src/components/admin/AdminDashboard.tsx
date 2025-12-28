@@ -513,6 +513,7 @@ function OrdersView({ db }: { db: any }) {
 
     return (
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="space-y-8">
+            <div className="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-6">
                 <div className="relative flex-1 max-w-md group">
                     <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-text-muted group-focus-within:text-primary transition-colors" />
                     <input
@@ -647,6 +648,6 @@ function OrdersView({ db }: { db: any }) {
                     </div>
                 )}
             </Modal>
-        </motion.div >
+        </motion.div>
     );
 }
