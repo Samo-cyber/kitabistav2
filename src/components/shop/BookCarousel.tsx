@@ -76,84 +76,93 @@ export function BookCarousel({ title, books, linkToAll, subtitle }: BookCarousel
                     >
                         {books.map((book) => (
                             <div key={book.id} className="min-w-[140px] md:min-w-[200px] snap-start">
-                                <Link href={`/product/${book.id}`} className="group/card block h-full">
-                                    <div className="h-full bg-zinc-900/90 md:bg-zinc-900/40 border border-white/10 rounded-xl overflow-hidden hover:border-primary/50 hover:bg-zinc-900/80 transition-all duration-300 flex flex-col md:backdrop-blur-sm group/card relative">
+                                <div className="group/card relative block h-full">
+                                    <Link href={`/product/${book.id}`} className="block h-full">
+                                        <div className="h-full bg-zinc-900/90 md:bg-zinc-900/40 border border-white/10 rounded-xl overflow-hidden hover:border-primary/50 hover:bg-zinc-900/80 transition-all duration-300 flex flex-col md:backdrop-blur-sm relative">
 
-                                        {/* Image Container */}
-                                        <div className="relative aspect-[2/3] w-full overflow-hidden bg-zinc-800 border-b border-white/5">
-                                            {book.image_url ? (
-                                                <Image
-                                                    src={book.image_url}
-                                                    alt={book.title}
-                                                    fill
-                                                    className="object-cover transition-transform duration-700 group-hover/card:scale-110 will-change-transform"
-                                                    sizes="(max-width: 768px) 160px, 200px"
-                                                    referrerPolicy="no-referrer"
-                                                />
-                                            ) : (
-                                                <div className="w-full h-full flex items-center justify-center text-zinc-600">
-                                                    <span className="text-xs">لا توجد صورة</span>
-                                                </div>
-                                            )}
-
-                                            {/* Overlay */}
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-60 group-hover/card:opacity-40 transition-opacity duration-300" />
-
-                                            {/* Discount Badge */}
-                                            {book.discount_price && (
-                                                <div className="absolute top-2 right-2 bg-red-600/90 backdrop-blur-md text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-sm border border-white/10 z-10">
-                                                    -{Math.round(((book.price - book.discount_price) / book.price) * 100)}%
-                                                </div>
-                                            )}
-                                        </div>
-
-                                        {/* Content */}
-                                        <div className="p-3 pb-2 flex flex-col flex-grow relative text-center">
-                                            {/* Golden Separator - Explicit Color */}
-                                            <div className="w-8 h-0.5 bg-primary/60 mx-auto mb-2 rounded-full transition-all duration-300 group-hover/card:w-20 group-hover/card:shadow-[0_0_10px_rgba(234,179,8,0.3)]" />
-
-                                            <h3 className={cn(
-                                                "font-bold text-white leading-snug group-hover/card:text-primary transition-colors flex items-center justify-center text-center line-clamp-2 min-h-[2.4em]",
-                                                book.title.length > 30 ? "text-[11px] md:text-base" : "text-[13px] md:text-base",
-                                                "mb-1 md:mb-2"
-                                            )}>
-                                                {book.title}
-                                            </h3>
-
-
-                                            {/* Footer: Price */}
-                                            <div className="mt-auto grid grid-cols-[1fr_auto_1fr] items-center w-full pb-2 gap-1">
-                                                {/* Old Price - Right (Col 1 in RTL) */}
-                                                <div className="flex justify-end">
-                                                    {book.discount_price && (
-                                                        <span className="text-[10px] md:text-xs text-red-500/60 line-through decoration-red-500/40 font-medium whitespace-nowrap">
-                                                            {book.price}
-                                                        </span>
-                                                    )}
-                                                </div>
-
-                                                {/* Main Price Stack - Center (Col 2) */}
-                                                <div className="flex flex-col items-center justify-center leading-none px-1">
-                                                    <span className="font-bold text-lg md:text-2xl text-primary font-display">
-                                                        {book.discount_price || book.price}
-                                                    </span>
-                                                    <span className="text-[9px] md:text-[10px] text-zinc-400 font-normal mt-0.5">
-                                                        ج.م
-                                                    </span>
-                                                </div>
-
-                                                {/* Add to Cart - Left (Col 3 in RTL) */}
-                                                <div className="flex justify-start">
-                                                    <MiniAddToCartButton
-                                                        book={book}
-                                                        iconSize="w-4 h-4 md:w-5 md:h-5"
-                                                        className="h-8 w-8 md:h-10 md:w-10 rounded-lg md:rounded-xl bg-white/5 border border-white/10 text-primary hover:bg-primary hover:text-black hover:border-primary transition-all duration-300"
+                                            {/* Image Container */}
+                                            <div className="relative aspect-[2/3] w-full overflow-hidden bg-zinc-800 border-b border-white/5">
+                                                {book.image_url ? (
+                                                    <Image
+                                                        src={book.image_url}
+                                                        alt={book.title}
+                                                        fill
+                                                        className="object-cover transition-transform duration-700 group-hover/card:scale-110 will-change-transform"
+                                                        sizes="(max-width: 768px) 160px, 200px"
+                                                        referrerPolicy="no-referrer"
                                                     />
+                                                ) : (
+                                                    <div className="w-full h-full flex items-center justify-center text-zinc-600">
+                                                        <span className="text-xs">لا توجد صورة</span>
+                                                    </div>
+                                                )}
+
+                                                {/* Overlay */}
+                                                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-60 group-hover/card:opacity-40 transition-opacity duration-300" />
+
+                                                {/* Discount Badge */}
+                                                {book.discount_price && (
+                                                    <div className="absolute top-2 right-2 bg-red-600/90 backdrop-blur-md text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-sm border border-white/10 z-10">
+                                                        -{Math.round(((book.price - book.discount_price) / book.price) * 100)}%
+                                                    </div>
+                                                )}
+                                            </div>
+
+                                            {/* Content */}
+                                            <div className="p-2.5 pb-1 flex flex-col flex-grow relative text-center">
+                                                {/* Golden Separator */}
+                                                <div className="w-8 h-0.5 bg-primary/60 mx-auto mb-1.5 rounded-full transition-all duration-300 group-hover/card:w-20 group-hover/card:shadow-[0_0_10px_rgba(234,179,8,0.3)]" />
+
+                                                <h3 className={cn(
+                                                    "font-bold text-white leading-snug group-hover/card:text-primary transition-colors flex items-center justify-center text-center line-clamp-2 min-h-[2.4em]",
+                                                    book.title.length > 30 ? "text-[11px] md:text-base" : "text-[13px] md:text-base",
+                                                    "mb-0"
+                                                )}>
+                                                    {book.title}
+                                                </h3>
+
+                                                <p className="text-[10px] md:text-xs text-zinc-400 mb-1 line-clamp-1 font-medium">
+                                                    {book.author}
+                                                </p>
+
+
+                                                {/* Footer: Price */}
+                                                <div className="mt-auto grid grid-cols-[1fr_auto_1fr] items-center w-full pb-1 gap-1">
+                                                    {/* Old Price */}
+                                                    <div className="flex justify-end">
+                                                        {book.discount_price && (
+                                                            <span className="text-[10px] md:text-xs text-red-500/60 line-through decoration-red-500/40 font-medium whitespace-nowrap">
+                                                                {book.price}
+                                                            </span>
+                                                        )}
+                                                    </div>
+
+                                                    {/* Main Price */}
+                                                    <div className="flex flex-col items-center justify-center leading-none px-1">
+                                                        <span className="font-bold text-lg md:text-2xl text-primary font-display">
+                                                            {book.discount_price || book.price}
+                                                        </span>
+                                                        <span className="text-[9px] md:text-[10px] text-zinc-400 font-normal mt-0.5">
+                                                            ج.م
+                                                        </span>
+                                                    </div>
+
+                                                    {/* Add to Cart Placeholder */}
+                                                    <div className="w-8 md:w-10 h-8 md:h-10"></div>
                                                 </div>
                                             </div>
                                         </div>
+                                    </Link>
+
+                                    {/* Actual Add to Cart Button */}
+                                    <div className="absolute bottom-[9px] left-[15px] z-20">
+                                        <MiniAddToCartButton
+                                            book={book}
+                                            iconSize="w-4 h-4 md:w-5 md:h-5"
+                                            className="h-8 w-8 md:h-10 md:w-10 rounded-lg md:rounded-xl bg-white/5 border border-white/10 text-primary hover:bg-primary hover:text-black hover:border-primary transition-all duration-300"
+                                        />
                                     </div>
-                                </Link>
+                                </div>
                             </div>
                         ))}
                     </div>

@@ -16,11 +16,11 @@ const governorates = [
 ];
 
 // Styles matching the project's premium dark theme (Green/Primary)
-const cardClasses = "bg-zinc-900/50 border border-white/5 rounded-2xl p-6 md:p-8 mb-6 backdrop-blur-sm";
-const labelClasses = "block text-right text-gray-300 text-sm font-bold mb-2";
+const cardClasses = "bg-zinc-900/50 border border-white/5 rounded-xl p-4 md:p-5 mb-3 backdrop-blur-sm";
+const labelClasses = "block text-right text-gray-400 text-xs font-bold mb-1.5";
 const inputContainerClasses = "relative";
-const inputClasses = "w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3.5 text-right text-white placeholder:text-gray-600 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all";
-const iconClasses = "absolute left-4 top-1/2 -translate-y-1/2 text-gray-500";
+const inputClasses = "w-full bg-black/40 border border-white/10 rounded-lg px-3 py-2.5 text-right text-white placeholder:text-gray-600 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-sm";
+const iconClasses = "absolute left-3 top-1/2 -translate-y-1/2 text-gray-500";
 
 export default function CheckoutPage() {
     const { items, total, clearCart } = useCart();
@@ -92,34 +92,34 @@ export default function CheckoutPage() {
     return (
         <div className="min-h-screen bg-background text-white pb-20">
             {/* Header */}
-            <div className="pt-10 pb-6 text-center relative max-w-2xl mx-auto px-4">
-                <Link href="/" className="absolute right-4 top-11 text-gray-400 hover:text-primary transition-colors flex items-center gap-2 group">
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                    <span className="font-medium hidden md:inline">العودة للرئيسية</span>
+            <div className="pt-4 pb-2 text-center relative max-w-2xl mx-auto px-4">
+                <Link href="/" className="absolute right-4 top-5 text-gray-400 hover:text-primary transition-colors flex items-center gap-2 group">
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <span className="font-medium text-xs hidden md:inline">العودة</span>
                 </Link>
 
-                <h1 className="text-3xl md:text-4xl font-bold text-white mb-8 flex items-center justify-center gap-3">
-                    <CreditCard className="w-8 h-8 text-primary" />
+                <h1 className="text-xl md:text-2xl font-bold text-white mb-4 flex items-center justify-center gap-2">
+                    <CreditCard className="w-6 h-6 text-primary" />
                     إتمام الشراء
                 </h1>
 
                 {/* Progress Steps */}
-                <div className="flex items-center justify-center gap-4 md:gap-8 mb-8 flex-row-reverse">
+                <div className="flex items-center justify-center gap-4 md:gap-6 mb-4 flex-row-reverse">
                     {[
                         { num: 3, label: "تأكيد" },
                         { num: 2, label: "الدفع" },
                         { num: 1, label: "البيانات" }
                     ].map((step, index) => (
                         <div key={step.num} className="flex items-center flex-row-reverse">
-                            <div className={`flex flex-col items-center gap-2 ${currentStep === step.num ? "opacity-100" : "opacity-40"}`}>
-                                <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all
+                            <div className={`flex flex-col items-center gap-1 ${currentStep === step.num ? "opacity-100" : "opacity-40"}`}>
+                                <div className={`w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all
                                     ${currentStep === step.num ? "bg-primary text-black" : "bg-white/10 text-white"}
                                 `}>
                                     {step.num}
                                 </div>
-                                <span className="text-xs md:text-sm font-medium">{step.label}</span>
+                                <span className="text-[10px] md:text-xs font-medium">{step.label}</span>
                             </div>
-                            {index < 2 && <div className="w-8 md:w-16 h-[1px] bg-white/10 mx-2 md:mx-4 -mt-6"></div>}
+                            {index < 2 && <div className="w-6 md:w-12 h-[1px] bg-white/10 mx-1 md:mx-2 -mt-4"></div>}
                         </div>
                     ))}
                 </div>
@@ -138,8 +138,8 @@ export default function CheckoutPage() {
                             >
                                 {/* Section 1: Personal Data */}
                                 <div className={cardClasses}>
-                                    <h2 className="text-xl font-bold text-white mb-6 flex items-center justify-center gap-2">
-                                        <User className="w-5 h-5 text-primary" />
+                                    <h2 className="text-lg font-bold text-white mb-4 flex items-center justify-center gap-2">
+                                        <User className="w-4 h-4 text-primary" />
                                         البيانات الشخصية
                                     </h2>
 
@@ -174,8 +174,8 @@ export default function CheckoutPage() {
 
                                 {/* Section 2: Delivery Address */}
                                 <div className={cardClasses}>
-                                    <h2 className="text-xl font-bold text-white mb-6 flex items-center justify-center gap-2">
-                                        <MapPin className="w-5 h-5 text-primary" />
+                                    <h2 className="text-lg font-bold text-white mb-4 flex items-center justify-center gap-2">
+                                        <MapPin className="w-4 h-4 text-primary" />
                                         عنوان التوصيل
                                     </h2>
 
@@ -223,10 +223,10 @@ export default function CheckoutPage() {
                                     type="button"
                                     onClick={nextStep}
                                     disabled={!isStep1Valid}
-                                    className="w-full h-14 bg-primary hover:bg-primary/90 text-black text-lg font-bold rounded-xl shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2"
+                                    className="w-full h-12 bg-primary hover:bg-primary/90 text-black text-base font-bold rounded-xl shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2"
                                 >
                                     التالي
-                                    <ArrowRight className="w-5 h-5 rotate-180" />
+                                    <ArrowRight className="w-4 h-4 rotate-180" />
                                 </Button>
                             </motion.div>
                         )}
@@ -239,8 +239,8 @@ export default function CheckoutPage() {
                                 exit={{ opacity: 0, y: -10 }}
                             >
                                 <div className={cardClasses}>
-                                    <h2 className="text-xl font-bold text-white mb-6 flex items-center justify-center gap-2">
-                                        <CreditCard className="w-5 h-5 text-primary" />
+                                    <h2 className="text-lg font-bold text-white mb-4 flex items-center justify-center gap-2">
+                                        <CreditCard className="w-4 h-4 text-primary" />
                                         طريقة الدفع
                                     </h2>
 
@@ -259,19 +259,19 @@ export default function CheckoutPage() {
                                     </div>
                                 </div>
 
-                                <div className="flex gap-4">
+                                <div className="flex gap-3">
                                     <Button
                                         type="button"
                                         variant="ghost"
                                         onClick={prevStep}
-                                        className="flex-1 h-14 text-gray-400 hover:text-white hover:bg-white/5 rounded-xl"
+                                        className="flex-1 h-12 text-gray-400 hover:text-white hover:bg-white/5 rounded-xl text-sm"
                                     >
                                         السابق
                                     </Button>
                                     <Button
                                         type="button"
                                         onClick={nextStep}
-                                        className="flex-[2] h-14 bg-primary hover:bg-primary/90 text-black text-lg font-bold rounded-xl shadow-lg shadow-primary/20"
+                                        className="flex-[2] h-12 bg-primary hover:bg-primary/90 text-black text-base font-bold rounded-xl shadow-lg shadow-primary/20"
                                     >
                                         التالي
                                     </Button>
@@ -287,8 +287,8 @@ export default function CheckoutPage() {
                                 exit={{ opacity: 0, y: -10 }}
                             >
                                 <div className={cardClasses}>
-                                    <h2 className="text-xl font-bold text-white mb-6 flex items-center justify-center gap-2">
-                                        <ShoppingBag className="w-5 h-5 text-primary" />
+                                    <h2 className="text-lg font-bold text-white mb-4 flex items-center justify-center gap-2">
+                                        <ShoppingBag className="w-4 h-4 text-primary" />
                                         ملخص الطلب
                                     </h2>
 
@@ -323,18 +323,18 @@ export default function CheckoutPage() {
                                     </div>
                                 </div>
 
-                                <div className="flex gap-4">
+                                <div className="flex gap-3">
                                     <Button
                                         type="button"
                                         variant="ghost"
                                         onClick={prevStep}
-                                        className="flex-1 h-14 text-gray-400 hover:text-white hover:bg-white/5 rounded-xl"
+                                        className="flex-1 h-12 text-gray-400 hover:text-white hover:bg-white/5 rounded-xl text-sm"
                                     >
                                         السابق
                                     </Button>
                                     <Button
                                         type="submit"
-                                        className="flex-[2] h-14 bg-green-600 hover:bg-green-500 text-white text-lg font-bold rounded-xl shadow-lg shadow-green-600/20"
+                                        className="flex-[2] h-12 bg-green-600 hover:bg-green-500 text-white text-base font-bold rounded-xl shadow-lg shadow-green-600/20"
                                     >
                                         تأكيد الطلب
                                     </Button>

@@ -234,24 +234,24 @@ export function ShopContent({ allBooks, categories, selectedCategory }: ShopCont
                                     </div>
 
                                     {/* Content */}
-                                    <div className="p-3 pb-2 flex flex-col flex-grow relative text-center">
+                                    <div className="p-2.5 pb-1 flex flex-col flex-grow relative text-center">
                                         {/* Golden Separator */}
-                                        <div className="w-8 h-0.5 bg-primary/60 mx-auto mb-2 rounded-full transition-all duration-300 group-hover/card:w-20 group-hover/card:shadow-[0_0_10px_rgba(234,179,8,0.3)]" />
+                                        <div className="w-8 h-0.5 bg-primary/60 mx-auto mb-1.5 rounded-full transition-all duration-300 group-hover/card:w-20 group-hover/card:shadow-[0_0_10px_rgba(234,179,8,0.3)]" />
 
                                         <h3 className={cn(
                                             "font-bold text-white leading-snug group-hover/card:text-primary transition-colors flex items-center justify-center text-center line-clamp-2 min-h-[2.4em]",
                                             book.title.length > 30 ? "text-[11px] md:text-base" : "text-[13px] md:text-base",
-                                            "mb-0.5"
+                                            "mb-0"
                                         )}>
                                             {book.title}
                                         </h3>
 
-                                        <p className="text-[10px] md:text-xs text-zinc-400 mb-2 line-clamp-1 font-medium">
+                                        <p className="text-[10px] md:text-xs text-zinc-400 mb-1 line-clamp-1 font-medium">
                                             {book.author}
                                         </p>
 
                                         {/* Footer: Price & Cart */}
-                                        <div className="mt-auto grid grid-cols-[1fr_auto_1fr] items-center w-full pb-2 gap-1">
+                                        <div className="mt-auto grid grid-cols-[1fr_auto_1fr] items-center w-full pb-1 gap-1">
                                             {/* Old Price */}
                                             <div className="flex justify-end">
                                                 {book.discount_price && (
@@ -279,7 +279,7 @@ export function ShopContent({ allBooks, categories, selectedCategory }: ShopCont
                             </Link>
 
                             {/* Actual Add to Cart Button - Positioned absolutely over the placeholder */}
-                            <div className="absolute bottom-[13px] left-[15px] z-20">
+                            <div className="absolute bottom-[9px] left-[15px] z-20">
                                 <MiniAddToCartButton
                                     book={book}
                                     iconSize="w-4 h-4 md:w-5 md:h-5"
