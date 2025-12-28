@@ -20,7 +20,7 @@ export default async function Home() {
                 <div className="container relative z-10 px-4 text-center">
                     <div className="max-w-3xl mx-auto space-y-4">
                         {/* Badge */}
-                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900/80 border border-primary/30 backdrop-blur-md shadow-[0_0_15px_rgba(234,179,8,0.1)] hover:border-primary/60 transition-colors cursor-default animate-float">
+                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900/80 border border-yellow-500/30 backdrop-blur-md shadow-[0_0_15px_rgba(234,179,8,0.1)] hover:border-yellow-500/60 transition-colors cursor-default animate-float">
                             <span className="relative flex h-2 w-2">
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500/40 opacity-75"></span>
                                 <span className="relative inline-flex rounded-full h-2 w-2 bg-red-600/80"></span>
