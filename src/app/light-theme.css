@@ -1,35 +1,42 @@
 @layer base {
     .light {
-        /* Light Mode - Yellow & Black (Industrial/Bold) */
-        --background: #FEF08A;
-        /* Yellow 200 */
-        --background-paper: #FEF9C3;
-        /* Yellow 100 */
-        --text-primary: #000000;
-        /* Black */
-        --text-secondary: #18181B;
-        /* Zinc 900 */
-        --text-muted: #4B5563;
-        /* Gray 600 */
-        --primary: #000000;
-        /* Black */
-        --primary-hover: #1F2937;
-        /* Gray 800 */
-        --primary-foreground: #FEF08A;
-        /* Yellow 200 */
-        --secondary: #FDE047;
-        /* Yellow 300 */
-        --secondary-foreground: #000000;
-        --accent: #000000;
-        --border: rgba(0, 0, 0, 0.1);
-        --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        /* Light Mode - Warm White & Black with Brand Yellow */
+        --background: #FAF9F7;
+        /* Warm White */
+        --background-paper: #FFFFFF;
+        /* White */
+        --text-primary: #121212;
+        /* Primary Black */
+        --text-secondary: #5F5F5F;
+        /* Secondary Gray */
+        --text-muted: #5F5F5F;
+        /* Muted Gray */
 
-        --foreground-rgb: 0, 0, 0;
-        --background-start-rgb: 254, 240, 138;
-        --background-end-rgb: 254, 240, 138;
-        --glass-bg: rgba(254, 249, 195, 0.8);
-        /* Yellow 100 with opacity */
-        --glass-border: rgba(0, 0, 0, 0.1);
+        --primary: #121212;
+        /* Primary Black */
+        --primary-hover: #333333;
+        /* Dark Gray */
+        --primary-foreground: #FFFFFF;
+        /* White */
+
+        --secondary: #F5C842;
+        /* Brand Yellow */
+        --secondary-foreground: #121212;
+        /* Black */
+
+        --accent: #F5C842;
+        /* Brand Yellow */
+
+        --border: #DDDDDD;
+        /* Light Gray */
+        --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+
+        --foreground-rgb: 18, 18, 18;
+        --background-start-rgb: 250, 249, 247;
+        --background-end-rgb: 250, 249, 247;
+
+        --glass-bg: rgba(255, 255, 255, 0.8);
+        --glass-border: #DDDDDD;
     }
 
     /* Logo Inversion for Light Mode */
@@ -45,6 +52,6 @@
     }
 
     .light .premium-card:hover {
-        box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.08);
     }
 }
