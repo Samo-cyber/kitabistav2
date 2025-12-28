@@ -142,18 +142,15 @@ export function BookCarousel({ title, books, linkToAll, subtitle }: BookCarousel
                                                     </span>
                                                 </div>
 
-                                                {/* Empty Spacer - Left (Col 3 in RTL) */}
-                                                <div className="w-8 md:w-10" />
+                                                {/* Add to Cart - Left (Col 3 in RTL) */}
+                                                <div className="flex justify-start">
+                                                    <MiniAddToCartButton
+                                                        book={book}
+                                                        iconSize="w-4 h-4 md:w-5 md:h-5"
+                                                        className="h-8 w-8 md:h-10 md:w-10 rounded-lg md:rounded-xl bg-primary/10 text-primary hover:bg-primary hover:text-black transition-all duration-300 shadow-sm"
+                                                    />
+                                                </div>
                                             </div>
-                                        </div>
-
-                                        {/* Premium Floating Button */}
-                                        <div className="absolute bottom-3 left-3 z-20 group/btn">
-                                            <MiniAddToCartButton
-                                                book={book}
-                                                iconSize="w-5 h-5 md:w-6 md:h-6"
-                                                className="h-10 w-10 md:h-12 md:w-12 rounded-full flex items-center justify-center bg-zinc-900/90 backdrop-blur-xl border border-primary/20 text-primary shadow-[0_8px_20px_rgba(0,0,0,0.4)] hover:bg-primary hover:text-black hover:border-primary hover:shadow-[0_0_20px_rgba(234,179,8,0.4)] transition-all duration-500 group-hover/btn:scale-110"
-                                            />
                                         </div>
                                     </div>
                                 </Link>
