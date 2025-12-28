@@ -38,10 +38,10 @@ export function CategoryGrid({ categories }: CategoryGridProps) {
                             href={`/shop?category=${category.id}`}
                             className="group snap-start"
                         >
-                            <div className="flex flex-col items-center gap-3 min-w-[80px]">
-                                <div className={`w-16 h-16 md:w-24 md:h-24 rounded-2xl bg-gradient-to-br ${style.bg} backdrop-blur-md border border-white/10 flex items-center justify-center shadow-lg ${style.shadow} group-hover:-translate-y-1 group-hover:scale-105 transition-all duration-300 relative overflow-hidden`}>
+                            <div className="flex flex-col items-center gap-2 min-w-[70px]">
+                                <div className={`w-14 h-14 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br ${style.bg} backdrop-blur-md border border-white/10 flex items-center justify-center shadow-lg ${style.shadow} group-hover:-translate-y-1 group-hover:scale-105 transition-all duration-300 relative overflow-hidden`}>
                                     <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                                    <Icon className={`w-7 h-7 md:w-10 md:h-10 ${style.text} drop-shadow-lg`} strokeWidth={1.5} />
+                                    <Icon className={`w-6 h-6 md:w-9 md:h-9 ${style.text} drop-shadow-lg`} strokeWidth={1.5} />
                                 </div>
                                 <span className="text-zinc-400 text-[10px] md:text-sm font-bold group-hover:text-white transition-colors whitespace-nowrap">
                                     {category.name}
