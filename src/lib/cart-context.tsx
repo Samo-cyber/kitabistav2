@@ -26,9 +26,41 @@ export function CartProvider({ children }: { children: ReactNode }) {
     const [items, setItems] = useState<CartItem[]>([]);
     const [isCartOpen, setIsCartOpen] = useState(false);
 
-    const openCart = () => setIsCartOpen(true);
-    const closeCart = () => setIsCartOpen(false);
-    const toggleCart = () => setIsCartOpen((prev) => !prev);
+    // Sync state with hash
+    useEffect(() => {
+        const handleHashChange = () => {
+            setIsCartOpen(window.location.hash === "#cart");
+        };
+
+        // Initial check
+        handleHashChange();
+
+        window.addEventListener("hashchange", handleHashChange);
+        return () => window.removeEventListener("hashchange", handleHashChange);
+    }, []);
+
+    const openCart = () => {
+        if (window.location.hash !== "#cart") {
+            window.history.pushState(null, "", "#cart");
+            setIsCartOpen(true);
+        }
+    };
+
+    const closeCart = () => {
+        if (window.location.hash === "#cart") {
+            window.history.back();
+        } else {
+            setIsCartOpen(false);
+        }
+    };
+
+    const toggleCart = () => {
+        if (isCartOpen) {
+            closeCart();
+        } else {
+            openCart();
+        }
+    };
 
     // Load cart from localStorage
     useEffect(() => {
@@ -57,6 +89,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
             }
             return [...prev, { ...book, quantity: 1 }];
         });
+        openCart();
     };
 
     const removeItem = (bookId: string) => {
