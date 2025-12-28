@@ -14,9 +14,9 @@ export function Footer() {
             <div className="max-w-6xl mx-auto px-4 pt-12 pb-28 md:pb-8 relative z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-12">
                     {/* Brand Column - Takes full width on mobile, 4 cols on desktop */}
-                    <div className="lg:col-span-4 space-y-6 text-center lg:text-right">
+                    <div className="lg:col-span-4 space-y-6 text-center">
                         <Link href="/" className="inline-block">
-                            <div className="relative h-12 w-40 mx-auto lg:mx-0">
+                            <div className="relative h-16 md:h-14 w-56 md:w-48 mx-auto">
                                 <Image
                                     src="/images/logo.png"
                                     alt="كتابيستا"
@@ -25,10 +25,10 @@ export function Footer() {
                                 />
                             </div>
                         </Link>
-                        <p className="text-gray-400 text-sm leading-relaxed max-w-sm mx-auto lg:mx-0">
-                            وجهتك الأولى للكتب المميزة. نجمع بين سحر الورق وأناقة التصميم لنقدم لك تجربة قراءة لا تُنسى.
+                        <p className="text-zinc-400 text-base md:text-lg font-medium leading-relaxed max-w-md mx-auto font-sans tracking-wide">
+                            رفيقك في كل صفحة
                         </p>
-                        <div className="flex justify-center lg:justify-start gap-3">
+                        <div className="flex justify-center gap-3">
                             <SocialIcon icon={<Facebook className="w-5 h-5" />} href="#" />
                             <SocialIcon icon={<Instagram className="w-5 h-5" />} href="#" />
                             <SocialIcon icon={<Twitter className="w-5 h-5" />} href="#" />
