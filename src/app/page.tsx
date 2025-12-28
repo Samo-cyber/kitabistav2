@@ -50,10 +50,10 @@ export default async function Home() {
                         <div className="flex flex-col sm:flex-row justify-center gap-3 pt-2 animate-fade-in-up delay-300">
                             <Link href="/shop" className="w-full sm:w-auto group relative">
                                 <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full animate-pulse-glow" />
-                                <Button size="lg" className="relative w-full sm:min-w-[180px] h-13 md:h-16 text-lg md:text-xl font-bold rounded-full bg-gradient-to-r from-yellow-500 via-amber-400 to-yellow-500 text-black animate-shimmer-bg border-none overflow-hidden group-hover:scale-105 transition-transform duration-300">
+                                <Button size="lg" className="relative w-full sm:min-w-[200px] h-14 md:h-16 text-base md:text-lg font-bold rounded-full bg-gradient-to-r from-yellow-500 via-amber-400 to-yellow-500 text-black animate-shimmer-bg border-none overflow-hidden group-hover:scale-105 transition-all duration-300 shadow-[0_10px_20px_rgba(234,179,8,0.3)]">
                                     <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 rounded-full" />
-                                    <ShoppingBag className="w-5 h-5 md:w-6 md:h-6 ml-2 animate-bounce" />
-                                    تسوق الآن
+                                    <ShoppingBag className="w-5 h-5 md:w-6 md:h-6 ml-2" />
+                                    <span>تسوق الآن</span>
                                 </Button>
                             </Link>
                             <Link href="/offers" className="w-full sm:w-auto group">
