@@ -19,10 +19,29 @@ interface ShopContentProps {
     selectedCategory?: string;
 }
 
-export function ShopContent({ allBooks, categories, selectedCategory }: ShopContentProps) {
+import { getMockDB } from "@/lib/mock-db";
+import { useEffect } from "react";
+
+export function ShopContent({ allBooks: initialBooks, categories, selectedCategory }: ShopContentProps) {
+    const [allBooks, setAllBooks] = useState<Book[]>(initialBooks);
     const [sortBy, setSortBy] = useState<"default" | "price_asc" | "price_desc">("default");
     const [isSortOpen, setIsSortOpen] = useState(false);
     const [isFilterOpen, setIsFilterOpen] = useState(false);
+
+    // Sync with mock DB
+    useEffect(() => {
+        const db = getMockDB();
+        if (db.books.length > 0) {
+            setAllBooks(db.books);
+        }
+
+        const handleUpdate = () => {
+            const updatedDb = getMockDB();
+            setAllBooks(updatedDb.books);
+        };
+        window.addEventListener("mock-db-update", handleUpdate);
+        return () => window.removeEventListener("mock-db-update", handleUpdate);
+    }, []);
 
     const searchParams = useSearchParams();
     const [searchQuery, setSearchQuery] = useState(searchParams.get("search") || "");

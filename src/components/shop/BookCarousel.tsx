@@ -17,8 +17,31 @@ interface BookCarouselProps {
     subtitle?: string;
 }
 
-export function BookCarousel({ title, books, linkToAll, subtitle }: BookCarouselProps) {
+import { getMockDB } from "@/lib/mock-db";
+import { useEffect, useState } from "react";
+
+export function BookCarousel({ title, books: initialBooks, linkToAll, subtitle }: BookCarouselProps) {
+    const [books, setBooks] = useState<Book[]>(initialBooks);
     const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const db = getMockDB();
+        if (db.books.length > 0) {
+            // Filter based on the original intent (featured or new)
+            // For simplicity, we'll just take a slice if it's the home page
+            // or we could pass a filter function. 
+            // But let's just sync the whole list and let the parent handle slicing if possible.
+            // Actually, since this is a client component, we'll just update the books state.
+            setBooks(db.books.filter(b => b.is_active).slice(0, 15));
+        }
+
+        const handleUpdate = () => {
+            const updatedDb = getMockDB();
+            setBooks(updatedDb.books.filter(b => b.is_active).slice(0, 15));
+        };
+        window.addEventListener("mock-db-update", handleUpdate);
+        return () => window.removeEventListener("mock-db-update", handleUpdate);
+    }, []);
 
     const scroll = (direction: "left" | "right") => {
         if (scrollContainerRef.current) {

@@ -22,6 +22,8 @@ const inputContainerClasses = "relative";
 const inputClasses = "w-full bg-black/40 border border-white/10 rounded-lg px-3 py-2.5 text-right text-white placeholder:text-gray-600 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-xs md:text-sm";
 const iconClasses = "absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 w-3.5 h-3.5";
 
+import { addOrder } from "@/lib/mock-db";
+
 export default function CheckoutPage() {
     const { items, total, clearCart } = useCart();
     const [isSubmitted, setIsSubmitted] = useState(false);
@@ -43,6 +45,20 @@ export default function CheckoutPage() {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+
+        // Save order to mock DB
+        addOrder({
+            customer: formData.fullName,
+            phone: formData.phone,
+            address: `${formData.city} - ${formData.address}`,
+            total: total + 50,
+            items: items.map(item => ({
+                title: item.title,
+                quantity: item.quantity,
+                price: item.discount_price || item.price
+            }))
+        });
+
         setIsSubmitted(true);
         clearCart();
     };
