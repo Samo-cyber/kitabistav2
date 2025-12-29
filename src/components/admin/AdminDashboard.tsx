@@ -16,14 +16,13 @@ import Image from "next/image";
 import { Input } from "@/components/ui/Input";
 import { Modal } from "@/components/ui/Modal";
 import { getMockDB, saveMockDB, addBook, updateBook, deleteBook } from "@/lib/mock-db";
-import { useTheme } from "@/lib/theme-context";
-import { Sun, Moon } from "lucide-react";
+
 
 export function AdminDashboard() {
     const [activeTab, setActiveTab] = useState<"dashboard" | "products" | "orders">("dashboard");
     const [db, setDb] = useState(getMockDB());
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const { theme, toggleTheme } = useTheme();
+
 
     // Sync with localStorage
     useEffect(() => {
@@ -148,12 +147,7 @@ export function AdminDashboard() {
                                 className="bg-background-paper border border-border rounded-2xl pr-12 pl-6 py-2.5 text-sm focus:outline-none focus:border-primary/50 w-64 lg:w-80 transition-all backdrop-blur-md"
                             />
                         </div>
-                        <button
-                            onClick={toggleTheme}
-                            className="p-3 bg-secondary hover:bg-border rounded-xl transition-colors text-text-secondary"
-                        >
-                            {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-                        </button>
+
                         <button className="p-3 bg-secondary hover:bg-border rounded-xl transition-colors relative">
                             <div className="absolute top-3 left-3 w-2 h-2 bg-red-500 rounded-full border-2 border-background" />
                             <Settings className="w-5 h-5 text-text-secondary" />

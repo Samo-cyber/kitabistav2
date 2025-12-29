@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/Button";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "@/lib/cart-context";
-import { useTheme } from "@/lib/theme-context";
 import { Book } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
@@ -27,7 +26,6 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
     const [searchQuery, setSearchQuery] = useState("");
     const [searchResults, setSearchResults] = useState<Book[]>([]);
     const { items, openCart } = useCart();
-    const { theme, toggleTheme } = useTheme();
     const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
 
     const [isVisible, setIsVisible] = useState(true);
@@ -87,7 +85,7 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
                     <Link href="/" className="flex items-center shrink-0 logo-container !transition-none" style={{ transition: 'none' }}>
                         <div className="relative h-8 md:h-10 w-24 md:w-32 !transition-none" style={{ transition: 'none' }}>
                             <Image
-                                src={theme === 'light' ? "/images/logo-light.png" : "/images/logo.png"}
+                                src="/images/logo.png"
                                 alt="كتابيستا"
                                 fill
                                 className="object-contain !transition-none"
@@ -197,15 +195,6 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
                             variant="ghost"
                             size="sm"
                             className="hover:bg-primary/10 hover:text-primary"
-                            onClick={toggleTheme}
-                            title={theme === 'dark' ? 'تبديل للوضع المضيء' : 'تبديل للوضع المظلم'}
-                        >
-                            {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-                        </Button>
-                        <Button
-                            variant="ghost"
-                            size="sm"
-                            className="hover:bg-primary/10 hover:text-primary"
                             onClick={() => setIsSearchOpen(true)}
                         >
                             <Search className="h-5 w-5" />
@@ -251,14 +240,6 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
                                         <div className="relative h-8 w-24">
                                             <Image src="/images/logo.png" alt="كتابيستا" fill className="object-contain" />
                                         </div>
-                                        <Button
-                                            variant="ghost"
-                                            size="sm"
-                                            className="hover:bg-secondary rounded-full p-2"
-                                            onClick={toggleTheme}
-                                        >
-                                            {theme === 'dark' ? <Sun className="w-5 h-5 text-text-secondary" /> : <Moon className="w-5 h-5 text-text-secondary" />}
-                                        </Button>
                                     </div>
                                     <Button variant="ghost" size="sm" onClick={() => setIsMenuOpen(false)} className="hover:bg-secondary rounded-full p-2">
                                         <X className="w-6 h-6 text-text-secondary" />

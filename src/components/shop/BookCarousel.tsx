@@ -73,7 +73,7 @@ export function BookCarousel({ title, books: initialBooks, linkToAll, subtitle }
                         )}
                     </div>
                     <Link href={linkToAll}>
-                        <Button variant="outline" size="sm" className="border-primary/50 text-primary hover:bg-primary hover:text-black transition-all duration-300 text-xs md:text-sm font-bold px-4 rounded-full">
+                        <Button variant="ghost" size="sm" className="text-primary hover:bg-primary/10 hover:text-primary transition-all duration-300 text-xs md:text-sm font-bold px-4 rounded-full">
                             <span>شاهد الكل</span>
                             <ChevronLeft className="w-3 h-3 md:w-4 md:h-4 mr-1" />
                         </Button>
@@ -134,7 +134,7 @@ export function BookCarousel({ title, books: initialBooks, linkToAll, subtitle }
                                             {/* Content */}
                                             <div className="p-2.5 pb-1 flex flex-col flex-grow relative text-center">
                                                 {/* Golden Separator */}
-                                                <div className="w-8 h-0.5 bg-primary/60 mx-auto mb-1.5 rounded-full transition-all duration-300 group-hover/card:w-20 group-hover/card:shadow-[0_0_10px_rgba(234,179,8,0.3)]" />
+                                                <div className="w-8 h-px bg-primary/80 mx-auto mb-2 rounded-full transition-all duration-500 ease-out group-hover/card:w-24 group-hover/card:bg-primary group-hover/card:shadow-[0_0_15px_rgba(234,179,8,0.4)]" />
 
                                                 <h3 className={cn(
                                                     "font-bold text-text-primary dark:text-white leading-snug group-hover/card:text-primary transition-colors flex items-center justify-center text-center line-clamp-2 min-h-[2.4em]",

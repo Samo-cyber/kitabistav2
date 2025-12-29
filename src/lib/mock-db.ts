@@ -2,7 +2,7 @@
 
 import { Book, Category, DB as initialDB } from "./data";
 
-const STORAGE_KEY = "kitabista_db";
+const STORAGE_KEY = "kitabista_db_v2";
 
 interface MockDB {
     books: Book[];
