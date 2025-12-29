@@ -131,7 +131,7 @@ export function OrdersView({ db }: { db: any }) {
                                 </div>
                                 <div className="bg-zinc-900/50 p-6 rounded-2xl border border-white/5">
                                     <p className="text-[10px] font-bold text-zinc-500 uppercase mb-3">عنوان التوصيل</p>
-                                    <p className="text-sm font-medium leading-relaxed text-zinc-300">"{selectedOrder.address}"</p>
+                                    <p className="text-sm font-medium leading-relaxed text-zinc-300">&quot;{selectedOrder.address}&quot;</p>
                                 </div>
                             </div>
                             <div className="bg-zinc-900/50 rounded-2xl p-6 border border-white/5 flex flex-col">
