@@ -202,12 +202,15 @@ export function Navbar({ books = [], isMenuOpen: propIsMenuOpen, setIsMenuOpen: 
                         <Button
                             variant="ghost"
                             size="sm"
-                            className="relative hover:bg-primary/10 hover:text-primary"
+                            className={cn(
+                                "relative hover:bg-primary/10 hover:text-primary transition-all duration-300",
+                                itemCount > 0 && "text-primary bg-primary/5 animate-pulse"
+                            )}
                             onClick={openCart}
                         >
-                            <ShoppingCart className="h-5 w-5" />
+                            <ShoppingCart className={cn("h-5 w-5", itemCount > 0 && "fill-primary/20")} />
                             {itemCount > 0 && (
-                                <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[9px] font-bold text-black shadow-lg shadow-primary/10">
+                                <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[9px] font-bold text-black shadow-lg shadow-primary/20 animate-bounce">
                                     {itemCount}
                                 </span>
                             )}

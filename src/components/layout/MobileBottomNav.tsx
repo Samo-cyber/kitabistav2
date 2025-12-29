@@ -44,13 +44,18 @@ export function MobileBottomNav({ isHidden }: { isHidden?: boolean }) {
                     {navItems.map((item, index) => {
                         const isActive = item.href ? pathname === item.href : false;
                         const Icon = item.icon;
+                        const isCart = item.name === "السلة";
+                        const hasItems = isCart && (item.badge ? item.badge > 0 : false);
 
                         const content = (
                             <>
                                 <div className="relative">
-                                    <Icon className={cn("w-5 h-5", isActive && "fill-current")} strokeWidth={isActive ? 2.5 : 2} />
+                                    <Icon className={cn("w-5 h-5", isActive && "fill-current", hasItems && "fill-primary/20")} strokeWidth={isActive ? 2.5 : 2} />
                                     {item.badge ? (
-                                        <span className="absolute -top-1.5 -right-1.5 bg-primary text-black text-[8px] font-bold w-3.5 h-3.5 flex items-center justify-center rounded-full border border-zinc-900 shadow-lg shadow-primary/10">
+                                        <span className={cn(
+                                            "absolute -top-1.5 -right-1.5 bg-primary text-black text-[8px] font-bold w-3.5 h-3.5 flex items-center justify-center rounded-full border border-zinc-900 shadow-lg shadow-primary/10",
+                                            hasItems && "animate-bounce"
+                                        )}>
                                             {item.badge}
                                         </span>
                                     ) : null}
@@ -67,7 +72,8 @@ export function MobileBottomNav({ isHidden }: { isHidden?: boolean }) {
                             "flex flex-col items-center justify-center w-12 h-12 rounded-xl transition-all duration-300 relative",
                             isActive
                                 ? "bg-primary text-black shadow-lg shadow-primary/20 scale-105 -translate-y-1"
-                                : "text-zinc-400 hover:text-zinc-100 hover:bg-white/5"
+                                : "text-zinc-400 hover:text-zinc-100 hover:bg-white/5",
+                            hasItems && !isActive && "text-primary bg-primary/5 animate-pulse"
                         );
 
                         return (

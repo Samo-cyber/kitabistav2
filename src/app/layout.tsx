@@ -19,8 +19,50 @@ const almarai = Almarai({
 });
 
 export const metadata: Metadata = {
-    title: "Kitabista | كتابيستا",
-    description: "متجر كتب",
+    metadataBase: new URL("https://kitabista.vercel.app"),
+    title: {
+        default: "Kitabista | كتابيستا - وجهتك الأولى للكتب",
+        template: "%s | Kitabista - كتابيستا"
+    },
+    description: "اكتشف عالمًا من المعرفة مع كتابيستا. أفضل الكتب والروايات العربية والعالمية بأسعار تنافسية. توصيل سريع لجميع المحافظات.",
+    keywords: ["كتب", "روايات", "متجر كتب", "كتب عربية", "ثقافة", "قراءة", "كتابيستا", "Kitabista"],
+    authors: [{ name: "Kitabista Team" }],
+    creator: "Kitabista",
+    publisher: "Kitabista",
+    openGraph: {
+        type: "website",
+        locale: "ar_EG",
+        url: "https://kitabista.vercel.app",
+        title: "Kitabista | كتابيستا - وجهتك الأولى للكتب",
+        description: "اكتشف عالمًا من المعرفة مع كتابيستا. أفضل الكتب والروايات العربية والعالمية بأسعار تنافسية.",
+        siteName: "Kitabista - كتابيستا",
+        images: [
+            {
+                url: "/images/og-image.jpg", // Make sure to add this image later or use a default
+                width: 1200,
+                height: 630,
+                alt: "Kitabista - كتابيستا",
+            },
+        ],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Kitabista | كتابيستا - وجهتك الأولى للكتب",
+        description: "اكتشف عالمًا من المعرفة مع كتابيستا. أفضل الكتب والروايات العربية والعالمية بأسعار تنافسية.",
+        images: ["/images/og-image.jpg"],
+        creator: "@kitabista",
+    },
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            'max-video-preview': -1,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+        },
+    },
 };
 
 import { getBooks } from "@/lib/data";
@@ -45,6 +87,30 @@ export default async function RootLayout({
                     <main className="flex-grow">{children}</main>
                     <FooterWrapper />
                 </CartProvider>
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "Organization",
+                            name: "Kitabista",
+                            url: "https://kitabista.vercel.app",
+                            logo: "https://kitabista.vercel.app/images/logo.png",
+                            sameAs: [
+                                "https://facebook.com/kitabista",
+                                "https://twitter.com/kitabista",
+                                "https://instagram.com/kitabista"
+                            ],
+                            contactPoint: {
+                                "@type": "ContactPoint",
+                                telephone: "+201000000000",
+                                contactType: "customer service",
+                                areaServed: "EG",
+                                availableLanguage: "Arabic"
+                            }
+                        })
+                    }}
+                />
             </body>
         </html>
     );

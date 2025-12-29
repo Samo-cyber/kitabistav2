@@ -2,7 +2,7 @@
 
 import { Book, Category, DB as initialDB } from "./data";
 
-const STORAGE_KEY = "kitabista_db_v2";
+const STORAGE_KEY = "kitabista_db_v3";
 
 interface MockDB {
     books: Book[];
@@ -18,8 +18,10 @@ export const getMockDB = (): MockDB => {
         try {
             const parsed = JSON.parse(stored);
             // Always ensure categories are up to date from data.ts
+            // And ensure books is an array
             return {
                 ...parsed,
+                books: Array.isArray(parsed.books) ? parsed.books : initialDB.books,
                 categories: initialDB.categories
             };
         } catch (e) {

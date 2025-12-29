@@ -1,13 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { BookOpen, Ghost, Lightbulb, Moon, Scroll, Gift } from "lucide-react";
+import { BookOpen, Ghost, Brain, Moon, Scroll, Gift } from "lucide-react";
 import { Category } from "@/lib/data";
 
 const iconMap: Record<string, React.ElementType> = {
     novels: BookOpen,
     horror: Ghost,
-    self: Lightbulb,
+    self: Brain,
     religious: Moon,
     history: Scroll,
     gifts: Gift,
@@ -16,7 +16,7 @@ const iconMap: Record<string, React.ElementType> = {
 const styleMap: Record<string, { bg: string, text: string, shadow: string }> = {
     novels: { bg: "dark:from-emerald-900/40 dark:to-emerald-950/40 bg-black/5", text: "dark:text-emerald-500/80 text-black", shadow: "dark:shadow-emerald-900/20 shadow-none" },
     horror: { bg: "dark:from-rose-900/40 dark:to-rose-950/40 bg-black/5", text: "dark:text-rose-500/80 text-black", shadow: "dark:shadow-rose-900/20 shadow-none" },
-    self: { bg: "dark:from-yellow-900/40 dark:to-yellow-950/40 bg-black/5", text: "dark:text-primary/80 text-black", shadow: "dark:shadow-yellow-900/20 shadow-none" },
+    self: { bg: "dark:from-yellow-900/40 dark:to-yellow-950/40 bg-black/5", text: "dark:text-yellow-500/80 text-black", shadow: "dark:shadow-yellow-900/20 shadow-none" },
     religious: { bg: "dark:from-sky-900/40 dark:to-sky-950/40 bg-black/5", text: "dark:text-sky-500/80 text-black", shadow: "dark:shadow-sky-900/20 shadow-none" },
     history: { bg: "dark:from-stone-800/40 dark:to-stone-900/40 bg-black/5", text: "dark:text-stone-400/80 text-black", shadow: "dark:shadow-stone-900/20 shadow-none" },
     gifts: { bg: "dark:from-purple-900/40 dark:to-purple-950/40 bg-black/5", text: "dark:text-purple-400/80 text-black", shadow: "dark:shadow-purple-900/20 shadow-none" },

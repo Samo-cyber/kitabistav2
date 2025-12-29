@@ -18,6 +18,7 @@ interface CartContextType {
     openCart: () => void;
     closeCart: () => void;
     toggleCart: () => void;
+    isLoaded: boolean;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -25,6 +26,7 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export function CartProvider({ children }: { children: ReactNode }) {
     const [items, setItems] = useState<CartItem[]>([]);
     const [isCartOpen, setIsCartOpen] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false);
 
     // Sync state with hash
     useEffect(() => {
@@ -72,12 +74,15 @@ export function CartProvider({ children }: { children: ReactNode }) {
                 console.error("Failed to parse cart", e);
             }
         }
+        setIsLoaded(true);
     }, []);
 
     // Save cart to localStorage
     useEffect(() => {
-        localStorage.setItem("cart", JSON.stringify(items));
-    }, [items]);
+        if (isLoaded) {
+            localStorage.setItem("cart", JSON.stringify(items));
+        }
+    }, [items, isLoaded]);
 
     const addItem = (book: Book) => {
         const isFirstItem = items.length === 0;
@@ -120,7 +125,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
     return (
         <CartContext.Provider
-            value={{ items, addItem, removeItem, updateQuantity, clearCart, total, isCartOpen, openCart, closeCart, toggleCart }}
+            value={{ items, addItem, removeItem, updateQuantity, clearCart, total, isCartOpen, openCart, closeCart, toggleCart, isLoaded }}
         >
             {children}
         </CartContext.Provider>

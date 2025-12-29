@@ -84,7 +84,7 @@ function SocialIcon({ icon, href }: { icon: React.ReactNode; href: string }) {
     return (
         <a
             href={href}
-            className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-secondary border border-border flex items-center justify-center text-text-muted hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300 group"
+            className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-secondary border border-border flex items-center justify-center text-primary hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300 group"
         >
             <div className="transform group-hover:scale-110 transition-transform">
                 {icon}

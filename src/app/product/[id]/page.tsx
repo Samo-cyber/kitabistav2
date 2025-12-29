@@ -8,6 +8,44 @@ import AddToCartButton from "@/app/product/[id]/add-to-cart-button";
 import Image from "next/image";
 import { BookCarousel } from "@/components/shop/BookCarousel";
 
+export async function generateMetadata({
+    params,
+}: {
+    params: { id: string };
+}) {
+    const book = await getBookById(params.id);
+
+    if (!book) {
+        return {
+            title: "كتاب غير موجود | Kitabista",
+            description: "عذراً، الكتاب الذي تبحث عنه غير موجود.",
+        };
+    }
+
+    return {
+        title: `${book.title} - ${book.author} | Kitabista`,
+        description: book.description.substring(0, 160),
+        openGraph: {
+            title: `${book.title} - ${book.author} | Kitabista`,
+            description: book.description.substring(0, 160),
+            images: [
+                {
+                    url: book.image_url || "/images/og-image.jpg",
+                    width: 800,
+                    height: 600,
+                    alt: book.title,
+                },
+            ],
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: `${book.title} - ${book.author} | Kitabista`,
+            description: book.description.substring(0, 160),
+            images: [book.image_url || "/images/og-image.jpg"],
+        },
+    };
+}
+
 export default async function ProductPage({
     params,
 }: {
@@ -299,6 +337,31 @@ export default async function ProductPage({
                     />
                 </div>
             )}
+
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "Product",
+                        name: book.title,
+                        image: book.image_url,
+                        description: book.description,
+                        brand: {
+                            "@type": "Brand",
+                            name: book.author
+                        },
+                        offers: {
+                            "@type": "Offer",
+                            url: `https://kitabista.vercel.app/product/${book.id}`,
+                            priceCurrency: "EGP",
+                            price: book.discount_price || book.price,
+                            availability: book.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+                            itemCondition: "https://schema.org/NewCondition"
+                        }
+                    })
+                }}
+            />
         </div>
     );
 }

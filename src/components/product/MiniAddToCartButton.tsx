@@ -7,15 +7,36 @@ import { ShoppingCart, Check } from "lucide-react";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
+import confetti from "canvas-confetti";
+
 export function MiniAddToCartButton({ book, className, iconSize = "w-5 h-5" }: { book: Book; className?: string; iconSize?: string }) {
-    const { addItem } = useCart();
+    const { addItem, openCart } = useCart();
     const [added, setAdded] = useState(false);
 
     const handleAdd = (e: React.MouseEvent) => {
-        e.preventDefault(); // Prevent navigation if inside a Link
+        e.preventDefault();
         e.stopPropagation();
+
+        // Add to cart
         addItem(book);
         setAdded(true);
+
+        // Trigger confetti
+        const rect = (e.target as HTMLElement).getBoundingClientRect();
+        const x = (rect.left + rect.width / 2) / window.innerWidth;
+        const y = (rect.top + rect.height / 2) / window.innerHeight;
+
+        confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { x, y },
+            colors: ['#FFD700', '#FFA500', '#FF4500'], // Gold, Orange, Red-Orange
+            zIndex: 9999
+        });
+
+        // Open cart drawer
+        openCart();
+
         setTimeout(() => setAdded(false), 2000);
     };
 

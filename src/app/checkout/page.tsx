@@ -16,16 +16,17 @@ const governorates = [
 ];
 
 // Styles matching the project's premium dark theme
-const cardClasses = "bg-zinc-900/50 border border-white/5 rounded-xl p-4 md:p-6 mb-4 backdrop-blur-sm";
-const labelClasses = "block text-right text-gray-400 text-[10px] md:text-xs font-bold mb-1.5";
+// Styles matching the project's premium dark theme
+const cardClasses = "bg-zinc-900/50 border border-white/5 rounded-xl p-3 md:p-5 mb-3 backdrop-blur-sm";
+const labelClasses = "block text-right text-gray-400 text-xs md:text-sm font-bold mb-1";
 const inputContainerClasses = "relative";
-const inputClasses = "w-full bg-black/40 border border-white/10 rounded-lg px-3 py-2.5 text-right text-white placeholder:text-gray-600 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-xs md:text-sm";
-const iconClasses = "absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 w-3.5 h-3.5";
+const inputClasses = "w-full bg-black/40 border border-white/10 rounded-lg px-3 py-2.5 text-right text-white placeholder:text-gray-600 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-sm md:text-base";
+const iconClasses = "absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 w-4 h-4";
 
 import { addOrder } from "@/lib/mock-db";
 
 export default function CheckoutPage() {
-    const { items, total, clearCart } = useCart();
+    const { items, total, clearCart, isLoaded } = useCart();
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [currentStep, setCurrentStep] = useState(1);
 
@@ -37,6 +38,16 @@ export default function CheckoutPage() {
         city: "",
     });
 
+    const [orderId, setOrderId] = useState<string>("");
+
+    if (!isLoaded) {
+        return (
+            <div className="h-screen flex items-center justify-center bg-background">
+                <div className="w-16 h-16 border-4 border-primary/30 border-t-primary rounded-full animate-spin"></div>
+            </div>
+        );
+    }
+
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
@@ -47,7 +58,7 @@ export default function CheckoutPage() {
         e.preventDefault();
 
         // Save order to mock DB
-        addOrder({
+        const newOrder = addOrder({
             customer: formData.fullName,
             phone: formData.phone,
             address: `${formData.city} - ${formData.address}`,
@@ -59,6 +70,7 @@ export default function CheckoutPage() {
             }))
         });
 
+        setOrderId(newOrder.id);
         setIsSubmitted(true);
         clearCart();
     };
@@ -79,13 +91,20 @@ export default function CheckoutPage() {
                 <motion.div
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
-                    className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-6"
+                    className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-6 shadow-[0_0_30px_rgba(255,215,0,0.2)]"
                 >
-                    <CheckCircle className="w-10 h-10" />
+                    <CheckCircle className="w-12 h-12" />
                 </motion.div>
-                <h1 className="text-2xl font-bold text-white mb-4">تم استلام طلبك بنجاح!</h1>
+                <h1 className="text-3xl font-bold text-white mb-2">تم استلام طلبك بنجاح!</h1>
+                <p className="text-gray-400 mb-6 text-lg">شكراً لثقتك بنا، سيتم التواصل معك قريباً لتأكيد الطلب.</p>
+
+                <div className="bg-white/5 border border-white/10 rounded-xl p-4 mb-8 min-w-[200px]">
+                    <p className="text-gray-500 text-sm mb-1">رقم الطلب</p>
+                    <p className="text-2xl font-mono font-bold text-primary tracking-wider">{orderId}</p>
+                </div>
+
                 <Link href="/">
-                    <Button className="bg-primary hover:bg-primary/90 text-black font-bold px-8 py-3 rounded-xl">
+                    <Button className="bg-primary hover:bg-primary/90 text-black font-bold px-10 py-4 rounded-xl text-lg shadow-lg shadow-primary/20 transition-all hover:scale-105">
                         العودة للرئيسية
                     </Button>
                 </Link>
@@ -106,44 +125,44 @@ export default function CheckoutPage() {
     }
 
     return (
-        <div className="h-screen md:overflow-hidden bg-background text-white flex flex-col">
+        <div className="h-screen overflow-hidden bg-background text-white flex flex-col">
             {/* Header */}
-            <div className="pt-6 pb-4 text-center relative max-w-4xl mx-auto px-4 w-full shrink-0">
-                <Link href="/" className="absolute right-4 top-5 text-gray-400 hover:text-primary transition-colors flex items-center gap-2 group">
+            <div className="pt-4 pb-2 text-center relative max-w-6xl mx-auto px-4 w-full shrink-0">
+                <Link href="/" className="absolute right-4 top-4 text-gray-400 hover:text-primary transition-colors flex items-center gap-2 group">
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     <span className="font-medium text-[10px] hidden md:inline">العودة</span>
                 </Link>
 
-                <h1 className="text-lg md:text-xl font-bold text-white mb-3 flex items-center justify-center gap-2">
+                <h1 className="text-lg font-bold text-white mb-6 flex items-center justify-center gap-2">
                     <CreditCard className="w-5 h-5 text-primary" />
                     إتمام الشراء
                 </h1>
 
                 {/* Progress Steps */}
-                <div className="flex items-center justify-center gap-3 md:gap-6 mb-2 flex-row-reverse">
+                <div className="flex items-center justify-center gap-4 md:gap-8 mb-2 flex-row-reverse">
                     {[
                         { num: 3, label: "تأكيد" },
                         { num: 2, label: "الدفع" },
                         { num: 1, label: "البيانات" }
                     ].map((step, index) => (
                         <div key={step.num} className="flex items-center flex-row-reverse">
-                            <div className={`flex flex-col items-center gap-1 ${currentStep === step.num ? "opacity-100" : "opacity-40"}`}>
-                                <div className={`w-6 h-6 md:w-7 md:h-7 rounded-full flex items-center justify-center text-[10px] font-bold transition-all
-                                    ${currentStep === step.num ? "bg-primary text-black" : "bg-white/10 text-white"}
+                            <div className={`flex flex-col items-center gap-2 ${currentStep === step.num ? "opacity-100" : "opacity-40"}`}>
+                                <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-xs md:text-sm font-bold transition-all
+                                    ${currentStep === step.num ? "bg-primary text-black shadow-[0_0_15px_rgba(255,215,0,0.3)]" : "bg-white/10 text-white"}
                                 `}>
                                     {step.num}
                                 </div>
-                                <span className="text-[9px] md:text-[10px] font-medium">{step.label}</span>
+                                <span className="text-[10px] md:text-xs font-medium">{step.label}</span>
                             </div>
-                            {index < 2 && <div className="w-6 md:w-12 h-[1px] bg-white/10 mx-1 md:mx-2 -mt-3"></div>}
+                            {index < 2 && <div className="w-8 md:w-20 h-[2px] bg-white/10 mx-2 md:mx-4 -mt-4 rounded-full"></div>}
                         </div>
                     ))}
                 </div>
             </div>
 
-            {/* Main Content - Scrollable on mobile, fixed on desktop */}
-            <div className="flex-1 overflow-y-auto md:overflow-visible px-4 pb-8 custom-scrollbar">
-                <div className="max-w-4xl mx-auto w-full">
+            {/* Main Content - Centered and Compact */}
+            <div className="flex-1 flex items-center justify-center px-4 pb-4 overflow-y-auto md:overflow-hidden">
+                <div className="max-w-5xl w-full">
                     <form onSubmit={handleSubmit} className="flex flex-col">
                         <AnimatePresence mode="wait">
                             {currentStep === 1 && (
@@ -154,82 +173,84 @@ export default function CheckoutPage() {
                                     exit={{ opacity: 0, y: -10 }}
                                     className="flex flex-col"
                                 >
-                                    {/* Section 1: Personal Data */}
-                                    <div className={cardClasses}>
-                                        <h2 className="text-base font-bold text-white mb-3 flex items-center justify-center gap-2">
-                                            <User className="w-4 h-4 text-primary" />
-                                            البيانات الشخصية
-                                        </h2>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        {/* Section 1: Personal Data */}
+                                        <div className={cardClasses}>
+                                            <h2 className="text-base font-bold text-white mb-3 flex items-center justify-center gap-2">
+                                                <User className="w-4 h-4 text-primary" />
+                                                البيانات الشخصية
+                                            </h2>
 
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                            <div>
-                                                <label className={labelClasses}>الاسم بالكامل</label>
-                                                <div className={inputContainerClasses}>
-                                                    <input
-                                                        name="fullName"
-                                                        value={formData.fullName}
-                                                        onChange={handleInputChange}
-                                                        required
-                                                        className={inputClasses}
-                                                    />
+                                            <div className="space-y-3">
+                                                <div>
+                                                    <label className={labelClasses}>الاسم بالكامل</label>
+                                                    <div className={inputContainerClasses}>
+                                                        <input
+                                                            name="fullName"
+                                                            value={formData.fullName}
+                                                            onChange={handleInputChange}
+                                                            required
+                                                            className={inputClasses}
+                                                        />
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div>
-                                                <label className={labelClasses}>رقم الهاتف</label>
-                                                <div className={inputContainerClasses}>
-                                                    <input
-                                                        name="phone"
-                                                        value={formData.phone}
-                                                        onChange={handleInputChange}
-                                                        required
-                                                        type="tel"
-                                                        className={inputClasses}
-                                                    />
+                                                <div>
+                                                    <label className={labelClasses}>رقم الهاتف</label>
+                                                    <div className={inputContainerClasses}>
+                                                        <input
+                                                            name="phone"
+                                                            value={formData.phone}
+                                                            onChange={handleInputChange}
+                                                            required
+                                                            type="tel"
+                                                            className={inputClasses}
+                                                        />
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    {/* Section 2: Delivery Address */}
-                                    <div className={cardClasses}>
-                                        <h2 className="text-base font-bold text-white mb-3 flex items-center justify-center gap-2">
-                                            <MapPin className="w-4 h-4 text-primary" />
-                                            عنوان التوصيل
-                                        </h2>
+                                        {/* Section 2: Delivery Address */}
+                                        <div className={cardClasses}>
+                                            <h2 className="text-base font-bold text-white mb-3 flex items-center justify-center gap-2">
+                                                <MapPin className="w-4 h-4 text-primary" />
+                                                عنوان التوصيل
+                                            </h2>
 
-                                        <div className="space-y-3">
-                                            <div>
-                                                <label className={labelClasses}>العنوان بالتفصيل</label>
-                                                <div className={inputContainerClasses}>
-                                                    <input
-                                                        name="address"
-                                                        value={formData.address}
-                                                        onChange={handleInputChange}
-                                                        required
-                                                        placeholder="اسم الشارع، رقم العمارة، الشقة"
-                                                        className={inputClasses}
-                                                    />
+                                            <div className="space-y-3">
+                                                <div>
+                                                    <label className={labelClasses}>المحافظة</label>
+                                                    <div className={inputContainerClasses}>
+                                                        <select
+                                                            name="city"
+                                                            value={formData.city}
+                                                            onChange={handleInputChange}
+                                                            required
+                                                            className={`${inputClasses} appearance-none`}
+                                                        >
+                                                            <option value="" disabled>اختر المحافظة</option>
+                                                            {governorates.map((gov) => (
+                                                                <option key={gov} value={gov} className="bg-zinc-900 text-white">
+                                                                    {gov}
+                                                                </option>
+                                                            ))}
+                                                        </select>
+                                                        <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
+                                                            <ChevronLeft className="w-4 h-4 rotate-[-90deg]" />
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div>
-                                                <label className={labelClasses}>المحافظة</label>
-                                                <div className={inputContainerClasses}>
-                                                    <select
-                                                        name="city"
-                                                        value={formData.city}
-                                                        onChange={handleInputChange}
-                                                        required
-                                                        className={`${inputClasses} appearance-none`}
-                                                    >
-                                                        <option value="" disabled>اختر المحافظة</option>
-                                                        {governorates.map((gov) => (
-                                                            <option key={gov} value={gov} className="bg-zinc-900 text-white">
-                                                                {gov}
-                                                            </option>
-                                                        ))}
-                                                    </select>
-                                                    <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
-                                                        <ChevronLeft className="w-4 h-4 rotate-[-90deg]" />
+                                                <div>
+                                                    <label className={labelClasses}>العنوان بالتفصيل</label>
+                                                    <div className={inputContainerClasses}>
+                                                        <input
+                                                            name="address"
+                                                            value={formData.address}
+                                                            onChange={handleInputChange}
+                                                            required
+                                                            placeholder="اسم الشارع، رقم العمارة، الشقة"
+                                                            className={inputClasses}
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>
@@ -237,7 +258,7 @@ export default function CheckoutPage() {
                                     </div>
 
                                     {/* Next Button */}
-                                    <div className="pt-4">
+                                    <div className="pt-4 max-w-md mx-auto w-full">
                                         <Button
                                             type="button"
                                             onClick={nextStep}
@@ -257,7 +278,7 @@ export default function CheckoutPage() {
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: -10 }}
-                                    className="flex flex-col"
+                                    className="flex flex-col max-w-md mx-auto w-full"
                                 >
                                     <div className={cardClasses}>
                                         <h2 className="text-base font-bold text-white mb-4 flex items-center justify-center gap-2">
@@ -306,7 +327,7 @@ export default function CheckoutPage() {
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: -10 }}
-                                    className="flex flex-col"
+                                    className="flex flex-col max-w-md mx-auto w-full"
                                 >
                                     <div className={cardClasses}>
                                         <h2 className="text-base font-bold text-white mb-3 flex items-center justify-center gap-2">
@@ -314,7 +335,7 @@ export default function CheckoutPage() {
                                             ملخص الطلب
                                         </h2>
 
-                                        <div className="space-y-2 mb-4 max-h-[40vh] overflow-y-auto custom-scrollbar pr-1">
+                                        <div className="space-y-2 mb-4 max-h-[30vh] overflow-y-auto custom-scrollbar pr-1">
                                             {items.map((item) => (
                                                 <div key={item.id} className="flex justify-between items-center bg-black/40 p-2.5 rounded-lg">
                                                     <div className="text-right">
